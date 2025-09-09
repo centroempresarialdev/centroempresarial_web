@@ -36,6 +36,33 @@ const Services = () => {
     }
   ];
 
+  const cursos = [
+  {
+    id: 1,
+    nombre: "Estrategias de Comunicacion Eficaz con Pacientes y Familiares",
+    banner: "https://camaraica.org.pe/wp-content/uploads/2025/09/IMG-20250909-WA0017.avif",
+    link: "/cursos/marketing-digital",
+  },
+  {
+    id: 2,
+    nombre: "Atención al Paciente con Enfermedades Crónicas",
+    banner: "https://camaraica.org.pe/wp-content/uploads/2025/09/IMG-20250909-WA0018.avif",
+    link: "/cursos/finanzas",
+  },
+  {
+    id: 3,
+    nombre: "Desarrollo de Habilidades Blandas para el personal de Salud",
+    banner: "https://camaraica.org.pe/wp-content/uploads/2025/09/IMG-20250909-WA0015.avif",
+    link: "/cursos/ventas",
+  },
+  {
+    id: 4,
+    nombre: "Curso Deteccion Temprana de Problemas de Crecimiento y Desarrollo de los Niños",
+    banner: "https://camaraica.org.pe/wp-content/uploads/2025/09/IMG-20250909-WA0016.avif",
+    link: "/cursos/liderazgo",
+  },
+];
+
   const featuredServices = [
     {
       icon: <GraduationCap className="h-12 w-12" />,
@@ -141,25 +168,26 @@ const Services = () => {
           
           {/* Course Banners Grid - Space for 8 course banners */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[...Array(8)].map((_, index) => (
-              <div 
-                key={index} 
-                className="aspect-[3/4] bg-gradient-to-br from-primary/5 to-accent/5 border-2 border-dashed border-primary/20 rounded-lg flex items-center justify-center hover:border-primary/40 transition-colors duration-300"
-              >
-                <div className="text-center p-4">
-                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-3">
-                    <BookOpen className="w-6 h-6 text-primary" />
-                  </div>
-                  <p className="text-sm text-muted-foreground font-medium">
-                    Banner del Curso {index + 1}
-                  </p>
-                  <p className="text-xs text-muted-foreground mt-1">
-                    Espacio para imagen
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
+  {cursos.map((curso) => (
+    <a
+      key={curso.id}
+      href={curso.link} // si usás React Router, sería <Link to={curso.link}>
+      className="block rounded-lg overflow-hidden shadow-md hover:shadow-xl transition"
+    >
+      <img
+  src={curso.banner}
+  alt={curso.nombre}
+  className="w-full aspect-square object-cover"
+/>
+
+      <div className="p-3 bg-white">
+        <h3 className="text-sm font-semibold text-gray-800">
+          {curso.nombre}
+        </h3>
+      </div>
+    </a>
+  ))}
+</div>
         </div>
 
         {/* Call to Action */}
