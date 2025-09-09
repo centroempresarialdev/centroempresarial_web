@@ -40,7 +40,7 @@ const Header = () => {
           {/* Logo */}
           <div className="flex items-center gap-3">
             <img 
-              src="https://camaraica.org.pe/wp-content/uploads/2024/04/CENTRO-EMPRESARIAL-NUEVO.avif" 
+              src="https://camaraica.org.pe/wp-content/uploads/2025/09/CENTRO-EMPRESARIAL-NUEVO.avif" 
               alt="Centro Empresarial Logo" 
               className="w-40 h-auto"
             />
