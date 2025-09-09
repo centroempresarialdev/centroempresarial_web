@@ -208,13 +208,8 @@ const Services = () => {
             >
               Solicitar Consulta Gratuita
             </Button>
-            <Button 
-              variant="outline"
-              size="lg"
-              className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10"
-            >
-              Ver Todos los Servicios
-            </Button>
+            
+            
           </div>
         </div>
       </div>
