@@ -42,7 +42,7 @@ const Header = () => {
             <img 
               src="https://camaraica.org.pe/wp-content/uploads/2024/04/CENTRO-EMPRESARIAL-NUEVO.avif" 
               alt="Centro Empresarial Logo" 
-              className="h-10 w-auto"
+              className="w-40 h-auto"
             />
            </div>
 
