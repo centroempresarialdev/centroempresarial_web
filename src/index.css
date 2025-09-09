@@ -129,11 +129,11 @@ All colors MUST be HSL.
 
   /* Corporate typography */
   .text-corporate {
-    @apply text-primary;
+    color: hsl(var(--primary));
   }
 
   .text-accent {
-    @apply text-accent;
+    color: hsl(var(--accent));
   }
 
   /* Gradients */
