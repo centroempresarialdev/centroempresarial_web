@@ -44,11 +44,7 @@ const Header = () => {
               alt="Centro Empresarial Logo" 
               className="h-10 w-auto"
             />
-            <div>
-              <h1 className="text-xl font-bold font-serif text-corporate">Centro Empresarial</h1>
-              <p className="text-xs text-muted-foreground">Asesores y Consultores</p>
-            </div>
-          </div>
+           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
