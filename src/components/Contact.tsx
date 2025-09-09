@@ -42,7 +42,7 @@ const Contact = () => {
     try {
       // Here you would normally send to your n8n webhook
       // Replace this URL with your actual n8n webhook URL
-      const webhookUrl = 'https://your-n8n-webhook-url.com/webhook/contact';
+      const webhookUrl = 'https://n8n-n8n.ricijy.easypanel.host/webhook/03033f2e-7822-4fa4-b213-93547a929ad8';
       
       const response = await fetch(webhookUrl, {
         method: 'POST',

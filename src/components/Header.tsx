@@ -66,12 +66,7 @@ const Header = () => {
             >
               Servicios
             </button>
-            <button
-              onClick={() => scrollToSection('contacto')}
-              className="text-foreground hover:text-primary transition-colors font-medium"
-            >
-              Contacto
-            </button>
+
             <Button 
               variant="corporate"
               onClick={() => scrollToSection('contacto')}
@@ -113,12 +108,7 @@ const Header = () => {
               >
                 Servicios
               </button>
-              <button
-                onClick={() => scrollToSection('contacto')}
-                className="text-left text-foreground hover:text-primary transition-colors font-medium py-2"
-              >
-                Contacto
-              </button>
+
               <Button 
                 variant="corporate"
                 className="w-full mt-2"

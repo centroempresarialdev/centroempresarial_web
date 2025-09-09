@@ -26,14 +26,29 @@ const About = () => {
     }
   ];
 
-  const partners = [
-    "Ministerio de Trabajo",
-    "ESSALUD",
-    "SUNAT",
-    "SUNAFIL",
-    "Gobierno Regional de Ica",
-    "Cámara de Comercio de Ica"
-  ];
+const partners = [
+  {
+    name: "Piskus",
+    logo: "https://tuservidor.com/logos/piskus.png",
+  },
+  {
+    name: "ESSALUD",
+    logo: "https://tuservidor.com/logos/essalud.png",
+  },
+  {
+    name: "Rumi Wasi",
+    logo: "https://tuservidor.com/logos/rumiwasi.png",
+  },
+  {
+    name: "El Sabor Milagroso",
+    logo: "https://tuservidor.com/logos/sabor-milagroso.png",
+  },
+  {
+    name: "Cámara de Comercio de Ica",
+    logo: "https://tuservidor.com/logos/camara-ica.png",
+  },
+];
+
 
   return (
     <section id="nosotros" className="py-20 bg-secondary">
@@ -162,20 +177,27 @@ const About = () => {
           <h3 className="text-3xl font-bold text-corporate mb-12">
             Nuestros Socios Estratégicos
           </h3>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-            {partners.map((partner, index) => (
-              <Card key={index} className="hover:shadow-corporate transition-all duration-300">
-                <CardContent className="p-4 text-center">
-                  <div className="flex items-center justify-center h-16 mb-3">
-                    <Users className="h-8 w-8 text-primary" />
-                  </div>
-                  <p className="text-sm font-medium text-muted-foreground">
-                    {partner}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+<div className="flex flex-wrap justify-center gap-6">
+  {partners.map((partner, index) => (
+    <Card
+      key={index}
+      className="w-40 hover:shadow-corporate transition-all duration-300"
+    >
+      <CardContent className="p-4 text-center flex flex-col items-center">
+        <div className="flex items-center justify-center h-16 mb-3">
+          <img
+            src={partner.logo}
+            alt={partner.name}
+            className="h-12 w-auto object-contain"
+          />
+        </div>
+        <p className="text-sm font-medium text-muted-foreground">
+          {partner.name}
+        </p>
+      </CardContent>
+    </Card>
+  ))}
+</div>
         </div>
       </div>
     </section>
