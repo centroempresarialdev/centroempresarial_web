@@ -12,7 +12,7 @@ const WhatsAppButton = () => {
       <Button
         asChild
         size="lg"
-        className="rounded-full bg-[#25D366] hover:bg-[#20c05c] text-white shadow-elevated hover:shadow-corporate transition-all duration-300 p-4 animate-bounce"
+        className="rounded-full bg-[#25D366] hover:bg-[#20c05c] text-white shadow-elevated hover:shadow-corporate transition-all duration-2000 p-4 animate-bounce"
       >
         <a
           href={whatsappUrl}
