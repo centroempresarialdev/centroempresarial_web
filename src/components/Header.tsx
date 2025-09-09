@@ -38,10 +38,16 @@ const Header = () => {
       <nav className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center">
-            <h1 className="text-2xl font-bold font-serif text-corporate">
-              Centro Empresarial
-            </h1>
+          <div className="flex items-center gap-3">
+            <img 
+              src="/src/assets/centro-empresarial-logo.png" 
+              alt="Centro Empresarial Logo" 
+              className="h-10 w-auto"
+            />
+            <div>
+              <h1 className="text-xl font-bold font-serif text-corporate">Centro Empresarial</h1>
+              <p className="text-xs text-muted-foreground">Asesores y Consultores</p>
+            </div>
           </div>
 
           {/* Desktop Navigation */}

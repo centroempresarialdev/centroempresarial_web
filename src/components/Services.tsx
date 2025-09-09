@@ -23,40 +23,16 @@ const Services = () => {
 
   const mainServices = [
     {
-      icon: <TrendingUp className="h-8 w-8" />,
-      title: "Consultoría Estratégica",
-      description: "Desarrollo de planes estratégicos y análisis de mercado para impulsar el crecimiento empresarial",
-      features: ["Análisis FODA", "Planificación estratégica", "Estudios de mercado", "Proyecciones financieras"]
+      icon: <GraduationCap className="h-8 w-8" />,
+      title: "Capacitaciones ESSALUD",
+      description: "Programas de capacitación especializados para el personal de ESSALUD y Red de Salud Ica",
+      features: ["Capacitación en gestión hospitalaria", "Actualización en normativas de salud", "Desarrollo de competencias técnicas", "Certificación oficial"]
     },
     {
-      icon: <Users className="h-8 w-8" />,
-      title: "Recursos Humanos",
-      description: "Gestión integral del talento humano y desarrollo organizacional",
-      features: ["Selección de personal", "Evaluación de desempeño", "Capacitación laboral", "Clima organizacional"]
-    },
-    {
-      icon: <FileText className="h-8 w-8" />,
-      title: "Asesoría Legal",
-      description: "Servicios legales especializados en derecho empresarial y laboral",
-      features: ["Contratos empresariales", "Cumplimiento normativo", "Resolución de conflictos", "Auditorías legales"]
-    },
-    {
-      icon: <Shield className="h-8 w-8" />,
-      title: "Seguridad y Salud Ocupacional",
-      description: "Implementación de sistemas de gestión en SST según normativas vigentes",
-      features: ["IPERC", "Plan de SST", "Capacitaciones especializadas", "Auditorías SST"]
-    },
-    {
-      icon: <Briefcase className="h-8 w-8" />,
-      title: "Gestión de Calidad",
-      description: "Implementación de sistemas de gestión de calidad ISO",
-      features: ["ISO 9001", "ISO 14001", "ISO 45001", "Mejora continua"]
-    },
-    {
-      icon: <BookOpen className="h-8 w-8" />,
-      title: "Proyectos de Inversión",
-      description: "Elaboración y evaluación de proyectos de inversión pública y privada",
-      features: ["Estudios de factibilidad", "Evaluación económica", "SNIP", "Seguimiento de proyectos"]
+      icon: <Award className="h-8 w-8" />,
+      title: "Red de Salud Ica",
+      description: "Formación continua y especializada para profesionales de la Red de Salud Ica",
+      features: ["Protocolos de atención", "Gestión administrativa", "Calidad en servicios de salud", "Certificación profesional"]
     }
   ];
 
@@ -121,7 +97,7 @@ const Services = () => {
         </div>
 
         {/* Main Services Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        <div className="grid md:grid-cols-2 gap-8 mb-16">
           {mainServices.map((service, index) => (
             <Card key={index} className="hover:shadow-corporate transition-all duration-300 hover:scale-105 group">
               <CardContent className="p-6">
@@ -147,6 +123,43 @@ const Services = () => {
               </CardContent>
             </Card>
           ))}
+        </div>
+
+        {/* Course Banners Section */}
+        <div className="mb-16">
+          <div className="text-center mb-12">
+            <Badge variant="outline" className="mb-4 text-primary">
+              Cursos Disponibles
+            </Badge>
+            <h3 className="text-3xl md:text-4xl font-bold font-serif text-corporate mb-4">
+              Nuestros Cursos Especializados
+            </h3>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Ofrecemos una amplia variedad de cursos diseñados para potenciar las competencias profesionales
+            </p>
+          </div>
+          
+          {/* Course Banners Grid - Space for 8 course banners */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[...Array(8)].map((_, index) => (
+              <div 
+                key={index} 
+                className="aspect-[3/4] bg-gradient-to-br from-primary/5 to-accent/5 border-2 border-dashed border-primary/20 rounded-lg flex items-center justify-center hover:border-primary/40 transition-colors duration-300"
+              >
+                <div className="text-center p-4">
+                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-3">
+                    <BookOpen className="w-6 h-6 text-primary" />
+                  </div>
+                  <p className="text-sm text-muted-foreground font-medium">
+                    Banner del Curso {index + 1}
+                  </p>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    Espacio para imagen
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Call to Action */}
