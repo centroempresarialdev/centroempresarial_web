@@ -68,16 +68,24 @@ const Services = () => {
   const featuredServices = [
     {
       icon: <GraduationCap className="h-12 w-12" />,
-      title: "Cursos Especializados",
-      description: "Programas de capacitación diseñados para potenciar las competencias profesionales",
-      highlight: "Más de 50 cursos disponibles",
-      color: "bg-primary"
+      title: "Cursos para ESSALUD y Red de Salud Ica",
+      description: "Programas de capacitación especializados para el personal de ESSALUD y Red de Salud Ica, diseñados para fortalecer competencias en el sector salud",
+      highlight: "Certificación oficial",
+      color: "bg-primary",
+      features: [
+        "Capacitación en gestión hospitalaria", 
+        "Actualización en normativas de salud", 
+        "Desarrollo de competencias técnicas", 
+        "Protocolos de atención", 
+        "Gestión administrativa", 
+        "Calidad en servicios de salud"
+      ]
     },
     {
       icon: <Award className="h-12 w-12" />,
-      title: "Cursos para ESSALUD",
-      description: "Capacitaciones específicas para el sector salud y seguridad social",
-      highlight: "Certificación oficial",
+      title: "Cursos Especializados",
+      description: "Programas de capacitación diseñados para potenciar las competencias profesionales en diversas áreas empresariales",
+      highlight: "Más de 50 cursos disponibles",
       color: "bg-accent"
     }
   ];
@@ -102,57 +110,51 @@ const Services = () => {
         {/* Featured Services */}
         <div className="grid md:grid-cols-2 gap-8 mb-20">
           {featuredServices.map((service, index) => (
-            <Card key={index} className="relative overflow-hidden shadow-elevated hover:shadow-corporate transition-all duration-300 group">
-              <CardContent className="p-8">
-                <div className={`absolute top-0 right-0 w-32 h-32 ${service.color} rounded-full opacity-10 transform translate-x-16 -translate-y-16 group-hover:scale-110 transition-transform duration-300`}></div>
+            <Card key={index} className="relative overflow-hidden shadow-elevated hover:shadow-corporate transition-all duration-500 group cursor-pointer hover:scale-[1.02] transform-gpu">
+              <CardContent className="p-8 relative">
+                {/* Animated background elements */}
+                <div className={`absolute top-0 right-0 w-32 h-32 ${service.color} rounded-full opacity-10 transform translate-x-16 -translate-y-16 group-hover:scale-125 group-hover:opacity-20 transition-all duration-500`}></div>
+                <div className={`absolute bottom-0 left-0 w-24 h-24 ${service.color} rounded-full opacity-5 transform -translate-x-12 translate-y-12 group-hover:scale-110 transition-all duration-700 delay-100`}></div>
+                
+                {/* Gradient overlay on hover */}
+                <div className={`absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-${service.color.replace('bg-', '')}/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
+                
                 <div className="relative z-10">
-                  <div className={`inline-flex p-4 ${service.color} text-white rounded-lg mb-6`}>
+                  <div className={`inline-flex p-4 ${service.color} text-white rounded-lg mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-lg group-hover:shadow-xl`}>
                     {service.icon}
                   </div>
-                  <h3 className="text-2xl font-bold text-corporate mb-4">
+                  <h3 className="text-2xl font-bold text-corporate mb-4 group-hover:text-primary transition-colors duration-300">
                     {service.title}
                   </h3>
-                  <p className="text-muted-foreground mb-4 text-lg">
+                  <p className="text-muted-foreground mb-4 text-lg group-hover:text-foreground transition-colors duration-300">
                     {service.description}
                   </p>
-                  <div className="flex items-center gap-2 text-accent font-semibold">
-                    <CheckCircle className="h-5 w-5" />
+                  
+                  {/* Features list for ESSALUD service */}
+                  {service.features && (
+                    <ul className="space-y-2 mb-4 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-200">
+                      {service.features.slice(0, 3).map((feature, featureIndex) => (
+                        <li key={featureIndex} className="flex items-center gap-2 text-sm text-muted-foreground">
+                          <CheckCircle className="h-4 w-4 text-primary animate-pulse" />
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  
+                  <div className="flex items-center gap-2 text-accent font-semibold group-hover:scale-105 transition-transform duration-300">
+                    <CheckCircle className="h-5 w-5 group-hover:animate-bounce" />
                     {service.highlight}
                   </div>
                 </div>
+                
+                {/* Shine effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out"></div>
               </CardContent>
             </Card>
           ))}
         </div>
 
-        {/* Main Services Grid */}
-        <div className="grid md:grid-cols-2 gap-8 mb-16">
-          {mainServices.map((service, index) => (
-            <Card key={index} className="hover:shadow-corporate transition-all duration-300 hover:scale-105 group">
-              <CardContent className="p-6">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="p-3 bg-primary/10 rounded-lg text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
-                    {service.icon}
-                  </div>
-                  <h3 className="text-xl font-bold text-corporate">
-                    {service.title}
-                  </h3>
-                </div>
-                <p className="text-muted-foreground mb-4">
-                  {service.description}
-                </p>
-                <ul className="space-y-2">
-                  {service.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <CheckCircle className="h-4 w-4 text-primary" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
 
         {/* Course Banners Section */}
         <div className="mb-16">
