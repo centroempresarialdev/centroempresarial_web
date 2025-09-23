@@ -24,15 +24,17 @@ const Services = () => {
   const mainServices = [
     {
       icon: <GraduationCap className="h-8 w-8" />,
-      title: "Capacitaciones ESSALUD",
-      description: "Programas de capacitación especializados para el personal de ESSALUD y Red de Salud Ica",
-      features: ["Capacitación en gestión hospitalaria", "Actualización en normativas de salud", "Desarrollo de competencias técnicas", "Certificación oficial"]
-    },
-    {
-      icon: <Award className="h-8 w-8" />,
-      title: "Red de Salud Ica",
-      description: "Formación continua y especializada para profesionales de la Red de Salud Ica",
-      features: ["Protocolos de atención", "Gestión administrativa", "Calidad en servicios de salud", "Certificación profesional"]
+      title: "Cursos para ESSALUD",
+      description: "Programas de capacitación especializados para el personal de ESSALUD y Red de Salud Ica, diseñados para fortalecer competencias en el sector salud",
+      features: [
+        "Capacitación en gestión hospitalaria", 
+        "Actualización en normativas de salud", 
+        "Desarrollo de competencias técnicas", 
+        "Protocolos de atención", 
+        "Gestión administrativa", 
+        "Calidad en servicios de salud", 
+        "Certificación oficial"
+      ]
     }
   ];
 
