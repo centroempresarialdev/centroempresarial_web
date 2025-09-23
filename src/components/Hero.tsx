@@ -11,7 +11,6 @@ const Hero = () => {
   const carouselImages = [
     caruImage,
     caruImage, // Add more different images as needed
-    heroImage,
   ];
 
   const scrollToSection = (sectionId: string) => {
