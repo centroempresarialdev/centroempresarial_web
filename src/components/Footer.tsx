@@ -29,7 +29,7 @@ const Footer = () => {
   return (
     <footer className="bg-primary text-primary-foreground">
       {/* Main Footer Content */}
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-8 lg:px-16 py-12">{/* Added more side padding */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="lg:col-span-1">
@@ -149,7 +149,7 @@ const Footer = () => {
 
       {/* Bottom Bar */}
       <div className="border-t border-primary-foreground/20">
-        <div className="container mx-auto px-4 py-6">
+        <div className="container mx-auto px-8 lg:px-16 py-6">{/* Added more side padding */}
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-primary-foreground/80 text-sm text-center md:text-left">
               © {currentYear} Centro Empresarial - Asesores y Consultores. 

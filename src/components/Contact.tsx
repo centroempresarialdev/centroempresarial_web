@@ -108,7 +108,7 @@ const Contact = () => {
 
   return (
     <section id="contacto" className="py-20 bg-background">{/* White background */}
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-8 lg:px-16">{/* Added more side padding */}
         {/* Section Header */}
         <div className="text-center mb-16">
           <Badge variant="outline" className="mb-4 text-primary">

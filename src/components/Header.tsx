@@ -17,7 +17,7 @@ const Header = () => {
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
       {/* Top bar with contact info */}
       <div className="hidden md:block bg-primary text-primary-foreground py-2">
-        <div className="container mx-auto px-4 flex justify-between items-center text-sm">
+        <div className="container mx-auto px-8 lg:px-16 flex justify-between items-center text-sm">{/* Added more side padding */}
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-2">
               <Phone size={14} />
@@ -35,7 +35,7 @@ const Header = () => {
       </div>
 
       {/* Main navigation */}
-      <nav className="container mx-auto px-4 py-4">
+      <nav className="container mx-auto px-8 lg:px-16 py-4">{/* Added more side padding */}
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center gap-3">
