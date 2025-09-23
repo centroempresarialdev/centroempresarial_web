@@ -10,7 +10,7 @@ const Hero = () => {
   // Carousel images - you can add more images here
   const carouselImages = [
     caruImage,
-    caruImage, // Add more different images as needed
+    heroImage, // Add more different images as needed
     heroImage,
   ];
 
