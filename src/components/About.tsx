@@ -51,7 +51,7 @@ const partners = [
 
 
   return (
-    <section id="nosotros" className="py-20 bg-secondary">
+    <section id="nosotros" className="py-20 bg-background">{/* White background */}
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-16">
