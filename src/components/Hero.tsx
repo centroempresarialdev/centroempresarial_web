@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Award, Users, TrendingUp, ChevronLeft, ChevronRight } from "lucide-react";
 import heroImage from "@/assets/hero-image.jpg";
 import caruImage from "@/assets/luren-manos.png";
+import ruleImage from "@/assets/papeles-image.png";
 
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -10,7 +11,7 @@ const Hero = () => {
   // Carousel images - you can add more images here
   const carouselImages = [
     caruImage,
-    heroImage, // Add more different images as needed
+    ruleImage, // Add more different images as needed
     heroImage,
   ];
 
