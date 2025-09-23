@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Award, Users, TrendingUp, ChevronLeft, ChevronRight } from "lucide-react";
 import heroImage from "@/assets/hero-image.jpg";
-import caruImage from "@/assets/luren-manos.png";
+import caruImage from "https://camaraica.org.pe/wp-content/uploads/2025/09/luren_manos.avif";
 
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
