@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Award, Users, TrendingUp, ChevronLeft, ChevronRight } from "lucide-react";
 import heroImage from "@/assets/hero-image.jpg";
-import caruImage from "@/assets/luren_manos.jpg";
+import caruImage from "@/assets/luren_manos.png";
 
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -11,7 +11,7 @@ const Hero = () => {
   const carouselImages = [
     caruImage,
     caruImage, // Add more different images as needed
-    caruImage,
+    heroImage,
   ];
 
   const scrollToSection = (sectionId: string) => {
