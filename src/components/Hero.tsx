@@ -135,7 +135,7 @@ const Hero = () => {
                   <Award className="h-8 w-8 text-accent" />
                 </div>
               </div>
-              <h3 className="text-3xl font-bold text-white mb-2">12+</h3>
+              <h3 className="text-3xl font-bold text-primary-foreground/80 mb-2">12+</h3>
               <p className="text-primary-foreground/80">Años de Experiencia</p>
             </div>
             
@@ -145,7 +145,7 @@ const Hero = () => {
                   <Users className="h-8 w-8 text-accent" />
                 </div>
               </div>
-              <h3 className="text-3xl font-bold text-white mb-2">500+</h3>
+              <h3 className="text-3xl font-bold text-primary-foreground/80 mb-2">500+</h3>
               <p className="text-primary-foreground/80">Clientes Satisfechos</p>
             </div>
             
@@ -155,7 +155,7 @@ const Hero = () => {
                   <TrendingUp className="h-8 w-8 text-accent" />
                 </div>
               </div>
-              <h3 className="text-3xl font-bold text-white mb-2">98%</h3>
+              <h3 className="text-3xl font-bold text-primary-foreground/80 mb-2">98%</h3>
               <p className="text-primary-foreground/80">Tasa de Éxito</p>
             </div>
           </div>
