@@ -12,7 +12,7 @@ const WhatsAppButton = () => {
       <Button
         asChild
         size="lg"
-        className="rounded-full bg-[#25D366] hover:bg-[#20c05c] text-white shadow-elevated hover:shadow-corporate transition-all duration-2000 p-4 animate-bounce"
+        className="rounded-full bg-[#25D366] hover:bg-[#20c05c] text-white shadow-elevated hover:shadow-corporate transition-all duration-2000 p-6 animate-bounce scale-110"
       >
         <a
           href={whatsappUrl}
@@ -20,7 +20,7 @@ const WhatsAppButton = () => {
           rel="noopener noreferrer"
           aria-label="Contactar por WhatsApp"
         >
-          <MessageCircle className="h-6 w-6" />
+          <MessageCircle className="h-8 w-8" />
           <span className="hidden sm:inline ml-2">WhatsApp</span>
         </a>
       </Button>
