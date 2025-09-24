@@ -101,7 +101,7 @@ const Hero = () => {
           </h2>
           
           {/* Subtitle */}
-          <p className="text-xl md:text-2xl mb-12 text-primary-foreground/90 max-w-3xl mx-auto leading-relaxed animate-slide-up">
+          <p className="text-xl md:text-2xl mb-12 text-white max-w-3xl mx-auto leading-relaxed animate-slide-up animate-pulse">
             Más de 12 años de experiencia ofreciendo soluciones estratégicas personalizadas 
             para empresas privadas e instituciones públicas en Ica, Perú
           </p>
