@@ -28,7 +28,7 @@ const Header = () => {
               <span>centroempresarialsac@gmail.com</span>
             </div>
           </div>
-          <div className="text-white animate-pulse">
+          <div className="text-white animate-pulse font-serif">
             Más de 12 años de experiencia
           </div>
         </div>
