@@ -82,7 +82,7 @@ const Hero = () => {
             key={index}
             onClick={() => setCurrentSlide(index)}
             className={`w-3 h-3 rounded-full transition-all duration-200 ${
-              index === currentSlide ? 'bg-accent' : 'bg-primary-foreground/30'
+              index === currentSlide ? 'bg-white' : 'bg-white/30'
             }`}
             aria-label={`Go to slide ${index + 1}`}
           />
@@ -162,12 +162,6 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 border-2 border-primary-foreground/30 rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-primary-foreground/50 rounded-full mt-2"></div>
-        </div>
-      </div>
     </section>
   );
 };
