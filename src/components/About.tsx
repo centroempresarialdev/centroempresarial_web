@@ -59,10 +59,7 @@ const About = () => {
             </h3>
             <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
               <p>
-                Fundada hace más de 12 años, <strong className="text-corporate">Centro Empresarial </strong> 
-                nació con la visión de transformar el panorama empresarial en Ica, Perú. 
-                Comenzamos como un pequeño equipo de consultores apasionados por ayudar 
-                a las empresas a alcanzar su máximo potencial.
+                Con más de 12 años de experiencia en el sector, <strong className="text-corporate">Centro empresarial – Asesores y Consultores</strong> se ha consolidado como una firma líder en consultoría y asesoría empresarial en Ica y la región.
               </p>
               <p>
                 A lo largo de los años, hemos crecido hasta convertirnos en una firma 
