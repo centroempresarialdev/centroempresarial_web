@@ -54,7 +54,7 @@ const Hero = () => {
             }`}
             style={{ backgroundImage: `url(${image})` }}
           >
-            <div className="absolute inset-0 bg-gradient-hero opacity-85"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black/80"></div>
           </div>
         ))}
       </div>
@@ -93,15 +93,15 @@ const Hero = () => {
       <div className="relative z-10 container mx-auto px-4 py-20">
         <div className="max-w-4xl mx-auto text-center text-primary-foreground">
           {/* Main Heading */}
-          <h1 className="text-5xl md:text-7xl font-bold font-serif mb-6 animate-fade-in">
+          <h1 className="text-5xl md:text-7xl font-bold font-serif mb-6 animate-fade-in text-white [text-shadow:_2px_2px_8px_rgb(0_0_0_/_80%)]">
             Centro Empresarial
           </h1>
-          <h2 className="text-2xl md:text-3xl font-semibold mb-8 animate-slide-up">
+          <h2 className="text-2xl md:text-3xl font-semibold mb-8 animate-slide-up text-white [text-shadow:_1px_1px_4px_rgb(0_0_0_/_70%)]">
             Asesores y Consultores
           </h2>
           
           {/* Subtitle */}
-          <p className="text-xl md:text-2xl mb-12 text-white max-w-3xl mx-auto leading-relaxed animate-slide-up animate-pulse">
+          <p className="text-xl md:text-2xl mb-12 text-white max-w-3xl mx-auto leading-relaxed animate-slide-up animate-pulse [text-shadow:_1px_1px_4px_rgb(0_0_0_/_70%)]">
             Más de 12 años de experiencia ofreciendo soluciones estratégicas personalizadas 
             para empresas privadas e instituciones públicas en Ica, Perú
           </p>
