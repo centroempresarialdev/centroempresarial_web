@@ -1,57 +1,41 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Target, Eye, Heart, Lightbulb, Handshake, Users } from "lucide-react";
-
 const About = () => {
-  const values = [
-    {
-      icon: <Target className="h-6 w-6" />,
-      title: "Excelencia",
-      description: "Comprometidos con la más alta calidad en todos nuestros servicios"
-    },
-    {
-      icon: <Heart className="h-6 w-6" />,
-      title: "Integridad",
-      description: "Actuamos con transparencia y ética en cada proyecto"
-    },
-    {
-      icon: <Lightbulb className="h-6 w-6" />,
-      title: "Innovación",
-      description: "Soluciones creativas y actualizadas para cada desafío"
-    },
-    {
-      icon: <Handshake className="h-6 w-6" />,
-      title: "Compromiso",
-      description: "Dedicados al éxito y crecimiento de nuestros clientes"
-    }
-  ];
-
-const partners = [
-  {
+  const values = [{
+    icon: <Target className="h-6 w-6" />,
+    title: "Excelencia",
+    description: "Comprometidos con la más alta calidad en todos nuestros servicios"
+  }, {
+    icon: <Heart className="h-6 w-6" />,
+    title: "Integridad",
+    description: "Actuamos con transparencia y ética en cada proyecto"
+  }, {
+    icon: <Lightbulb className="h-6 w-6" />,
+    title: "Innovación",
+    description: "Soluciones creativas y actualizadas para cada desafío"
+  }, {
+    icon: <Handshake className="h-6 w-6" />,
+    title: "Compromiso",
+    description: "Dedicados al éxito y crecimiento de nuestros clientes"
+  }];
+  const partners = [{
     name: "Piskus",
-    logo: "https://tuservidor.com/logos/piskus.png",
-  },
-  {
+    logo: "https://tuservidor.com/logos/piskus.png"
+  }, {
     name: "ESSALUD",
-    logo: "https://tuservidor.com/logos/essalud.png",
-  },
-  {
+    logo: "https://tuservidor.com/logos/essalud.png"
+  }, {
     name: "Rumi Wasi",
-    logo: "https://tuservidor.com/logos/rumiwasi.png",
-  },
-  {
+    logo: "https://tuservidor.com/logos/rumiwasi.png"
+  }, {
     name: "El Sabor Milagroso",
-    logo: "https://tuservidor.com/logos/sabor-milagroso.png",
-  },
-  {
+    logo: "https://tuservidor.com/logos/sabor-milagroso.png"
+  }, {
     name: "Cámara de Comercio de Ica",
-    logo: "https://tuservidor.com/logos/camara-ica.png",
-  },
-];
-
-
-  return (
-    <section id="nosotros" className="py-20 bg-background">{/* White background */}
+    logo: "https://tuservidor.com/logos/camara-ica.png"
+  }];
+  return <section id="nosotros" className="py-20 bg-background">{/* White background */}
       <div className="container mx-auto px-8 lg:px-16">{/* Added more side padding */}
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -75,7 +59,7 @@ const partners = [
             </h3>
             <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
               <p>
-                Fundada hace más de 12 años, <strong className="text-corporate">Centro Empresarial</strong> 
+                Fundada hace más de 12 años, <strong className="text-corporate">Centro Empresarial </strong> 
                 nació con la visión de transformar el panorama empresarial en Ica, Perú. 
                 Comenzamos como un pequeño equipo de consultores apasionados por ayudar 
                 a las empresas a alcanzar su máximo potencial.
@@ -140,8 +124,7 @@ const partners = [
             Nuestros Valores
           </h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {values.map((value, index) => (
-              <Card key={index} className="text-center hover:shadow-corporate transition-all duration-300 hover:scale-105">
+            {values.map((value, index) => <Card key={index} className="text-center hover:shadow-corporate transition-all duration-300 hover:scale-105">
                 <CardContent className="p-6">
                   <div className="flex justify-center mb-4">
                     <div className="p-3 bg-primary/10 rounded-full text-primary">
@@ -155,8 +138,7 @@ const partners = [
                     {value.description}
                   </p>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </div>
 
@@ -177,31 +159,20 @@ const partners = [
           <h3 className="text-3xl font-bold text-corporate mb-12">
             Nuestros Socios Estratégicos
           </h3>
-<div className="flex flex-wrap justify-center gap-6">
-  {partners.map((partner, index) => (
-    <Card
-      key={index}
-      className="w-40 hover:shadow-corporate transition-all duration-300"
-    >
+        <div className="flex flex-wrap justify-center gap-6">
+  {partners.map((partner, index) => <Card key={index} className="w-40 hover:shadow-corporate transition-all duration-300">
       <CardContent className="p-4 text-center flex flex-col items-center">
         <div className="flex items-center justify-center h-16 mb-3">
-          <img
-            src={partner.logo}
-            alt={partner.name}
-            className="h-12 w-auto object-contain"
-          />
+          <img src={partner.logo} alt={partner.name} className="h-12 w-auto object-contain" />
         </div>
         <p className="text-sm font-medium text-muted-foreground">
           {partner.name}
         </p>
       </CardContent>
-    </Card>
-  ))}
-</div>
+    </Card>)}
+        </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default About;
