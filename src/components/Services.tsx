@@ -2,6 +2,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { BookOpen, TrendingUp, Users, FileText, Shield, Briefcase, GraduationCap, Award, CheckCircle } from "lucide-react";
+import servicesImage from "@/assets/services-header.jpg";
+import essaludImage from "@/assets/essalud-training.jpg";
 const Services = () => {
   const scrollToContact = () => {
     const element = document.getElementById('contacto');
@@ -52,20 +54,30 @@ const Services = () => {
     highlight: "Más de 50 cursos disponibles",
     color: "bg-accent"
   }];
-  return <section id="servicios" className="py-30 bg-background">
-      <div className="container mx-auto px-8 lg:px-16">{/* Added more side padding */}
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <Badge variant="outline" className="mb-4 text-primary">
-            Soluciones Empresariales
-          </Badge>
-          <h2 className="text-4xl md:text-5xl font-bold font-serif text-corporate mb-6">
-            Nuestros Servicios
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Ofrecemos una amplia gama de servicios de consultoría y asesoría 
-            empresarial para impulsar el crecimiento de su organización
-          </p>
+  return <section id="servicios" className="py-20 bg-background">
+      <div className="container mx-auto px-8 lg:px-16">
+        {/* Section Header with Image */}
+        <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
+          <div className="text-left">
+            <Badge variant="outline" className="mb-4 text-primary">
+              Soluciones Empresariales
+            </Badge>
+            <h2 className="text-4xl md:text-5xl font-bold font-serif text-corporate mb-6">
+              Nuestros Servicios
+            </h2>
+            <p className="text-xl text-muted-foreground">
+              Ofrecemos una amplia gama de servicios de consultoría y asesoría 
+              empresarial para impulsar el crecimiento de su organización
+            </p>
+          </div>
+          <div className="relative overflow-hidden rounded-lg shadow-elevated">
+            <img 
+              src={servicesImage} 
+              alt="Servicios de Consultoría" 
+              className="w-full h-[300px] object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent"></div>
+          </div>
         </div>
 
         {/* Featured Services */}
