@@ -54,18 +54,26 @@ const Services = () => {
   }];
   return <section id="servicios" className="py-20 bg-background">
       <div className="container mx-auto px-8 lg:px-16">{/* Added more side padding */}
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <Badge variant="outline" className="mb-4 text-primary">
-            Soluciones Empresariales
-          </Badge>
-          <h2 className="text-4xl md:text-5xl font-bold font-serif text-corporate mb-6">
-            Nuestros Servicios
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Ofrecemos una amplia gama de servicios de consultoría y asesoría 
-            empresarial para impulsar el crecimiento de su organización
-          </p>
+        {/* Section Header with Image */}
+        <div className="mb-16">
+          <div className="relative h-[400px] rounded-lg overflow-hidden mb-8">
+            <img 
+              src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=2000" 
+              alt="Nuestros servicios" 
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-primary/30 flex items-center">
+              <div className="container mx-auto px-8">
+                <h2 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white mb-4 text-left">
+                  Nuestros Servicios
+                </h2>
+                <p className="text-xl md:text-2xl text-white/90 max-w-2xl text-left">
+                  Ofrecemos una amplia gama de servicios de consultoría y asesoría 
+                  empresarial para impulsar el crecimiento de su organización
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Featured Services */}
@@ -111,16 +119,24 @@ const Services = () => {
         </div>
 
 
-        {/* Course Banners Section */}
+        {/* Course Banners Section with Image Header */}
         <div className="mb-16">
-          <div className="text-center mb-12">
-            <Badge variant="outline" className="mb-4 text-primary">
-              Cursos Disponibles
-            </Badge>
-            <h3 className="text-3xl md:text-4xl font-bold font-serif text-corporate mb-4">Cursos Especializados</h3>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Ofrecemos una amplia variedad de cursos diseñados para potenciar las competencias profesionales
-            </p>
+          <div className="relative h-[300px] rounded-lg overflow-hidden mb-8">
+            <img 
+              src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&q=80&w=2000" 
+              alt="Cursos especializados" 
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-accent/80 to-accent/40 flex items-center">
+              <div className="container mx-auto px-8">
+                <h3 className="text-4xl md:text-5xl font-extrabold text-white text-left mb-2">
+                  Cursos Especializados
+                </h3>
+                <p className="text-lg md:text-xl text-white/90 max-w-2xl text-left">
+                  Ofrecemos una amplia variedad de cursos diseñados para potenciar las competencias profesionales
+                </p>
+              </div>
+            </div>
           </div>
           
           {/* Course Banners Grid - Space for 8 course banners */}
