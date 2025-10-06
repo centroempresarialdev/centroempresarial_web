@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Target, Eye, Heart, Lightbulb, Handshake, Users } from "lucide-react";
+import aboutImage from "@/assets/about-nosotros.jpg";
 const About = () => {
   const values = [{
     icon: <Target className="h-6 w-6" />,
@@ -36,19 +37,29 @@ const About = () => {
     logo: "https://tuservidor.com/logos/camara-ica.png"
   }];
   return <section id="nosotros" className="py-20 bg-background">{/* White background */}
-      <div className="container mx-auto px-8 lg:px-16">{/* Added more side padding */}
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <Badge variant="outline" className="mb-4 text-primary">
-            Conoce Nuestro Equipo
-          </Badge>
-          <h2 className="text-4xl md:text-5xl font-bold font-serif text-corporate mb-6">
-            Nosotros
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Somos una firma líder en consultoría empresarial con más de una década 
-            de experiencia transformando negocios en la región de Ica
-          </p>
+      <div className="container mx-auto px-8 lg:px-16">
+        {/* Section Header with Image */}
+        <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
+          <div className="text-left">
+            <Badge variant="outline" className="mb-4 text-primary">
+              Conoce Nuestro Equipo
+            </Badge>
+            <h2 className="text-4xl md:text-5xl font-bold font-serif text-corporate mb-6">
+              Nosotros
+            </h2>
+            <p className="text-xl text-muted-foreground">
+              Somos una firma líder en consultoría empresarial con más de una década 
+              de experiencia transformando negocios en la región de Ica
+            </p>
+          </div>
+          <div className="relative overflow-hidden rounded-lg shadow-elevated">
+            <img 
+              src={aboutImage} 
+              alt="Equipo de Centro Empresarial" 
+              className="w-full h-[300px] object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent"></div>
+          </div>
         </div>
 
         {/* Company Story */}
