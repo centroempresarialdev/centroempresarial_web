@@ -22,19 +22,19 @@ const About = () => {
   }];
   const partners = [{
     name: "Piskus",
-    logo: "https://tuservidor.com/logos/piskus.png"
+    logo: "https://centroempresarialica.com/media/piskus.jpg"
   }, {
     name: "ESSALUD",
-    logo: "https://tuservidor.com/logos/essalud.png"
+    logo: "https://centroempresarialica.com/media/Essalud.png"
   }, {
     name: "Rumi Wasi",
-    logo: "https://tuservidor.com/logos/rumiwasi.png"
+    logo: "https://centroempresarialica.com/media/rumi-wasi.jpg"
   }, {
     name: "El Sabor Milagroso",
-    logo: "https://tuservidor.com/logos/sabor-milagroso.png"
+    logo: "https://centroempresarialica.com/media/sabor-milagroso.jpg"
   }, {
     name: "Cámara de Comercio de Ica",
-    logo: "https://tuservidor.com/logos/camara-ica.png"
+    logo: "https://centroempresarialica.com/media/CamaraLogo.jpg"
   }];
   return <section id="nosotros" className="py-20 bg-background">{/* White background */}
       <div className="container mx-auto px-8 lg:px-16">
@@ -162,16 +162,17 @@ const About = () => {
           </div>
         </div>
 
+
         {/* Strategic Partners */}
         <div className="text-center">
           <h3 className="text-3xl font-bold text-corporate mb-12">
             Nuestros Socios Estratégicos
           </h3>
         <div className="flex flex-wrap justify-center gap-6">
-  {partners.map((partner, index) => <Card key={index} className="w-40 hover:shadow-corporate transition-all duration-300">
+  {partners.map((partner, index) => <Card key={index} className="w-48 hover:shadow-corporate transition-all duration-300">
       <CardContent className="p-4 text-center flex flex-col items-center">
-        <div className="flex items-center justify-center h-16 mb-3">
-          <img src={partner.logo} alt={partner.name} className="h-12 w-auto object-contain" />
+        <div className="flex items-center justify-center h-40 mb-3">
+          <img src={partner.logo} alt={partner.name} className="h-40 w-auto object-contain" />
         </div>
         <p className="text-sm font-medium text-muted-foreground">
           {partner.name}
