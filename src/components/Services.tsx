@@ -60,11 +60,7 @@ const Services = () => {
         {/* Section Header with Image - Right Text, Left Image */}
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
           <div className="relative overflow-hidden rounded-lg shadow-elevated">
-            <img 
-              src={servicesImage} 
-              alt="Servicios de Consultoría" 
-              className="w-full h-[400px] object-cover"
-            />
+            <img src={servicesImage} alt="Servicios de Consultoría" className="w-full h-[400px] object-cover" />
             <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent"></div>
           </div>
           <div className="text-left">
@@ -91,11 +87,7 @@ const Services = () => {
           <div className="group relative overflow-hidden rounded-2xl shadow-elevated hover:shadow-2xl transition-all duration-700 cursor-pointer h-[500px]">
             {/* Background Image - Full Card */}
             <div className="absolute inset-0">
-              <img 
-                src={essaludImage} 
-                alt="Cursos ESSALUD" 
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              />
+              <img src={essaludImage} alt="Cursos ESSALUD" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
               <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-primary/90 group-hover:to-primary/98 transition-all duration-700"></div>
             </div>
             
@@ -151,11 +143,7 @@ const Services = () => {
           <div className="group relative overflow-hidden rounded-2xl shadow-elevated hover:shadow-2xl transition-all duration-700 cursor-pointer h-[500px]">
             {/* Background Image - Full Card */}
             <div className="absolute inset-0">
-              <img 
-                src={cursosImage} 
-                alt="Cursos Especializados" 
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              />
+              <img src={cursosImage} alt="Cursos Especializados" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
               <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-accent/90 group-hover:to-accent/98 transition-all duration-700"></div>
             </div>
             
@@ -179,26 +167,25 @@ const Services = () => {
                 {/* Expanded content - Shows on hover with stagger effect */}
                 <div className="opacity-0 group-hover:opacity-100 transition-all duration-700 delay-200 max-h-0 group-hover:max-h-96 overflow-hidden transform translate-y-8 group-hover:translate-y-0">
                   <div className="pt-6 border-t border-white/30 space-y-4">
-                    <p className="text-white/95 text-base leading-relaxed">
-                      Programas de capacitación diseñados para potenciar las competencias 
-                      profesionales en diversas áreas empresariales.
-                    </p>
+                    <p className="text-white/95 text-base leading-relaxed">Programas de capacitación diseñados para potenciar las competencias profesionales en diversas áreas d.</p>
                     <ul className="space-y-3">
                       <li className="flex items-center gap-3 text-sm transform transition-all duration-500 delay-300 translate-x-4 group-hover:translate-x-0 opacity-0 group-hover:opacity-100">
                         <CheckCircle className="h-5 w-5 flex-shrink-0" />
-                        <span>Marketing Digital y Ventas</span>
+                        <span>Estrategias de Comunicacion Eficaz</span>
                       </li>
                       <li className="flex items-center gap-3 text-sm transform transition-all duration-500 delay-400 translate-x-4 group-hover:translate-x-0 opacity-0 group-hover:opacity-100">
                         <CheckCircle className="h-5 w-5 flex-shrink-0" />
-                        <span>Gestión Financiera y Contabilidad</span>
+                        <span>Atención al Paciente con
+Enfermedades Crónicas</span>
                       </li>
                       <li className="flex items-center gap-3 text-sm transform transition-all duration-500 delay-500 translate-x-4 group-hover:translate-x-0 opacity-0 group-hover:opacity-100">
                         <CheckCircle className="h-5 w-5 flex-shrink-0" />
-                        <span>Recursos Humanos y Liderazgo</span>
+                        <span>Desarrollo de Habilidades Blandas</span>
                       </li>
                       <li className="flex items-center gap-3 text-sm transform transition-all duration-500 delay-[600ms] translate-x-4 group-hover:translate-x-0 opacity-0 group-hover:opacity-100">
                         <CheckCircle className="h-5 w-5 flex-shrink-0" />
-                        <span>Gestión de Proyectos</span>
+                        <span>Curso Deteccion Temprana de
+Problemas de Crecimiento y Desarrollo</span>
                       </li>
                     </ul>
                   </div>
