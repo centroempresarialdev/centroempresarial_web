@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { BookOpen, TrendingUp, Users, FileText, Shield, Briefcase, GraduationCap, Award, CheckCircle } from "lucide-react";
+import { BookOpen, TrendingUp, Users, FileText, Shield, Briefcase, GraduationCap, Award, CheckCircle, ArrowRight } from "lucide-react";
 import servicesImage from "@/assets/services-header.jpg";
 import essaludImage from "@/assets/essalud-training.jpg";
 const Services = () => {
@@ -84,46 +84,127 @@ const Services = () => {
           </div>
         </div>
 
-        {/* Featured Services */}
+        {/* Featured Services - Interactive Cards */}
         <div className="grid md:grid-cols-2 gap-8 mb-20">
-          {featuredServices.map((service, index) => <Card key={index} className="relative overflow-hidden shadow-elevated hover:shadow-corporate transition-all duration-500 group cursor-pointer hover:scale-[1.02] transform-gpu">
-              <CardContent className="p-8 relative">
-                {/* Animated background elements */}
-                <div className={`absolute top-0 right-0 w-32 h-32 ${service.color} rounded-full opacity-10 transform translate-x-16 -translate-y-16 group-hover:scale-125 group-hover:opacity-20 transition-all duration-500`}></div>
-                <div className={`absolute bottom-0 left-0 w-24 h-24 ${service.color} rounded-full opacity-5 transform -translate-x-12 translate-y-12 group-hover:scale-110 transition-all duration-700 delay-100`}></div>
-                
-                {/* Gradient overlay on hover */}
-                <div className={`absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-${service.color.replace('bg-', '')}/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
-                
-                <div className="relative z-10">
-                  <div className={`inline-flex p-4 ${service.color} text-white rounded-lg mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-lg group-hover:shadow-xl`}>
-                    {service.icon}
+          {/* ESSALUD Card */}
+          <div className="group relative overflow-hidden rounded-2xl shadow-elevated hover:shadow-2xl transition-all duration-500 cursor-pointer h-[500px]">
+            {/* Image */}
+            <div className="absolute inset-0 h-1/2">
+              <img 
+                src={essaludImage} 
+                alt="Cursos ESSALUD" 
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent to-primary/20"></div>
+            </div>
+            
+            {/* Content - Normal State */}
+            <div className="absolute bottom-0 left-0 right-0 bg-primary text-white p-8 transition-all duration-500 group-hover:h-full group-hover:bg-primary/95 flex flex-col justify-end">
+              <div className="space-y-4">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <h3 className="text-2xl font-bold mb-2">
+                      Cursos para ESSALUD - Red de Salud Ica
+                    </h3>
+                    <p className="text-white/90 font-medium">
+                      Programas especializados
+                    </p>
                   </div>
-                  <h3 className="text-2xl font-bold text-corporate mb-4 group-hover:text-primary transition-colors duration-300">
-                    {service.title}
-                  </h3>
-                  <p className="text-muted-foreground mb-4 text-lg group-hover:text-foreground transition-colors duration-300">
-                    {service.description}
-                  </p>
-                  
-                  {/* Features list for ESSALUD service */}
-                  {service.features && <ul className="space-y-2 mb-4 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-200">
-                      {service.features.slice(0, 3).map((feature, featureIndex) => <li key={featureIndex} className="flex items-center gap-2 text-sm text-muted-foreground">
-                          <CheckCircle className="h-4 w-4 text-primary animate-pulse" />
-                          {feature}
-                        </li>)}
-                    </ul>}
-                  
-                  <div className="flex items-center gap-2 text-accent font-semibold group-hover:scale-105 transition-transform duration-300">
-                    <CheckCircle className="h-5 w-5 group-hover:animate-bounce" />
-                    {service.highlight}
+                  <div className="bg-white/20 p-3 rounded-full group-hover:rotate-45 transition-transform duration-500">
+                    <ArrowRight className="h-6 w-6" />
                   </div>
                 </div>
                 
-                {/* Shine effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out"></div>
-              </CardContent>
-            </Card>)}
+                {/* Expanded content - Shows on hover */}
+                <div className="opacity-0 group-hover:opacity-100 transition-all duration-500 max-h-0 group-hover:max-h-96 overflow-hidden">
+                  <div className="pt-4 border-t border-white/20 space-y-3">
+                    <p className="text-white/95">
+                      Capacitación especializada para el personal de ESSALUD y Red de Salud Ica, 
+                      diseñados para fortalecer competencias en el sector salud.
+                    </p>
+                    <ul className="space-y-2">
+                      <li className="flex items-center gap-2 text-sm">
+                        <CheckCircle className="h-4 w-4 flex-shrink-0" />
+                        Capacitación en gestión hospitalaria
+                      </li>
+                      <li className="flex items-center gap-2 text-sm">
+                        <CheckCircle className="h-4 w-4 flex-shrink-0" />
+                        Actualización en normativas de salud
+                      </li>
+                      <li className="flex items-center gap-2 text-sm">
+                        <CheckCircle className="h-4 w-4 flex-shrink-0" />
+                        Desarrollo de competencias técnicas
+                      </li>
+                      <li className="flex items-center gap-2 text-sm">
+                        <CheckCircle className="h-4 w-4 flex-shrink-0" />
+                        Certificación oficial
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Cursos Especializados Card */}
+          <div className="group relative overflow-hidden rounded-2xl shadow-elevated hover:shadow-2xl transition-all duration-500 cursor-pointer h-[500px]">
+            {/* Image */}
+            <div className="absolute inset-0 h-1/2">
+              <img 
+                src={servicesImage} 
+                alt="Cursos Especializados" 
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent to-accent/20"></div>
+            </div>
+            
+            {/* Content - Normal State */}
+            <div className="absolute bottom-0 left-0 right-0 bg-accent text-white p-8 transition-all duration-500 group-hover:h-full group-hover:bg-accent/95 flex flex-col justify-end">
+              <div className="space-y-4">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <h3 className="text-2xl font-bold mb-2">
+                      Cursos Especializados
+                    </h3>
+                    <p className="text-white/90 font-medium">
+                      Más de 50 cursos disponibles
+                    </p>
+                  </div>
+                  <div className="bg-white/20 p-3 rounded-full group-hover:rotate-45 transition-transform duration-500">
+                    <ArrowRight className="h-6 w-6" />
+                  </div>
+                </div>
+                
+                {/* Expanded content - Shows on hover */}
+                <div className="opacity-0 group-hover:opacity-100 transition-all duration-500 max-h-0 group-hover:max-h-96 overflow-hidden">
+                  <div className="pt-4 border-t border-white/20 space-y-3">
+                    <p className="text-white/95">
+                      Programas de capacitación diseñados para potenciar las competencias 
+                      profesionales en diversas áreas empresariales.
+                    </p>
+                    <ul className="space-y-2">
+                      <li className="flex items-center gap-2 text-sm">
+                        <CheckCircle className="h-4 w-4 flex-shrink-0" />
+                        Marketing Digital y Ventas
+                      </li>
+                      <li className="flex items-center gap-2 text-sm">
+                        <CheckCircle className="h-4 w-4 flex-shrink-0" />
+                        Gestión Financiera y Contabilidad
+                      </li>
+                      <li className="flex items-center gap-2 text-sm">
+                        <CheckCircle className="h-4 w-4 flex-shrink-0" />
+                        Recursos Humanos y Liderazgo
+                      </li>
+                      <li className="flex items-center gap-2 text-sm">
+                        <CheckCircle className="h-4 w-4 flex-shrink-0" />
+                        Gestión de Proyectos
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
 
