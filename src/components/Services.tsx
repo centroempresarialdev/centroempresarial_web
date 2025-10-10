@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { BookOpen, TrendingUp, Users, FileText, Shield, Briefcase, GraduationCap, Award, CheckCircle, ArrowRight } from "lucide-react";
 import servicesImage from "@/assets/services-header.jpg";
-import essaludImage from "@/assets/essalud-training.jpg";
+import essaludImage from "@/assets/essalud-healthcare.jpg";
 const Services = () => {
   const scrollToContact = () => {
     const element = document.getElementById('contacto');
@@ -87,57 +87,57 @@ const Services = () => {
         {/* Featured Services - Interactive Cards */}
         <div className="grid md:grid-cols-2 gap-8 mb-20">
           {/* ESSALUD Card */}
-          <div className="group relative overflow-hidden rounded-2xl shadow-elevated hover:shadow-2xl transition-all duration-500 cursor-pointer h-[500px]">
-            {/* Image */}
-            <div className="absolute inset-0 h-1/2">
+          <div className="group relative overflow-hidden rounded-2xl shadow-elevated hover:shadow-2xl transition-all duration-700 cursor-pointer h-[500px]">
+            {/* Background Image - Full Card */}
+            <div className="absolute inset-0">
               <img 
                 src={essaludImage} 
                 alt="Cursos ESSALUD" 
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent to-primary/20"></div>
+              <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-primary/90 group-hover:to-primary/98 transition-all duration-700"></div>
             </div>
             
-            {/* Content - Normal State */}
-            <div className="absolute bottom-0 left-0 right-0 bg-primary text-white p-8 transition-all duration-500 group-hover:h-full group-hover:bg-primary/95 flex flex-col justify-end">
-              <div className="space-y-4">
+            {/* Content - Animated State */}
+            <div className="absolute bottom-0 left-0 right-0 text-white p-8 transition-all duration-700 ease-out group-hover:bottom-0 flex flex-col justify-end h-full">
+              <div className="space-y-4 transform transition-all duration-700 translate-y-0">
                 <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <h3 className="text-2xl font-bold mb-2">
+                  <div className="transition-transform duration-700 group-hover:-translate-y-32">
+                    <h3 className="text-2xl md:text-3xl font-bold mb-2 transition-all duration-500">
                       Cursos para ESSALUD - Red de Salud Ica
                     </h3>
-                    <p className="text-white/90 font-medium">
+                    <p className="text-white/90 font-medium text-lg">
                       Programas especializados
                     </p>
                   </div>
-                  <div className="bg-white/20 p-3 rounded-full group-hover:rotate-45 transition-transform duration-500">
+                  <div className="bg-white/20 backdrop-blur-sm p-3 rounded-full group-hover:rotate-90 group-hover:bg-white/30 transition-all duration-700">
                     <ArrowRight className="h-6 w-6" />
                   </div>
                 </div>
                 
-                {/* Expanded content - Shows on hover */}
-                <div className="opacity-0 group-hover:opacity-100 transition-all duration-500 max-h-0 group-hover:max-h-96 overflow-hidden">
-                  <div className="pt-4 border-t border-white/20 space-y-3">
-                    <p className="text-white/95">
+                {/* Expanded content - Shows on hover with stagger effect */}
+                <div className="opacity-0 group-hover:opacity-100 transition-all duration-700 delay-200 max-h-0 group-hover:max-h-96 overflow-hidden transform translate-y-8 group-hover:translate-y-0">
+                  <div className="pt-6 border-t border-white/30 space-y-4">
+                    <p className="text-white/95 text-base leading-relaxed">
                       Capacitación especializada para el personal de ESSALUD y Red de Salud Ica, 
                       diseñados para fortalecer competencias en el sector salud.
                     </p>
-                    <ul className="space-y-2">
-                      <li className="flex items-center gap-2 text-sm">
-                        <CheckCircle className="h-4 w-4 flex-shrink-0" />
-                        Capacitación en gestión hospitalaria
+                    <ul className="space-y-3">
+                      <li className="flex items-center gap-3 text-sm transform transition-all duration-500 delay-300 translate-x-4 group-hover:translate-x-0 opacity-0 group-hover:opacity-100">
+                        <CheckCircle className="h-5 w-5 flex-shrink-0" />
+                        <span>Capacitación en gestión hospitalaria</span>
                       </li>
-                      <li className="flex items-center gap-2 text-sm">
-                        <CheckCircle className="h-4 w-4 flex-shrink-0" />
-                        Actualización en normativas de salud
+                      <li className="flex items-center gap-3 text-sm transform transition-all duration-500 delay-400 translate-x-4 group-hover:translate-x-0 opacity-0 group-hover:opacity-100">
+                        <CheckCircle className="h-5 w-5 flex-shrink-0" />
+                        <span>Actualización en normativas de salud</span>
                       </li>
-                      <li className="flex items-center gap-2 text-sm">
-                        <CheckCircle className="h-4 w-4 flex-shrink-0" />
-                        Desarrollo de competencias técnicas
+                      <li className="flex items-center gap-3 text-sm transform transition-all duration-500 delay-500 translate-x-4 group-hover:translate-x-0 opacity-0 group-hover:opacity-100">
+                        <CheckCircle className="h-5 w-5 flex-shrink-0" />
+                        <span>Desarrollo de competencias técnicas</span>
                       </li>
-                      <li className="flex items-center gap-2 text-sm">
-                        <CheckCircle className="h-4 w-4 flex-shrink-0" />
-                        Certificación oficial
+                      <li className="flex items-center gap-3 text-sm transform transition-all duration-500 delay-[600ms] translate-x-4 group-hover:translate-x-0 opacity-0 group-hover:opacity-100">
+                        <CheckCircle className="h-5 w-5 flex-shrink-0" />
+                        <span>Certificación oficial</span>
                       </li>
                     </ul>
                   </div>
