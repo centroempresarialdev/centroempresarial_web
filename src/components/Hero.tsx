@@ -33,7 +33,7 @@ const Hero = () => {
   const prevSlide = () => {
     setCurrentSlide(prev => (prev - 1 + carouselImages.length) % carouselImages.length);
   };
-  return <section id="inicio" className="relative h-[70vh] flex items-center overflow-hidden">
+  return <section id="inicio" className="relative h-[70vh] flex items-center overflow-hidden mt-[120px] md:mt-[140px]">
 
       {/* Carousel Background */}
       <div className="absolute inset-0 overflow-hidden">
