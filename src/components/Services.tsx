@@ -54,10 +54,18 @@ const Services = () => {
     highlight: "Más de 50 cursos disponibles",
     color: "bg-accent"
   }];
-  return <section id="servicios" className="py-20 bg-background">
+  return <section id="servicios" className="py-20 bg-muted/30">
       <div className="container mx-auto px-8 lg:px-16">
-        {/* Section Header with Image */}
+        {/* Section Header with Image - Right Text, Left Image */}
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
+          <div className="relative overflow-hidden rounded-lg shadow-elevated">
+            <img 
+              src={servicesImage} 
+              alt="Servicios de Consultoría" 
+              className="w-full h-[400px] object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent"></div>
+          </div>
           <div className="text-left">
             <Badge variant="outline" className="mb-4 text-primary">
               Soluciones Empresariales
@@ -65,18 +73,14 @@ const Services = () => {
             <h2 className="text-4xl md:text-5xl font-bold font-serif text-corporate mb-6">
               Nuestros Servicios
             </h2>
-            <p className="text-xl text-muted-foreground">
+            <p className="text-xl text-muted-foreground mb-6">
               Ofrecemos una amplia gama de servicios de consultoría y asesoría 
               empresarial para impulsar el crecimiento de su organización
             </p>
-          </div>
-          <div className="relative overflow-hidden rounded-lg shadow-elevated">
-            <img 
-              src={servicesImage} 
-              alt="Servicios de Consultoría" 
-              className="w-full h-[300px] object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent"></div>
+            <p className="text-lg text-muted-foreground">
+              Nuestros servicios están diseñados para adaptarse a las necesidades específicas 
+              de cada empresa, garantizando soluciones efectivas y sostenibles.
+            </p>
           </div>
         </div>
 

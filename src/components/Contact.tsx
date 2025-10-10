@@ -107,25 +107,25 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contacto" className="py-20 bg-background">{/* White background */}
-      <div className="container mx-auto px-8 lg:px-16">{/* Added more side padding */}
+    <section id="contacto" className="py-20 bg-background">
+      <div className="container mx-auto px-8 lg:px-16">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className="text-left mb-12">
           <Badge variant="outline" className="mb-4 text-primary">
             Hablemos de tu Proyecto
           </Badge>
           <h2 className="text-4xl md:text-5xl font-bold font-serif text-corporate mb-6">
             Contáctanos
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-2xl">
             Estamos aquí para ayudarte a transformar tu empresa. 
             Contacta con nuestros expertos para una consulta personalizada
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Contact Form */}
-          <Card className="shadow-elevated">
+        <div className="grid lg:grid-cols-5 gap-12">
+          {/* Contact Form - Takes 3 columns */}
+          <Card className="shadow-elevated lg:col-span-3">
             <CardHeader>
               <CardTitle className="text-2xl text-corporate flex items-center gap-2">
                 <MessageCircle className="h-6 w-6 text-primary" />
@@ -253,8 +253,8 @@ const Contact = () => {
             </CardContent>
           </Card>
 
-          {/* Contact Information */}
-          <div className="space-y-8">
+          {/* Contact Information - Takes 2 columns */}
+          <div className="space-y-8 lg:col-span-2">
             <Card className="shadow-elevated">
               <CardHeader>
                 <CardTitle className="text-2xl text-corporate flex items-center gap-2">

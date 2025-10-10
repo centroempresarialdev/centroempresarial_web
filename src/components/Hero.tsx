@@ -33,38 +33,25 @@ const Hero = () => {
   const prevSlide = () => {
     setCurrentSlide(prev => (prev - 1 + carouselImages.length) % carouselImages.length);
   };
-  return <section id="inicio" className="relative min-h-screen flex items-center overflow-hidden pt-32">
+  return <section id="inicio" className="relative h-[70vh] flex items-center overflow-hidden">
 
       {/* Carousel Background */}
       <div className="absolute inset-0 overflow-hidden">
         {carouselImages.map((image, index) => <div key={index} className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`} style={{
         backgroundImage: `url(${image})`
       }}>
-            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black/80"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black/70"></div>
           </div>)}
       </div>
 
-      {/* Carousel Controls */}
-      <button onClick={prevSlide} className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-background/20 hover:bg-background/30 text-primary-foreground p-2 rounded-full transition-all duration-200" aria-label="Previous slide">
-        <ChevronLeft size={24} />
-      </button>
-      <button onClick={nextSlide} className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-background/20 hover:bg-background/30 text-primary-foreground p-2 rounded-full transition-all duration-200" aria-label="Next slide">
-        <ChevronRight size={24} />
-      </button>
-
-      {/* Carousel Indicators */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-2">
-        {carouselImages.map((_, index) => <button key={index} onClick={() => setCurrentSlide(index)} className={`w-3 h-3 rounded-full transition-all duration-200 ${index === currentSlide ? 'bg-white' : 'bg-white/30'}`} aria-label={`Go to slide ${index + 1}`} />)}
-      </div>
-
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 py-20">
-        <div className="max-w-4xl mx-auto text-center text-primary-foreground">
+      <div className="relative z-10 container mx-auto px-8 lg:px-16">
+        <div className="max-w-2xl text-left text-primary-foreground">
           {/* Main Heading */}
-          <h1 className="text-5xl md:text-7xl font-bold font-serif mb-6 animate-fade-in text-white [text-shadow:_2px_2px_8px_rgb(0_0_0_/_80%)]">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold font-serif mb-4 animate-fade-in text-white [text-shadow:_2px_2px_8px_rgb(0_0_0_/_80%)]">
             Centro Empresarial
           </h1>
-          <h2 className="text-2xl md:text-3xl font-semibold mb-8 animate-slide-up text-white [text-shadow:_1px_1px_4px_rgb(0_0_0_/_70%)]">
+          <h2 className="text-2xl md:text-3xl font-semibold mb-6 animate-slide-up text-white [text-shadow:_1px_1px_4px_rgb(0_0_0_/_70%)]">
             Asesores y Consultores
           </h2>
           
@@ -72,47 +59,11 @@ const Hero = () => {
           
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16 animate-slide-up">
-            <Button variant="hero" size="lg" onClick={() => scrollToSection('servicios')} className="text-lg px-8 py-4">
-              Nuestros Servicios
+          <div className="flex flex-col sm:flex-row gap-4 mb-8 animate-slide-up">
+            <Button variant="hero" size="lg" onClick={() => scrollToSection('contacto')} className="text-lg px-8 py-6">
+              Solicitar Información
               <ArrowRight className="ml-2" />
             </Button>
-            <Button variant="outline" size="lg" onClick={() => scrollToSection('contacto')} className="text-lg px-8 py-4 bg-background/10 text-primary-foreground border-primary-foreground/30 hover:bg-background/20">
-              Contáctanos
-            </Button>
-          </div>
-
-          {/* Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto animate-slide-up">
-            <div className="text-center">
-              <div className="flex justify-center mb-4">
-                <div className="p-3 bg-accent/20 rounded-full">
-                  <Award className="h-8 w-8 text-accent" />
-                </div>
-              </div>
-              <h3 className="text-3xl font-bold text-primary-foreground/80 mb-2">12+</h3>
-              <p className="text-primary-foreground/80">Años de Experiencia</p>
-            </div>
-            
-            <div className="text-center">
-              <div className="flex justify-center mb-4">
-                <div className="p-3 bg-accent/20 rounded-full">
-                  <Users className="h-8 w-8 text-accent" />
-                </div>
-              </div>
-              <h3 className="text-3xl font-bold text-primary-foreground/80 mb-2">500+</h3>
-              <p className="text-primary-foreground/80">Clientes Satisfechos</p>
-            </div>
-            
-            <div className="text-center">
-              <div className="flex justify-center mb-4">
-                <div className="p-3 bg-accent/20 rounded-full">
-                  <TrendingUp className="h-8 w-8 text-accent" />
-                </div>
-              </div>
-              <h3 className="text-3xl font-bold text-primary-foreground/80 mb-2">98%</h3>
-              <p className="text-primary-foreground/80">Tasa de Éxito</p>
-            </div>
           </div>
         </div>
       </div>

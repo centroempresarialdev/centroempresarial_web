@@ -36,27 +36,31 @@ const About = () => {
     name: "Cámara de Comercio de Ica",
     logo: "https://centroempresarialica.com/media/CamaraLogo.jpg"
   }];
-  return <section id="nosotros" className="py-20 bg-background">{/* White background */}
+  return <section id="nosotros" className="py-20 bg-background">
       <div className="container mx-auto px-8 lg:px-16">
-        {/* Section Header with Image */}
+        {/* Section Header with Image - Left Text, Right Image */}
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
           <div className="text-left">
             <Badge variant="outline" className="mb-4 text-primary">
-              Conoce Nuestro Equipo
+              Experiencia y Confianza
             </Badge>
             <h2 className="text-4xl md:text-5xl font-bold font-serif text-corporate mb-6">
-              Nosotros
+              Sobre Nosotros
             </h2>
-            <p className="text-xl text-muted-foreground">
-              Somos una firma líder en consultoría empresarial con más de una década 
-              de experiencia transformando negocios en la región de Ica
+            <p className="text-xl text-muted-foreground mb-6">
+              Somos un equipo multidisciplinario de expertos dedicados a impulsar 
+              el éxito de tu organización
+            </p>
+            <p className="text-lg text-muted-foreground">
+              Con más de 12 años de experiencia en el mercado, Centro Empresarial se ha consolidado 
+              como un referente en consultoría y asesoría empresarial en la región de Ica y a nivel nacional.
             </p>
           </div>
-          <div className="relative overflow-hidden rounded-lg shadow-elevated">
+          <div className="relative overflow-hidden rounded-lg shadow-elevated order-first lg:order-last">
             <img 
               src={aboutImage} 
               alt="Equipo de Centro Empresarial" 
-              className="w-full h-[300px] object-cover"
+              className="w-full h-[400px] object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent"></div>
           </div>
