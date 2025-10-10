@@ -156,7 +156,7 @@ const Services = () => {
                       Cursos Especializados
                     </h3>
                     <p className="text-white/90 font-medium text-lg">
-                      Más de 50 cursos disponibles
+                      Más cursos disponibles
                     </p>
                   </div>
                   <div className="bg-white/20 backdrop-blur-sm p-3 rounded-full group-hover:rotate-90 group-hover:bg-white/30 transition-all duration-700">
