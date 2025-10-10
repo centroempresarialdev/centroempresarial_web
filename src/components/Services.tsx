@@ -128,7 +128,7 @@ const Services = () => {
                         <CheckCircle className="h-5 w-5 flex-shrink-0" />
                         <span>Desarrollo de competencias técnicas</span>
                       </li>
-                      <li className="flex items-center gap-3 text-sm transform transition-all duration-500 delay-[600ms] translate-x-4 group-hover:translate-x-0 opacity-0 group-hover:opacity-100">
+                      <li className="flex items-center gap-3 text-sm transform transition-all duration-500 delay-600 translate-x-4 group-hover:translate-x-0 opacity-0 group-hover:opacity-100">
                         <CheckCircle className="h-5 w-5 flex-shrink-0" />
                         <span>Certificación oficial</span>
                       </li>
@@ -182,7 +182,7 @@ Enfermedades Crónicas</span>
                         <CheckCircle className="h-5 w-5 flex-shrink-0" />
                         <span>Desarrollo de Habilidades Blandas</span>
                       </li>
-                      <li className="flex items-center gap-3 text-sm transform transition-all duration-500 delay-[600ms] translate-x-4 group-hover:translate-x-0 opacity-0 group-hover:opacity-100">
+                      <li className="flex items-center gap-3 text-sm transform transition-all duration-500 delay-700 translate-x-4 group-hover:translate-x-0 opacity-0 group-hover:opacity-100">
                         <CheckCircle className="h-5 w-5 flex-shrink-0" />
                         <span>Curso Deteccion Temprana de
 Problemas de Crecimiento y Desarrollo</span>
