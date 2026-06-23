@@ -1,246 +1,312 @@
-import { Card, CardContent } from "@/components/ui/card";
+﻿import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { BookOpen, TrendingUp, Users, FileText, Shield, Briefcase, GraduationCap, Award, CheckCircle, ArrowRight } from "lucide-react";
-import servicesImage from "@/assets/services-header.jpg";
-import essaludImage from "@/assets/essalud-healthcare.jpg";
-import cursosImage from "@/assets/cursos-especializados.jpg";
-const Services = () => {
-  const scrollToContact = () => {
-    const element = document.getElementById('contacto');
-    if (element) {
-      element.scrollIntoView({
-        behavior: 'smooth'
-      });
-    }
-  };
-  const mainServices = [{
-    icon: <GraduationCap className="h-8 w-8" />,
-    title: "Cursos para ESSALUD",
-    description: "Programas de capacitación especializados para el personal de ESSALUD y Red de Salud Ica, diseñados para fortalecer competencias en el sector salud",
-    features: ["Capacitación en gestión hospitalaria", "Actualización en normativas de salud", "Desarrollo de competencias técnicas", "Protocolos de atención", "Gestión administrativa", "Calidad en servicios de salud", "Certificación oficial"]
-  }];
-  const cursos = [{
-    id: 1,
-    nombre: "Estrategias de Comunicacion Eficaz con Pacientes y Familiares",
+import { Card, CardContent } from "@/components/ui/card";
+import { ArrowRight, BookOpen, BriefcaseBusiness, CalendarDays, CheckCircle2, Clock, GraduationCap, Handshake, Image as ImageIcon, PlayCircle, Sparkles, UserRound } from "lucide-react";
+import servicesImage from "@/assets/hero/services-header.jpg";
+import essaludImage from "@/assets/hero/essalud-healthcare.jpg";
+import cursosImage from "@/assets/hero/cursos-especializados.jpg";
+import trainingImage from "@/assets/hero/essalud-training.jpg";
+
+const memberships = [
+  {
+    icon: GraduationCap,
+    name: "Estudiante",
+    price: "S/ 360",
+    period: "anual",
+    description: "Para estudiantes que buscan capacitaciones, recursos empresariales y apoyo académico.",
+    benefits: ["50% de descuento en capacitaciones", "Videos y blog empresarial gratuitos", "20% de descuento en monografías, tesis y proyectos"],
+    featured: false,
+  },
+  {
+    icon: UserRound,
+    name: "Profesionales",
+    price: "S/ 480",
+    period: "anual",
+    description: "Para profesionales que desean formación continua, eventos y networking especializado.",
+    benefits: ["50% de descuento en capacitaciones", "Postgrado con 20% de descuento", "Eventos y webinars con ponentes internacionales"],
+    featured: true,
+  },
+  {
+    icon: BriefcaseBusiness,
+    name: "Empresarial",
+    price: "S/ 1,500",
+    period: "anual",
+    description: "Para empresas que requieren asesoría, consultoría y acompañamiento en mejora continua.",
+    benefits: ["Capacitaciones para equipos", "Consultorías, auditorías y orientación institucional", "IA aplicada a negocios y mejora continua"],
+    featured: false,
+  },
+];
+
+const benefitGroups = [
+  {
+    category: "Estudiante",
+    items: ["Capacitaciones empresariales con 50% de descuento", "Videos empresariales gratuitos", "Blog empresarial gratuito", "Monografías, proyectos de tesis y tesis con 20% de descuento"],
+  },
+  {
+    category: "Profesionales",
+    items: ["Capacitaciones con 50% de descuento", "Acceso a videos y blogs", "Postgrado con 20% de descuento", "Eventos, webinars y alianzas con colegios profesionales"],
+  },
+  {
+    category: "Empresarial",
+    items: ["Capacitaciones con ponentes nacionales e internacionales", "Asesoría con instituciones públicas y privadas", "Consultorías y auditorías", "Tecnología e inteligencia artificial aplicada a empresas"],
+  },
+];
+
+const events = [
+  {
+    title: "Webinars empresariales",
+    description: "Charlas y sesiones online para actualizar conocimientos de gestión, tecnología, salud y negocios.",
+    icon: PlayCircle,
+  },
+  {
+    title: "Eventos institucionales",
+    description: "Actividades presenciales y convocatorias para conectar asociados, aliados y especialistas.",
+    icon: CalendarDays,
+  },
+  {
+    title: "Cursos especializados",
+    description: "Programas para fortalecer competencias profesionales y capacidades de equipos de trabajo.",
+    icon: BookOpen,
+  },
+];
+
+const courses = [
+  {
+    title: "Comunicación eficaz con pacientes y familiares",
     banner: "https://camaraica.org.pe/wp-content/uploads/2025/09/IMG-20250909-WA0017.avif",
-    link: "/cursos/marketing-digital"
-  }, {
-    id: 2,
-    nombre: "Atención al Paciente con Enfermedades Crónicas",
+  },
+  {
+    title: "Atención al paciente con enfermedades crónicas",
     banner: "https://camaraica.org.pe/wp-content/uploads/2025/09/IMG-20250909-WA0018.avif",
-    link: "/cursos/finanzas"
-  }, {
-    id: 3,
-    nombre: "Desarrollo de Habilidades Blandas para el personal de Salud",
+  },
+  {
+    title: "Habilidades blandas para personal de salud",
     banner: "https://camaraica.org.pe/wp-content/uploads/2025/09/IMG-20250909-WA0015.avif",
-    link: "/cursos/ventas"
-  }, {
-    id: 4,
-    nombre: "Curso Deteccion Temprana de Problemas de Crecimiento y Desarrollo de los Niños",
+  },
+  {
+    title: "Detección temprana de crecimiento y desarrollo",
     banner: "https://camaraica.org.pe/wp-content/uploads/2025/09/IMG-20250909-WA0016.avif",
-    link: "/cursos/liderazgo"
-  }];
-  const featuredServices = [{
-    icon: <GraduationCap className="h-12 w-12" />,
-    title: "Cursos para ESSALUD - Red de Salud Ica",
-    description: "Programas de capacitación especializados para el personal de ESSALUD - Red de Salud Ica, diseñados para fortalecer competencias en el sector salud",
-    highlight: "Certificación oficial",
-    color: "bg-primary",
-    features: ["Capacitación en gestión hospitalaria", "Actualización en normativas de salud", "Desarrollo de competencias técnicas", "Protocolos de atención", "Gestión administrativa", "Calidad en servicios de salud"]
-  }, {
-    icon: <Award className="h-12 w-12" />,
-    title: "Cursos Especializados",
-    description: "Programas de capacitación diseñados para potenciar las competencias profesionales en diversas áreas empresariales",
-    highlight: "Más de 50 cursos disponibles",
-    color: "bg-accent"
-  }];
-  return <section id="servicios" className="py-20 bg-muted/30">
-      <div className="container mx-auto px-8 lg:px-16">
-        {/* Section Header with Image - Right Text, Left Image */}
-        <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
-          <div className="relative overflow-hidden rounded-lg shadow-elevated">
-            <img src={servicesImage} alt="Servicios de Consultoría" className="w-full h-[400px] object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent"></div>
+  },
+];
+
+const partners = [
+  { name: "Piskus", logo: "https://centroempresarialica.com/media/piskus.jpg" },
+  { name: "ESSALUD", logo: "https://centroempresarialica.com/media/Essalud.png" },
+  { name: "Rumi Wasi", logo: "https://centroempresarialica.com/media/rumi-wasi.jpg" },
+  { name: "El Sabor Milagroso", logo: "https://centroempresarialica.com/media/sabor-milagroso.jpg" },
+  { name: "Cámara de Comercio de Ica", logo: "https://centroempresarialica.com/media/CamaraLogo.jpg" },
+];
+
+const Services = () => {
+  const scrollToForm = () => {
+    document.getElementById("inscripcion")?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  return (
+    <>
+      <section id="membresias" className="bg-muted/35 py-20">
+        <div className="container mx-auto px-6 lg:px-12">
+          <div className="mb-12 grid items-end gap-8 lg:grid-cols-[1fr_0.72fr]">
+            <div>
+              <Badge variant="outline" className="mb-4 text-primary">Membresías</Badge>
+              <h2 className="max-w-3xl text-3xl font-extrabold leading-tight text-corporate md:text-5xl">
+                Planes claros para cada etapa de crecimiento
+              </h2>
+              <p className="mt-5 max-w-2xl text-lg leading-8 text-muted-foreground">
+                Presenta precios anuales, beneficios y enfoque de cada categoría para que el usuario entienda rápido cuál membresía le corresponde.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-border bg-background p-6 shadow-sm">
+              <div className="flex items-center gap-3 text-primary">
+                <Clock className="h-5 w-5" />
+                <p className="font-bold">Membresía mensual</p>
+              </div>
+              <p className="mt-3 text-sm leading-6 text-muted-foreground">
+                Bloque preparado para mostrar montos mensuales cuando el cliente los defina. Por ahora se comunica disponibilidad bajo consulta.
+              </p>
+            </div>
           </div>
-          <div className="text-left">
-            <Badge variant="outline" className="mb-4 text-primary">
-              Soluciones Empresariales
-            </Badge>
-            <h2 className="text-4xl md:text-5xl font-bold font-serif text-corporate mb-6">
-              Nuestros Servicios
-            </h2>
-            <p className="text-xl text-muted-foreground mb-6">
-              Ofrecemos una amplia gama de servicios de consultoría y asesoría 
-              empresarial para impulsar el crecimiento de su organización
-            </p>
-            <p className="text-lg text-muted-foreground">
-              Nuestros servicios están diseñados para adaptarse a las necesidades específicas 
-              de cada empresa, garantizando soluciones efectivas y sostenibles.
-            </p>
+
+          <div className="grid gap-6 lg:grid-cols-3">
+            {memberships.map((plan, index) => (
+              <motion.div
+                key={plan.name}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{ duration: 0.45, delay: index * 0.08 }}
+              >
+                <Card className={`h-full overflow-hidden border-border bg-background shadow-sm transition-all hover:-translate-y-2 hover:shadow-elevated ${plan.featured ? "ring-2 ring-accent" : ""}`}>
+                  {plan.featured && (
+                    <div className="bg-accent px-5 py-2 text-center text-sm font-bold text-accent-foreground">Más solicitado</div>
+                  )}
+                  <CardContent className="flex h-full flex-col p-6">
+                    <div className="mb-5 flex items-start justify-between gap-4">
+                      <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 p-3 text-primary">
+                        <plan.icon className="h-7 w-7" />
+                      </div>
+                      <div className="text-right">
+                        <p className="text-3xl font-extrabold text-corporate">{plan.price}</p>
+                        <p className="text-sm text-muted-foreground">{plan.period}</p>
+                      </div>
+                    </div>
+                    <h3 className="text-2xl font-bold text-corporate">{plan.name}</h3>
+                    <p className="mt-3 min-h-20 text-sm leading-6 text-muted-foreground">{plan.description}</p>
+                    <div className="mt-6 space-y-3">
+                      {plan.benefits.map((benefit) => (
+                        <div key={benefit} className="flex gap-3 text-sm leading-6">
+                          <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+                          <span>{benefit}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <Button variant={plan.featured ? "accent" : "corporate"} className="mt-8 w-full" onClick={scrollToForm}>
+                      Solicitar inscripción
+                      <ArrowRight className="h-4 w-4" />
+                    </Button>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
           </div>
         </div>
+      </section>
 
-        {/* Featured Services - Interactive Cards */}
-        <div className="grid md:grid-cols-2 gap-8 mb-20">
-          {/* ESSALUD Card */}
-          <div className="group relative overflow-hidden rounded-2xl shadow-elevated hover:shadow-2xl transition-all duration-700 cursor-pointer h-[500px]">
-            {/* Background Image - Full Card */}
-            <div className="absolute inset-0">
-              <img src={essaludImage} alt="Cursos ESSALUD" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-              <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-primary/90 group-hover:to-primary/98 transition-all duration-700"></div>
+      <section id="beneficios" className="bg-background py-20">
+        <div className="container mx-auto px-6 lg:px-12">
+          <div className="mb-12 text-center">
+            <Badge variant="outline" className="mb-4 text-primary">Beneficios por categoría</Badge>
+            <h2 className="mx-auto max-w-3xl text-3xl font-extrabold text-corporate md:text-5xl">Beneficios visibles, comparables y fáciles de decidir</h2>
+          </div>
+
+          <div className="grid gap-6 lg:grid-cols-3">
+            {benefitGroups.map((group) => (
+              <Card key={group.category} className="border-border/80 shadow-sm">
+                <CardContent className="p-6">
+                  <h3 className="text-2xl font-bold text-corporate">{group.category}</h3>
+                  <div className="mt-5 space-y-4">
+                    {group.items.map((item) => (
+                      <div key={item} className="flex gap-3 text-sm leading-6 text-muted-foreground">
+                        <Sparkles className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+                        <span>{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="eventos" className="bg-primary py-20 text-primary-foreground">
+        <div className="container mx-auto px-6 lg:px-12">
+          <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+            <div>
+              <Badge variant="outline" className="mb-4 border-white/30 text-white">Eventos y formación</Badge>
+              <h2 className="text-3xl font-extrabold leading-tight text-white md:text-5xl">Contenido activo para mantener conectada a la comunidad</h2>
+              <p className="mt-5 text-lg leading-8 text-white/80">
+                La web queda preparada para comunicar eventos, webinars, cursos y convocatorias relevantes con una lectura más comercial.
+              </p>
             </div>
-            
-            {/* Content - Animated State */}
-            <div className="absolute bottom-0 left-0 right-0 text-white p-8 transition-all duration-700 ease-out group-hover:bottom-0 flex flex-col justify-end h-full">
-              <div className="space-y-4 transform transition-all duration-700 translate-y-0">
-                <div className="flex items-start justify-between gap-4">
-                  <div className="transition-transform duration-700 group-hover:-translate-y-32">
-                    <h3 className="text-2xl md:text-3xl font-bold mb-2 transition-all duration-500">
-                      Cursos para ESSALUD - Red de Salud Ica
-                    </h3>
-                    <p className="text-white/90 font-medium text-lg">
-                      Programas especializados
-                    </p>
+
+            <div className="grid gap-4 md:grid-cols-3">
+              {events.map((event) => (
+                <div key={event.title} className="rounded-2xl border border-white/15 bg-white/10 p-5 backdrop-blur">
+                  <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-full bg-accent text-accent-foreground">
+                    <event.icon className="h-6 w-6" />
                   </div>
-                  <div className="bg-white/20 backdrop-blur-sm p-3 rounded-full group-hover:rotate-90 group-hover:bg-white/30 transition-all duration-700">
-                    <ArrowRight className="h-6 w-6" />
-                  </div>
+                  <h3 className="text-xl font-bold text-white">{event.title}</h3>
+                  <p className="mt-3 text-sm leading-6 text-white/75">{event.description}</p>
                 </div>
-                
-                {/* Expanded content - Shows on hover with stagger effect */}
-                <div className="opacity-0 group-hover:opacity-100 transition-all duration-700 delay-200 max-h-0 group-hover:max-h-96 overflow-hidden transform translate-y-8 group-hover:translate-y-0">
-                  <div className="pt-6 border-t border-white/30 space-y-4">
-                    <p className="text-white/95 text-base leading-relaxed">
-                      Capacitación especializada para el personal de ESSALUD y Red de Salud Ica, 
-                      diseñados para fortalecer competencias en el sector salud.
-                    </p>
-                    <ul className="space-y-3">
-                      <li className="flex items-center gap-3 text-sm transform transition-all duration-500 delay-300 translate-x-4 group-hover:translate-x-0 opacity-0 group-hover:opacity-100">
-                        <CheckCircle className="h-5 w-5 flex-shrink-0" />
-                        <span>Capacitación en gestión hospitalaria</span>
-                      </li>
-                      <li className="flex items-center gap-3 text-sm transform transition-all duration-500 delay-400 translate-x-4 group-hover:translate-x-0 opacity-0 group-hover:opacity-100">
-                        <CheckCircle className="h-5 w-5 flex-shrink-0" />
-                        <span>Actualización en normativas de salud</span>
-                      </li>
-                      <li className="flex items-center gap-3 text-sm transform transition-all duration-500 delay-500 translate-x-4 group-hover:translate-x-0 opacity-0 group-hover:opacity-100">
-                        <CheckCircle className="h-5 w-5 flex-shrink-0" />
-                        <span>Desarrollo de competencias técnicas</span>
-                      </li>
-                      <li className="flex items-center gap-3 text-sm transform transition-all duration-500 delay-600 translate-x-4 group-hover:translate-x-0 opacity-0 group-hover:opacity-100">
-                        <CheckCircle className="h-5 w-5 flex-shrink-0" />
-                        <span>Certificación oficial</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="galeria" className="bg-muted/30 py-20">
+        <div className="container mx-auto px-6 lg:px-12">
+          <div className="mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+            <div>
+              <Badge variant="outline" className="mb-4 text-primary">Galería</Badge>
+              <h2 className="text-3xl font-extrabold text-corporate md:text-5xl">Fotos, videos y cursos destacados</h2>
+            </div>
+            <p className="max-w-xl text-muted-foreground">
+              Espacio visual para mostrar evidencia institucional, material audiovisual y piezas de cursos entregadas por el cliente.
+            </p>
+          </div>
+
+          <div className="grid gap-5 lg:grid-cols-4">
+            <div className="relative overflow-hidden rounded-2xl shadow-elevated lg:col-span-2 lg:row-span-2">
+              <img src={servicesImage} alt="Galería institucional" className="h-full min-h-[420px] w-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/75 to-transparent" />
+              <div className="absolute bottom-0 p-6 text-white">
+                <ImageIcon className="mb-3 h-8 w-8 text-accent" />
+                <h3 className="text-3xl font-bold">Actividad institucional</h3>
+                <p className="mt-2 max-w-md text-white/80">Bloque preparado para fotos y videos de eventos, capacitaciones y alianzas.</p>
               </div>
             </div>
-          </div>
 
-          {/* Cursos Especializados Card */}
-          <div className="group relative overflow-hidden rounded-2xl shadow-elevated hover:shadow-2xl transition-all duration-700 cursor-pointer h-[500px]">
-            {/* Background Image - Full Card */}
-            <div className="absolute inset-0">
-              <img src={cursosImage} alt="Cursos Especializados" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-              <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-accent/90 group-hover:to-accent/98 transition-all duration-700"></div>
-            </div>
-            
-            {/* Content - Animated State */}
-            <div className="absolute bottom-0 left-0 right-0 text-white p-8 transition-all duration-700 ease-out group-hover:bottom-0 flex flex-col justify-end h-full">
-              <div className="space-y-4 transform transition-all duration-700 translate-y-0">
-                <div className="flex items-start justify-between gap-4">
-                  <div className="transition-transform duration-700 group-hover:-translate-y-32">
-                    <h3 className="text-2xl md:text-3xl font-bold mb-2 transition-all duration-500">
-                      Cursos Especializados
-                    </h3>
-                    <p className="text-white/90 font-medium text-lg">
-                      Más cursos disponibles
-                    </p>
-                  </div>
-                  <div className="bg-white/20 backdrop-blur-sm p-3 rounded-full group-hover:rotate-90 group-hover:bg-white/30 transition-all duration-700">
-                    <ArrowRight className="h-6 w-6" />
-                  </div>
-                </div>
-                
-                {/* Expanded content - Shows on hover with stagger effect */}
-                <div className="opacity-0 group-hover:opacity-100 transition-all duration-700 delay-200 max-h-0 group-hover:max-h-96 overflow-hidden transform translate-y-8 group-hover:translate-y-0">
-                  <div className="pt-6 border-t border-white/30 space-y-4">
-                    <p className="text-white/95 text-base leading-relaxed">Programas de capacitación diseñados para potenciar las competencias profesionales en diversas áreas d.</p>
-                    <ul className="space-y-3">
-                      <li className="flex items-center gap-3 text-sm transform transition-all duration-500 delay-300 translate-x-4 group-hover:translate-x-0 opacity-0 group-hover:opacity-100">
-                        <CheckCircle className="h-5 w-5 flex-shrink-0" />
-                        <span>Estrategias de Comunicacion Eficaz</span>
-                      </li>
-                      <li className="flex items-center gap-3 text-sm transform transition-all duration-500 delay-400 translate-x-4 group-hover:translate-x-0 opacity-0 group-hover:opacity-100">
-                        <CheckCircle className="h-5 w-5 flex-shrink-0" />
-                        <span>Atención al Paciente con
-Enfermedades Crónicas</span>
-                      </li>
-                      <li className="flex items-center gap-3 text-sm transform transition-all duration-500 delay-500 translate-x-4 group-hover:translate-x-0 opacity-0 group-hover:opacity-100">
-                        <CheckCircle className="h-5 w-5 flex-shrink-0" />
-                        <span>Desarrollo de Habilidades Blandas</span>
-                      </li>
-                      <li className="flex items-center gap-3 text-sm transform transition-all duration-500 delay-700 translate-x-4 group-hover:translate-x-0 opacity-0 group-hover:opacity-100">
-                        <CheckCircle className="h-5 w-5 flex-shrink-0" />
-                        <span>Curso Deteccion Temprana de
-Problemas de Crecimiento y Desarrollo</span>
-                      </li>
-                    </ul>
-                  </div>
+            {[trainingImage, essaludImage, cursosImage].map((image, index) => (
+              <div key={image} className="overflow-hidden rounded-2xl shadow-sm">
+                <img src={image} alt={`Galería ${index + 1}`} className="h-52 w-full object-cover transition-transform duration-500 hover:scale-105" />
+              </div>
+            ))}
+
+            {courses.map((course) => (
+              <div key={course.title} className="overflow-hidden rounded-2xl border border-border bg-background shadow-sm transition-all hover:-translate-y-1 hover:shadow-corporate">
+                <img src={course.banner} alt={course.title} className="aspect-square w-full object-cover" />
+                <div className="p-4">
+                  <p className="text-sm font-bold leading-6 text-foreground">{course.title}</p>
                 </div>
               </div>
-            </div>
+            ))}
           </div>
         </div>
+      </section>
 
-
-        {/* Course Banners Section */}
-        <div className="mb-16">
-          <div className="text-center mb-12">
-            <Badge variant="outline" className="mb-4 text-primary">
-              Cursos Disponibles
-            </Badge>
-            <h3 className="text-3xl md:text-4xl font-bold font-serif text-corporate mb-4">Cursos Especializados</h3>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Ofrecemos una amplia variedad de cursos diseñados para potenciar las competencias profesionales
+      <section id="aliados" className="bg-background py-20">
+        <div className="container mx-auto px-6 lg:px-12">
+          <div className="mb-12 grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+            <div>
+              <Badge variant="outline" className="mb-4 text-primary">Aliados estratégicos</Badge>
+              <h2 className="text-3xl font-extrabold text-corporate md:text-5xl">Convenios que amplían el valor de la membresía</h2>
+            </div>
+            <p className="text-lg leading-8 text-muted-foreground">
+              Este bloque presenta aliados, convenios y beneficios asociados, reforzando confianza y dando razones concretas para inscribirse.
             </p>
           </div>
-          
-          {/* Course Banners Grid - Space for 8 course banners */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-  {cursos.map(curso => <a key={curso.id} href={curso.link} // si usás React Router, sería <Link to={curso.link}>
-          className="block rounded-lg overflow-hidden shadow-md hover:shadow-xl transition">
-      <img src={curso.banner} alt={curso.nombre} className="w-full aspect-square object-cover" />
 
-      <div className="p-3 bg-white">
-        <h3 className="text-sm font-semibold text-gray-800">
-          {curso.nombre}
-        </h3>
-      </div>
-    </a>)}
-        </div>
-        </div>
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+            {partners.map((partner) => (
+              <Card key={partner.name} className="border-border/80 shadow-sm transition-all hover:-translate-y-1 hover:shadow-corporate">
+                <CardContent className="flex h-full flex-col items-center justify-center p-5 text-center">
+                  <div className="flex h-28 w-full items-center justify-center">
+                    <img src={partner.logo} alt={partner.name} className="max-h-24 max-w-full object-contain" />
+                  </div>
+                  <p className="mt-4 text-sm font-bold text-corporate">{partner.name}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
 
-        {/* Call to Action */}
-        <div className="text-center bg-gradient-primary p-12 rounded-lg shadow-elevated">
-          <h3 className="text-3xl font-bold text-primary-foreground mb-4">
-            ¿Listo para Transformar tu Empresa?
-          </h3>
-          <p className="text-xl text-primary-foreground/90 mb-8 max-w-2xl mx-auto">
-            Contacta con nuestros expertos y descubre cómo podemos ayudarte 
-            a alcanzar tus objetivos empresariales
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="hero" size="lg" onClick={scrollToContact} className="bg-background text-primary hover:bg-background/90">
-              Solicitar Consulta Gratuita
+          <div className="mt-12 rounded-2xl bg-gradient-primary p-8 text-center text-primary-foreground shadow-elevated md:p-12">
+            <Handshake className="mx-auto mb-4 h-10 w-10 text-accent" />
+            <h3 className="text-3xl font-bold text-white">¿Listo para formar parte de la red?</h3>
+            <p className="mx-auto mt-3 max-w-2xl text-white/80">
+              Completa la ficha de inscripción y recibe orientación directa por WhatsApp sobre la membresía ideal para ti o tu empresa.
+            </p>
+            <Button variant="accent" size="lg" className="mt-7" onClick={scrollToForm}>
+              Iniciar inscripción
+              <ArrowRight className="h-5 w-5" />
             </Button>
-            
-            
           </div>
         </div>
-      </div>
-    </section>;
+      </section>
+    </>
+  );
 };
+
 export default Services;

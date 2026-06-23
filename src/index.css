@@ -1,4 +1,4 @@
-@tailwind base;
+﻿@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -122,10 +122,20 @@ All colors MUST be HSL.
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 
+  .lenis-smooth {
+    scroll-behavior: auto;
+  }
+
+  [data-scroll-reveal],
+  [data-gsap-stagger] > *,
+  [data-gsap-image] {
+    will-change: transform, opacity;
+  }
+
   /* Headings with bold, professional typography */
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading font-bold;
-    letter-spacing: -0.02em;
+    letter-spacing: 0;
   }
 
   h1 {

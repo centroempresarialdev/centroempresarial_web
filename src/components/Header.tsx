@@ -1,123 +1,123 @@
 import { useState } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Phone, Mail } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { contactInfo } from "@/data/site";
+import { Mail, Menu, Phone, UserPlus, X } from "lucide-react";
+
+const navigation = [
+  { label: "Inicio", href: "/" },
+  { label: "Membresias", href: "/membresias" },
+  { label: "Beneficios", href: "/beneficios" },
+  { label: "Aliados", href: "/aliados" },
+  { label: "Contacto", href: "/contacto" },
+];
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setIsMenuOpen(false);
-    }
-  };
+  const location = useLocation();
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
-      {/* Top bar with contact info */}
-      <div className="hidden md:block bg-primary text-primary-foreground py-2">
-        <div className="container mx-auto px-8 lg:px-16 flex justify-between items-center text-sm">{/* Added more side padding */}
+    <header className="fixed left-0 right-0 top-0 z-50 border-b border-border/80 bg-background/95 shadow-sm backdrop-blur-xl">
+      <div className="hidden bg-primary text-primary-foreground md:block">
+        <div className="container mx-auto flex items-center justify-between px-6 py-2 text-sm lg:px-12">
           <div className="flex items-center gap-6">
-            <div className="flex items-center gap-2">
+            <a href={`tel:${contactInfo.phone.replace(/\s/g, "")}`} className="flex items-center gap-2 transition-opacity hover:opacity-85">
               <Phone size={14} />
-              <span>+51 945 228 848</span>
-            </div>
-            <div className="flex items-center gap-2">
+              <span>{contactInfo.phone}</span>
+            </a>
+            <a href={`mailto:${contactInfo.email}`} className="flex items-center gap-2 transition-opacity hover:opacity-85">
               <Mail size={14} />
-              <span>centroempresarialsac@gmail.com</span>
-            </div>
+              <span>{contactInfo.email}</span>
+            </a>
           </div>
-          <div className="text-white animate-pulse font-serif">
-            Más de 12 años de experiencia
-          </div>
+          <p className="font-medium text-primary-foreground/90">Membresias, eventos y capacitacion para crecer en red</p>
         </div>
       </div>
 
-      {/* Main navigation */}
-      <nav className="container mx-auto px-8 lg:px-16 py-4">{/* Added more side padding */}
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <div className="flex items-center gap-3">
-            <img 
-              src="https://camaraica.org.pe/wp-content/uploads/2025/09/CENTRO.avif" 
-              alt="Centro Empresarial Logo" 
-              className="w-40 h-auto"
+      <nav className="container mx-auto px-6 py-4 lg:px-12">
+        <div className="flex items-center justify-between gap-6">
+          <Link to="/" className="flex items-center gap-3 text-left" aria-label="Ir al inicio" onClick={() => setIsMenuOpen(false)}>
+            <img
+              src="https://camaraica.org.pe/wp-content/uploads/2025/09/CENTRO.avif"
+              alt="Centro Empresarial"
+              className="h-12 w-auto"
             />
-           </div>
+          </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            <button
-              onClick={() => scrollToSection('inicio')}
-              className="text-foreground hover:text-primary transition-colors font-medium"
-            >
-              Inicio
-            </button>
-            <button
-              onClick={() => scrollToSection('nosotros')}
-              className="text-foreground hover:text-primary transition-colors font-medium"
-            >
-              Nosotros
-            </button>
-            <button
-              onClick={() => scrollToSection('servicios')}
-              className="text-foreground hover:text-primary transition-colors font-medium"
-            >
-              Servicios
-            </button>
+          <div className="hidden items-center gap-2 lg:flex">
+            {navigation.map((item) => (
+              <NavLink
+                key={item.href}
+                to={item.href}
+                className={({ isActive }) =>
+                  cn(
+                    "rounded-md px-3 py-2 text-sm font-semibold text-foreground/75 transition-colors hover:bg-muted hover:text-primary",
+                    isActive && "bg-primary/10 text-primary",
+                  )
+                }
+              >
+                {item.label}
+              </NavLink>
+            ))}
+          </div>
 
-            <Button 
-              variant="corporate"
-              onClick={() => scrollToSection('contacto')}
-            >
-              Contáctanos
+          <div className="hidden items-center gap-3 md:flex">
+            {location.pathname !== "/contacto" && (
+              <Button asChild variant="outline">
+                <Link to="/contacto">Hablar con asesor</Link>
+              </Button>
+            )}
+            <Button asChild variant="corporate">
+              <Link to="/contacto">
+                <UserPlus className="h-4 w-4" />
+                Asociarme
+              </Link>
             </Button>
           </div>
 
-          {/* Mobile menu button */}
           <Button
             variant="ghost"
             size="icon"
             className="md:hidden"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            onClick={() => setIsMenuOpen((value) => !value)}
+            aria-label="Abrir menu"
           >
-            {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
           </Button>
         </div>
 
-        {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden mt-4 py-4 border-t border-border">
-            <div className="flex flex-col gap-4">
-              <button
-                onClick={() => scrollToSection('inicio')}
-                className="text-left text-foreground hover:text-primary transition-colors font-medium py-2"
-              >
-                Inicio
-              </button>
-              <button
-                onClick={() => scrollToSection('nosotros')}
-                className="text-left text-foreground hover:text-primary transition-colors font-medium py-2"
-              >
-                Nosotros
-              </button>
-              <button
-                onClick={() => scrollToSection('servicios')}
-                className="text-left text-foreground hover:text-primary transition-colors font-medium py-2"
-              >
-                Servicios
-              </button>
-
-              <Button 
-                variant="corporate"
-                className="w-full mt-2"
-                onClick={() => scrollToSection('contacto')}
-              >
-                Contáctanos
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mt-4 border-t border-border py-4 md:hidden"
+          >
+            <div className="flex flex-col gap-2">
+              {navigation.map((item) => (
+                <NavLink
+                  key={item.href}
+                  to={item.href}
+                  onClick={() => setIsMenuOpen(false)}
+                  className={({ isActive }) =>
+                    cn(
+                      "rounded-md px-3 py-3 text-left font-semibold text-foreground/85 hover:bg-muted",
+                      isActive && "bg-primary/10 text-primary",
+                    )
+                  }
+                >
+                  {item.label}
+                </NavLink>
+              ))}
+              <Button asChild variant="corporate" className="mt-2 w-full" onClick={() => setIsMenuOpen(false)}>
+                <Link to="/contacto">
+                  <UserPlus className="h-4 w-4" />
+                  Quiero asociarme
+                </Link>
               </Button>
             </div>
-          </div>
+          </motion.div>
         )}
       </nav>
     </header>

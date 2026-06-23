@@ -1,4 +1,5 @@
-import type { Config } from "tailwindcss";
+﻿import type { Config } from "tailwindcss";
+import tailwindcssAnimate from "tailwindcss-animate";
 
 export default {
   darkMode: ["class"],
@@ -68,8 +69,8 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        'sans': ['Open Sans', 'system-ui', 'sans-serif'],
-        'heading': ['Montserrat', 'sans-serif'],
+        'sans': ['Manrope', 'system-ui', 'sans-serif'],
+        'heading': ['Manrope', 'system-ui', 'sans-serif'],
       },
       keyframes: {
         "accordion-down": {
@@ -115,5 +116,6 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [tailwindcssAnimate],
 } satisfies Config;
+

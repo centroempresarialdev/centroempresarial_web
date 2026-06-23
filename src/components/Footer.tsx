@@ -1,169 +1,91 @@
-import { Mail, Phone, MapPin, Clock, Facebook, Linkedin, Twitter } from "lucide-react";
+import { Link } from "react-router-dom";
+import { contactInfo, executiveServices } from "@/data/site";
+import { Facebook, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
-  const services = [
-    "Consultoría Estratégica",
-    "Recursos Humanos",
-    "Asesoría Legal",
-    "Seguridad y Salud Ocupacional",
-    "Gestión de Calidad",
-    "Proyectos de Inversión"
+  const links = [
+    { name: "Inicio", href: "/" },
+    { name: "Membresias", href: "/membresias" },
+    { name: "Beneficios", href: "/beneficios" },
+    { name: "Aliados", href: "/aliados" },
+    { name: "Contacto", href: "/contacto" },
   ];
-
-  const quickLinks = [
-    { name: "Inicio", href: "#inicio" },
-    { name: "Nosotros", href: "#nosotros" },
-    { name: "Servicios", href: "#servicios" },
-    { name: "Contacto", href: "#contacto" }
-  ];
-
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId.replace('#', ''));
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
   return (
-    <footer className="bg-primary text-primary-foreground">
-      {/* Main Footer Content */}
-      <div className="container mx-auto px-8 lg:px-16 py-12">{/* Added more side padding */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Company Info */}
-          <div className="lg:col-span-1">
-            <h3 className="text-2xl font-bold font-serif mb-4">
-              Centro Empresarial
-            </h3>
-            <p className="text-primary-foreground/80 mb-6 leading-relaxed">
-              Más de 12 años de experiencia ofreciendo soluciones estratégicas 
-              personalizadas para empresas privadas e instituciones públicas en Ica, Perú.
+    <footer className="bg-foreground text-background">
+      <div className="container mx-auto px-6 py-14 lg:px-12">
+        <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr_0.75fr_1fr]">
+          <div>
+            <img
+              src="https://camaraica.org.pe/wp-content/uploads/2025/09/CENTRO.avif"
+              alt="Centro Empresarial"
+              className="mb-5 h-14 w-auto rounded bg-white p-2"
+            />
+            <h3 className="text-2xl font-bold text-white">Centro Empresarial</h3>
+            <p className="mt-4 max-w-sm leading-7 text-white/70">
+              Comunidad empresarial para capacitacion, membresias, aliados estrategicos y acompanamiento profesional en Ica y el Peru.
             </p>
-            <div className="flex gap-4">
-              <a 
-                href="#" 
-                className="p-2 bg-primary-foreground/10 rounded-lg hover:bg-primary-foreground/20 transition-colors"
-                aria-label="Facebook"
-              >
+            <div className="mt-6 flex gap-3">
+              <a href="#" aria-label="Facebook" className="rounded-full bg-white/10 p-3 text-white transition-colors hover:bg-accent hover:text-accent-foreground">
                 <Facebook className="h-5 w-5" />
               </a>
-              <a 
-                href="#" 
-                className="p-2 bg-primary-foreground/10 rounded-lg hover:bg-primary-foreground/20 transition-colors"
-                aria-label="LinkedIn"
-              >
+              <a href="#" aria-label="LinkedIn" className="rounded-full bg-white/10 p-3 text-white transition-colors hover:bg-accent hover:text-accent-foreground">
                 <Linkedin className="h-5 w-5" />
-              </a>
-              <a 
-                href="#" 
-                className="p-2 bg-primary-foreground/10 rounded-lg hover:bg-primary-foreground/20 transition-colors"
-                aria-label="Twitter"
-              >
-                <Twitter className="h-5 w-5" />
               </a>
             </div>
           </div>
 
-          {/* Services */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">Servicios</h4>
-            <ul className="space-y-2">
-              {services.map((service, index) => (
-                <li key={index}>
-                  <button 
-                    onClick={() => scrollToSection('servicios')}
-                    className="text-primary-foreground/80 hover:text-primary-foreground transition-colors text-left"
-                  >
-                    {service}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Quick Links */}
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Enlaces Rápidos</h4>
-            <ul className="space-y-2">
-              {quickLinks.map((link, index) => (
-                <li key={index}>
-                  <button 
-                    onClick={() => scrollToSection(link.href)}
-                    className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
-                  >
+            <h4 className="mb-5 text-lg font-bold text-white">Secciones</h4>
+            <ul className="space-y-3">
+              {links.map((link) => (
+                <li key={link.href}>
+                  <Link to={link.href} className="text-left text-sm text-white/70 transition-colors hover:text-accent">
                     {link.name}
-                  </button>
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Contact Info */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">Contacto</h4>
-            <div className="space-y-3">
-              <div className="flex items-start gap-3">
-                <MapPin className="h-5 w-5 text-accent mt-0.5" />
-                <div>
-                  <p className="text-primary-foreground/80 text-sm">
-                    Calle Castrovirreyna 323<br />
-                    Tercer piso, Ica, Perú
-                  </p>
-                </div>
-              </div>
-              
-              <div className="flex items-center gap-3">
+            <h4 className="mb-5 text-lg font-bold text-white">Enfoque</h4>
+            <ul className="space-y-4">
+              {executiveServices.map((service) => (
+                <li key={service.label} className="flex items-center gap-3 text-sm text-white/72">
+                  <service.icon className="h-4 w-4 text-accent" />
+                  {service.label}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="mb-5 text-lg font-bold text-white">Contacto</h4>
+            <div className="space-y-4 text-sm text-white/72">
+              <a href={`tel:${contactInfo.phone.replace(/\s/g, "")}`} className="flex items-center gap-3 transition-colors hover:text-accent">
                 <Phone className="h-5 w-5 text-accent" />
-                <a 
-                  href="tel:+51945228848" 
-                  className="text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm"
-                >
-                  +51 945 228 848
-                </a>
-              </div>
-              
-              <div className="flex items-center gap-3">
+                {contactInfo.phone}
+              </a>
+              <a href={`mailto:${contactInfo.email}`} className="flex items-center gap-3 transition-colors hover:text-accent">
                 <Mail className="h-5 w-5 text-accent" />
-                <a 
-                  href="mailto:centroempresarialsac@gmail.com" 
-                  className="text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm"
-                >
-                  centroempresarialsac@gmail.com
-                </a>
-              </div>
-              
-              <div className="flex items-start gap-3">
-                <Clock className="h-5 w-5 text-accent mt-0.5" />
-                <div>
-                  <p className="text-primary-foreground/80 text-sm">
-                    Lunes - Viernes<br />
-                    8:00 AM - 6:00 PM
-                  </p>
-                </div>
-              </div>
+                {contactInfo.email}
+              </a>
+              <a href={contactInfo.mapUrl} target="_blank" rel="noopener noreferrer" className="flex items-start gap-3 transition-colors hover:text-accent">
+                <MapPin className="mt-0.5 h-5 w-5 text-accent" />
+                {contactInfo.address}
+              </a>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Bottom Bar */}
-      <div className="border-t border-primary-foreground/20">
-        <div className="container mx-auto px-8 lg:px-16 py-6">{/* Added more side padding */}
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-primary-foreground/80 text-sm text-center md:text-left">
-              © {currentYear} Centro Empresarial - Asesores y Consultores. 
-              Todos los derechos reservados.
-            </p>
-            <div className="flex gap-6 text-sm">
-              <a href="#" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
-                Política de Privacidad
-              </a>
-              <a href="#" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
-                Términos de Servicio
-              </a>
-            </div>
-          </div>
+      <div className="border-t border-white/10">
+        <div className="container mx-auto flex flex-col gap-3 px-6 py-6 text-sm text-white/60 md:flex-row md:items-center md:justify-between lg:px-12">
+          <p>© {currentYear} Centro Empresarial - Asesores y Consultores. Todos los derechos reservados.</p>
+          <p>Membresias, beneficios y contacto directo por WhatsApp.</p>
         </div>
       </div>
     </footer>
