@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Layout from "@/components/Layout";
 import Benefits from "@/pages/Benefits";
 import ContactPage from "@/pages/ContactPage";
@@ -23,7 +23,8 @@ const App = () => (
           <Route element={<Layout />}>
             <Route path="/" element={<Index />} />
             <Route path="/membresias" element={<Memberships />} />
-            <Route path="/beneficios" element={<Benefits />} />
+            <Route path="/eventos" element={<Benefits />} />
+            <Route path="/beneficios" element={<Navigate to="/eventos" replace />} />
             <Route path="/aliados" element={<Partners />} />
             <Route path="/contacto" element={<ContactPage />} />
             <Route path="*" element={<NotFound />} />

@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import PageIntro from "@/components/PageIntro";
 import ScrollReveal from "@/components/ScrollReveal";
-import { associationSteps, benefitGroups, membershipPlans } from "@/data/site";
+import { associationSteps, membershipPlans } from "@/data/site";
 import { ArrowRight, CheckCircle2, ClipboardCheck } from "lucide-react";
 
 const Memberships = () => {
@@ -14,8 +14,8 @@ const Memberships = () => {
           <div className="grid items-end gap-10 lg:grid-cols-[0.95fr_1.05fr]">
             <PageIntro
               eyebrow="Membresias"
-              title="Planes claros para asociarte con criterio"
-              description="Compara inversion, beneficios y enfoque por perfil. Cada membresia esta pensada para que el interesado vea rapido si encaja con su etapa actual."
+              title="Membresias anuales para cada etapa"
+              description="Compara el enfoque, la inversion y los beneficios reales de cada categoria antes de solicitar tu inscripcion."
             />
             <ScrollReveal direction="right" className="rounded-lg border border-border bg-background p-6 shadow-sm">
               <div className="flex items-center gap-3 text-primary">
@@ -32,69 +32,60 @@ const Memberships = () => {
 
       <section className="bg-background py-20">
         <div className="container mx-auto px-6 lg:px-12">
+          <ScrollReveal className="mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+            <div>
+              <p className="mb-3 text-sm font-bold uppercase tracking-[0.2em] text-primary">Membresia anual</p>
+              <h2 className="text-3xl font-extrabold leading-tight text-corporate md:text-5xl">Beneficios por tipo de asociado</h2>
+            </div>
+            <p className="max-w-xl text-lg leading-8 text-muted-foreground">
+              Cada plan responde a una necesidad distinta: apoyo academico, desarrollo profesional o crecimiento empresarial.
+            </p>
+          </ScrollReveal>
+
           <div className="grid gap-6 lg:grid-cols-3">
             {membershipPlans.map((plan, index) => (
               <ScrollReveal key={plan.name} delay={index * 0.08}>
                 <Card className={`h-full overflow-hidden border-border bg-background shadow-sm transition-all hover:-translate-y-2 hover:shadow-elevated ${plan.featured ? "ring-2 ring-accent" : ""}`}>
-                {plan.featured && <div className="bg-accent px-5 py-2 text-center text-sm font-bold text-accent-foreground">Mas solicitado</div>}
-                <CardContent className="flex h-full flex-col p-6">
-                  <div className="mb-5 flex items-start justify-between gap-4">
-                    <div className="flex h-14 w-14 items-center justify-center rounded-md bg-primary/10 p-3 text-primary">
-                      <plan.icon className="h-7 w-7" />
-                    </div>
-                    <div className="text-right">
-                      <p className="text-3xl font-extrabold text-corporate">{plan.price}</p>
-                      <p className="text-sm text-muted-foreground">{plan.period}</p>
-                    </div>
-                  </div>
-                  <h2 className="text-2xl font-bold text-corporate">{plan.name}</h2>
-                  <p className="mt-3 text-sm leading-6 text-muted-foreground">{plan.description}</p>
-                  <div className="mt-6 space-y-3">
-                    {plan.benefits.map((benefit) => (
-                      <div key={benefit} className="flex gap-3 text-sm leading-6">
-                        <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
-                        <span>{benefit}</span>
+                  <div className={`h-2 ${plan.featured ? "bg-accent" : "bg-primary"}`} />
+                  <CardContent className="flex h-full flex-col p-6">
+                    <div className="mb-6 flex items-start justify-between gap-4">
+                      <div className="flex h-14 w-14 items-center justify-center rounded-md bg-primary text-primary-foreground">
+                        <plan.icon className="h-7 w-7" />
                       </div>
-                    ))}
-                  </div>
-                  <p className="mt-6 rounded-md bg-muted px-4 py-3 text-sm font-semibold text-corporate">{plan.bestFor}</p>
-                  <Button asChild variant={plan.featured ? "accent" : "corporate"} className="mt-8 w-full">
-                    <Link to="/contacto">
-                      Solicitar inscripcion
-                      <ArrowRight className="h-4 w-4" />
-                    </Link>
-                  </Button>
-                </CardContent>
-              </Card>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-muted/35 py-20">
-        <div className="container mx-auto px-6 lg:px-12">
-          <PageIntro
-            eyebrow="Comparativo"
-            title="Beneficios visibles por categoria"
-            description="La informacion se presenta por perfil para reducir dudas y acelerar la decision de contacto."
-            align="center"
-          />
-
-          <div className="mt-12 grid gap-6 lg:grid-cols-3">
-            {benefitGroups.map((group, index) => (
-              <ScrollReveal key={group.category} delay={index * 0.08}>
-                <Card className="border-border/80 shadow-sm">
-                  <CardContent className="p-6">
-                    <h2 className="text-2xl font-bold text-corporate">{group.category}</h2>
-                    <div className="mt-5 space-y-4">
-                      {group.items.map((item) => (
-                        <div key={item} className="flex gap-3 text-sm leading-6 text-muted-foreground">
-                          <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
-                          <span>{item}</span>
-                        </div>
-                      ))}
+                      {plan.featured && <span className="rounded-full bg-accent/15 px-3 py-1 text-xs font-extrabold uppercase tracking-wide text-accent">Mas solicitado</span>}
                     </div>
+
+                    <div>
+                      <h2 className="text-2xl font-extrabold text-corporate">{plan.name}</h2>
+                      <div className="mt-5 flex items-end gap-2 rounded-lg bg-muted/55 p-4">
+                        <p className="text-4xl font-extrabold text-corporate">{plan.price}</p>
+                        <p className="pb-1 text-sm text-muted-foreground">/{plan.period}</p>
+                      </div>
+                    </div>
+
+                    <div className="mt-5 rounded-md border border-border bg-card p-4">
+                      <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-primary">Enfoque</p>
+                      <p className="mt-2 text-sm leading-6 text-muted-foreground">{plan.audience}</p>
+                    </div>
+
+                    <div className="mt-6 flex-1">
+                      <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-primary">Beneficios</p>
+                      <div className="mt-4 space-y-3">
+                        {plan.benefits.map((benefit) => (
+                          <div key={benefit} className="flex gap-3 text-sm leading-6 text-muted-foreground">
+                            <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
+                            <span>{benefit}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <Button asChild variant={plan.featured ? "accent" : "corporate"} className="mt-8 w-full">
+                      <Link to="/contacto">
+                        Solicitar inscripcion
+                        <ArrowRight className="h-4 w-4" />
+                      </Link>
+                    </Button>
                   </CardContent>
                 </Card>
               </ScrollReveal>

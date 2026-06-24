@@ -8,7 +8,7 @@ const Footer = () => {
   const links = [
     { name: "Inicio", href: "/" },
     { name: "Membresias", href: "/membresias" },
-    { name: "Beneficios", href: "/beneficios" },
+    { name: "Eventos", href: "/eventos" },
     { name: "Aliados", href: "/aliados" },
     { name: "Contacto", href: "/contacto" },
   ];
@@ -85,7 +85,7 @@ const Footer = () => {
       <div className="border-t border-white/10">
         <div className="container mx-auto flex flex-col gap-3 px-6 py-6 text-sm text-white/60 md:flex-row md:items-center md:justify-between lg:px-12">
           <p>© {currentYear} Centro Empresarial - Asesores y Consultores. Todos los derechos reservados.</p>
-          <p>Membresias, beneficios y contacto directo por WhatsApp.</p>
+          <p>Membresias, eventos y contacto directo por WhatsApp.</p>
         </div>
       </div>
     </footer>

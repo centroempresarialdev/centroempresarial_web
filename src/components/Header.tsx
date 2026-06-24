@@ -9,7 +9,7 @@ import { Mail, Menu, Phone, UserPlus, X } from "lucide-react";
 const navigation = [
   { label: "Inicio", href: "/" },
   { label: "Membresias", href: "/membresias" },
-  { label: "Beneficios", href: "/beneficios" },
+  { label: "Eventos", href: "/eventos" },
   { label: "Aliados", href: "/aliados" },
   { label: "Contacto", href: "/contacto" },
 ];
@@ -19,7 +19,7 @@ const Header = () => {
   const location = useLocation();
 
   return (
-    <header className="fixed left-0 right-0 top-0 z-50 border-b border-border/80 bg-background/95 shadow-sm backdrop-blur-xl">
+    <header className="fixed left-0 right-0 top-0 z-50 border-b border-border/80 bg-card/95 shadow-sm backdrop-blur-xl">
       <div className="hidden bg-primary text-primary-foreground md:block">
         <div className="container mx-auto flex items-center justify-between px-6 py-2 text-sm lg:px-12">
           <div className="flex items-center gap-6">

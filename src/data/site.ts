@@ -17,6 +17,9 @@ import galleryCourseGroup from "@/assets/16 de septiembre 2025.jpg";
 import galleryTraining from "@/assets/2025.jpg";
 import galleryInnovation from "@/assets/2026.jpg";
 import galleryMeeting from "@/assets/5 de septiembre 2025.jpg";
+import logoIntedya from "@/assets/Logo_Intedya_Alta Blanco.jpeg";
+import eventParacas from "@/assets/eventos/paracas.jpg";
+import eventSeguridad from "@/assets/eventos/seguridad.jpg";
 
 export type IconItem = {
   icon: LucideIcon;
@@ -69,10 +72,15 @@ export const membershipPlans = [
     name: "Estudiante",
     price: "S/ 360",
     period: "anual",
-    audience: "Para estudiantes que quieren acceder a formacion, recursos y acompanamiento academico.",
-    description: "Una entrada accesible a la comunidad para aprender, construir criterio empresarial y avanzar con soporte.",
-    benefits: ["50% de descuento en capacitaciones", "Videos y blog empresarial gratuitos", "20% de descuento en monografias, tesis y proyectos"],
-    bestFor: "Estudiantes tecnicos, universitarios y egresados recientes.",
+    audience: "Orientada a estudiantes que buscan capacitaciones, recursos empresariales y apoyo academico.",
+    description: "Acceso formativo para estudiantes que quieren avanzar con recursos, descuentos y soporte academico.",
+    benefits: [
+      "Capacitaciones empresariales con 50% de descuento.",
+      "Videos empresariales gratuitos.",
+      "Blog empresarial gratuito.",
+      "Monografias, proyectos de tesis y tesis para titulacion, maestria y doctorado con 20% de descuento.",
+    ],
+    bestFor: "Estudiantes",
     featured: false,
   },
   {
@@ -80,10 +88,16 @@ export const membershipPlans = [
     name: "Profesionales",
     price: "S/ 480",
     period: "anual",
-    audience: "Para profesionales que buscan actualizacion, eventos y una red de contactos con valor.",
-    description: "El plan mas equilibrado para mantenerse vigente, conectar con especialistas y acceder a beneficios.",
-    benefits: ["50% de descuento en capacitaciones", "Postgrado con 20% de descuento", "Eventos y webinars con ponentes internacionales"],
-    bestFor: "Profesionales independientes, consultores y lideres de area.",
+    audience: "Orientada a profesionales que buscan formacion continua, beneficios academicos y acceso a eventos especializados.",
+    description: "Una membresia para actualizar competencias, acceder a beneficios academicos y conectar con espacios especializados.",
+    benefits: [
+      "Capacitaciones con 50% de descuento.",
+      "Acceso a videos y blogs.",
+      "Postgrado con 20% de descuento.",
+      "Eventos y webinars con ponentes internacionales.",
+      "Alianzas estrategicas con colegios profesionales.",
+    ],
+    bestFor: "Profesionales",
     featured: true,
   },
   {
@@ -91,10 +105,16 @@ export const membershipPlans = [
     name: "Empresarial",
     price: "S/ 1,500",
     period: "anual",
-    audience: "Para empresas que necesitan capacitacion, consultoria y acompanamiento de mejora continua.",
-    description: "Un acceso corporativo para equipos que requieren orientacion, alianzas y herramientas aplicadas.",
-    benefits: ["Capacitaciones para equipos", "Consultorias, auditorias y orientacion institucional", "IA aplicada a negocios y mejora continua"],
-    bestFor: "Empresas, instituciones y equipos en crecimiento.",
+    audience: "Orientada a empresas que requieren capacitaciones, asesorias, consultorias y acompanamiento en mejora continua.",
+    description: "Un plan corporativo para equipos que necesitan orientacion especializada, auditorias e innovacion aplicada.",
+    benefits: [
+      "Capacitaciones relacionadas a negocios con ponentes nacionales e internacionales.",
+      "Asesorias y orientacion con instituciones publicas y privadas.",
+      "Consultorias y auditorias.",
+      "Asesoramiento en tecnologia aplicada a los negocios y mejora continua.",
+      "Asesoria e implementacion de inteligencia artificial para empresas.",
+    ],
+    bestFor: "Empresas",
     featured: false,
   },
 ];
@@ -102,17 +122,41 @@ export const membershipPlans = [
 export const benefitGroups = [
   {
     category: "Estudiante",
-    items: ["Capacitaciones empresariales con 50% de descuento", "Videos empresariales gratuitos", "Blog empresarial gratuito", "Monografias, proyectos de tesis y tesis con 20% de descuento"],
+    items: [
+      "Capacitaciones empresariales con 50% de descuento.",
+      "Videos empresariales gratuitos.",
+      "Blog empresarial gratuito.",
+      "Monografias, proyectos de tesis y tesis para titulacion, maestria y doctorado con 20% de descuento.",
+    ],
   },
   {
     category: "Profesionales",
-    items: ["Capacitaciones con 50% de descuento", "Acceso a videos y blogs", "Postgrado con 20% de descuento", "Eventos, webinars y alianzas con colegios profesionales"],
+    items: [
+      "Capacitaciones con 50% de descuento.",
+      "Acceso a videos y blogs.",
+      "Postgrado con 20% de descuento.",
+      "Eventos y webinars con ponentes internacionales.",
+      "Alianzas estrategicas con colegios profesionales.",
+    ],
   },
   {
     category: "Empresarial",
-    items: ["Capacitaciones con ponentes nacionales e internacionales", "Asesoria con instituciones publicas y privadas", "Consultorias y auditorias", "Tecnologia e inteligencia artificial aplicada a empresas"],
+    items: [
+      "Capacitaciones relacionadas a negocios con ponentes nacionales e internacionales.",
+      "Asesorias y orientacion con instituciones publicas y privadas.",
+      "Consultorias y auditorias.",
+      "Asesoramiento en tecnologia aplicada a los negocios y mejora continua.",
+      "Asesoria e implementacion de inteligencia artificial para empresas.",
+    ],
   },
 ];
+
+export const monthlyMembership = {
+  title: "Membresia mensual",
+  description:
+    "Estructura visual preparada para mostrar membresias mensuales cuando se definan los montos correspondientes. No se muestran importes hasta que el cliente los confirme.",
+  status: "Proximamente",
+};
 
 export const events: IconItem[] = [
   {
@@ -159,11 +203,81 @@ export const galleryImages = [
 ];
 
 export const partners = [
-  { name: "Piskus", logo: "https://centroempresarialica.com/media/piskus.jpg" },
-  { name: "ESSALUD", logo: "https://centroempresarialica.com/media/Essalud.png" },
-  { name: "Rumi Wasi", logo: "https://centroempresarialica.com/media/rumi-wasi.jpg" },
-  { name: "El Sabor Milagroso", logo: "https://centroempresarialica.com/media/sabor-milagroso.jpg" },
-  { name: "Camara de Comercio de Ica", logo: "https://centroempresarialica.com/media/CamaraLogo.jpg" },
+  {
+    name: "Intedya Internacional",
+    logo: logoIntedya,
+    summary: "Formacion, gestion empresarial y mejora continua con alcance internacional.",
+    darkLogo: true,
+    benefits: [
+      "Acceso a conocimiento y buenas practicas empresariales de alcance internacional.",
+      "Capacitacion especializada en gestion, calidad, seguridad y mejora continua.",
+      "Impulso a la competitividad, innovacion y optimizacion de procesos.",
+      "Prestigio institucional y oportunidades de colaboracion empresarial.",
+    ],
+  },
+  {
+    name: "Piskus",
+    logo: "https://centroempresarialica.com/media/piskus.jpg",
+    summary: "Beneficios comerciales para asociados y actividades de integracion.",
+    benefits: [
+      "Condiciones preferenciales para miembros activos.",
+      "Oportunidades para activaciones, sorteos o campanas con la comunidad.",
+      "Espacios de relacionamiento para asociados y aliados.",
+    ],
+  },
+  {
+    name: "ESSALUD",
+    logo: "https://centroempresarialica.com/media/Essalud.png",
+    summary: "Articulacion institucional orientada a bienestar, prevencion y comunidad.",
+    benefits: [
+      "Acceso a actividades informativas de salud preventiva cuando se programen.",
+      "Orientacion institucional para iniciativas de bienestar laboral.",
+      "Participacion en campanas y espacios de sensibilizacion para asociados.",
+    ],
+  },
+  {
+    name: "Rumi Wasi",
+    logo: "https://centroempresarialica.com/media/rumi-wasi.jpg",
+    summary: "Experiencias y espacios para integracion, reuniones y actividades corporativas.",
+    benefits: [
+      "Beneficios preferenciales para actividades de integracion.",
+      "Opciones para reuniones, encuentros o experiencias empresariales.",
+      "Apoyo para dinamicas de networking y relacionamiento entre miembros.",
+    ],
+  },
+  {
+    name: "El Sabor Milagroso",
+    logo: "https://centroempresarialica.com/media/sabor-milagroso.jpg",
+    summary: "Beneficios gastronomicos para asociados, reuniones y eventos.",
+    benefits: [
+      "Condiciones especiales para consumos o coordinaciones de asociados.",
+      "Opciones para reuniones, celebraciones y encuentros de la comunidad.",
+      "Apoyo en activaciones comerciales vinculadas a eventos institucionales.",
+    ],
+  },
+  {
+    name: "Camara de Comercio de Ica",
+    logo: "https://camaraica.org.pe/wp-content/uploads/2026/03/LOGO-FULL-COLOR-scaled.webp",
+    summary: "Vinculacion institucional, oportunidades empresariales y fortalecimiento comercial.",
+    benefits: [
+      "Acceso a espacios de relacionamiento empresarial e institucional.",
+      "Mayor visibilidad para oportunidades comerciales y colaborativas.",
+      "Conexion con iniciativas que fortalecen el desarrollo empresarial regional.",
+    ],
+  },
+];
+
+export const eventHighlights = [
+  {
+    src: eventParacas,
+    title: "Encuentro empresarial en Paracas",
+    label: "Evento institucional",
+  },
+  {
+    src: eventSeguridad,
+    title: "Capacitacion en seguridad y gestion",
+    label: "Formacion aplicada",
+  },
 ];
 
 export const associationSteps = [

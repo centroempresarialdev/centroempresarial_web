@@ -1,5 +1,9 @@
 import { useEffect } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const prefersReducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -8,25 +12,28 @@ export const useLenisScroll = () => {
     if (prefersReducedMotion()) return;
 
     const lenis = new Lenis({
-      duration: 1.08,
+      duration: 1.18,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
-      wheelMultiplier: 0.88,
-      touchMultiplier: 1.1,
+      wheelMultiplier: 0.82,
+      touchMultiplier: 1.08,
     });
 
-    let animationFrame = 0;
-
-    const raf = (time: number) => {
-      lenis.raf(time);
-      animationFrame = requestAnimationFrame(raf);
+    const updateScrollTrigger = () => ScrollTrigger.update();
+    const tick = (time: number) => {
+      lenis.raf(time * 1000);
     };
 
-    animationFrame = requestAnimationFrame(raf);
+    lenis.on("scroll", updateScrollTrigger);
+    gsap.ticker.add(tick);
+    gsap.ticker.lagSmoothing(0);
     document.documentElement.classList.add("lenis-smooth");
 
     return () => {
-      cancelAnimationFrame(animationFrame);
+      const lenisWithOff = lenis as Lenis & { off?: (event: "scroll", callback: typeof updateScrollTrigger) => void };
+
+      lenisWithOff.off?.("scroll", updateScrollTrigger);
+      gsap.ticker.remove(tick);
       document.documentElement.classList.remove("lenis-smooth");
       lenis.destroy();
     };

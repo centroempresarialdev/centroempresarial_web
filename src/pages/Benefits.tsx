@@ -1,9 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import PageIntro from "@/components/PageIntro";
 import ScrollReveal from "@/components/ScrollReveal";
-import { courseCards, events, galleryImages } from "@/data/site";
+import { eventHighlights, galleryImages } from "@/data/site";
 import { ArrowRight, Image as ImageIcon } from "lucide-react";
 
 const Benefits = () => {
@@ -11,25 +9,26 @@ const Benefits = () => {
     <>
       <section className="bg-background pt-36 pb-20">
         <div className="container mx-auto px-6 lg:px-12">
-          <PageIntro
-            eyebrow="Beneficios y formacion"
-            title="Una agenda de valor para mantener activa la comunidad"
-            description="La propuesta combina capacitaciones, recursos, webinars, eventos y contenidos visuales para reforzar confianza y mostrar actividad real."
-            align="center"
-          />
-        </div>
-      </section>
+          <ScrollReveal className="mb-8">
+            <p className="text-sm font-bold uppercase tracking-[0.2em] text-primary">Eventos</p>
+            <h1 className="mt-3 text-3xl font-extrabold leading-tight text-corporate md:text-5xl">Proximos eventos</h1>
+          </ScrollReveal>
 
-      <section className="bg-primary py-20 text-primary-foreground">
-        <div className="container mx-auto px-6 lg:px-12">
-          <div className="grid gap-5 md:grid-cols-3">
-            {events.map((event, index) => (
-              <ScrollReveal key={event.title} delay={index * 0.08} className="rounded-lg border border-white/15 bg-white/10 p-6 backdrop-blur">
-                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-md bg-accent text-accent-foreground">
-                  <event.icon className="h-6 w-6" />
+          <div className="grid gap-6 lg:grid-cols-2">
+            {eventHighlights.map((event, index) => (
+              <ScrollReveal key={event.title} delay={index * 0.08} className="overflow-hidden rounded-lg border border-border bg-card shadow-sm transition-all hover:-translate-y-1 hover:shadow-corporate">
+                <div className="bg-white p-3">
+                  <img src={event.src} alt={event.title} className="mx-auto max-h-[720px] w-full object-contain" />
                 </div>
-                <h2 className="text-2xl font-bold text-white">{event.title}</h2>
-                <p className="mt-3 text-sm leading-6 text-white/75">{event.description}</p>
+                <div className="flex flex-col gap-3 border-t border-border bg-background p-5 sm:flex-row sm:items-center sm:justify-between">
+                  <p className="text-sm font-bold uppercase tracking-[0.14em] text-primary">{event.label}</p>
+                  <Button asChild variant="accent">
+                    <Link to="/contacto">
+                      Quiero participar
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </Button>
+                </div>
               </ScrollReveal>
             ))}
           </div>
@@ -41,10 +40,10 @@ const Benefits = () => {
           <ScrollReveal className="mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end">
             <div>
               <p className="mb-3 text-sm font-bold uppercase tracking-[0.2em] text-primary">Galeria institucional</p>
-              <h2 className="text-3xl font-extrabold text-corporate md:text-5xl">Evidencia visual de actividades y cursos</h2>
+              <h2 className="text-3xl font-extrabold text-corporate md:text-5xl">Momentos que respaldan nuestra actividad</h2>
             </div>
             <p className="max-w-xl text-muted-foreground">
-              Una seccion visual permite validar la actividad institucional sin saturar la pagina principal.
+              Registro visual de encuentros, capacitaciones y conexiones que fortalecen la experiencia de los asociados.
             </p>
           </ScrollReveal>
 
@@ -58,38 +57,10 @@ const Benefits = () => {
                 </div>
               </ScrollReveal>
             ))}
-
-            {courseCards.map((course, index) => (
-              <ScrollReveal key={course.title} delay={index * 0.06}>
-                <Card className="overflow-hidden border-border bg-background shadow-sm transition-all hover:-translate-y-1 hover:shadow-corporate">
-                  <img src={course.banner} alt={course.title} className="aspect-square w-full object-cover" data-gsap-image />
-                  <CardContent className="p-4">
-                    <p className="text-sm font-bold leading-6 text-foreground">{course.title}</p>
-                  </CardContent>
-                </Card>
-              </ScrollReveal>
-            ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-background py-20">
-        <ScrollReveal className="container mx-auto grid gap-8 px-6 lg:grid-cols-[1fr_0.8fr] lg:items-center lg:px-12">
-          <div>
-            <p className="mb-3 text-sm font-bold uppercase tracking-[0.2em] text-primary">Conversion</p>
-            <h2 className="text-3xl font-extrabold leading-tight text-corporate md:text-5xl">Convierte interes en una consulta concreta</h2>
-            <p className="mt-5 text-lg leading-8 text-muted-foreground">
-              Luego de revisar beneficios y actividades, el usuario puede pasar directo a una ficha breve y conversar por WhatsApp.
-            </p>
-          </div>
-          <Button asChild variant="accent" size="lg" className="justify-self-start lg:justify-self-end">
-            <Link to="/contacto">
-              Solicitar informacion
-              <ArrowRight className="h-5 w-5" />
-            </Link>
-          </Button>
-        </ScrollReveal>
-      </section>
     </>
   );
 };

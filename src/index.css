@@ -8,48 +8,48 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 220 25% 15%;
+    --background: 210 20% 98%;
+    --foreground: 215 24% 16%;
 
     --card: 0 0% 100%;
-    --card-foreground: 220 25% 15%;
+    --card-foreground: 215 24% 16%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 25% 15%;
+    --popover-foreground: 215 24% 16%;
 
-    /* Dark Green - Primary brand color #205B3F */
-    --primary: 152 48% 24%;
+    /* Executive forest green */
+    --primary: 154 39% 22%;
     --primary-foreground: 0 0% 100%;
-    --primary-light: 152 48% 35%;
-    --primary-dark: 152 48% 18%;
+    --primary-light: 154 31% 32%;
+    --primary-dark: 162 38% 13%;
 
-    /* Vibrant Yellow/Orange - Accent color */
-    --accent: 35 100% 55%;
-    --accent-foreground: 0 0% 100%;
-    --accent-light: 35 100% 70%;
-    --accent-muted: 35 60% 85%;
+    /* Controlled golden accent */
+    --accent: 39 88% 52%;
+    --accent-foreground: 162 38% 13%;
+    --accent-light: 42 92% 66%;
+    --accent-muted: 39 58% 87%;
 
-    /* Bright Secondary - Turquoise/Cyan */
-    --secondary: 180 100% 60%;
+    /* Quiet neutral support tone */
+    --secondary: 188 32% 42%;
     --secondary-foreground: 0 0% 100%;
-    --muted: 220 15% 95%;
-    --muted-foreground: 220 15% 45%;
+    --muted: 215 20% 94%;
+    --muted-foreground: 215 12% 42%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 220 15% 90%;
-    --input: 220 15% 90%;
-    --ring: 214 84% 20%;
+    --border: 214 18% 86%;
+    --input: 214 18% 86%;
+    --ring: 154 39% 22%;
 
     /* Professional gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-light)));
-    --gradient-hero: linear-gradient(135deg, hsl(152 48% 24%) 0%, hsl(152 48% 18%) 50%, hsl(152 35% 30%) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary-dark)), hsl(var(--primary)) 55%, hsl(var(--primary-light)));
+    --gradient-hero: linear-gradient(135deg, hsl(162 38% 13%) 0%, hsl(154 39% 22%) 58%, hsl(188 32% 28%) 100%);
     --gradient-accent: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--accent-light)));
 
     /* Professional shadows */
-    --shadow-corporate: 0 10px 30px -10px hsl(var(--primary) / 0.15);
-    --shadow-elevated: 0 20px 50px -10px hsl(var(--primary) / 0.25);
+    --shadow-corporate: 0 14px 34px -24px hsl(var(--foreground) / 0.36);
+    --shadow-elevated: 0 26px 64px -34px hsl(var(--foreground) / 0.42);
 
     --radius: 0.5rem;
 
@@ -119,6 +119,7 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground font-sans;
+    background-image: linear-gradient(180deg, hsl(210 20% 99%) 0%, hsl(var(--background)) 46%, hsl(215 20% 96%) 100%);
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 
@@ -128,8 +129,12 @@ All colors MUST be HSL.
 
   [data-scroll-reveal],
   [data-gsap-stagger] > *,
-  [data-gsap-image] {
+  [data-gsap-image],
+  [data-gsap-card],
+  main > section {
     will-change: transform, opacity;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
   }
 
   /* Headings with bold, professional typography */
@@ -195,6 +200,25 @@ All colors MUST be HSL.
     animation: slideUp 0.8s ease-out;
   }
 
+  .logo-marquee {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+
+  .logo-marquee-track {
+    display: flex;
+    width: max-content;
+    gap: 1.25rem;
+    animation: logoMarquee 28s linear infinite;
+  }
+
+  .logo-marquee:hover .logo-marquee-track {
+    animation-play-state: paused;
+  }
+
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -212,6 +236,23 @@ All colors MUST be HSL.
     to {
       opacity: 1;
       transform: translateY(0);
+    }
+  }
+
+  @keyframes logoMarquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .logo-marquee-track {
+      animation: none;
+      flex-wrap: wrap;
+      justify-content: center;
     }
   }
 }
