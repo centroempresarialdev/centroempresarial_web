@@ -8,43 +8,43 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 210 20% 98%;
-    --foreground: 215 24% 16%;
+    --background: 210 24% 98%;
+    --foreground: 222 32% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 215 24% 16%;
+    --card-foreground: 222 32% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 215 24% 16%;
+    --popover-foreground: 222 32% 15%;
 
-    /* Executive forest green */
-    --primary: 154 39% 22%;
+    /* Institutional deep green */
+    --primary: 158 36% 23%;
     --primary-foreground: 0 0% 100%;
-    --primary-light: 154 31% 32%;
-    --primary-dark: 162 38% 13%;
+    --primary-light: 154 28% 34%;
+    --primary-dark: 164 42% 13%;
 
-    /* Controlled golden accent */
-    --accent: 39 88% 52%;
-    --accent-foreground: 162 38% 13%;
-    --accent-light: 42 92% 66%;
-    --accent-muted: 39 58% 87%;
+    /* Formal gold accent */
+    --accent: 38 82% 50%;
+    --accent-foreground: 164 42% 13%;
+    --accent-light: 41 88% 64%;
+    --accent-muted: 40 58% 88%;
 
     /* Quiet neutral support tone */
-    --secondary: 188 32% 42%;
+    --secondary: 188 24% 38%;
     --secondary-foreground: 0 0% 100%;
     --muted: 215 20% 94%;
-    --muted-foreground: 215 12% 42%;
+    --muted-foreground: 217 14% 42%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
     --border: 214 18% 86%;
     --input: 214 18% 86%;
-    --ring: 154 39% 22%;
+    --ring: 158 36% 23%;
 
     /* Professional gradients */
     --gradient-primary: linear-gradient(135deg, hsl(var(--primary-dark)), hsl(var(--primary)) 55%, hsl(var(--primary-light)));
-    --gradient-hero: linear-gradient(135deg, hsl(162 38% 13%) 0%, hsl(154 39% 22%) 58%, hsl(188 32% 28%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(164 42% 13%) 0%, hsl(158 36% 23%) 58%, hsl(188 24% 30%) 100%);
     --gradient-accent: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--accent-light)));
 
     /* Professional shadows */
@@ -80,17 +80,17 @@ All colors MUST be HSL.
     --popover: 220 25% 10%;
     --popover-foreground: 0 0% 95%;
 
-    --primary: 152 48% 30%;
+    --primary: 154 42% 32%;
     --primary-foreground: 0 0% 100%;
-    --primary-light: 152 48% 40%;
-    --primary-dark: 152 48% 20%;
+    --primary-light: 154 36% 42%;
+    --primary-dark: 164 42% 18%;
 
-    --accent: 35 100% 65%;
-    --accent-foreground: 0 0% 100%;
-    --accent-light: 35 100% 75%;
-    --accent-muted: 35 40% 25%;
+    --accent: 38 88% 58%;
+    --accent-foreground: 164 42% 13%;
+    --accent-light: 41 90% 68%;
+    --accent-muted: 38 40% 25%;
 
-    --secondary: 180 100% 70%;
+    --secondary: 188 32% 54%;
     --secondary-foreground: 0 0% 100%;
     --muted: 220 15% 20%;
     --muted-foreground: 220 15% 65%;
