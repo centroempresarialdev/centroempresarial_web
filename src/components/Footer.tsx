@@ -8,10 +8,11 @@ const Footer = () => {
 
   const links = [
     { name: "Inicio", href: "/" },
-    { name: "Membresias", href: "/membresias" },
     { name: "Eventos", href: "/eventos" },
+    { name: "Servicios", href: "/servicios" },
     { name: "Aliados", href: "/aliados" },
-    { name: "Contacto", href: "/contacto" },
+    { name: "Membresía", href: "/membresias" },
+    { name: "Contactos", href: "/contacto" },
   ];
 
   return (
@@ -43,7 +44,7 @@ const Footer = () => {
                 to="/contacto"
                 className="inline-flex items-center justify-center gap-2 rounded-md border border-white/20 px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-white hover:text-primary"
               >
-                Contacto
+                Contactos
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>

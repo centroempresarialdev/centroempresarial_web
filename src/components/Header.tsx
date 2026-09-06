@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -8,15 +8,15 @@ import { Mail, Menu, Phone, UserPlus, X } from "lucide-react";
 
 const navigation = [
   { label: "Inicio", href: "/" },
-  { label: "Membresias", href: "/membresias" },
   { label: "Eventos", href: "/eventos" },
+  { label: "Servicios", href: "/servicios" },
   { label: "Aliados", href: "/aliados" },
-  { label: "Contacto", href: "/contacto" },
+  { label: "Membresía", href: "/membresias" },
+  { label: "Contactos", href: "/contacto" },
 ];
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const location = useLocation();
 
   return (
     <header className="fixed left-0 right-0 top-0 z-50 border-b border-border/80 bg-card/95 shadow-sm backdrop-blur-xl">
@@ -36,24 +36,24 @@ const Header = () => {
         </div>
       </div>
 
-      <nav className="container mx-auto px-6 py-4 lg:px-12">
+      <nav className="container mx-auto px-6 py-3 lg:px-12">
         <div className="flex items-center justify-between gap-6">
           <Link to="/" className="flex items-center gap-3 text-left" aria-label="Ir al inicio" onClick={() => setIsMenuOpen(false)}>
             <img
               src="https://camaraica.org.pe/wp-content/uploads/2025/09/CENTRO.avif"
               alt="Centro Empresarial"
-              className="h-12 w-auto"
+              className="h-16 w-auto"
             />
           </Link>
 
-          <div className="hidden items-center gap-2 lg:flex">
+          <div className="hidden items-center gap-1 lg:flex">
             {navigation.map((item) => (
               <NavLink
                 key={item.href}
                 to={item.href}
                 className={({ isActive }) =>
                   cn(
-                    "rounded-md px-3 py-2 text-sm font-semibold text-foreground/75 transition-colors hover:bg-muted hover:text-primary",
+                    "rounded-md px-2.5 py-2 text-sm font-semibold text-foreground/75 transition-colors hover:bg-muted hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
                     isActive && "bg-primary/10 text-primary",
                   )
                 }
@@ -63,12 +63,7 @@ const Header = () => {
             ))}
           </div>
 
-          <div className="hidden items-center gap-3 md:flex">
-            {location.pathname !== "/contacto" && (
-              <Button asChild variant="outline">
-                <Link to="/contacto">Hablar con asesor</Link>
-              </Button>
-            )}
+          <div className="hidden items-center lg:flex">
             <Button asChild variant="corporate">
               <Link to="/contacto">
                 <UserPlus className="h-4 w-4" />
@@ -80,9 +75,11 @@ const Header = () => {
           <Button
             variant="ghost"
             size="icon"
-            className="md:hidden"
+            className="lg:hidden"
             onClick={() => setIsMenuOpen((value) => !value)}
-            aria-label="Abrir menu"
+            aria-label={isMenuOpen ? "Cerrar menú" : "Abrir menú"}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-navigation"
           >
             {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
           </Button>
@@ -92,7 +89,8 @@ const Header = () => {
           <motion.div
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mt-4 border-t border-border py-4 md:hidden"
+            id="mobile-navigation"
+            className="mt-3 border-t border-border py-4 lg:hidden"
           >
             <div className="flex flex-col gap-2">
               {navigation.map((item) => (
@@ -102,7 +100,7 @@ const Header = () => {
                   onClick={() => setIsMenuOpen(false)}
                   className={({ isActive }) =>
                     cn(
-                      "rounded-md px-3 py-3 text-left font-semibold text-foreground/85 hover:bg-muted",
+                      "rounded-md px-3 py-3 text-left font-semibold text-foreground/85 hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
                       isActive && "bg-primary/10 text-primary",
                     )
                   }

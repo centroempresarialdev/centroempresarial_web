@@ -7,10 +7,9 @@ import { Carousel, type CarouselApi, CarouselContent, CarouselItem, CarouselNext
 import ScrollReveal from "@/components/ScrollReveal";
 import { audiences, eventHighlights, partners } from "@/data/site";
 import aboutImage from "@/assets/hero/about-nosotros.jpg";
-import consultingBenefitsImage from "@/assets/hero/consulting-benefits.png";
 import heroTrainingImage from "@/assets/2025 (4).jpg";
 import heroCommunityImage from "@/assets/2026.jpg";
-import { ArrowRight, CalendarDays, Handshake, Percent } from "lucide-react";
+import { ArrowRight, CalendarDays, Eye, Handshake, ListChecks, Target } from "lucide-react";
 
 const heroSlides = [
   {
@@ -29,10 +28,26 @@ const heroSlides = [
   },
 ];
 
-const valueHighlights = [
-  { icon: Percent, title: "Descuentos en formacion", text: "Capacitaciones, programas y recursos con condiciones preferenciales." },
-  { icon: CalendarDays, title: "Eventos especializados", text: "Espacios presenciales y webinars para actualizarte y conectar." },
-  { icon: Handshake, title: "Aliados estrategicos", text: "Convenios que suman oportunidades academicas, comerciales e institucionales." },
+const institutionalPillars = [
+  {
+    icon: Target,
+    title: "Misión",
+    text: "Impulsar el crecimiento de estudiantes, profesionales y empresas mediante capacitación, asesoría, alianzas estratégicas y espacios de conexión que generen oportunidades reales.",
+  },
+  {
+    icon: Eye,
+    title: "Visión",
+    text: "Ser el centro empresarial referente de Ica y del Perú, reconocido por articular una comunidad innovadora, colaborativa y competitiva.",
+  },
+  {
+    icon: ListChecks,
+    title: "Objetivos",
+    items: [
+      "Fortalecer capacidades mediante formación y asesoría.",
+      "Conectar a los miembros con aliados y oportunidades.",
+      "Facilitar herramientas, tecnología y acompañamiento para su desarrollo.",
+    ],
+  },
 ];
 
 const partnerLogoTrack = [...partners, ...partners];
@@ -60,7 +75,7 @@ const Index = () => {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-foreground pt-24 text-white md:pt-32">
+      <section className="relative overflow-hidden bg-foreground pt-24 text-white md:pt-36">
         <Carousel setApi={setHeroApi} opts={{ align: "start", loop: true }} className="relative">
           <CarouselContent className="ml-0">
             {heroSlides.map((slide) => (
@@ -107,6 +122,41 @@ const Index = () => {
             </div>
           </div>
         </Carousel>
+      </section>
+
+      <section className="bg-background py-20">
+        <div className="container mx-auto px-6 lg:px-12">
+          <ScrollReveal className="mb-10 max-w-3xl">
+            <p className="mb-3 text-sm font-bold uppercase tracking-[0.2em] text-primary">Identidad institucional</p>
+            <h2 className="text-3xl font-extrabold leading-tight text-corporate md:text-5xl">Nuestro propósito orienta cada oportunidad</h2>
+          </ScrollReveal>
+
+          <div className="grid gap-6 lg:grid-cols-3">
+            {institutionalPillars.map((pillar, index) => (
+              <ScrollReveal key={pillar.title} delay={index * 0.08}>
+                <Card className="h-full border-border/80 bg-card shadow-sm transition-all hover:-translate-y-1 hover:shadow-corporate">
+                  <CardContent className="p-6 md:p-7">
+                    <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-md bg-primary text-primary-foreground">
+                      <pillar.icon className="h-6 w-6" aria-hidden="true" />
+                    </div>
+                    <h3 className="text-2xl font-extrabold text-corporate">{pillar.title}</h3>
+                    {pillar.text && <p className="mt-4 text-base leading-7 text-muted-foreground">{pillar.text}</p>}
+                    {pillar.items && (
+                      <ul className="mt-4 space-y-3 text-base leading-7 text-muted-foreground">
+                        {pillar.items.map((item) => (
+                          <li key={item} className="flex gap-3">
+                            <span className="mt-2.5 h-2 w-2 shrink-0 rounded-full bg-accent" aria-hidden="true" />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </CardContent>
+                </Card>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
       </section>
 
       <section className="bg-muted/35 py-20">
@@ -175,58 +225,6 @@ const Index = () => {
             </div>
           </div>
         </ScrollReveal>
-      </section>
-
-      <section className="bg-background py-20">
-        <div className="container mx-auto px-6 lg:px-12">
-          <ScrollReveal className="mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end">
-            <div>
-              <p className="mb-3 text-sm font-bold uppercase tracking-[0.2em] text-primary">Beneficios de asociarte</p>
-              <h2 className="max-w-3xl text-3xl font-extrabold leading-tight text-corporate md:text-5xl">Impulsa tu crecimiento con una red activa</h2>
-            </div>
-            <Button asChild variant="corporate">
-              <Link to="/contacto">
-                Quiero asociarme
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </Button>
-          </ScrollReveal>
-
-          <ScrollReveal className="grid overflow-hidden rounded-lg border border-border bg-muted/30 shadow-elevated lg:grid-cols-[1.08fr_0.92fr]">
-            <div className="relative min-h-[430px]">
-              <img src={consultingBenefitsImage} alt="Asesoria empresarial" className="absolute inset-0 h-full w-full object-cover" data-gsap-image />
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent to-foreground/12" />
-            </div>
-
-            <div className="flex flex-col justify-center p-6 md:p-10">
-              <p className="text-sm font-bold uppercase tracking-[0.2em] text-primary">Valor para asociados</p>
-              <h3 className="mt-3 text-3xl font-extrabold leading-tight text-corporate md:text-4xl">
-                Formacion, eventos y aliados para avanzar con respaldo
-              </h3>
-
-              <div className="mt-8 grid gap-4">
-                {valueHighlights.map((item) => (
-                  <div key={item.title} className="flex items-center gap-4 rounded-md border border-border bg-background p-4 shadow-sm">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-primary text-primary-foreground">
-                      <item.icon className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <h4 className="text-base font-extrabold text-corporate">{item.title}</h4>
-                      <p className="text-sm text-muted-foreground">{item.text}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <Button asChild variant="accent" size="lg" className="mt-8 w-fit">
-                <Link to="/contacto">
-                  Hablar con asesor
-                  <ArrowRight className="h-5 w-5" />
-                </Link>
-              </Button>
-            </div>
-          </ScrollReveal>
-        </div>
       </section>
 
       <section className="bg-background py-20">

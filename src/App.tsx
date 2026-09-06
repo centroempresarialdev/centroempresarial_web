@@ -10,6 +10,7 @@ import Index from "@/pages/Index";
 import Memberships from "@/pages/Memberships";
 import NotFound from "@/pages/NotFound";
 import Partners from "@/pages/Partners";
+import ServicesPage from "@/pages/ServicesPage";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +26,7 @@ const App = () => (
             <Route path="/membresias" element={<Memberships />} />
             <Route path="/eventos" element={<Benefits />} />
             <Route path="/beneficios" element={<Navigate to="/eventos" replace />} />
+            <Route path="/servicios" element={<ServicesPage />} />
             <Route path="/aliados" element={<Partners />} />
             <Route path="/contacto" element={<ContactPage />} />
             <Route path="*" element={<NotFound />} />

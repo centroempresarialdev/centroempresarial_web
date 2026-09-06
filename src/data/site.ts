@@ -27,6 +27,14 @@ export type IconItem = {
   description: string;
 };
 
+export type ServiceItem = {
+  title: string;
+  description: string;
+};
+
+// Agrega aquí los servicios confirmados para que aparezcan automáticamente en /servicios.
+export const serviceCatalog: ServiceItem[] = [];
+
 export const contactInfo = {
   phone: "+51 945 228 848",
   whatsapp: "51945228848",

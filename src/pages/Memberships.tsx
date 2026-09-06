@@ -4,7 +4,14 @@ import { Card, CardContent } from "@/components/ui/card";
 import PageIntro from "@/components/PageIntro";
 import ScrollReveal from "@/components/ScrollReveal";
 import { associationSteps, membershipPlans } from "@/data/site";
-import { ArrowRight, CheckCircle2, ClipboardCheck } from "lucide-react";
+import consultingBenefitsImage from "@/assets/hero/consulting-benefits.png";
+import { ArrowRight, CalendarDays, CheckCircle2, ClipboardCheck, Handshake, Percent } from "lucide-react";
+
+const valueHighlights = [
+  { icon: Percent, title: "Descuentos en formación", text: "Capacitaciones, programas y recursos con condiciones preferenciales." },
+  { icon: CalendarDays, title: "Eventos especializados", text: "Espacios presenciales y webinars para actualizarte y conectar." },
+  { icon: Handshake, title: "Aliados estratégicos", text: "Convenios que suman oportunidades académicas, comerciales e institucionales." },
+];
 
 const Memberships = () => {
   return (
@@ -91,6 +98,58 @@ const Memberships = () => {
               </ScrollReveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="bg-muted/30 py-20">
+        <div className="container mx-auto px-6 lg:px-12">
+          <ScrollReveal className="mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+            <div>
+              <p className="mb-3 text-sm font-bold uppercase tracking-[0.2em] text-primary">Beneficios de asociarte</p>
+              <h2 className="max-w-3xl text-3xl font-extrabold leading-tight text-corporate md:text-5xl">Impulsa tu crecimiento con una red activa</h2>
+            </div>
+            <Button asChild variant="corporate">
+              <Link to="/contacto">
+                Quiero asociarme
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </Button>
+          </ScrollReveal>
+
+          <ScrollReveal className="grid overflow-hidden rounded-lg border border-border bg-background shadow-elevated lg:grid-cols-[1.08fr_0.92fr]">
+            <div className="relative min-h-[430px]">
+              <img src={consultingBenefitsImage} alt="Asesoría empresarial" className="absolute inset-0 h-full w-full object-cover" data-gsap-image />
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent to-foreground/12" />
+            </div>
+
+            <div className="flex flex-col justify-center p-6 md:p-10">
+              <p className="text-sm font-bold uppercase tracking-[0.2em] text-primary">Valor para asociados</p>
+              <h3 className="mt-3 text-3xl font-extrabold leading-tight text-corporate md:text-4xl">
+                Formación, eventos y aliados para avanzar con respaldo
+              </h3>
+
+              <div className="mt-8 grid gap-4">
+                {valueHighlights.map((item) => (
+                  <div key={item.title} className="flex items-center gap-4 rounded-md border border-border bg-background p-4 shadow-sm">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-primary text-primary-foreground">
+                      <item.icon className="h-5 w-5" aria-hidden="true" />
+                    </div>
+                    <div>
+                      <h4 className="text-base font-extrabold text-corporate">{item.title}</h4>
+                      <p className="text-sm text-muted-foreground">{item.text}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <Button asChild variant="accent" size="lg" className="mt-8 w-fit">
+                <Link to="/contacto">
+                  Hablar con un asesor
+                  <ArrowRight className="h-5 w-5" />
+                </Link>
+              </Button>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 

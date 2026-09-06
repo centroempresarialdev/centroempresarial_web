@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import Header from "@/components/Header";
@@ -11,6 +12,10 @@ const Layout = () => {
 
   useLenisScroll();
   useGsapScroll(location.pathname);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }, [location.pathname]);
 
   return (
     <div className="min-h-screen bg-background">
