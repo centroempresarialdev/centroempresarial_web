@@ -6,7 +6,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import { eventHighlights } from "@/data/site";
 import { ArrowLeft, ArrowRight, Image as ImageIcon } from "lucide-react";
 
-const galleryModules = import.meta.glob<{ default: string }>("/src/assets/*.{jpg,jpeg,png,webp}", { eager: true });
+const galleryModules = import.meta.glob<{ default: string }>("/src/assets/galeria/*.{jpg,jpeg,png,webp}", { eager: true });
 
 const featuredOrder = [
   "2025 (4).jpg",
@@ -58,11 +58,11 @@ const GalleryTile = ({ image, className, delay = 0 }: { image: GalleryCardImage;
         key={image.src}
         src={image.src}
         alt={image.title}
-        initial={{ opacity: 0, scale: 1.035 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0.985 }}
-        transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-        className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.9, ease: "easeInOut" }}
+        className="absolute inset-0 h-full w-full object-cover"
       />
     </AnimatePresence>
     <div className="absolute inset-0 bg-gradient-to-t from-black/72 via-black/12 to-transparent opacity-90 transition-opacity group-hover:opacity-100" />
@@ -82,7 +82,7 @@ const Benefits = () => {
   useEffect(() => {
     const timer = window.setInterval(() => {
       setGalleryIndex((current) => (current + 1) % galleryImages.length);
-    }, 3800);
+    }, 6000);
 
     return () => window.clearInterval(timer);
   }, []);
@@ -167,7 +167,7 @@ const Benefits = () => {
             <div className="grid gap-5 sm:grid-cols-2">
               {visibleGalleryImages.slice(1).map((image, index) => (
                 <GalleryTile
-                  key={`${image.filename}-${index}`}
+                  key={index}
                   image={image}
                   delay={(index + 1) * 0.04}
                   className={`min-h-[230px] ${index === 2 ? "sm:col-span-2" : ""}`}

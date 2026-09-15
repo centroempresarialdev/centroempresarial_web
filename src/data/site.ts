@@ -13,11 +13,11 @@ import {
   UserRound,
   Users,
 } from "lucide-react";
-import galleryCourseGroup from "@/assets/16 de septiembre 2025.jpg";
-import galleryTraining from "@/assets/2025.jpg";
-import galleryInnovation from "@/assets/2026.jpg";
-import galleryMeeting from "@/assets/5 de septiembre 2025.jpg";
-import logoIntedya from "@/assets/Logo_Intedya_Alta Blanco.jpeg";
+import galleryCourseGroup from "@/assets/galeria/16 de septiembre 2025.jpg";
+import galleryTraining from "@/assets/galeria/2025.jpg";
+import galleryInnovation from "@/assets/galeria/2026.jpg";
+import galleryMeeting from "@/assets/galeria/5 de septiembre 2025.jpg";
+import logoIntedya from "@/assets/logos/Logo_Intedya_Alta Blanco.jpeg";
 import eventParacas from "@/assets/eventos/paracas.jpg";
 import eventSeguridad from "@/assets/eventos/seguridad.jpg";
 

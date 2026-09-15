@@ -7,8 +7,8 @@ import { Carousel, type CarouselApi, CarouselContent, CarouselItem, CarouselNext
 import ScrollReveal from "@/components/ScrollReveal";
 import { audiences, eventHighlights, partners } from "@/data/site";
 import aboutImage from "@/assets/hero/about-nosotros.jpg";
-import heroTrainingImage from "@/assets/2025 (4).jpg";
-import heroCommunityImage from "@/assets/2026.jpg";
+import heroTrainingImage from "@/assets/galeria/2025 (4).jpg";
+import heroCommunityImage from "@/assets/galeria/2026.jpg";
 import { ArrowRight, CalendarDays, Eye, Handshake, ListChecks, Target } from "lucide-react";
 
 const heroSlides = [
