@@ -214,6 +214,7 @@ export const partners = [
   {
     name: "Intedya Internacional",
     logo: logoIntedya,
+    logoScale: 1,
     summary: "Formacion, gestion empresarial y mejora continua con alcance internacional.",
     darkLogo: true,
     benefits: [
@@ -226,6 +227,7 @@ export const partners = [
   {
     name: "Piskus",
     logo: "https://centroempresarialica.com/media/piskus.jpg",
+    logoScale: 1,
     summary: "Beneficios comerciales para asociados y actividades de integracion.",
     benefits: [
       "Condiciones preferenciales para miembros activos.",
@@ -236,6 +238,7 @@ export const partners = [
   {
     name: "ESSALUD",
     logo: "https://centroempresarialica.com/media/Essalud.png",
+    logoScale: 1,
     summary: "Articulacion institucional orientada a bienestar, prevencion y comunidad.",
     benefits: [
       "Acceso a actividades informativas de salud preventiva cuando se programen.",
@@ -246,6 +249,7 @@ export const partners = [
   {
     name: "Rumi Wasi",
     logo: "https://centroempresarialica.com/media/rumi-wasi.jpg",
+    logoScale: 1.1,
     summary: "Experiencias y espacios para integracion, reuniones y actividades corporativas.",
     benefits: [
       "Beneficios preferenciales para actividades de integracion.",
@@ -256,6 +260,7 @@ export const partners = [
   {
     name: "El Sabor Milagroso",
     logo: "https://centroempresarialica.com/media/sabor-milagroso.jpg",
+    logoScale: 1.45,
     summary: "Beneficios gastronomicos para asociados, reuniones y eventos.",
     benefits: [
       "Condiciones especiales para consumos o coordinaciones de asociados.",
@@ -266,6 +271,7 @@ export const partners = [
   {
     name: "Camara de Comercio de Ica",
     logo: "https://camaraica.org.pe/wp-content/uploads/2026/03/LOGO-FULL-COLOR-scaled.webp",
+    logoScale: 1,
     summary: "Vinculacion institucional, oportunidades empresariales y fortalecimiento comercial.",
     benefits: [
       "Acceso a espacios de relacionamiento empresarial e institucional.",

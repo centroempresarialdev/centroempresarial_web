@@ -52,8 +52,13 @@ const Partners = () => {
                 <Card className="overflow-hidden border-border/80 bg-card shadow-sm transition-all hover:-translate-y-1 hover:shadow-corporate">
                   <CardContent className="grid gap-0 p-0 lg:grid-cols-[0.42fr_0.58fr]">
                     <div className="flex flex-col justify-center bg-muted/35 p-6 md:p-8">
-                      <div className={`flex min-h-40 items-center justify-center rounded-lg border border-border bg-card p-6 shadow-sm ${partner.darkLogo ? "bg-primary" : ""}`}>
-                        <img src={partner.logo} alt={partner.name} className="max-h-24 max-w-full object-contain" />
+                      <div className={`flex h-40 items-center justify-center overflow-hidden rounded-lg border border-border bg-card p-4 shadow-sm ${partner.darkLogo ? "bg-primary" : ""}`}>
+                        <img
+                          src={partner.logo}
+                          alt={partner.name}
+                          className="h-28 w-full object-contain"
+                          style={{ transform: `scale(${partner.logoScale})` }}
+                        />
                       </div>
                       <h3 className="mt-5 text-2xl font-extrabold text-corporate">{partner.name}</h3>
                       <p className="mt-2 text-sm leading-6 text-muted-foreground">{partner.summary}</p>

@@ -218,8 +218,13 @@ const Index = () => {
           <div className="logo-marquee mt-12">
             <div className="logo-marquee-track">
               {partnerLogoTrack.map((partner, index) => (
-                <div key={`${partner.name}-${index}`} className="flex h-28 w-64 shrink-0 items-center justify-center rounded-lg border border-white/15 bg-white p-4 shadow-sm">
-                  <img src={partner.logo} alt={partner.name} className="max-h-20 max-w-full object-contain" />
+                <div key={`${partner.name}-${index}`} className="flex h-28 w-64 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-white/15 bg-white p-4 shadow-sm">
+                  <img
+                    src={partner.logo}
+                    alt={partner.name}
+                    className="h-20 w-full object-contain"
+                    style={{ transform: `scale(${partner.logoScale})` }}
+                  />
                 </div>
               ))}
             </div>
