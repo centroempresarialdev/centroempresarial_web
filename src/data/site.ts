@@ -249,7 +249,7 @@ export const partners = [
   {
     name: "Rumi Wasi",
     logo: "https://centroempresarialica.com/media/rumi-wasi.jpg",
-    logoScale: 1.1,
+    logoScale: 1.2,
     summary: "Experiencias y espacios para integracion, reuniones y actividades corporativas.",
     benefits: [
       "Beneficios preferenciales para actividades de integracion.",
@@ -260,7 +260,7 @@ export const partners = [
   {
     name: "El Sabor Milagroso",
     logo: "https://centroempresarialica.com/media/sabor-milagroso.jpg",
-    logoScale: 1.45,
+    logoScale: 1.6,
     summary: "Beneficios gastronomicos para asociados, reuniones y eventos.",
     benefits: [
       "Condiciones especiales para consumos o coordinaciones de asociados.",
