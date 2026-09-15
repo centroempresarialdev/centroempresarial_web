@@ -14,8 +14,8 @@ const PageIntro = ({ eyebrow, title, description, align = "left" }: PageIntroPro
       <Badge variant="outline" className="mb-4 text-primary">
         {eyebrow}
       </Badge>
-      <h1 className="text-4xl font-extrabold leading-tight text-corporate md:text-6xl">{title}</h1>
-      <p className="mt-5 text-lg leading-8 text-muted-foreground">{description}</p>
+      <h1 className="text-3xl font-extrabold leading-tight text-corporate sm:text-4xl md:text-6xl">{title}</h1>
+      <p className="mt-4 text-base leading-7 text-muted-foreground sm:mt-5 sm:text-lg sm:leading-8">{description}</p>
     </ScrollReveal>
   );
 };

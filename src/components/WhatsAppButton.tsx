@@ -7,14 +7,14 @@ const WhatsAppButton = () => {
   const whatsappUrl = `https://wa.me/${contactInfo.whatsapp}?text=${encodeURIComponent(message)}`;
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <div className="fixed bottom-4 right-4 z-50 sm:bottom-6 sm:right-6">
       <Button
         asChild
         size="lg"
-        className="rounded-full bg-[#25D366] p-5 text-white shadow-elevated transition-all duration-300 hover:scale-105 hover:bg-[#20c05c] hover:shadow-corporate sm:px-6"
+        className="h-14 w-14 rounded-full bg-[#25D366] p-0 text-white shadow-elevated transition-all duration-300 hover:scale-105 hover:bg-[#20c05c] hover:shadow-corporate sm:h-11 sm:w-auto sm:px-6"
       >
         <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
-          <MessageCircle className="h-7 w-7" />
+          <MessageCircle className="h-6 w-6 sm:h-7 sm:w-7" />
           <span className="hidden font-bold sm:inline">WhatsApp</span>
         </a>
       </Button>

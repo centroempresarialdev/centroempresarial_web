@@ -101,7 +101,7 @@ const Benefits = () => {
 
   return (
     <>
-      <section className="bg-background pt-36 pb-20">
+      <section className="bg-background pb-14 pt-28 md:pb-20 md:pt-36">
         <div className="container mx-auto px-6 lg:px-12">
           <ScrollReveal className="mb-8">
             <p className="text-sm font-bold uppercase tracking-[0.2em] text-primary">Eventos</p>
@@ -129,7 +129,7 @@ const Benefits = () => {
         </div>
       </section>
 
-      <section className="bg-muted/30 py-20">
+      <section className="bg-muted/30 py-14 md:py-20">
         <div className="container mx-auto px-6 lg:px-12">
           <ScrollReveal className="mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end">
             <div>

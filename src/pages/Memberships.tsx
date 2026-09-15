@@ -16,7 +16,7 @@ const valueHighlights = [
 const Memberships = () => {
   return (
     <>
-      <section className="bg-muted/35 pt-36 pb-20">
+      <section className="bg-muted/35 pb-14 pt-28 md:pb-20 md:pt-36">
         <div className="container mx-auto px-6 lg:px-12">
           <div className="grid items-end gap-10 lg:grid-cols-[0.95fr_1.05fr]">
             <PageIntro
@@ -37,7 +37,7 @@ const Memberships = () => {
         </div>
       </section>
 
-      <section className="bg-background py-20">
+      <section className="bg-background py-14 md:py-20">
         <div className="container mx-auto px-6 lg:px-12">
           <ScrollReveal className="mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end">
             <div>
@@ -101,7 +101,7 @@ const Memberships = () => {
         </div>
       </section>
 
-      <section className="bg-muted/30 py-20">
+      <section className="bg-muted/30 py-14 md:py-20">
         <div className="container mx-auto px-6 lg:px-12">
           <ScrollReveal className="mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end">
             <div>
@@ -153,7 +153,7 @@ const Memberships = () => {
         </div>
       </section>
 
-      <section className="bg-primary py-20 text-primary-foreground">
+      <section className="bg-primary py-14 text-primary-foreground md:py-20">
         <div className="container mx-auto px-6 lg:px-12">
           <ScrollReveal className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
             <div>

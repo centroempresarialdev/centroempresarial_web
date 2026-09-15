@@ -63,7 +63,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contacto" className="bg-muted/35 pt-36 pb-20">
+    <section id="contacto" className="bg-muted/35 pb-14 pt-28 md:pb-20 md:pt-36">
       <div className="container mx-auto px-6 lg:px-12">
         <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
           <motion.div

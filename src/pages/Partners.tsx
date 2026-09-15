@@ -9,7 +9,7 @@ import { ArrowRight, BadgeCheck, CheckCircle2, Handshake, Network, Sparkles } fr
 const Partners = () => {
   return (
     <>
-      <section className="bg-muted/35 pt-36 pb-20">
+      <section className="bg-muted/35 pb-14 pt-28 md:pb-20 md:pt-36">
         <div className="container mx-auto px-6 lg:px-12">
           <div className="grid items-center gap-10 lg:grid-cols-[0.95fr_1.05fr]">
             <PageIntro
@@ -34,7 +34,7 @@ const Partners = () => {
         </div>
       </section>
 
-      <section className="bg-background py-20">
+      <section className="bg-background py-14 md:py-20">
         <div className="container mx-auto px-6 lg:px-12">
           <ScrollReveal className="mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end">
             <div>
@@ -89,7 +89,7 @@ const Partners = () => {
         </div>
       </section>
 
-      <section className="bg-muted/30 py-20">
+      <section className="bg-muted/30 py-14 md:py-20">
         <div className="container mx-auto px-6 lg:px-12">
           <ScrollReveal className="overflow-hidden rounded-lg bg-gradient-primary p-8 text-primary-foreground shadow-elevated md:p-12">
             <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-center">

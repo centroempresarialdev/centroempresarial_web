@@ -75,21 +75,21 @@ const Index = () => {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-foreground pt-24 text-white md:pt-36">
-        <Carousel setApi={setHeroApi} opts={{ align: "start", loop: true }} className="relative">
+      <section className="relative w-full overflow-hidden bg-foreground pt-[76px] text-white sm:pt-[88px] md:pt-36">
+        <Carousel setApi={setHeroApi} opts={{ align: "start", loop: true }} className="relative w-full overflow-hidden">
           <CarouselContent className="ml-0">
             {heroSlides.map((slide) => (
               <CarouselItem key={slide.title} className="pl-0">
-                <div className="relative min-h-[660px] overflow-hidden">
+                <div className="relative min-h-[560px] overflow-hidden sm:min-h-[620px] md:min-h-[660px]">
                   <img src={slide.image} alt={slide.title} className="absolute inset-0 h-[108%] w-full object-cover" data-gsap-parallax />
-                  <div className="absolute inset-0 bg-gradient-to-r from-foreground via-foreground/88 to-primary/38" />
+                  <div className="absolute inset-0 bg-foreground/55 md:bg-gradient-to-r md:from-foreground md:via-foreground/88 md:to-primary/38" />
                   <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-background to-transparent" />
 
-                  <div className="container relative z-10 mx-auto flex min-h-[660px] items-center px-6 py-16 lg:px-12">
+                  <div className="container relative z-10 mx-auto flex min-h-[560px] items-center px-5 py-12 sm:min-h-[620px] sm:px-6 sm:py-16 md:min-h-[660px] lg:px-12">
                     <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-3xl">
-                      <p className="mb-5 text-sm font-bold uppercase tracking-[0.24em] text-accent">{slide.eyebrow}</p>
-                      <h1 className="text-4xl font-extrabold leading-tight text-white md:text-6xl lg:text-7xl">{slide.title}</h1>
-                      <Button asChild size="lg" variant="accent" className="mt-8 text-base">
+                      <p className="mb-4 text-xs font-bold uppercase leading-5 tracking-[0.18em] text-accent sm:mb-5 sm:text-sm sm:tracking-[0.24em]">{slide.eyebrow}</p>
+                      <h1 className="text-[2.15rem] font-extrabold leading-[1.12] text-white sm:text-5xl md:text-6xl lg:text-7xl">{slide.title}</h1>
+                      <Button asChild size="lg" variant="accent" className="mt-7 w-full text-base sm:mt-8 sm:w-auto">
                         <Link to={slide.href}>
                           {slide.cta}
                           <ArrowRight className="h-5 w-5" />
@@ -102,8 +102,8 @@ const Index = () => {
             ))}
           </CarouselContent>
 
-          <div className="pointer-events-none absolute inset-x-0 bottom-10 z-20">
-            <div className="container mx-auto flex items-center justify-between gap-4 px-6 lg:px-12">
+          <div className="pointer-events-none absolute inset-x-0 bottom-7 z-20 sm:bottom-10">
+            <div className="container mx-auto flex items-center justify-between gap-4 px-5 sm:px-6 lg:px-12">
               <div className="pointer-events-auto flex gap-2">
                 {heroSlides.map((slide, index) => (
                   <button
@@ -124,7 +124,7 @@ const Index = () => {
         </Carousel>
       </section>
 
-      <section className="bg-background py-20">
+      <section className="bg-background py-14 md:py-20">
         <div className="container mx-auto px-6 lg:px-12">
           <ScrollReveal className="mb-10 max-w-3xl">
             <p className="mb-3 text-sm font-bold uppercase tracking-[0.2em] text-primary">Identidad institucional</p>
@@ -159,7 +159,7 @@ const Index = () => {
         </div>
       </section>
 
-      <section className="bg-muted/35 py-20">
+      <section className="bg-muted/35 py-14 md:py-20">
         <div className="container mx-auto px-6 lg:px-12">
           <ScrollReveal className="mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end">
             <div>
@@ -197,7 +197,7 @@ const Index = () => {
         </div>
       </section>
 
-      <section className="bg-primary py-20 text-primary-foreground">
+      <section className="bg-primary py-14 text-primary-foreground md:py-20">
         <ScrollReveal className="container mx-auto px-6 text-center lg:px-12">
           <Handshake className="mx-auto mb-5 h-10 w-10 text-accent" />
           <h2 className="mx-auto max-w-3xl text-3xl font-extrabold text-white md:text-5xl">Aliados con beneficios concretos para asociados</h2>
@@ -232,10 +232,10 @@ const Index = () => {
         </ScrollReveal>
       </section>
 
-      <section className="bg-background py-20">
+      <section className="bg-background py-14 md:py-20">
         <div className="container mx-auto grid gap-12 px-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:px-12">
           <ScrollReveal direction="left" className="overflow-hidden rounded-lg shadow-elevated">
-            <img src={aboutImage} alt="Equipo de Centro Empresarial" className="h-[440px] w-full object-cover" data-gsap-image />
+            <img src={aboutImage} alt="Equipo de Centro Empresarial" className="h-72 w-full object-cover sm:h-96 lg:h-[440px]" data-gsap-image />
           </ScrollReveal>
           <ScrollReveal direction="right">
             <p className="mb-3 text-sm font-bold uppercase tracking-[0.2em] text-primary">Experiencia por perfil</p>

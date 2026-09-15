@@ -9,7 +9,7 @@ import { serviceCatalog } from "@/data/site";
 const ServicesPage = () => {
   return (
     <>
-      <section className="bg-muted/35 pb-20 pt-36">
+      <section className="bg-muted/35 pb-14 pt-28 md:pb-20 md:pt-36">
         <div className="container mx-auto px-6 lg:px-12">
           <PageIntro
             eyebrow="Servicios empresariales"
@@ -19,7 +19,7 @@ const ServicesPage = () => {
         </div>
       </section>
 
-      <section className="bg-background py-20">
+      <section className="bg-background py-14 md:py-20">
         <div className="container mx-auto px-6 lg:px-12">
           {serviceCatalog.length > 0 ? (
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">

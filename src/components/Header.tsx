@@ -36,13 +36,13 @@ const Header = () => {
         </div>
       </div>
 
-      <nav className="container mx-auto px-6 py-3 lg:px-12">
+      <nav className="container mx-auto px-5 py-2.5 sm:px-6 sm:py-3 lg:px-12">
         <div className="flex items-center justify-between gap-6">
           <Link to="/" className="flex items-center gap-3 text-left" aria-label="Ir al inicio" onClick={() => setIsMenuOpen(false)}>
             <img
               src="https://camaraica.org.pe/wp-content/uploads/2025/09/CENTRO.avif"
               alt="Centro Empresarial"
-              className="h-16 w-auto"
+              className="h-14 w-auto sm:h-16"
             />
           </Link>
 
@@ -75,7 +75,7 @@ const Header = () => {
           <Button
             variant="ghost"
             size="icon"
-            className="lg:hidden"
+            className="h-11 w-11 shrink-0 lg:hidden"
             onClick={() => setIsMenuOpen((value) => !value)}
             aria-label={isMenuOpen ? "Cerrar menú" : "Abrir menú"}
             aria-expanded={isMenuOpen}
