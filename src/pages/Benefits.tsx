@@ -108,7 +108,7 @@ const Benefits = () => {
             <h1 className="mt-3 text-3xl font-extrabold leading-tight text-corporate md:text-5xl">Proximos eventos</h1>
           </ScrollReveal>
 
-          <div className="grid gap-6 lg:grid-cols-2">
+          <div className="mx-auto grid max-w-3xl grid-cols-1 gap-8">
             {eventHighlights.map((event, index) => (
               <ScrollReveal key={event.title} delay={index * 0.08} className="overflow-hidden rounded-lg border border-border bg-card shadow-sm transition-all hover:-translate-y-1 hover:shadow-corporate">
                 <div className="bg-white p-3">

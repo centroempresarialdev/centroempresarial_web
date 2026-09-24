@@ -36,8 +36,8 @@ export type ServiceItem = {
 export const serviceCatalog: ServiceItem[] = [];
 
 export const contactInfo = {
-  phone: "+51 945 228 848",
-  whatsapp: "51945228848",
+  phone: "+51 906 491 859",
+  whatsapp: "51906491859",
   email: "centroempresarialsac@gmail.com",
   address: "Calle Castrovirreyna 323, tercer piso, Ica, Peru",
   mapUrl: "https://maps.google.com/?q=Calle+Castrovirreyna+323+Ica+Peru",

@@ -5,11 +5,11 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Carousel, type CarouselApi, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import ScrollReveal from "@/components/ScrollReveal";
-import { audiences, eventHighlights, partners } from "@/data/site";
+import { audiences, eventHighlights, executiveServices, partners } from "@/data/site";
 import aboutImage from "@/assets/hero/about-nosotros.jpg";
 import heroTrainingImage from "@/assets/galeria/2025 (4).jpg";
 import heroCommunityImage from "@/assets/galeria/2026.jpg";
-import { ArrowRight, CalendarDays, Eye, Handshake, ListChecks, Target } from "lucide-react";
+import { ArrowRight, CalendarDays, Eye, Handshake, ListChecks, Target, Zap } from "lucide-react";
 
 const heroSlides = [
   {
@@ -75,17 +75,17 @@ const Index = () => {
 
   return (
     <>
-      <section className="relative w-full overflow-hidden bg-foreground pt-[76px] text-white sm:pt-[88px] md:pt-36">
+      <section className="relative w-full overflow-hidden bg-foreground text-white">
         <Carousel setApi={setHeroApi} opts={{ align: "start", loop: true }} className="relative w-full overflow-hidden">
           <CarouselContent className="ml-0">
             {heroSlides.map((slide) => (
               <CarouselItem key={slide.title} className="pl-0">
-                <div className="relative min-h-[560px] overflow-hidden sm:min-h-[620px] md:min-h-[660px]">
+                <div className="relative min-h-[660px] overflow-hidden sm:min-h-[720px] md:min-h-[800px]">
                   <img src={slide.image} alt={slide.title} className="absolute inset-0 h-[108%] w-full object-cover" data-gsap-parallax />
                   <div className="absolute inset-0 bg-foreground/55 md:bg-gradient-to-r md:from-foreground md:via-foreground/88 md:to-primary/38" />
-                  <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-background to-transparent" />
+                  <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-background to-transparent" />
 
-                  <div className="container relative z-10 mx-auto flex min-h-[560px] items-center px-5 py-12 sm:min-h-[620px] sm:px-6 sm:py-16 md:min-h-[660px] lg:px-12">
+                  <div className="container relative z-10 mx-auto flex min-h-[660px] items-center px-5 pb-16 pt-24 sm:min-h-[720px] sm:px-6 sm:pb-20 sm:pt-28 md:min-h-[800px] md:pt-32 lg:px-12">
                     <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-3xl">
                       <p className="mb-4 text-xs font-bold uppercase leading-5 tracking-[0.18em] text-accent sm:mb-5 sm:text-sm sm:tracking-[0.24em]">{slide.eyebrow}</p>
                       <h1 className="text-[2.15rem] font-extrabold leading-[1.12] text-white sm:text-5xl md:text-6xl lg:text-7xl">{slide.title}</h1>
@@ -122,6 +122,37 @@ const Index = () => {
             </div>
           </div>
         </Carousel>
+      </section>
+
+      <section className="relative overflow-hidden bg-gradient-to-br from-muted via-background to-muted py-14 md:py-20">
+        <div className="pointer-events-none absolute -right-24 -top-24 h-[600px] w-[600px] rounded-full bg-primary/15 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-20 -left-20 h-[500px] w-[500px] rounded-full bg-accent/12 blur-3xl" />
+        <div className="container relative z-10 mx-auto px-6 lg:px-12">
+          <ScrollReveal className="mx-auto mb-12 max-w-3xl text-center">
+            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-accent/15 text-accent">
+              <Zap className="h-6 w-6" />
+            </div>
+            <p className="mb-3 text-sm font-bold uppercase tracking-[0.2em] text-primary">¿Quiénes somos?</p>
+            <h2 className="text-3xl font-extrabold leading-tight text-corporate md:text-5xl">Conectamos personas y empresas con oportunidades reales</h2>
+            <p className="mt-5 text-lg leading-8 text-muted-foreground">
+              Centro Empresarial es una organización con más de 12 años en Ica articulando capacitación, asesoría, alianzas estratégicas y eventos para estudiantes, profesionales y empresas que buscan crecer.
+            </p>
+          </ScrollReveal>
+
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {executiveServices.map((service, index) => (
+              <ScrollReveal key={service.label} delay={index * 0.07}>
+                <div className="group relative flex flex-col items-center overflow-hidden rounded-xl border border-border bg-card p-8 text-center shadow-sm transition-all duration-500 hover:-translate-y-1.5 hover:border-primary/30 hover:shadow-corporate">
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary-dark to-primary opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                  <div className="relative z-10 mb-5 flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 text-primary transition-all duration-500 group-hover:bg-white/20 group-hover:text-white group-hover:scale-110">
+                    <service.icon className="h-7 w-7" />
+                  </div>
+                  <h3 className="relative z-10 text-lg font-bold text-corporate transition-colors duration-500 group-hover:text-white">{service.label}</h3>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
       </section>
 
       <section className="bg-background py-14 md:py-20">

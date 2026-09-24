@@ -3,7 +3,8 @@ import { Button } from "@/components/ui/button";
 import { contactInfo } from "@/data/site";
 
 const WhatsAppButton = () => {
-  const message = "Hola, deseo recibir informacion sobre las membresias del Centro Empresarial.";
+  const message =
+    "Hola, deseo recibir informacion sobre las membresias del Centro Empresarial.";
   const whatsappUrl = `https://wa.me/${contactInfo.whatsapp}?text=${encodeURIComponent(message)}`;
 
   return (
@@ -13,9 +14,14 @@ const WhatsAppButton = () => {
         size="lg"
         className="h-14 w-14 rounded-full bg-[#25D366] p-0 text-white shadow-elevated transition-all duration-300 hover:scale-105 hover:bg-[#20c05c] hover:shadow-corporate sm:h-11 sm:w-auto sm:px-6"
       >
-        <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
+        <a
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Contactar por WhatsApp"
+        >
           <MessageCircle className="h-6 w-6 sm:h-7 sm:w-7" />
-          <span className="hidden font-bold sm:inline">WhatsApp</span>
+          <span className="hidden font-bold sm:inline"></span>
         </a>
       </Button>
     </div>

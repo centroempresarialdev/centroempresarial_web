@@ -1,4 +1,5 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -11,10 +12,18 @@ import { contactInfo } from "@/data/site";
 import { Building2, Mail, MapPin, MessageCircle, Phone, Send, UserCheck } from "lucide-react";
 
 const interestedTypes = ["Estudiante", "Profesional", "Corporacion", "Empresa"];
-const membershipTypes = ["Estudiante - S/ 360 anual", "Profesionales - S/ 480 anual", "Empresarial - S/ 1,500 anual", "Evaluacion mensual bajo consulta", "Necesito orientacion"];
+const membershipTypes = [
+  "Estudiante - S/ 360 anual",
+  "Profesional - S/ 480 anual",
+  "Empresarial - S/ 1,500 anual",
+  "Evaluacion mensual bajo consulta",
+  "Necesito orientacion",
+];
 
 const Contact = () => {
   const { toast } = useToast();
+  const [searchParams] = useSearchParams();
+
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -24,41 +33,119 @@ const Contact = () => {
     message: "",
   });
 
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    const planParam = searchParams.get("plan")?.toLowerCase();
+    if (!planParam) return;
+
+    if (planParam.includes("estudiante")) {
+      setFormData((prev) => ({
+        ...prev,
+        interestedType: prev.interestedType || "Estudiante",
+        membership: prev.membership || "Estudiante - S/ 360 anual",
+      }));
+    } else if (planParam.includes("profesional")) {
+      setFormData((prev) => ({
+        ...prev,
+        interestedType: prev.interestedType || "Profesional",
+        membership: prev.membership || "Profesional - S/ 480 anual",
+      }));
+    } else if (planParam.includes("empresa") || planParam.includes("corporaci")) {
+      setFormData((prev) => ({
+        ...prev,
+        interestedType: prev.interestedType || "Empresa",
+        membership: prev.membership || "Empresarial - S/ 1,500 anual",
+      }));
+    }
+  }, [searchParams]);
+
   const whatsappPreview = useMemo(() => {
-    return [
-      "Hola, deseo recibir informacion para asociarme al Centro Empresarial.",
-      `Nombre / Razon social: ${formData.name || "-"}`,
-      `Telefono / WhatsApp: ${formData.phone || "-"}`,
-      `Correo: ${formData.email || "-"}`,
-      `Tipo de interesado: ${formData.interestedType || "-"}`,
-      `Membresia de interes: ${formData.membership || "-"}`,
-      `Consulta adicional: ${formData.message || "-"}`,
-    ].join("\n");
+    const lines = [
+      "👋 *Hola, deseo recibir información para asociarme al Centro Empresarial:*",
+      "",
+      `👤 *Nombre / Razón social:* ${formData.name.trim() || "-"}`,
+      `📱 *Teléfono:* ${formData.phone.trim() || "-"}`,
+      `✉️ *Correo:* ${formData.email.trim() || "-"}`,
+      `🎯 *Tipo de interesado:* ${formData.interestedType || "-"}`,
+      `💳 *Membresía de interés:* ${formData.membership || "-"}`,
+    ];
+    if (formData.message.trim()) {
+      lines.push(`💬 *Consulta adicional:* ${formData.message.trim()}`);
+    }
+    return lines.join("\n");
   }, [formData]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = event.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    if (errors[name]) {
+      setErrors((prev) => {
+        const rest = { ...prev };
+        delete rest[name];
+        return rest;
+      });
+    }
+  };
+
+  const validate = () => {
+    const newErrors: Record<string, string> = {};
+
+    if (!formData.name.trim()) {
+      newErrors.name = "Ingresa tu nombre o razón social.";
+    } else if (formData.name.trim().length < 3) {
+      newErrors.name = "El nombre debe tener al menos 3 caracteres.";
+    }
+
+    const digits = formData.phone.replace(/\D/g, "");
+    if (!formData.phone.trim()) {
+      newErrors.phone = "Ingresa tu teléfono o WhatsApp.";
+    } else if (digits.length < 9) {
+      newErrors.phone = "Ingresa un número válido de al menos 9 dígitos.";
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formData.email.trim()) {
+      newErrors.email = "Ingresa tu correo electrónico.";
+    } else if (!emailRegex.test(formData.email.trim())) {
+      newErrors.email = "Ingresa un correo electrónico válido.";
+    }
+
+    if (!formData.interestedType) {
+      newErrors.interestedType = "Selecciona el tipo de interesado.";
+    }
+
+    if (!formData.membership) {
+      newErrors.membership = "Selecciona la membresía de interés.";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
-    if (!formData.name || !formData.phone || !formData.email || !formData.interestedType || !formData.membership) {
+    if (!validate()) {
       toast({
         title: "Completa los datos requeridos",
-        description: "Nombre, telefono, correo, tipo de interesado y membresia son obligatorios.",
+        description: "Revisa los campos destacados en rojo.",
         variant: "destructive",
       });
       return;
     }
 
-    const whatsappUrl = `https://wa.me/${contactInfo.whatsapp}?text=${encodeURIComponent(whatsappPreview)}`;
-    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    const cleanRecipient = contactInfo.whatsapp.replace(/\D/g, "");
+    const whatsappUrl = `https://wa.me/${cleanRecipient}?text=${encodeURIComponent(whatsappPreview)}`;
+    const popup = window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+
+    if (!popup || popup.closed || typeof popup.closed === "undefined") {
+      window.location.href = whatsappUrl;
+    }
 
     toast({
       title: "Solicitud preparada",
-      description: "Se abrio WhatsApp con tu mensaje de inscripcion.",
+      description: "Se abrió WhatsApp con tu mensaje de inscripción.",
     });
   };
 
@@ -135,35 +222,85 @@ const Contact = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-5">
+                <form onSubmit={handleSubmit} noValidate className="space-y-5">
                   <div>
                     <label htmlFor="name" className="mb-2 block text-sm font-semibold text-foreground">
-                      Nombre y apellidos / razon social *
+                      Nombre y apellidos / razón social <span className="text-destructive">*</span>
                     </label>
-                    <Input id="name" name="name" value={formData.name} onChange={handleInputChange} placeholder="Ej. Juan Perez / Empresa SAC" />
+                    <Input
+                      id="name"
+                      name="name"
+                      autoComplete="name"
+                      required
+                      aria-required="true"
+                      aria-invalid={!!errors.name}
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      placeholder="Ej. Juan Pérez / Empresa SAC"
+                      className={errors.name ? "border-destructive focus-visible:ring-destructive" : ""}
+                    />
+                    {errors.name && <p className="mt-1.5 text-xs font-medium text-destructive">{errors.name}</p>}
                   </div>
 
                   <div className="grid gap-5 sm:grid-cols-2">
                     <div>
                       <label htmlFor="phone" className="mb-2 block text-sm font-semibold text-foreground">
-                        Telefono o WhatsApp *
+                        Teléfono o WhatsApp <span className="text-destructive">*</span>
                       </label>
-                      <Input id="phone" name="phone" value={formData.phone} onChange={handleInputChange} placeholder="+51 999 999 999" />
+                      <Input
+                        id="phone"
+                        name="phone"
+                        type="tel"
+                        inputMode="tel"
+                        autoComplete="tel"
+                        required
+                        aria-required="true"
+                        aria-invalid={!!errors.phone}
+                        value={formData.phone}
+                        onChange={handleInputChange}
+                        placeholder="+51 999 999 999"
+                        className={errors.phone ? "border-destructive focus-visible:ring-destructive" : ""}
+                      />
+                      {errors.phone && <p className="mt-1.5 text-xs font-medium text-destructive">{errors.phone}</p>}
                     </div>
                     <div>
                       <label htmlFor="email" className="mb-2 block text-sm font-semibold text-foreground">
-                        Correo electronico *
+                        Correo electrónico <span className="text-destructive">*</span>
                       </label>
-                      <Input id="email" name="email" type="email" value={formData.email} onChange={handleInputChange} placeholder="tu@email.com" />
+                      <Input
+                        id="email"
+                        name="email"
+                        type="email"
+                        autoComplete="email"
+                        required
+                        aria-required="true"
+                        aria-invalid={!!errors.email}
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        placeholder="tu@email.com"
+                        className={errors.email ? "border-destructive focus-visible:ring-destructive" : ""}
+                      />
+                      {errors.email && <p className="mt-1.5 text-xs font-medium text-destructive">{errors.email}</p>}
                     </div>
                   </div>
 
                   <div className="grid gap-5 sm:grid-cols-2">
                     <div>
                       <label htmlFor="interestedType" className="mb-2 block text-sm font-semibold text-foreground">
-                        Tipo de interesado *
+                        Tipo de interesado <span className="text-destructive">*</span>
                       </label>
-                      <select id="interestedType" name="interestedType" value={formData.interestedType} onChange={handleInputChange} className="h-10 w-full rounded-md border border-input bg-background px-3 text-sm focus:outline-none focus:ring-2 focus:ring-ring">
+                      <select
+                        id="interestedType"
+                        name="interestedType"
+                        required
+                        aria-required="true"
+                        aria-invalid={!!errors.interestedType}
+                        value={formData.interestedType}
+                        onChange={handleInputChange}
+                        className={`h-10 w-full rounded-md border bg-background px-3 text-sm focus:outline-none focus:ring-2 ${
+                          errors.interestedType ? "border-destructive focus:ring-destructive" : "border-input focus:ring-ring"
+                        }`}
+                      >
                         <option value="">Seleccionar</option>
                         {interestedTypes.map((type) => (
                           <option key={type} value={type}>
@@ -171,12 +308,24 @@ const Contact = () => {
                           </option>
                         ))}
                       </select>
+                      {errors.interestedType && <p className="mt-1.5 text-xs font-medium text-destructive">{errors.interestedType}</p>}
                     </div>
                     <div>
                       <label htmlFor="membership" className="mb-2 block text-sm font-semibold text-foreground">
-                        Membresia de interes *
+                        Membresía de interés <span className="text-destructive">*</span>
                       </label>
-                      <select id="membership" name="membership" value={formData.membership} onChange={handleInputChange} className="h-10 w-full rounded-md border border-input bg-background px-3 text-sm focus:outline-none focus:ring-2 focus:ring-ring">
+                      <select
+                        id="membership"
+                        name="membership"
+                        required
+                        aria-required="true"
+                        aria-invalid={!!errors.membership}
+                        value={formData.membership}
+                        onChange={handleInputChange}
+                        className={`h-10 w-full rounded-md border bg-background px-3 text-sm focus:outline-none focus:ring-2 ${
+                          errors.membership ? "border-destructive focus:ring-destructive" : "border-input focus:ring-ring"
+                        }`}
+                      >
                         <option value="">Seleccionar</option>
                         {membershipTypes.map((type) => (
                           <option key={type} value={type}>
@@ -184,6 +333,7 @@ const Contact = () => {
                           </option>
                         ))}
                       </select>
+                      {errors.membership && <p className="mt-1.5 text-xs font-medium text-destructive">{errors.membership}</p>}
                     </div>
                   </div>
 
@@ -191,10 +341,17 @@ const Contact = () => {
                     <label htmlFor="message" className="mb-2 block text-sm font-semibold text-foreground">
                       Mensaje o consulta adicional
                     </label>
-                    <Textarea id="message" name="message" value={formData.message} onChange={handleInputChange} placeholder="Cuentanos que necesitas o que beneficio te interesa..." rows={5} />
+                    <Textarea
+                      id="message"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      placeholder="Cuéntanos qué necesitas o qué beneficio te interesa..."
+                      rows={5}
+                    />
                   </div>
 
-                  <Button type="submit" variant="accent" size="lg" className="w-full text-base">
+                  <Button type="submit" variant="accent" size="lg" className="w-full text-base font-semibold shadow-md">
                     Enviar por WhatsApp
                     <Send className="h-4 w-4" />
                   </Button>

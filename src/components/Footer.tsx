@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { contactInfo, executiveServices } from "@/data/site";
 import { ArrowRight, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 
+import logoFooter from "@/assets/logos/new-logo.png";
+
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const whatsappUrl = `https://wa.me/${contactInfo.whatsapp}?text=${encodeURIComponent("Hola, deseo recibir informacion para asociarme al Centro Empresarial.")}`;
@@ -20,11 +22,11 @@ const Footer = () => {
       <div className="container mx-auto px-6 py-12 lg:px-12">
         <div className="grid gap-10 lg:grid-cols-[1.15fr_0.7fr_0.9fr_1.05fr]">
           <div>
-            <Link to="/" className="inline-flex rounded-md bg-white p-3" aria-label="Ir al inicio">
+            <Link to="/" className="inline-flex items-center" aria-label="Ir al inicio">
               <img
-                src="https://camaraica.org.pe/wp-content/uploads/2025/09/CENTRO.avif"
+                src={logoFooter}
                 alt="Centro Empresarial"
-                className="h-12 w-auto"
+                className="h-24 w-auto sm:h-28"
               />
             </Link>
             <p className="mt-5 max-w-sm text-sm leading-7 text-white/72">
