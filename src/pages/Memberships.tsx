@@ -33,10 +33,10 @@ interface MembershipPlan {
   featured: boolean;
   imgDefault: string;
   imgHover: string;
-  accentColor: string;      // Tailwind bg class for header strip
-  badgeLabel?: string;       // optional badge (e.g. "Más solicitado")
-  haloGradient: string;      // Tailwind gradient classes for backdrop halo
-  ringBorder: string;        // Tailwind border color class for rings
+  accentColor: string; // Tailwind bg class for header strip
+  badgeLabel?: string; // optional badge (e.g. "Más solicitado")
+  haloGradient: string; // Tailwind gradient classes for backdrop halo
+  ringBorder: string; // Tailwind border color class for rings
 }
 
 // ── Plan data ──────────────────────────────────────────────────────
@@ -45,7 +45,8 @@ const plans: MembershipPlan[] = [
     name: "Estudiante",
     price: "S/ 360",
     period: "anual",
-    audience: "Orientada a estudiantes que buscan capacitaciones, recursos empresariales y apoyo academico.",
+    audience:
+      "Orientada a estudiantes que buscan capacitaciones, recursos empresariales y apoyo academico.",
     benefits: [
       "Capacitaciones con 50% dto.",
       "Videos y blog gratuitos.",
@@ -62,7 +63,8 @@ const plans: MembershipPlan[] = [
     name: "Profesional",
     price: "S/ 480",
     period: "anual",
-    audience: "Orientada a profesionales que buscan formacion continua, beneficios academicos y acceso a eventos especializados.",
+    audience:
+      "Orientada a profesionales que buscan formacion continua, beneficios academicos y acceso a eventos especializados.",
     benefits: [
       "Capacitaciones con 50% dto.",
       "Postgrado con 20% dto.",
@@ -81,7 +83,8 @@ const plans: MembershipPlan[] = [
     name: "Empresarial",
     price: "S/ 1,500",
     period: "anual",
-    audience: "Orientada a empresas que requieren capacitaciones, asesorias, consultorias y acompanamiento en mejora continua.",
+    audience:
+      "Orientada a empresas que requieren capacitaciones, asesorias, consultorias y acompanamiento en mejora continua.",
     benefits: [
       "Ponentes nacionales e internacionales.",
       "Asesorías públicas y privadas.",
@@ -134,7 +137,9 @@ function PlanEnfoque({ text }: { text: string }) {
 // ── Component ──────────────────────────────────────────────────────
 const Memberships = () => {
   const scrollToPlans = () => {
-    document.getElementById("planes-membresia")?.scrollIntoView({ behavior: "smooth" });
+    document
+      .getElementById("planes-membresia")
+      ?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -248,10 +253,12 @@ const Memberships = () => {
                     ${plan.featured ? "border-accent ring-2 ring-accent/40" : "border-border"}`}
                 >
                   {/* ── Color strip ── */}
-                  <div className={`absolute left-0 right-0 top-0 h-1.5 rounded-t-2xl ${plan.accentColor}`} />
+                  <div
+                    className={`absolute left-0 right-0 top-0 h-1.5 rounded-t-2xl ${plan.accentColor}`}
+                  />
 
                   {/* ── Pop-out image — absolute, bottom-left, overflows TOP ── */}
-                  <div className="pointer-events-none absolute bottom-0 left-0 z-10 h-[120%] w-[45%]">
+                  <div className="pointer-events-none absolute bottom-0 left-0 z-10 h-[120%] w-[44%] overflow-hidden rounded-bl-2xl">
                     {/* Backdrop Halo & Rings */}
                     <div
                       className={`absolute left-1/2 top-[44%] h-44 w-44 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-tr ${plan.haloGradient} blur-xl opacity-70 transition-transform duration-500 group-hover:scale-110`}
@@ -267,14 +274,14 @@ const Memberships = () => {
                     <img
                       src={plan.imgDefault}
                       alt={plan.name}
-                      className="absolute bottom-0 left-0 h-full w-full object-contain object-bottom
+                      className="absolute bottom-0 left-1/2 -translate-x-1/2 h-full w-[130%] object-cover object-top
                         transition-opacity duration-300 group-hover:opacity-0"
                     />
                     {/* Hover image — overlays base, fades in on card hover */}
                     <img
                       src={plan.imgHover}
                       alt={`${plan.name} — acción`}
-                      className="absolute bottom-0 left-0 h-full w-full object-contain object-bottom
+                      className="absolute bottom-0 left-1/2 -translate-x-1/2 h-full w-[130%] object-cover object-top
                         opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                     />
                   </div>
@@ -292,8 +299,12 @@ const Memberships = () => {
                     {plan.name}
                   </h3>
                   <div className="mt-1 flex items-end gap-1">
-                    <span className="text-3xl font-extrabold text-corporate lg:text-4xl">{plan.price}</span>
-                    <span className="pb-0.5 text-xs text-muted-foreground">/{plan.period}</span>
+                    <span className="text-3xl font-extrabold text-corporate lg:text-4xl">
+                      {plan.price}
+                    </span>
+                    <span className="pb-0.5 text-xs text-muted-foreground">
+                      /{plan.period}
+                    </span>
                   </div>
 
                   {/* Audience / Enfoque */}
@@ -305,7 +316,10 @@ const Memberships = () => {
                   {/* Benefits */}
                   <ul className="flex-1 space-y-2">
                     {plan.benefits.map((b) => (
-                      <li key={b} className="flex gap-2 text-sm leading-snug text-muted-foreground">
+                      <li
+                        key={b}
+                        className="flex gap-2 text-sm leading-snug text-muted-foreground"
+                      >
                         <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
                         <span>{b}</span>
                       </li>
@@ -318,7 +332,9 @@ const Memberships = () => {
                     variant={plan.featured ? "accent" : "corporate"}
                     className="mt-5 w-full text-sm"
                   >
-                    <Link to={`/contacto?plan=${encodeURIComponent(plan.name.toLowerCase())}`}>
+                    <Link
+                      to={`/contacto?plan=${encodeURIComponent(plan.name.toLowerCase())}`}
+                    >
                       Solicitar inscripción
                       <ArrowRight className="ml-1 h-4 w-4" />
                     </Link>
