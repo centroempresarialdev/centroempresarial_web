@@ -8,8 +8,10 @@ import { Mail, Menu, Phone, UserPlus, X } from "lucide-react";
 
 const navigation = [
   { label: "Inicio", href: "/" },
+  { label: "Noticias Empresariales", href: "/noticias" },
   { label: "Eventos", href: "/eventos" },
   { label: "Servicios", href: "/servicios" },
+  { label: "Asesoría/Tesis", href: "/asesoria-tesis" },
   { label: "Aliados", href: "/aliados" },
   { label: "Membresía", href: "/membresias" },
   { label: "Contactos", href: "/contacto" },

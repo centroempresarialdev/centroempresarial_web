@@ -5,10 +5,12 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import Layout from "@/components/Layout";
+import AdvisoryThesis from "@/pages/AdvisoryThesis";
 import Benefits from "@/pages/Benefits";
 import ContactPage from "@/pages/ContactPage";
 import Index from "@/pages/Index";
 import Memberships from "@/pages/Memberships";
+import News from "@/pages/News";
 import NotFound from "@/pages/NotFound";
 import Partners from "@/pages/Partners";
 import ServicesPage from "@/pages/ServicesPage";
@@ -35,7 +37,9 @@ const App = () => (
             <Route path="/eventos" element={<Benefits />} />
             <Route path="/beneficios" element={<Navigate to="/eventos" replace />} />
             <Route path="/servicios" element={<ServicesPage />} />
+            <Route path="/asesoria-tesis" element={<AdvisoryThesis />} />
             <Route path="/aliados" element={<Partners />} />
+            <Route path="/noticias" element={<News />} />
             <Route path="/contacto" element={<ContactPage />} />
             <Route path="*" element={<NotFound />} />
           </Route>

@@ -2,14 +2,17 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Carousel, type CarouselApi, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import ScrollReveal from "@/components/ScrollReveal";
-import { audiences, eventHighlights, executiveServices, partners } from "@/data/site";
+import { audiences, executiveServices, partners } from "@/data/site";
 import aboutImage from "@/assets/hero/about-nosotros.jpg";
 import heroTrainingImage from "@/assets/galeria/2025 (4).jpg";
 import heroCommunityImage from "@/assets/galeria/2026.jpg";
-import { ArrowRight, CalendarDays, Eye, Handshake, ListChecks, Target, Zap } from "lucide-react";
+import misionImage from "@/assets/hero/identidad-mision.jpg";
+import visionImage from "@/assets/hero/identidad-vision.jpg";
+import objetivosImage from "@/assets/hero/identidad-objetivos.jpg";
+import valoresImage from "@/assets/hero/identidad-valores.jpg";
+import { ArrowRight, Check, Eye, Handshake, ListChecks, ShieldCheck, Target, Zap } from "lucide-react";
 
 const heroSlides = [
   {
@@ -30,22 +33,36 @@ const heroSlides = [
 
 const institutionalPillars = [
   {
+    image: misionImage,
     icon: Target,
     title: "Misión",
     text: "Impulsar el crecimiento de estudiantes, profesionales y empresas mediante capacitación, asesoría, alianzas estratégicas y espacios de conexión que generen oportunidades reales.",
   },
   {
+    image: visionImage,
     icon: Eye,
     title: "Visión",
     text: "Ser el centro empresarial referente de Ica y del Perú, reconocido por articular una comunidad innovadora, colaborativa y competitiva.",
   },
   {
+    image: objetivosImage,
     icon: ListChecks,
     title: "Objetivos",
     items: [
       "Fortalecer capacidades mediante formación y asesoría.",
       "Conectar a los miembros con aliados y oportunidades.",
       "Facilitar herramientas, tecnología y acompañamiento para su desarrollo.",
+    ],
+  },
+  {
+    image: valoresImage,
+    icon: ShieldCheck,
+    title: "Valores",
+    items: [
+      "Compromiso y responsabilidad con nuestros asociados.",
+      "Integridad, ética y transparencia en cada acción.",
+      "Innovación constante y excelencia profesional.",
+      "Colaboración estratégica y vocación de servicio.",
     ],
   },
 ];
@@ -162,66 +179,49 @@ const Index = () => {
             <h2 className="text-3xl font-extrabold leading-tight text-corporate md:text-5xl">Nuestro propósito orienta cada oportunidad</h2>
           </ScrollReveal>
 
-          <div className="grid gap-6 lg:grid-cols-3">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {institutionalPillars.map((pillar, index) => (
-              <ScrollReveal key={pillar.title} delay={index * 0.08}>
-                <Card className="h-full border-border/80 bg-card shadow-sm transition-all hover:-translate-y-1 hover:shadow-corporate">
-                  <CardContent className="p-6 md:p-7">
-                    <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-md bg-primary text-primary-foreground">
-                      <pillar.icon className="h-6 w-6" aria-hidden="true" />
-                    </div>
-                    <h3 className="text-2xl font-extrabold text-corporate">{pillar.title}</h3>
-                    {pillar.text && <p className="mt-4 text-base leading-7 text-muted-foreground">{pillar.text}</p>}
-                    {pillar.items && (
-                      <ul className="mt-4 space-y-3 text-base leading-7 text-muted-foreground">
-                        {pillar.items.map((item) => (
-                          <li key={item} className="flex gap-3">
-                            <span className="mt-2.5 h-2 w-2 shrink-0 rounded-full bg-accent" aria-hidden="true" />
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </CardContent>
-                </Card>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
+              <ScrollReveal key={pillar.title} delay={index * 0.08} className="h-full">
+                <div className="group relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-border/80 bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-corporate">
+                  <div className="relative h-44 w-full overflow-hidden bg-muted sm:h-48 md:h-52">
+                    <img
+                      src={pillar.image}
+                      alt={pillar.title}
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
 
-      <section className="bg-muted/35 py-14 md:py-20">
-        <div className="container mx-auto px-6 lg:px-12">
-          <ScrollReveal className="mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end">
-            <div>
-              <p className="mb-3 text-sm font-bold uppercase tracking-[0.2em] text-primary">Eventos proximos</p>
-              <h2 className="text-3xl font-extrabold leading-tight text-corporate md:text-5xl">Actividad real para ver la comunidad en movimiento</h2>
-            </div>
-            <Button asChild variant="corporate">
-              <Link to="/eventos">
-                Ver eventos
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </Button>
-          </ScrollReveal>
+                  <div className="relative z-10 -mt-7 ml-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary text-primary-foreground shadow-md transition-transform duration-300 group-hover:scale-105">
+                    <pillar.icon className="h-7 w-7" strokeWidth={2.2} />
+                  </div>
 
-          <div className="grid gap-6 lg:grid-cols-2">
-            {eventHighlights.map((event, index) => (
-              <ScrollReveal key={event.title} delay={index * 0.08}>
-                <Card className="overflow-hidden border-border/80 bg-card shadow-sm transition-all hover:-translate-y-1 hover:shadow-corporate">
-                  <CardContent className="p-0">
-                    <div className="bg-white p-3">
-                      <img src={event.src} alt={event.title} className="mx-auto max-h-[520px] w-full object-contain" />
+                  <div className="relative z-10 flex flex-1 flex-col justify-between p-6 pt-4">
+                    <div>
+                      <h3 className="text-2xl font-extrabold text-corporate">{pillar.title}</h3>
+                      {pillar.text && (
+                        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                          {pillar.text}
+                        </p>
+                      )}
+                      {pillar.items && (
+                        <ul className="mt-3 space-y-2.5 text-sm leading-relaxed text-muted-foreground">
+                          {pillar.items.map((item) => (
+                            <li key={item} className="flex items-start gap-2.5">
+                              <div className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
+                                <Check className="h-2.5 w-2.5 stroke-[3]" />
+                              </div>
+                              <span className="leading-snug">{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
                     </div>
-                    <div className="flex items-center justify-between gap-4 border-t border-border p-5">
-                      <div>
-                        <p className="text-xs font-extrabold uppercase tracking-[0.16em] text-accent">{event.label}</p>
-                        <h3 className="mt-2 text-xl font-extrabold text-corporate">{event.title}</h3>
-                      </div>
-                      <CalendarDays className="h-7 w-7 shrink-0 text-primary" />
-                    </div>
-                  </CardContent>
-                </Card>
+
+                    <div className="mt-6 h-1.5 w-12 rounded-full bg-primary" />
+                  </div>
+
+                  <div className="pointer-events-none absolute -bottom-8 -right-8 h-32 w-32 rounded-tl-[80px] bg-gradient-to-tl from-primary/10 via-primary/5 to-transparent" />
+                </div>
               </ScrollReveal>
             ))}
           </div>

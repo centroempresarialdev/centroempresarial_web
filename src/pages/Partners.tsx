@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import PageIntro from "@/components/PageIntro";
 import ScrollReveal from "@/components/ScrollReveal";
 import { partners } from "@/data/site";
@@ -46,43 +45,64 @@ const Partners = () => {
             </p>
           </ScrollReveal>
 
-          <div className="space-y-6">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {partners.map((partner, index) => (
-              <ScrollReveal key={partner.name} delay={index * 0.05}>
-                <Card className="overflow-hidden border-border/80 bg-card shadow-sm transition-all hover:-translate-y-1 hover:shadow-corporate">
-                  <CardContent className="grid gap-0 p-0 lg:grid-cols-[0.42fr_0.58fr]">
-                    <div className="flex flex-col justify-center bg-muted/35 p-6 md:p-8">
-                      <div className={`flex h-40 items-center justify-center overflow-hidden rounded-lg border border-border bg-card p-4 shadow-sm ${partner.darkLogo ? "bg-primary" : ""}`}>
+              <ScrollReveal key={partner.name} delay={index * 0.06} className="h-full">
+                <div className="group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-border/80 bg-card shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/40 hover:shadow-corporate">
+                  <div>
+                    {/* Big prominent logo area */}
+                    <div
+                      className={`relative flex h-52 w-full items-center justify-center overflow-hidden border-b border-border/60 p-6 transition-colors ${
+                        partner.darkLogo ? "bg-primary" : "bg-white"
+                      }`}
+                    >
+                      <div
+                        className="flex h-full w-full items-center justify-center transition-transform duration-300 group-hover:scale-105"
+                        style={{ transform: `scale(${partner.logoScale || 1})` }}
+                      >
                         <img
                           src={partner.logo}
                           alt={partner.name}
-                          className="h-28 w-full object-contain"
-                          style={{ transform: `scale(${partner.logoScale})` }}
+                          className="max-h-36 max-w-[85%] object-contain"
                         />
                       </div>
-                      <h3 className="mt-5 text-2xl font-extrabold text-corporate">{partner.name}</h3>
-                      <p className="mt-2 text-sm leading-6 text-muted-foreground">{partner.summary}</p>
                     </div>
 
-                    <div className="p-6 md:p-8">
-                      <p className="mb-5 text-sm font-bold uppercase tracking-[0.18em] text-primary">Beneficios para asociados</p>
-                      <div className="grid gap-3 sm:grid-cols-2">
-                        {partner.benefits.map((benefit) => (
-                          <div key={benefit} className="flex gap-3 rounded-md border border-border bg-card p-4 text-sm leading-6 text-muted-foreground shadow-sm">
-                            <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
-                            <span>{benefit}</span>
-                          </div>
-                        ))}
+                    {/* Content */}
+                    <div className="p-6 sm:p-7">
+                      <h3 className="text-2xl font-extrabold text-corporate">{partner.name}</h3>
+                      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                        {partner.summary}
+                      </p>
+
+                      <div className="mt-6 border-t border-border/70 pt-5">
+                        <p className="mb-3 text-xs font-bold uppercase tracking-wider text-primary">
+                          Beneficios para asociados
+                        </p>
+                        <ul className="space-y-2.5">
+                          {partner.benefits.map((benefit) => (
+                            <li
+                              key={benefit}
+                              className="flex items-start gap-2.5 text-sm leading-snug text-muted-foreground"
+                            >
+                              <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+                              <span>{benefit}</span>
+                            </li>
+                          ))}
+                        </ul>
                       </div>
-                      <Button asChild variant="accent" className="mt-6 w-full md:w-fit">
-                        <Link to="/contacto">
-                          Consultar beneficio
-                          <ArrowRight className="h-4 w-4" />
-                        </Link>
-                      </Button>
                     </div>
-                  </CardContent>
-                </Card>
+                  </div>
+
+                  <div className="p-6 pt-0 sm:p-7 sm:pt-0">
+                    <Button asChild variant="accent" className="w-full">
+                      <Link to="/contacto">
+                        Consultar beneficio
+                        <ArrowRight className="ml-1 h-4 w-4" />
+                      </Link>
+                    </Button>
+                  </div>
+                </div>
               </ScrollReveal>
             ))}
           </div>

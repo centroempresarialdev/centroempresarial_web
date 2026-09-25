@@ -10,8 +10,10 @@ const Footer = () => {
 
   const links = [
     { name: "Inicio", href: "/" },
+    { name: "Noticias Empresariales", href: "/noticias" },
     { name: "Eventos", href: "/eventos" },
     { name: "Servicios", href: "/servicios" },
+    { name: "Asesoría/Tesis", href: "/asesoria-tesis" },
     { name: "Aliados", href: "/aliados" },
     { name: "Membresía", href: "/membresias" },
     { name: "Contactos", href: "/contacto" },
