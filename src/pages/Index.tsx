@@ -121,6 +121,8 @@ const Index = () => {
                   <img
                     src={slide.image}
                     alt={slide.title}
+                    fetchPriority="high"
+                    decoding="async"
                     className="absolute inset-0 h-[108%] w-full object-cover"
                     data-gsap-parallax
                   />
@@ -245,6 +247,8 @@ const Index = () => {
                     <img
                       src={pillar.image}
                       alt={pillar.title}
+                      loading="lazy"
+                      decoding="async"
                       className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>
@@ -324,6 +328,8 @@ const Index = () => {
                   <img
                     src={partner.logo}
                     alt={partner.name}
+                    loading="lazy"
+                    decoding="async"
                     className="h-full w-full max-h-20 sm:max-h-24 max-w-[88%] object-contain"
                     style={{
                       transform: partner.logoScale
@@ -347,6 +353,8 @@ const Index = () => {
             <img
               src={aboutImage}
               alt="Equipo de Centro Empresarial"
+              loading="lazy"
+              decoding="async"
               className="h-72 w-full object-cover sm:h-96 lg:h-[440px]"
               data-gsap-image
             />

@@ -26,7 +26,7 @@ export const useLenisScroll = () => {
 
     lenis.on("scroll", updateScrollTrigger);
     gsap.ticker.add(tick);
-    gsap.ticker.lagSmoothing(0);
+    gsap.ticker.lagSmoothing(500, 33);
     document.documentElement.classList.add("lenis-smooth");
 
     return () => {
