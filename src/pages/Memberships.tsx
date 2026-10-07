@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { gsap } from "gsap";
 import { Button } from "@/components/ui/button";
@@ -6,6 +6,8 @@ import ScrollReveal from "@/components/ScrollReveal";
 import { associationSteps, contactInfo } from "@/data/site";
 import consultingBenefitsImage from "@/assets/hero/consulting-benefits.png";
 import membershipHeroBg from "@/assets/hero/inner-hero-office.jpg";
+import { clientsService } from "@/services";
+import type { MembershipVerifyResponse } from "@/lib/api-types";
 import {
   ArrowRight,
   Briefcase,
@@ -21,6 +23,9 @@ import {
   ShieldCheck,
   Target,
   UserRound,
+  Loader2,
+  FileCheck,
+  AlertTriangle,
 } from "lucide-react";
 
 // ── Membership images ──────────────────────────────────────────────
@@ -146,6 +151,29 @@ function PlanEnfoque({ text }: { text: string }) {
 const Memberships = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const heroBgRef = useRef<HTMLDivElement>(null);
+
+  // Verificador público de carnet
+  const [verifyDoc, setVerifyDoc] = useState("");
+  const [verifyResult, setVerifyResult] = useState<MembershipVerifyResponse | null>(null);
+  const [isVerifying, setIsVerifying] = useState(false);
+
+  const handleVerify = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!verifyDoc.trim()) return;
+
+    setIsVerifying(true);
+    setVerifyResult(null);
+    try {
+      const res = await clientsService.verifyMembership(verifyDoc.trim());
+      setVerifyResult(res);
+    } catch (err: any) {
+      setVerifyResult({
+        is_valid: false,
+      });
+    } finally {
+      setIsVerifying(false);
+    }
+  };
 
   const scrollToPlans = () => {
     document
@@ -563,6 +591,87 @@ const Memberships = () => {
                 </div>
               </ScrollReveal>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── VERIFICADOR PÚBLICO DE CARNET / MEMBRESÍA ─── */}
+      <section className="bg-gradient-to-b from-background via-slate-900 to-slate-950 py-16 text-white">
+        <div className="container mx-auto px-6 lg:px-12 max-w-4xl">
+          <ScrollReveal className="text-center mb-8">
+            <div className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-4 py-1 text-xs font-bold uppercase tracking-wider text-accent mb-3">
+              <ShieldCheck className="h-4 w-4" />
+              <span>Verificación Oficial en Tiempo Real</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white">
+              Validador de Carnet & Membresía
+            </h2>
+            <p className="mt-2 text-xs sm:text-sm text-slate-300 max-w-xl mx-auto">
+              Herramienta pública para asociados, empresas aliadas y comercios en convenio (Intedya, Portón, Piskus, etc.). Comprueba la vigencia de un carnet institucional.
+            </p>
+          </ScrollReveal>
+
+          <div className="rounded-2xl border border-white/15 bg-white/5 p-6 sm:p-8 backdrop-blur shadow-2xl">
+            <form onSubmit={handleVerify} className="flex flex-col sm:flex-row gap-3">
+              <input
+                type="text"
+                required
+                placeholder="Ingresa tu DNI o RUC (Ej: 75748957 o 20601928374)..."
+                value={verifyDoc}
+                onChange={(e) => setVerifyDoc(e.target.value)}
+                className="flex-1 rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white placeholder:text-slate-400 focus:bg-white focus:text-slate-900 focus:outline-none transition-colors"
+              />
+              <button
+                type="submit"
+                disabled={isVerifying}
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-6 py-3 text-xs font-bold uppercase tracking-wider text-slate-950 shadow-md hover:bg-accent-light disabled:opacity-50 transition-colors"
+              >
+                {isVerifying ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : (
+                  <FileCheck className="h-4 w-4" />
+                )}
+                <span>Validar Carnet</span>
+              </button>
+            </form>
+
+            {verifyResult && (
+              <div className="mt-6 rounded-xl border p-4 sm:p-5 transition-all">
+                {verifyResult.is_valid ? (
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                    <div>
+                      <div className="flex items-center gap-2 text-emerald-400 font-bold text-sm sm:text-base">
+                        <CheckCircle2 className="h-5 w-5 shrink-0" />
+                        <span>Membresía VIGENTE — {verifyResult.client_name}</span>
+                      </div>
+                      <p className="mt-1 text-xs text-slate-300">
+                        Documento: <span className="font-mono">{verifyResult.document_number}</span> · Plan: <span className="font-semibold text-white">{verifyResult.plan_name}</span> · Válida hasta: <span className="font-semibold text-white">{verifyResult.valid_until}</span>
+                      </p>
+                    </div>
+                    <span className="self-start sm:self-center rounded-full bg-emerald-500/20 px-3.5 py-1 text-xs font-bold text-emerald-300 border border-emerald-500/30">
+                      ACTIVA
+                    </span>
+                  </div>
+                ) : (
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                    <div>
+                      <div className="flex items-center gap-2 text-rose-400 font-semibold text-sm">
+                        <AlertTriangle className="h-4 w-4 shrink-0" />
+                        <span>No se encontró carnet activo o membresía vigente para el documento ingresado.</span>
+                      </div>
+                      <p className="mt-1 text-xs text-slate-400">
+                        Si ya te asociaste, tu renovación puede estar en trámite administrativo.
+                      </p>
+                    </div>
+                    <Button asChild size="sm" variant="accent" className="shrink-0 self-start sm:self-center">
+                      <Link to="/contacto">
+                        Asociarme hoy
+                      </Link>
+                    </Button>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </section>

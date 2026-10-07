@@ -10,6 +10,7 @@ import {
   partnersService,
   uploadsService,
   whatsappService,
+  dashboardService,
   API_BASE_URL,
 } from "@/services";
 
@@ -17,6 +18,7 @@ export { tokenStorage, ApiError, ApiError as ApiClientError, API_BASE_URL };
 
 export const api = {
   health: () => httpClient<{ status: string; service: string }>("/health"),
+  dashboard: dashboardService,
   auth: authService,
   leads: leadsService,
   clients: clientsService,

@@ -69,13 +69,15 @@ export interface ClientCreate {
 
 export interface ClientUpdate {
   full_name?: string;
+  document_type?: string;
+  document_number?: string;
   phone?: string;
   email?: string;
   client_type?: string;
-  company_name?: string;
+  company_name?: string | null;
   opt_in_newsletter?: boolean;
   opt_in_whatsapp?: boolean;
-  notes?: string;
+  notes?: string | null;
 }
 
 export interface ClientOut {

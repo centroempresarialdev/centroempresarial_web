@@ -7,3 +7,4 @@ export * from "./events.service";
 export * from "./partners.service";
 export * from "./uploads.service";
 export * from "./whatsapp.service";
+export * from "./dashboard.service";

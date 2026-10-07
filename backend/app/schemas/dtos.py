@@ -152,6 +152,8 @@ class ClientCreate(BaseModel):
 
 class ClientUpdate(BaseModel):
     full_name: Optional[str] = None
+    document_type: Optional[str] = None
+    document_number: Optional[str] = None
     phone: Optional[str] = None
     email: Optional[EmailStr] = None
     client_type: Optional[str] = None

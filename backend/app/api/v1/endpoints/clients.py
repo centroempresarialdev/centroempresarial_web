@@ -4,6 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException, status, Query
 from sqlmodel.ext.asyncio.session import AsyncSession
 from sqlmodel import select
 from sqlalchemy.orm import selectinload
+from sqlalchemy.exc import IntegrityError
 from app.core.database import get_session
 from app.api.deps import require_role
 from app.models.entities import Client, Membership, MembershipPlan, User
@@ -78,8 +79,15 @@ async def update_client(
     for key, value in update_dict.items():
         setattr(client, key, value)
 
-    session.add(client)
-    await session.commit()
+    try:
+        session.add(client)
+        await session.commit()
+    except IntegrityError:
+        await session.rollback()
+        raise HTTPException(
+            status_code=400,
+            detail="Ya existe otro asociado registrado con este número de documento o correo electrónico."
+        )
     
     # Recargar con relaciones
     refreshed = await session.exec(query)

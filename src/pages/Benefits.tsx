@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import ScrollReveal from "@/components/ScrollReveal";
 import { contactInfo, eventHighlights } from "@/data/site";
 import defaultHeroBg from "@/assets/hero/inner-hero-office.jpg";
+import { eventsService } from "@/services";
+import type { EventOut } from "@/lib/api-types";
 import {
   ArrowLeft,
   ArrowRight,
@@ -132,6 +134,21 @@ const Benefits = () => {
     );
   const goToNext = () =>
     setGalleryIndex((current) => (current + 1) % galleryImages.length);
+
+  const [remoteEvents, setRemoteEvents] = useState<EventOut[]>([]);
+
+  useEffect(() => {
+    eventsService
+      .list({ limit: 20 })
+      .then((data) => {
+        if (data && data.length > 0) {
+          setRemoteEvents(data);
+        }
+      })
+      .catch((err) => {
+        console.warn("Backend events no disponible, usando locales:", err);
+      });
+  }, []);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const heroBgRef = useRef<HTMLDivElement>(null);
@@ -304,10 +321,59 @@ const Benefits = () => {
           </ScrollReveal>
 
           <div className="mx-auto grid max-w-3xl grid-cols-1 gap-8">
+            {/* Eventos dinámicos publicados desde el panel de administración */}
+            {remoteEvents.map((event, index) => (
+              <ScrollReveal
+                key={`remote-${event.id}`}
+                delay={index * 0.08}
+                className="overflow-hidden rounded-lg border border-border bg-card shadow-sm transition-all hover:-translate-y-1 hover:shadow-corporate"
+              >
+                {event.banner_url && (
+                  <div className="bg-white p-3">
+                    <img
+                      src={event.banner_url}
+                      alt={event.title}
+                      className="mx-auto max-h-[720px] w-full object-contain"
+                    />
+                  </div>
+                )}
+                <div className="border-t border-border bg-background p-6">
+                  <div className="flex flex-wrap items-center gap-2 mb-2">
+                    <span className="rounded bg-accent/15 px-2.5 py-0.5 text-xs font-bold text-accent-dark">
+                      {event.event_type}
+                    </span>
+                    <span className="text-xs font-semibold text-muted-foreground">
+                      📅 {new Date(event.event_date).toLocaleDateString("es-PE", {
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric",
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
+                    </span>
+                  </div>
+                  <h3 className="text-xl font-extrabold text-corporate mb-2">{event.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-4">{event.description}</p>
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between border-t border-border/60 pt-4">
+                    <span className="text-xs font-bold uppercase tracking-wider text-primary">
+                      {event.location_or_link ? `📍 ${event.location_or_link}` : "Convocatoria Abierta"}
+                    </span>
+                    <Button asChild variant="accent">
+                      <Link to={`/contacto?service=${encodeURIComponent(event.title)}`}>
+                        Quiero participar
+                        <ArrowRight className="h-4 w-4 ml-1" />
+                      </Link>
+                    </Button>
+                  </div>
+                </div>
+              </ScrollReveal>
+            ))}
+
+            {/* Eventos destacados institucionales */}
             {eventHighlights.map((event, index) => (
               <ScrollReveal
                 key={event.title}
-                delay={index * 0.08}
+                delay={(remoteEvents.length + index) * 0.08}
                 className="overflow-hidden rounded-lg border border-border bg-card shadow-sm transition-all hover:-translate-y-1 hover:shadow-corporate"
               >
                 <div className="bg-white p-3">

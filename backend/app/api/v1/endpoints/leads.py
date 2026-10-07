@@ -54,7 +54,7 @@ async def create_public_lead(
 
 @router.get("", response_model=List[LeadOut])
 async def list_leads(
-    is_converted: Optional[bool] = False,
+    is_converted: Optional[bool] = None,
     only_assigned: Optional[bool] = False,
     session: AsyncSession = Depends(get_session),
     current_user: User = Depends(require_role(["admin", "multifuncional"]))
