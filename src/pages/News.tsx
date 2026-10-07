@@ -1,22 +1,31 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import ScrollReveal from "@/components/ScrollReveal";
+import { gsap } from "gsap";
 import { contactInfo } from "@/data/site";
 import {
   ArrowRight,
+  BookOpen,
   CalendarDays,
+  FileText,
+  Lightbulb,
   Maximize2,
   MessageCircle,
   Newspaper,
   Sparkles,
+  TrendingUp,
   X,
 } from "lucide-react";
+import ScrollReveal from "@/components/ScrollReveal";
+import { Button } from "@/components/ui/button";
+import newsHeroBg from "@/assets/hero/news-hero-press.jpg";
+import { newsService } from "@/services";
 
 import flyer1 from "@/assets/flayers-Noticias empresariales/1.png";
 import flyer2 from "@/assets/flayers-Noticias empresariales/2.png";
 import flyer3 from "@/assets/flayers-Noticias empresariales/3.png";
 import flyer4 from "@/assets/flayers-Noticias empresariales/4.png";
+import flyerInnovation from "@/assets/flayers-Noticias empresariales/Corporate_flyer_for_business_inn…_2K_20260929112835.jpg";
+import flyerGnv from "@/assets/flayers-Noticias empresariales/Invitación Foro GNV Ica 2026_page-0001.jpg";
 
 interface NewsFlyer {
   id: number;
@@ -32,6 +41,30 @@ interface NewsFlyer {
 const flyers: NewsFlyer[] = [
   {
     id: 1,
+    image: flyerInnovation,
+    category: "Innovación & Emprendimiento",
+    tag: "Centro Empresarial",
+    title: "Concursos Regionales de Innovación — Edición 2",
+    description:
+      "Sesión del Grupo Impulsor para coordinar y desplegar los Concursos Regionales de Innovación en su segunda edición vía Microsoft Teams.",
+    date: "Lunes 28 de Septiembre | 4:00 p.m.",
+    whatsappMessage:
+      "Hola, deseo más información sobre los Concursos Regionales de Innovación Edición 2.",
+  },
+  {
+    id: 2,
+    image: flyerGnv,
+    category: "Foro Empresarial & Sostenibilidad",
+    tag: "Contugas & CIP Ica",
+    title: "Foro GNV Ica 2026 — Movilidad Sostenible y Competitiva",
+    description:
+      "Encuentro especializado en movilidad a Gas Natural Vehicular para la industria y agroindustria de Ica. Jornada presencial con cupos limitados en el Colegio de Ingenieros del Perú - CD Ica.",
+    date: "Miércoles 30 de Setiembre | Presencial",
+    whatsappMessage:
+      "Hola, deseo inscribirme en el Foro GNV Ica 2026 sobre movilidad a Gas Natural.",
+  },
+  {
+    id: 3,
     image: flyer1,
     category: "Evento Académico",
     tag: "Cámara de Comercio de Ica",
@@ -43,7 +76,7 @@ const flyers: NewsFlyer[] = [
       "Hola, deseo más información sobre el II Encuentro Académico a otro nivel.",
   },
   {
-    id: 2,
+    id: 4,
     image: flyer2,
     category: "Networking & Gastronomía",
     tag: "La Caravedo & Portón",
@@ -55,7 +88,7 @@ const flyers: NewsFlyer[] = [
       "Hola, deseo información sobre la Cena by Portón IX Edición en La Caravedo.",
   },
   {
-    id: 3,
+    id: 5,
     image: flyer3,
     category: "Publicación Institucional",
     tag: "Revista Asociados",
@@ -67,7 +100,7 @@ const flyers: NewsFlyer[] = [
       "Hola, deseo acceder a la edición completa de la Revista Empresarial Asociados.",
   },
   {
-    id: 4,
+    id: 6,
     image: flyer4,
     category: "Alianza Estratégica",
     tag: "Equifax & Infocorp",
@@ -82,6 +115,36 @@ const flyers: NewsFlyer[] = [
 
 const News = () => {
   const [selectedFlyer, setSelectedFlyer] = useState<NewsFlyer | null>(null);
+  const [flyerList, setFlyerList] = useState<NewsFlyer[]>(flyers);
+
+  useEffect(() => {
+    newsService
+      .list({ limit: 20 })
+      .then((remoteNews) => {
+        if (remoteNews && remoteNews.length > 0) {
+          const formatted: NewsFlyer[] = remoteNews.map((item) => ({
+            id: item.id,
+            image: item.flyer_url,
+            category: item.category || "Noticia Empresarial",
+            tag: item.tag || "Oficial",
+            title: item.title,
+            description: item.summary,
+            date: new Date(item.published_at).toLocaleDateString("es-PE", {
+              day: "numeric",
+              month: "short",
+              year: "numeric",
+            }),
+            whatsappMessage:
+              item.whatsapp_cta_message ||
+              `Hola, deseo información sobre la noticia: ${item.title}`,
+          }));
+          setFlyerList([...formatted, ...flyers]);
+        }
+      })
+      .catch((err) => {
+        console.warn("Backend news no disponible, usando afiches locales:", err);
+      });
+  }, []);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -99,59 +162,163 @@ const News = () => {
     };
   }, [selectedFlyer]);
 
+  const containerRef = useRef<HTMLDivElement>(null);
+  const heroBgRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const heroTl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+      if (heroBgRef.current) {
+        gsap.fromTo(
+          heroBgRef.current,
+          { opacity: 0, scale: 1.1 },
+          { opacity: 1, scale: 1, duration: 1.8, ease: "sine.out" },
+        );
+      }
+
+      heroTl.fromTo(
+        ".news-hero-lift",
+        { y: 38, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1.0,
+          stagger: 0.12,
+          ease: "power3.out",
+        },
+        0.1,
+      );
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <>
-      {/* ─── HERO ─── */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-primary-dark via-primary to-primary-dark pb-16 pt-36 text-white md:pb-24 md:pt-48">
-        <div className="pointer-events-none absolute -right-20 -top-20 h-96 w-96 rounded-full bg-accent/15 blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-20 -left-20 h-96 w-96 rounded-full bg-white/10 blur-3xl" />
+    <div
+      ref={containerRef}
+      className="relative w-full overflow-hidden bg-background"
+    >
+      {/* ─── HERO: NOTICIAS & COMUNICADOS ─── */}
+      <section className="relative w-full min-h-screen min-h-[100dvh] flex flex-col justify-center overflow-hidden bg-gradient-to-br from-[#0c3f30] via-[#105340] to-[#093527] text-white pt-28 pb-12 sm:pt-32 sm:pb-14 md:pt-36 md:pb-16">
+        {/* Background photography on right with smooth gradient mask */}
+        <div
+          ref={heroBgRef}
+          className="pointer-events-none absolute inset-0 overflow-hidden will-change-transform"
+        >
+          <img
+            src={newsHeroBg}
+            alt="Noticias y Comunicados Oficiales"
+            className="h-full w-full object-cover object-center lg:object-right opacity-25 lg:opacity-40 [mask-image:linear-gradient(to_right,transparent_0%,transparent_30%,black_80%)] [-webkit-mask-image:linear-gradient(to_right,transparent_0%,transparent_30%,black_80%)]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0c3f30] via-transparent to-transparent lg:w-1/2" />
+        </div>
+
+        {/* Decorative ambient glowing lines */}
+        <svg
+          className="pointer-events-none absolute inset-0 h-full w-full opacity-20"
+          viewBox="0 0 1440 600"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M-100 480 C 300 400, 600 580, 1000 320 C 1200 200, 1400 250, 1600 120"
+            stroke="#F59E0B"
+            strokeWidth="1.5"
+            strokeDasharray="4 4"
+          />
+          <path
+            d="M-50 560 C 400 480, 700 620, 1100 360 C 1300 220, 1450 280, 1650 180"
+            stroke="#10B981"
+            strokeWidth="1.5"
+          />
+        </svg>
+
+        {/* Ambient glow halos */}
+        <div className="pointer-events-none absolute -left-20 top-1/4 h-80 w-80 rounded-full bg-primary/20 blur-[100px]" />
+        <div className="pointer-events-none absolute right-10 bottom-10 h-72 w-72 rounded-full bg-accent/15 blur-[90px]" />
 
         <div className="container relative z-10 mx-auto px-6 lg:px-12">
-          <ScrollReveal direction="left">
-            <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-accent backdrop-blur">
+          <div className="max-w-3xl lg:max-w-4xl">
+            {/* Pill Badge */}
+            <div className="news-hero-lift inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-accent backdrop-blur-md">
               <Newspaper className="h-4 w-4" />
-              Noticias Empresariales
+              <span>Noticias &amp; Comunicados</span>
             </div>
-            <h1 className="mt-4 max-w-3xl text-4xl font-extrabold leading-tight text-white md:text-5xl lg:text-6xl">
-              Comunicados, eventos y actualidad de nuestra red
+
+            {/* Main Headline */}
+            <h1 className="news-hero-lift mt-5 text-3xl font-extrabold leading-[1.15] tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
+              Información estratégica y{" "}
+              <span className="relative inline-block text-accent pb-1 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-1 after:rounded-full after:bg-gradient-to-r after:from-accent after:via-accent-light after:to-transparent">
+                actualidad empresarial
+              </span>
             </h1>
-            <p className="mt-5 max-w-2xl text-lg leading-8 text-white/85">
-              Accede a los comunicados oficiales, convocatorias, convenios y
-              actividades desarrolladas por el Centro Empresarial y nuestros
-              aliados estratégicos.
+
+            {/* Description */}
+            <p className="news-hero-lift mt-5 text-base leading-relaxed text-white/85 sm:text-lg sm:leading-8 max-w-2xl">
+              Accede a comunicados oficiales, foros de desarrollo económico,
+              alianzas y publicaciones clave del ecosistema corporativo en Ica
+              y la región.
             </p>
-            <div className="mt-8 flex flex-wrap items-center gap-4">
-              <Button asChild size="lg" variant="accent">
+
+            {/* Action Buttons */}
+            <div className="news-hero-lift mt-8 flex flex-wrap items-center gap-3 sm:gap-4">
+              <Button
+                asChild
+                size="lg"
+                variant="accent"
+                className="h-12 px-7 text-sm font-bold shadow-lg shadow-accent/20 transition-all duration-300 hover:scale-105"
+              >
                 <a
                   href={`https://wa.me/${contactInfo.whatsapp}?text=${encodeURIComponent(
-                    "Hola, deseo recibir las noticias y comunicados del Centro Empresarial."
+                    "Hola, deseo recibir las noticias y comunicados oficiales del Centro Empresarial.",
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="gap-2"
+                  className="gap-2.5"
                 >
                   <MessageCircle className="h-5 w-5" />
-                  Recibir boletín por WhatsApp
+                  <span>Recibir boletín WhatsApp</span>
+                  <ArrowRight className="h-4 w-4" />
                 </a>
               </Button>
+
               <Button
                 asChild
                 size="lg"
                 variant="outline"
-                className="border-white/30 bg-white/10 text-white hover:bg-white hover:text-primary"
+                className="h-12 border-white/25 bg-white/10 px-6 text-sm font-semibold text-white backdrop-blur transition-all duration-300 hover:bg-white hover:text-primary-dark"
               >
-                <Link to="/contacto" className="gap-2">
-                  Contactar
-                  <ArrowRight className="h-5 w-5" />
-                </Link>
+                <a href="#boletin-afiches" className="gap-2">
+                  <span>Ver afiches y noticias</span>
+                  <ArrowRight className="h-4 w-4" />
+                </a>
               </Button>
             </div>
-          </ScrollReveal>
+
+            {/* Bottom 3 Quick Highlights */}
+            <div className="news-hero-lift relative mt-12 pt-6 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl">
+              <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-white/30 via-white/15 to-transparent" />
+              <div className="flex items-center gap-2.5 text-xs sm:text-sm font-medium text-white/90">
+                <FileText className="h-4 w-4 shrink-0 text-accent" />
+                <span>Comunicados oficiales</span>
+              </div>
+              <div className="flex items-center gap-2.5 text-xs sm:text-sm font-medium text-white/90">
+                <TrendingUp className="h-4 w-4 shrink-0 text-accent" />
+                <span>Foros e innovación</span>
+              </div>
+              <div className="flex items-center gap-2.5 text-xs sm:text-sm font-medium text-white/90">
+                <Sparkles className="h-4 w-4 shrink-0 text-accent" />
+                <span>Publicaciones clave</span>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* ─── FLYERS GRID (2-COLUMN VERTICAL FEED) ─── */}
-      <section className="bg-background py-14 md:py-20">
+      <section id="boletin-afiches" className="bg-background py-14 md:py-20">
         <div className="container mx-auto px-6 lg:px-12">
           <ScrollReveal className="mb-12 flex flex-col justify-between gap-4 md:flex-row md:items-end">
             <div>
@@ -170,15 +337,19 @@ const News = () => {
 
           {/* 2 per row, vertical stacking */}
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:gap-10">
-            {flyers.map((flyer, index) => {
+            {flyerList.map((flyer, index) => {
               const isLastOdd =
-                index === flyers.length - 1 && flyers.length % 2 !== 0;
+                index === flyerList.length - 1 && flyerList.length % 2 !== 0;
 
               return (
                 <ScrollReveal
                   key={flyer.id}
                   delay={index * 0.07}
-                  className={isLastOdd ? "md:col-span-2 md:mx-auto md:max-w-xl w-full" : "w-full"}
+                  className={
+                    isLastOdd
+                      ? "md:col-span-2 md:mx-auto md:max-w-xl w-full"
+                      : "w-full"
+                  }
                 >
                   <div className="group flex h-full flex-col justify-between overflow-hidden rounded-[1.75rem] border border-border/80 bg-card shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/40 hover:shadow-corporate">
                     {/* Flyer Image Container */}
@@ -236,10 +407,14 @@ const News = () => {
                           <Maximize2 className="h-4 w-4 text-primary" />
                           Ver completo
                         </Button>
-                        <Button asChild variant="accent" className="flex-1 gap-2">
+                        <Button
+                          asChild
+                          variant="accent"
+                          className="flex-1 gap-2"
+                        >
                           <a
                             href={`https://wa.me/${contactInfo.whatsapp}?text=${encodeURIComponent(
-                              flyer.whatsappMessage
+                              flyer.whatsappMessage,
                             )}`}
                             target="_blank"
                             rel="noopener noreferrer"
@@ -320,7 +495,9 @@ const News = () => {
                   <CalendarDays className="h-3.5 w-3.5 text-accent" />
                   <span>{selectedFlyer.date}</span>
                   <span className="text-muted-foreground">•</span>
-                  <span className="text-muted-foreground">{selectedFlyer.category}</span>
+                  <span className="text-muted-foreground">
+                    {selectedFlyer.category}
+                  </span>
                 </div>
 
                 <h3 className="mt-2 text-2xl font-extrabold text-corporate">
@@ -335,7 +512,7 @@ const News = () => {
                   <Button asChild variant="accent">
                     <a
                       href={`https://wa.me/${contactInfo.whatsapp}?text=${encodeURIComponent(
-                        selectedFlyer.whatsappMessage
+                        selectedFlyer.whatsappMessage,
                       )}`}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -357,7 +534,7 @@ const News = () => {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

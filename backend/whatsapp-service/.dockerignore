@@ -1,0 +1,5 @@
+node_modules/
+whatsapp-session/
+.git/
+.gitignore
+npm-debug.log*

@@ -17,7 +17,11 @@ import galleryCourseGroup from "@/assets/galeria/16 de septiembre 2025.jpg";
 import galleryTraining from "@/assets/galeria/2025.jpg";
 import galleryInnovation from "@/assets/galeria/2026.jpg";
 import galleryMeeting from "@/assets/galeria/5 de septiembre 2025.jpg";
-import logoIntedya from "@/assets/logos/Logo_Intedya_Alta Blanco.jpeg";
+import logoIntedya from "@/assets/logos/Logo_Intedya_Alta Blanco.png";
+import logoPiskus from "@/assets/logos/300627995_453823640094812_1102513949734375755_n.png";
+import logoEssalud from "@/assets/logos/channels4_profile.png";
+import logoRumiWasi from "@/assets/logos/709735391_979083064823402_4736671039494979448_n.png";
+import logoSaborMilagroso from "@/assets/logos/313335029_493265452839010_9009473707098014598_n.png";
 import eventParacas from "@/assets/eventos/paracas.jpg";
 import eventSeguridad from "@/assets/eventos/seguridad.jpg";
 
@@ -216,7 +220,7 @@ export const partners = [
     logo: logoIntedya,
     logoScale: 1,
     summary: "Formacion, gestion empresarial y mejora continua con alcance internacional.",
-    darkLogo: true,
+    darkLogo: false,
     benefits: [
       "Acceso a conocimiento y buenas practicas empresariales de alcance internacional.",
       "Capacitacion especializada en gestion, calidad, seguridad y mejora continua.",
@@ -226,7 +230,7 @@ export const partners = [
   },
   {
     name: "Piskus",
-    logo: "https://centroempresarialica.com/media/piskus.jpg",
+    logo: logoPiskus,
     logoScale: 1,
     summary: "Beneficios comerciales para asociados y actividades de integracion.",
     benefits: [
@@ -237,7 +241,7 @@ export const partners = [
   },
   {
     name: "ESSALUD",
-    logo: "https://centroempresarialica.com/media/Essalud.png",
+    logo: logoEssalud,
     logoScale: 1,
     summary: "Articulacion institucional orientada a bienestar, prevencion y comunidad.",
     benefits: [
@@ -248,8 +252,8 @@ export const partners = [
   },
   {
     name: "Rumi Wasi",
-    logo: "https://centroempresarialica.com/media/rumi-wasi.jpg",
-    logoScale: 1.2,
+    logo: logoRumiWasi,
+    logoScale: 1,
     summary: "Experiencias y espacios para integracion, reuniones y actividades corporativas.",
     benefits: [
       "Beneficios preferenciales para actividades de integracion.",
@@ -259,8 +263,8 @@ export const partners = [
   },
   {
     name: "El Sabor Milagroso",
-    logo: "https://centroempresarialica.com/media/sabor-milagroso.jpg",
-    logoScale: 1.6,
+    logo: logoSaborMilagroso,
+    logoScale: 1,
     summary: "Beneficios gastronomicos para asociados, reuniones y eventos.",
     benefits: [
       "Condiciones especiales para consumos o coordinaciones de asociados.",
@@ -302,8 +306,8 @@ export const associationSteps = [
 ];
 
 export const executiveServices = [
-  { icon: GraduationCap, label: "Capacitaciones y cursos" },
-  { icon: Handshake, label: "Aliados estrategicos" },
-  { icon: BriefcaseBusiness, label: "Asesoria empresarial" },
-  { icon: CalendarDays, label: "Eventos y webinars" },
+  { icon: GraduationCap, label: "Capacitaciones y cursos", href: "/servicios" },
+  { icon: Handshake, label: "Aliados estrategicos", href: "/aliados" },
+  { icon: BriefcaseBusiness, label: "Asesoria empresarial", href: "/asesoria-tesis" },
+  { icon: CalendarDays, label: "Eventos y webinars", href: "/eventos" },
 ];

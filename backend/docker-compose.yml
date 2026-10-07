@@ -1,0 +1,45 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: centroempresarial_api
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      - PYTHONUNBUFFERED=1
+      # En red Docker interna se comunica con el servicio de WhatsApp por su nombre de servicio
+      - WHATSAPP_SERVICE_URL=http://whatsapp_service:3001
+    volumes:
+      # Montaje de volumen para recarga en vivo (hot-reload) durante desarrollo
+      - .:/app
+      - static_data:/app/static/uploads
+    networks:
+      - ce_network
+
+  whatsapp_service:
+    build:
+      context: ./whatsapp-service
+      dockerfile: Dockerfile
+    container_name: centroempresarial_whatsapp
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    environment:
+      - INTERNAL_WHATSAPP_TOKEN=ce_internal_secret_token_wa_9981
+    volumes:
+      # Persistencia de la sesión de WhatsApp Web en el host
+      - ./whatsapp-service/whatsapp-session:/app/whatsapp-session
+      - ./whatsapp-service/index.js:/app/index.js
+    networks:
+      - ce_network
+
+volumes:
+  static_data:
+
+networks:
+  ce_network:
+    driver: bridge

@@ -22,3 +22,16 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Python backend
+backend/venv/
+backend/.env
+backend/.pytest_cache/
+backend/__pycache__/
+**/__pycache__/
+*.py[cod]
+backend/static/uploads/
+
+# WhatsApp Service
+backend/whatsapp-service/node_modules/
+backend/whatsapp-service/whatsapp-session/

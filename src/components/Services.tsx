@@ -17,6 +17,10 @@ import {
   UserRound,
 } from "lucide-react";
 import servicesImage from "@/assets/hero/services-header.jpg";
+import logoPiskus from "@/assets/logos/300627995_453823640094812_1102513949734375755_n.png";
+import logoEssalud from "@/assets/logos/channels4_profile.png";
+import logoRumiWasi from "@/assets/logos/709735391_979083064823402_4736671039494979448_n.png";
+import logoSaborMilagroso from "@/assets/logos/313335029_493265452839010_9009473707098014598_n.png";
 
 // Galería institucional
 import gal01 from "@/assets/galeria/2013.jpg";
@@ -223,22 +227,22 @@ const courses = [
 ];
 
 const partners = [
-  { name: "Piskus", logo: "https://centroempresarialica.com/media/piskus.jpg" },
+  { name: "Piskus", logo: logoPiskus },
   {
     name: "ESSALUD",
-    logo: "https://centroempresarialica.com/media/Essalud.png",
+    logo: logoEssalud,
   },
   {
     name: "Rumi Wasi",
-    logo: "https://centroempresarialica.com/media/rumi-wasi.jpg",
+    logo: logoRumiWasi,
   },
   {
     name: "El Sabor Milagroso",
-    logo: "https://centroempresarialica.com/media/sabor-milagroso.jpg",
+    logo: logoSaborMilagroso,
   },
   {
     name: "Cámara de Comercio de Ica",
-    logo: "https://centroempresarialica.com/media/CamaraLogo.jpg",
+    logo: "https://camaraica.org.pe/wp-content/uploads/2026/03/LOGO-FULL-COLOR-scaled.webp",
   },
 ];
 

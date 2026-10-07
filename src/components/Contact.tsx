@@ -1,367 +1,652 @@
-import { useEffect, useMemo, useState } from "react";
+import React, { useState, useEffect, useRef, FormEvent } from "react";
 import { useSearchParams } from "react-router-dom";
-import { motion } from "framer-motion";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import ScrollReveal from "@/components/ScrollReveal";
-import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/hooks/use-toast";
-import { contactInfo } from "@/data/site";
-import { Building2, Mail, MapPin, MessageCircle, Phone, Send, UserCheck } from "lucide-react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import advisorImg from "@/assets/hero/asesora-contacto.png";
+import {
+  Sparkles,
+  ArrowRight,
+  MessageCircle,
+  Phone,
+  Mail,
+  MapPin,
+  Building2,
+  FileText,
+  UserCheck,
+  Send,
+  Headphones,
+  Users,
+  Loader2,
+  CheckCircle2,
+} from "lucide-react";
+import { leadsService } from "@/services";
 
-const interestedTypes = ["Estudiante", "Profesional", "Corporacion", "Empresa"];
-const membershipTypes = [
-  "Estudiante - S/ 360 anual",
-  "Profesional - S/ 480 anual",
-  "Empresarial - S/ 1,500 anual",
-  "Evaluacion mensual bajo consulta",
-  "Necesito orientacion",
-];
+gsap.registerPlugin(ScrollTrigger);
 
-const Contact = () => {
-  const { toast } = useToast();
+interface FormDataState {
+  name: string;
+  phone: string;
+  email: string;
+  profileType: string;
+  serviceInterest: string;
+  message: string;
+}
+
+const initialFormData: FormDataState = {
+  name: "",
+  phone: "",
+  email: "",
+  profileType: "Profesional",
+  serviceInterest: "Asesoría de Tesis",
+  message: "",
+};
+
+const Contact: React.FC = () => {
   const [searchParams] = useSearchParams();
+  const [formData, setFormData] = useState<FormDataState>(initialFormData);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "fallback">("idle");
 
-  const [formData, setFormData] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    interestedType: "",
-    membership: "",
-    message: "",
-  });
-
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const leftColRef = useRef<HTMLDivElement>(null);
+  const formCardRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
+  const bottomGridRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const planParam = searchParams.get("plan")?.toLowerCase();
-    if (!planParam) return;
+    const serviceParam = searchParams.get("servicio")?.toLowerCase();
 
-    if (planParam.includes("estudiante")) {
-      setFormData((prev) => ({
-        ...prev,
-        interestedType: prev.interestedType || "Estudiante",
-        membership: prev.membership || "Estudiante - S/ 360 anual",
-      }));
-    } else if (planParam.includes("profesional")) {
-      setFormData((prev) => ({
-        ...prev,
-        interestedType: prev.interestedType || "Profesional",
-        membership: prev.membership || "Profesional - S/ 480 anual",
-      }));
-    } else if (planParam.includes("empresa") || planParam.includes("corporaci")) {
-      setFormData((prev) => ({
-        ...prev,
-        interestedType: prev.interestedType || "Empresa",
-        membership: prev.membership || "Empresarial - S/ 1,500 anual",
-      }));
+    if (planParam) {
+      if (planParam.includes("estudiante")) {
+        setFormData((prev) => ({ ...prev, profileType: "Estudiante" }));
+      } else if (planParam.includes("profesional")) {
+        setFormData((prev) => ({ ...prev, profileType: "Profesional" }));
+      } else if (
+        planParam.includes("empresa") ||
+        planParam.includes("corporaci")
+      ) {
+        setFormData((prev) => ({
+          ...prev,
+          profileType: "Empresa",
+          serviceInterest: "Soluciones Empresariales",
+        }));
+      }
+    }
+
+    if (serviceParam) {
+      if (serviceParam.includes("tesis") || serviceParam.includes("asesoria")) {
+        setFormData((prev) => ({
+          ...prev,
+          serviceInterest: "Asesoría de Tesis",
+        }));
+      } else if (
+        serviceParam.includes("curso") ||
+        serviceParam.includes("capacitacion")
+      ) {
+        setFormData((prev) => ({
+          ...prev,
+          serviceInterest: "Cursos de Capacitación",
+        }));
+      } else if (
+        serviceParam.includes("empresa") ||
+        serviceParam.includes("solucion")
+      ) {
+        setFormData((prev) => ({
+          ...prev,
+          serviceInterest: "Soluciones Empresariales",
+        }));
+      }
     }
   }, [searchParams]);
 
-  const whatsappPreview = useMemo(() => {
-    const lines = [
-      "👋 *Hola, deseo recibir información para asociarme al Centro Empresarial:*",
-      "",
-      `👤 *Nombre / Razón social:* ${formData.name.trim() || "-"}`,
-      `📱 *Teléfono:* ${formData.phone.trim() || "-"}`,
-      `✉️ *Correo:* ${formData.email.trim() || "-"}`,
-      `🎯 *Tipo de interesado:* ${formData.interestedType || "-"}`,
-      `💳 *Membresía de interés:* ${formData.membership || "-"}`,
-    ];
-    if (formData.message.trim()) {
-      lines.push(`💬 *Consulta adicional:* ${formData.message.trim()}`);
-    }
-    return lines.join("\n");
-  }, [formData]);
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Bloque izquierdo entrando desde la izquierda
+      if (leftColRef.current) {
+        gsap.fromTo(
+          leftColRef.current,
+          { opacity: 0, x: -30 },
+          { opacity: 1, x: 0, duration: 0.9, ease: "power2.out" },
+        );
+      }
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = event.target;
+      // Imagen de asesora entrando en el centro con fade y suave lift
+      if (imageRef.current) {
+        gsap.fromTo(
+          imageRef.current,
+          { opacity: 0, y: 30 },
+          { opacity: 1, y: 0, duration: 0.95, delay: 0.1, ease: "power2.out" },
+        );
+      }
+
+      // Tarjeta del formulario entrando desde la derecha
+      if (formCardRef.current) {
+        gsap.fromTo(
+          formCardRef.current,
+          { opacity: 0, x: 30 },
+          { opacity: 1, x: 0, duration: 0.9, delay: 0.18, ease: "power2.out" },
+        );
+      }
+
+      // Tarjetas inferiores con ScrollTrigger y stagger 0.15s
+      if (bottomGridRef.current) {
+        gsap.fromTo(
+          bottomGridRef.current.children,
+          { opacity: 0, y: 35 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.75,
+            stagger: 0.15,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: bottomGridRef.current,
+              start: "top 85%",
+            },
+          },
+        );
+      }
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >,
+  ) => {
+    const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    if (errors[name]) {
-      setErrors((prev) => {
-        const rest = { ...prev };
-        delete rest[name];
-        return rest;
-      });
-    }
   };
 
-  const validate = () => {
-    const newErrors: Record<string, string> = {};
-
-    if (!formData.name.trim()) {
-      newErrors.name = "Ingresa tu nombre o razón social.";
-    } else if (formData.name.trim().length < 3) {
-      newErrors.name = "El nombre debe tener al menos 3 caracteres.";
-    }
-
-    const digits = formData.phone.replace(/\D/g, "");
-    if (!formData.phone.trim()) {
-      newErrors.phone = "Ingresa tu teléfono o WhatsApp.";
-    } else if (digits.length < 9) {
-      newErrors.phone = "Ingresa un número válido de al menos 9 dígitos.";
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!formData.email.trim()) {
-      newErrors.email = "Ingresa tu correo electrónico.";
-    } else if (!emailRegex.test(formData.email.trim())) {
-      newErrors.email = "Ingresa un correo electrónico válido.";
-    }
-
-    if (!formData.interestedType) {
-      newErrors.interestedType = "Selecciona el tipo de interesado.";
-    }
-
-    if (!formData.membership) {
-      newErrors.membership = "Selecciona la membresía de interés.";
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-
-    if (!validate()) {
-      toast({
-        title: "Completa los datos requeridos",
-        description: "Revisa los campos destacados en rojo.",
-        variant: "destructive",
-      });
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    if (!formData.name.trim() || !formData.phone.trim() || !formData.email.trim()) {
+      alert("Por favor completa nombre, teléfono y correo electrónico.");
       return;
     }
 
-    const cleanRecipient = contactInfo.whatsapp.replace(/\D/g, "");
-    const whatsappUrl = `https://wa.me/${cleanRecipient}?text=${encodeURIComponent(whatsappPreview)}`;
-    const popup = window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    setIsSubmitting(true);
 
-    if (!popup || popup.closed || typeof popup.closed === "undefined") {
-      window.location.href = whatsappUrl;
+    // 1. Guardar prospecto en la base de datos a través del backend FastAPI
+    try {
+      const validTypes: Array<"Estudiante" | "Profesional" | "Empresa"> = [
+        "Estudiante",
+        "Profesional",
+        "Empresa",
+      ];
+      const interested_type = validTypes.includes(formData.profileType as any)
+        ? (formData.profileType as "Estudiante" | "Profesional" | "Empresa")
+        : "Profesional";
+
+      await leadsService.create({
+        full_name: formData.name.trim(),
+        phone: formData.phone.trim(),
+        email: formData.email.trim(),
+        interested_type,
+        target_plan: formData.serviceInterest || undefined,
+        message: formData.message || undefined,
+      });
+      setSubmitStatus("success");
+    } catch (err) {
+      // Si el backend no está corriendo aún en local, no bloqueamos al usuario
+      console.warn(
+        "Aviso: Backend no respondió o no disponible. Procediendo con WhatsApp directo.",
+        err
+      );
+      setSubmitStatus("fallback");
+    } finally {
+      setIsSubmitting(false);
+      setFormSubmitted(true);
     }
 
-    toast({
-      title: "Solicitud preparada",
-      description: "Se abrió WhatsApp con tu mensaje de inscripción.",
+    // 2. Abrir WhatsApp para atención directa y personalizada
+    const messageLines = [
+      "¡Hola Centro Empresarial! Deseo solicitar orientación personalizada:",
+      `• Nombre / Razón Social: ${formData.name}`,
+      `• Teléfono / WhatsApp: ${formData.phone}`,
+      formData.email ? `• Correo electrónico: ${formData.email}` : null,
+      `• Tipo de perfil: ${formData.profileType}`,
+      `• Servicio de interés: ${formData.serviceInterest}`,
+      formData.message ? `• Mensaje / Consulta: ${formData.message}` : null,
+    ].filter(Boolean);
+
+    const fullMessage = messageLines.join("\n");
+    const waUrl = `https://wa.me/51906491859?text=${encodeURIComponent(fullMessage)}`;
+
+    window.open(waUrl, "_blank", "noopener,noreferrer");
+  };
+
+  const scrollToForm = () => {
+    formCardRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
     });
   };
 
   return (
-    <section id="contacto" className="bg-muted/35 pb-14 pt-28 md:pb-20 md:pt-36">
-      <div className="container mx-auto px-6 lg:px-12">
-        <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 0.55 }}
-          >
-            <Badge variant="outline" className="mb-4 text-primary">
-              Ficha de inscripcion
-            </Badge>
-            <h1 className="max-w-3xl text-4xl font-extrabold leading-tight text-corporate md:text-6xl">
-              Solicita orientacion y recibe una respuesta directa
-            </h1>
-            <p className="mt-5 max-w-2xl text-lg leading-8 text-muted-foreground">
-              Completa los datos principales y la web preparara un mensaje profesional para continuar por WhatsApp con el asesor.
-            </p>
+    <div ref={sectionRef} className="relative w-full bg-[#f8f9fa]">
+      {/* ─── HERO DE CONTACTO (100vh - HEADER) ─── */}
+      <section className="relative w-full min-h-screen min-h-[100dvh] flex flex-col justify-center overflow-hidden bg-[#f8f9fa] pt-24 pb-12 sm:pt-28 sm:pb-14 lg:pt-[104px] lg:pb-12">
+        {/* Elementos decorativos sutiles de fondo */}
+        <div className="pointer-events-none absolute -left-20 top-1/4 h-96 w-96 rounded-full bg-[#1a4a38]/5 blur-3xl" />
+        <div className="pointer-events-none absolute -right-20 top-1/2 h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
 
-            <div className="mt-8 grid gap-4 sm:grid-cols-3">
-              {[
-                { icon: UserCheck, title: "Datos claros", text: "Nombre, telefono y correo." },
-                { icon: Building2, title: "Perfil correcto", text: "Estudiante, profesional o empresa." },
-                { icon: MessageCircle, title: "Cierre directo", text: "Mensaje listo para WhatsApp." },
-              ].map((item, index) => (
-                <ScrollReveal key={item.title} delay={index * 0.07} className="rounded-lg border border-border bg-background p-5 shadow-sm">
-                  <item.icon className="mb-4 h-6 w-6 text-primary" />
-                  <h2 className="text-base font-bold text-corporate">{item.title}</h2>
-                  <p className="mt-2 text-sm text-muted-foreground">{item.text}</p>
-                </ScrollReveal>
-              ))}
+        <div className="container relative z-10 mx-auto px-6 lg:px-12 my-auto">
+          {/* ═════════════════════════════════════════════════════════════
+              COMPOSICIÓN DE 3 COLUMNAS:
+              IZQUIERDA (Contenido ~33%) | CENTRO (Persona Grande ~33%) | DERECHA (Formulario ~33%)
+             ═════════════════════════════════════════════════════════════ */}
+          <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-6 xl:gap-8">
+            {/* 1. Bloque Izquierdo: Contenido y CTA */}
+            <div
+              ref={leftColRef}
+              className="lg:col-span-4 flex flex-col justify-center"
+            >
+              {/* Badge superior */}
+              <div className="inline-flex w-fit items-center gap-2 rounded-full border border-[#1a4a38]/15 bg-[#1a4a38]/5 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#1a4a38]">
+                <span>Tu aliado en el crecimiento empresarial</span>
+              </div>
+
+              {/* Título grande y en negrita verde oscuro */}
+              <h1 className="mt-4 text-2xl sm:text-3xl lg:text-3xl xl:text-4xl font-extrabold leading-tight text-[#1a4a38] lg:leading-[1.18]">
+                Solicita orientación y recibe una respuesta directa
+              </h1>
+
+              {/* Párrafo descriptivo con tarjeta visual integrada */}
+              <div className="mt-4 rounded-2xl border border-[#1a4a38]/15 bg-white/85 p-4 shadow-sm backdrop-blur-md transition-all duration-300 hover:bg-white/95 hover:shadow-md">
+                <div className="flex items-start gap-3">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#1a4a38]/10 text-[#1a4a38]">
+                    <Sparkles className="h-4 w-4" />
+                  </div>
+                  <p className="text-xs sm:text-sm font-medium leading-relaxed text-[#1a4a38]/90">
+                    Completa los datos principales y la web preparará un mensaje
+                    profesional para continuar por WhatsApp con el asesor.
+                  </p>
+                </div>
+              </div>
+
+              {/* Botón primario verde oscuro con icono de WhatsApp */}
+              <div className="mt-6">
+                <button
+                  type="button"
+                  onClick={scrollToForm}
+                  className="group inline-flex items-center gap-2.5 rounded-xl bg-[#1a4a38] px-6 py-3.5 text-sm font-bold text-white shadow-md transition-all duration-300 hover:bg-[#13372a] hover:shadow-lg hover:-translate-y-0.5"
+                >
+                  <MessageCircle className="h-4 w-4 text-[#25D366]" />
+                  <span>Enviar por WhatsApp</span>
+                  <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+                </button>
+              </div>
             </div>
 
-            <ScrollReveal>
-            <Card className="mt-8 border-border/80 bg-primary text-primary-foreground shadow-elevated">
-              <CardContent className="p-6">
-                <h2 className="text-2xl font-bold text-white">Atencion directa</h2>
-                <div className="mt-5 space-y-4 text-white/80">
-                  <a href={`tel:${contactInfo.phone.replace(/\s/g, "")}`} className="flex items-center gap-3 transition-opacity hover:opacity-85">
-                    <Phone className="h-5 w-5 text-accent" />
-                    {contactInfo.phone}
-                  </a>
-                  <a href={`mailto:${contactInfo.email}`} className="flex items-center gap-3 transition-opacity hover:opacity-85">
-                    <Mail className="h-5 w-5 text-accent" />
-                    {contactInfo.email}
-                  </a>
-                  <a href={contactInfo.mapUrl} target="_blank" rel="noopener noreferrer" className="flex items-start gap-3 transition-opacity hover:opacity-85">
-                    <MapPin className="mt-0.5 h-5 w-5 text-accent" />
-                    {contactInfo.address}
-                  </a>
-                </div>
-              </CardContent>
-            </Card>
-            </ScrollReveal>
-          </motion.div>
+            {/* 2. Bloque Central: Persona Visible y con Gran Tamaño */}
+            <div
+              ref={imageRef}
+              className="relative z-10 flex flex-col items-center justify-end lg:col-span-4 w-full self-center lg:self-end overflow-visible pt-4 lg:pt-0"
+            >
+              {/* Círculo suave de fondo */}
+              <div className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 h-[320px] w-[320px] sm:h-[380px] sm:w-[380px] lg:h-[420px] lg:w-[420px] xl:h-[480px] xl:w-[480px] rounded-full bg-gradient-to-t from-[#105340]/15 via-[#ecf2ea] to-transparent -z-10" />
 
-          <motion.div
-            id="inscripcion"
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.55, delay: 0.08 }}
-            className="scroll-mt-32"
-          >
-            <Card className="border-border/80 shadow-elevated">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-3 text-2xl text-corporate">
-                  <MessageCircle className="h-6 w-6 text-primary" />
-                  Solicitud de membresia
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <form onSubmit={handleSubmit} noValidate className="space-y-5">
+              {/* Imagen de la asesora de gran presencia con degradado suave en la parte inferior */}
+              <img
+                src={advisorImg}
+                alt="Asesora Centro Empresarial"
+                style={{
+                  maskImage:
+                    "linear-gradient(to bottom, black 0%, black 72%, transparent 98%)",
+                  WebkitMaskImage:
+                    "linear-gradient(to bottom, black 0%, black 72%, transparent 87%)",
+                }}
+                className="relative z-10 h-[400px] sm:h-[520px] md:h-[520px] lg:h-[540px] xl:h-[600px] 2xl:h-[640px] w-auto max-w-full object-contain drop-shadow-2xl transition-transform duration-300 hover:scale-[1.02]"
+              />
+
+              {/* Puesto / Rol de la asesora */}
+              <div className="relative z-20 -mt-12 sm:-mt-16 lg:-mt-20 -translate-x-5 sm:-translate-x-8 mb-3 flex flex-col items-center text-center">
+                <div className="inline-flex items-center gap-2 rounded-full border border-[#1a4a38]/20 bg-white/95 px-4 py-1.5 shadow-md backdrop-blur-md">
+                  <span className="h-2 w-2 rounded-full bg-[#1a4a38]" />
+                  <span className="text-xs sm:text-sm font-bold text-[#1a4a38]">
+                    Líder de Gestión Empresarial y TI
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* 3. Bloque Derecho: Formulario a la Derecha */}
+            <div ref={formCardRef} className="lg:col-span-4 z-20">
+              <div className="relative rounded-2xl border border-gray-200/80 bg-white p-5 sm:p-6 lg:p-5 xl:p-6 shadow-xl">
+                {/* Cabecera del formulario */}
+                <div className="mb-4 flex items-center gap-3 border-b border-gray-100 pb-3">
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gray-100 text-[#1a4a38]">
+                    <MessageCircle className="h-4 w-4" />
+                  </div>
                   <div>
-                    <label htmlFor="name" className="mb-2 block text-sm font-semibold text-foreground">
-                      Nombre y apellidos / razón social <span className="text-destructive">*</span>
+                    <h2 className="text-lg sm:text-xl font-extrabold text-gray-900">
+                      Solicitud de membresía
+                    </h2>
+                  </div>
+                </div>
+
+                {/* Formulario */}
+                <form onSubmit={handleSubmit} className="space-y-3">
+                  {/* Nombre y apellidos / razón social * (full width) */}
+                  <div>
+                    <label
+                      htmlFor="name"
+                      className="block text-xs font-semibold text-gray-700 mb-1"
+                    >
+                      Nombre y apellidos / razón social{" "}
+                      <span className="text-red-500">*</span>
                     </label>
-                    <Input
+                    <input
+                      type="text"
                       id="name"
                       name="name"
-                      autoComplete="name"
                       required
-                      aria-required="true"
-                      aria-invalid={!!errors.name}
                       value={formData.name}
-                      onChange={handleInputChange}
+                      onChange={handleChange}
                       placeholder="Ej. Juan Pérez / Empresa SAC"
-                      className={errors.name ? "border-destructive focus-visible:ring-destructive" : ""}
+                      className="w-full rounded-xl border border-gray-200 bg-white px-3.5 py-2 text-sm text-gray-800 transition-colors placeholder:text-gray-400 focus:border-[#1a4a38] focus:outline-none focus:ring-2 focus:ring-[#1a4a38]/20"
                     />
-                    {errors.name && <p className="mt-1.5 text-xs font-medium text-destructive">{errors.name}</p>}
                   </div>
 
-                  <div className="grid gap-5 sm:grid-cols-2">
+                  {/* Grid 2 Columnas: Teléfono y Correo */}
+                  <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
                     <div>
-                      <label htmlFor="phone" className="mb-2 block text-sm font-semibold text-foreground">
-                        Teléfono o WhatsApp <span className="text-destructive">*</span>
+                      <label
+                        htmlFor="phone"
+                        className="block text-xs font-semibold text-gray-700 mb-1"
+                      >
+                        Teléfono o WhatsApp{" "}
+                        <span className="text-red-500">*</span>
                       </label>
-                      <Input
+                      <input
+                        type="tel"
                         id="phone"
                         name="phone"
-                        type="tel"
-                        inputMode="tel"
-                        autoComplete="tel"
                         required
-                        aria-required="true"
-                        aria-invalid={!!errors.phone}
                         value={formData.phone}
-                        onChange={handleInputChange}
+                        onChange={handleChange}
                         placeholder="+51 999 999 999"
-                        className={errors.phone ? "border-destructive focus-visible:ring-destructive" : ""}
+                        className="w-full rounded-xl border border-gray-200 bg-white px-3.5 py-2 text-sm text-gray-800 transition-colors placeholder:text-gray-400 focus:border-[#1a4a38] focus:outline-none focus:ring-2 focus:ring-[#1a4a38]/20"
                       />
-                      {errors.phone && <p className="mt-1.5 text-xs font-medium text-destructive">{errors.phone}</p>}
                     </div>
+
                     <div>
-                      <label htmlFor="email" className="mb-2 block text-sm font-semibold text-foreground">
-                        Correo electrónico <span className="text-destructive">*</span>
+                      <label
+                        htmlFor="email"
+                        className="block text-xs font-semibold text-gray-700 mb-1"
+                      >
+                        Correo electrónico{" "}
+                        <span className="text-red-500">*</span>
                       </label>
-                      <Input
+                      <input
+                        type="email"
                         id="email"
                         name="email"
-                        type="email"
-                        autoComplete="email"
                         required
-                        aria-required="true"
-                        aria-invalid={!!errors.email}
                         value={formData.email}
-                        onChange={handleInputChange}
+                        onChange={handleChange}
                         placeholder="tu@email.com"
-                        className={errors.email ? "border-destructive focus-visible:ring-destructive" : ""}
+                        className="w-full rounded-xl border border-gray-200 bg-white px-3.5 py-2 text-sm text-gray-800 transition-colors placeholder:text-gray-400 focus:border-[#1a4a38] focus:outline-none focus:ring-2 focus:ring-[#1a4a38]/20"
                       />
-                      {errors.email && <p className="mt-1.5 text-xs font-medium text-destructive">{errors.email}</p>}
                     </div>
                   </div>
 
-                  <div className="grid gap-5 sm:grid-cols-2">
+                  {/* Grid 2 Columnas: Tipo de interesado y Membresía de interés */}
+                  <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
                     <div>
-                      <label htmlFor="interestedType" className="mb-2 block text-sm font-semibold text-foreground">
-                        Tipo de interesado <span className="text-destructive">*</span>
+                      <label
+                        htmlFor="profileType"
+                        className="block text-xs font-semibold text-gray-700 mb-1"
+                      >
+                        Tipo de interesado{" "}
+                        <span className="text-red-500">*</span>
                       </label>
                       <select
-                        id="interestedType"
-                        name="interestedType"
-                        required
-                        aria-required="true"
-                        aria-invalid={!!errors.interestedType}
-                        value={formData.interestedType}
-                        onChange={handleInputChange}
-                        className={`h-10 w-full rounded-md border bg-background px-3 text-sm focus:outline-none focus:ring-2 ${
-                          errors.interestedType ? "border-destructive focus:ring-destructive" : "border-input focus:ring-ring"
-                        }`}
+                        id="profileType"
+                        name="profileType"
+                        value={formData.profileType}
+                        onChange={handleChange}
+                        className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-800 transition-colors focus:border-[#1a4a38] focus:outline-none focus:ring-2 focus:ring-[#1a4a38]/20"
                       >
                         <option value="">Seleccionar</option>
-                        {interestedTypes.map((type) => (
-                          <option key={type} value={type}>
-                            {type}
-                          </option>
-                        ))}
+                        <option value="Estudiante">Estudiante</option>
+                        <option value="Profesional">Profesional</option>
+                        <option value="Empresa">Empresa</option>
                       </select>
-                      {errors.interestedType && <p className="mt-1.5 text-xs font-medium text-destructive">{errors.interestedType}</p>}
                     </div>
+
                     <div>
-                      <label htmlFor="membership" className="mb-2 block text-sm font-semibold text-foreground">
-                        Membresía de interés <span className="text-destructive">*</span>
+                      <label
+                        htmlFor="serviceInterest"
+                        className="block text-xs font-semibold text-gray-700 mb-1"
+                      >
+                        Membresía de interés{" "}
+                        <span className="text-red-500">*</span>
                       </label>
                       <select
-                        id="membership"
-                        name="membership"
-                        required
-                        aria-required="true"
-                        aria-invalid={!!errors.membership}
-                        value={formData.membership}
-                        onChange={handleInputChange}
-                        className={`h-10 w-full rounded-md border bg-background px-3 text-sm focus:outline-none focus:ring-2 ${
-                          errors.membership ? "border-destructive focus:ring-destructive" : "border-input focus:ring-ring"
-                        }`}
+                        id="serviceInterest"
+                        name="serviceInterest"
+                        value={formData.serviceInterest}
+                        onChange={handleChange}
+                        className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-800 transition-colors focus:border-[#1a4a38] focus:outline-none focus:ring-2 focus:ring-[#1a4a38]/20"
                       >
                         <option value="">Seleccionar</option>
-                        {membershipTypes.map((type) => (
-                          <option key={type} value={type}>
-                            {type}
-                          </option>
-                        ))}
+                        <option value="Membresía Estudiante">
+                          Membresía Estudiante
+                        </option>
+                        <option value="Membresía Profesional">
+                          Membresía Profesional
+                        </option>
+                        <option value="Membresía Empresarial">
+                          Membresía Empresarial
+                        </option>
+                        <option value="Asesoría de Tesis">
+                          Asesoría de Tesis
+                        </option>
+                        <option value="Cursos de Capacitación">
+                          Cursos de Capacitación
+                        </option>
+                        <option value="Soluciones Empresariales">
+                          Soluciones Empresariales
+                        </option>
                       </select>
-                      {errors.membership && <p className="mt-1.5 text-xs font-medium text-destructive">{errors.membership}</p>}
                     </div>
                   </div>
 
+                  {/* Mensaje o consulta adicional */}
                   <div>
-                    <label htmlFor="message" className="mb-2 block text-sm font-semibold text-foreground">
+                    <label
+                      htmlFor="message"
+                      className="block text-xs font-semibold text-gray-700 mb-1"
+                    >
                       Mensaje o consulta adicional
                     </label>
-                    <Textarea
+                    <textarea
                       id="message"
                       name="message"
+                      rows={2}
                       value={formData.message}
-                      onChange={handleInputChange}
+                      onChange={handleChange}
                       placeholder="Cuéntanos qué necesitas o qué beneficio te interesa..."
-                      rows={5}
+                      className="w-full resize-none rounded-xl border border-gray-200 bg-white px-3.5 py-2 text-sm text-gray-800 transition-colors placeholder:text-gray-400 focus:border-[#1a4a38] focus:outline-none focus:ring-2 focus:ring-[#1a4a38]/20"
                     />
                   </div>
 
-                  <Button type="submit" variant="accent" size="lg" className="w-full text-base font-semibold shadow-md">
-                    Enviar por WhatsApp
-                    <Send className="h-4 w-4" />
-                  </Button>
+                  {/* Botón de envío ancho completo en verde oscuro corporativo */}
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="group inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#1a4a38] px-6 py-3 text-sm font-bold text-white shadow-md transition-all duration-300 hover:bg-[#13372a] hover:shadow-lg hover:-translate-y-0.5 disabled:opacity-75 disabled:cursor-not-allowed"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="h-4 w-4 animate-spin text-white" />
+                        <span>Registrando solicitud...</span>
+                      </>
+                    ) : (
+                      <>
+                        <MessageCircle className="h-4 w-4 text-[#25D366]" />
+                        <span>Enviar por WhatsApp</span>
+                        <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+                      </>
+                    )}
+                  </button>
+
+                  {formSubmitted && (
+                    <div className="flex items-center justify-center gap-1.5 text-center text-xs font-semibold text-emerald-600">
+                      <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600 shrink-0" />
+                      <span>
+                        {submitStatus === "success"
+                          ? "Solicitud registrada en el sistema y abriendo WhatsApp..."
+                          : "Abriendo conversación directa en WhatsApp..."}
+                      </span>
+                    </div>
+                  )}
                 </form>
-              </CardContent>
-            </Card>
-          </motion.div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* ─── SECCIÓN INFERIOR (Beneficios y Contacto: Grid 5 Columnas) ─── */}
+      <section className="relative w-full border-t border-gray-200/80 bg-white py-14 md:py-20">
+        <div className="container mx-auto px-6 lg:px-12">
+          {/* Subtítulo superior */}
+          <div className="mb-8">
+            <span className="text-sm font-bold tracking-wider text-gray-500">
+              — ¿Cómo podemos ayudarte?
+            </span>
+            <h2 className="mt-1 text-2xl font-extrabold text-[#1a4a38] sm:text-3xl">
+              Proceso transparente y atención dedicada
+            </h2>
+          </div>
+
+          {/* Grid de 5 Columnas (1 a 4 beneficios + 5 contacto dark) */}
+          <div
+            ref={bottomGridRef}
+            className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5"
+          >
+            {/* Tarjeta 1 */}
+            <div className="flex flex-col justify-between rounded-2xl border border-gray-200/80 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#1a4a38]/40 hover:shadow-md">
+              <div>
+                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-[#1a4a38]/10 text-[#1a4a38]">
+                  <UserCheck className="h-5 w-5" />
+                </div>
+                <h3 className="text-base font-bold text-gray-900">
+                  Datos claros
+                </h3>
+                <p className="mt-1.5 text-xs leading-relaxed text-gray-600">
+                  Nombre, teléfono y correo.
+                </p>
+              </div>
+            </div>
+
+            {/* Tarjeta 2 */}
+            <div className="flex flex-col justify-between rounded-2xl border border-gray-200/80 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#1a4a38]/40 hover:shadow-md">
+              <div>
+                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-[#1a4a38]/10 text-[#1a4a38]">
+                  <Building2 className="h-5 w-5" />
+                </div>
+                <h3 className="text-base font-bold text-gray-900">
+                  Perfil correcto
+                </h3>
+                <p className="mt-1.5 text-xs leading-relaxed text-gray-600">
+                  Estudiante, profesional o empresa.
+                </p>
+              </div>
+            </div>
+
+            {/* Tarjeta 3 */}
+            <div className="flex flex-col justify-between rounded-2xl border border-gray-200/80 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#1a4a38]/40 hover:shadow-md">
+              <div>
+                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-[#1a4a38]/10 text-[#1a4a38]">
+                  <MessageCircle className="h-5 w-5" />
+                </div>
+                <h3 className="text-base font-bold text-gray-900">
+                  Cierre directo
+                </h3>
+                <p className="mt-1.5 text-xs leading-relaxed text-gray-600">
+                  Mensaje listo para WhatsApp.
+                </p>
+              </div>
+            </div>
+
+            {/* Tarjeta 4 */}
+            <div className="flex flex-col justify-between rounded-2xl border border-gray-200/80 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#1a4a38]/40 hover:shadow-md">
+              <div>
+                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-[#1a4a38]/10 text-[#1a4a38]">
+                  <Users className="h-5 w-5" />
+                </div>
+                <h3 className="text-base font-bold text-gray-900">
+                  Acompañamiento
+                </h3>
+                <p className="mt-1.5 text-xs leading-relaxed text-gray-600">
+                  Nuestro equipo te brinda el soporte que necesitas.
+                </p>
+              </div>
+            </div>
+
+            {/* Columna 5: Tarjeta de Contacto Dark */}
+            <div className="relative overflow-hidden rounded-2xl bg-[#1a4a38] p-5 text-white shadow-lg transition-all duration-300 hover:-translate-y-1 sm:col-span-2 lg:col-span-1">
+              {/* Marca de agua sutil del isotipo 'e' de Centro Empresarial */}
+              <div className="pointer-events-none absolute -bottom-10 -right-6 select-none font-sans text-[150px] font-extrabold leading-none text-white/[0.08]">
+                e
+              </div>
+
+              <div className="relative z-10 flex h-full flex-col justify-between">
+                <div>
+                  <h3 className="text-lg font-extrabold text-white">
+                    Contáctanos
+                  </h3>
+                  <p className="mt-1 text-xs text-white/75">
+                    Canales oficiales de atención
+                  </p>
+
+                  <div className="mt-4 space-y-3">
+                    <a
+                      href="https://wa.me/51906491859"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2.5 text-xs font-semibold text-white/90 hover:text-white transition-colors"
+                    >
+                      <Phone className="h-3.5 w-3.5 shrink-0 text-accent" />
+                      <span>+51 906 491 859</span>
+                    </a>
+
+                    <a
+                      href="mailto:centroempresarialsac@gmail.com"
+                      className="flex items-start gap-2.5 text-xs font-semibold text-white/90 hover:text-white transition-colors break-all"
+                    >
+                      <Mail className="h-3.5 w-3.5 shrink-0 text-accent mt-0.5" />
+                      <span>centroempresarialsac@gmail.com</span>
+                    </a>
+
+                    <div className="flex items-start gap-2.5 text-xs text-white/80">
+                      <MapPin className="h-3.5 w-3.5 shrink-0 text-accent mt-0.5" />
+                      <span>
+                        Calle Castrovirreyna 323, tercer piso, Ica, Perú
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-5 border-t border-white/15 pt-3">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-accent">
+                    Atención personalizada
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 };
 

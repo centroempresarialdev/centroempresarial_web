@@ -25,22 +25,35 @@ const Header = () => {
       <div className="hidden bg-primary text-primary-foreground md:block">
         <div className="container mx-auto flex items-center justify-between px-6 py-2 text-sm lg:px-12">
           <div className="flex items-center gap-6">
-            <a href={`tel:${contactInfo.phone.replace(/\s/g, "")}`} className="flex items-center gap-2 transition-opacity hover:opacity-85">
+            <a
+              href={`tel:${contactInfo.phone.replace(/\s/g, "")}`}
+              className="flex items-center gap-2 transition-opacity hover:opacity-85"
+            >
               <Phone size={14} />
               <span>{contactInfo.phone}</span>
             </a>
-            <a href={`mailto:${contactInfo.email}`} className="flex items-center gap-2 transition-opacity hover:opacity-85">
+            <a
+              href={`mailto:${contactInfo.email}`}
+              className="flex items-center gap-2 transition-opacity hover:opacity-85"
+            >
               <Mail size={14} />
               <span>{contactInfo.email}</span>
             </a>
           </div>
-          <p className="font-medium text-primary-foreground/90">Membresias, eventos y capacitacion para crecer en red</p>
+          <p className="font-medium text-primary-foreground/90">
+            Membresias, eventos y capacitacion para crecer en red
+          </p>
         </div>
       </div>
 
       <nav className="container mx-auto px-5 py-2.5 sm:px-6 sm:py-3 lg:px-12">
         <div className="flex items-center justify-between gap-6">
-          <Link to="/" className="flex items-center gap-3 text-left" aria-label="Ir al inicio" onClick={() => setIsMenuOpen(false)}>
+          <Link
+            to="/"
+            className="flex items-center gap-3 text-left"
+            aria-label="Ir al inicio"
+            onClick={() => setIsMenuOpen(false)}
+          >
             <img
               src="https://camaraica.org.pe/wp-content/uploads/2025/09/CENTRO.avif"
               alt="Centro Empresarial"
@@ -66,7 +79,7 @@ const Header = () => {
           </div>
 
           <div className="hidden items-center lg:flex">
-            <Button asChild variant="corporate">
+            <Button asChild variant="corporate" className="font-bold">
               <Link to="/contacto">
                 <UserPlus className="h-4 w-4" />
                 Asociarme
@@ -110,7 +123,12 @@ const Header = () => {
                   {item.label}
                 </NavLink>
               ))}
-              <Button asChild variant="corporate" className="mt-2 w-full" onClick={() => setIsMenuOpen(false)}>
+              <Button
+                asChild
+                variant="corporate"
+                className="mt-2 w-full font-bold"
+                onClick={() => setIsMenuOpen(false)}
+              >
                 <Link to="/contacto">
                   <UserPlus className="h-4 w-4" />
                   Quiero asociarme
