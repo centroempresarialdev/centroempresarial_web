@@ -523,6 +523,8 @@ const Memberships = () => {
                     <img
                       src={plan.imgDefault}
                       alt={plan.name}
+                      loading="lazy"
+                      decoding="async"
                       className="absolute bottom-0 left-1/2 -translate-x-1/2 h-full w-[130%] object-cover object-top
                         transition-opacity duration-300 group-hover:opacity-0"
                     />
@@ -530,6 +532,8 @@ const Memberships = () => {
                     <img
                       src={plan.imgHover}
                       alt={`${plan.name} — acción`}
+                      loading="lazy"
+                      decoding="async"
                       className="absolute bottom-0 left-1/2 -translate-x-1/2 h-full w-[130%] object-cover object-top
                         opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                     />

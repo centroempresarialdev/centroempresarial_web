@@ -405,6 +405,8 @@ const AdvisoryThesis = () => {
                 <img
                   src={thesisCard1Img}
                   alt="Tesis de pregrado y postgrado"
+                  loading="lazy"
+                  decoding="async"
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
@@ -458,6 +460,8 @@ const AdvisoryThesis = () => {
                 <img
                   src={thesisCard2Img}
                   alt="Monografías y tesinas escolares y/o universitarios"
+                  loading="lazy"
+                  decoding="async"
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />

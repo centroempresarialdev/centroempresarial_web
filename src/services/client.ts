@@ -6,6 +6,11 @@ export const API_BASE_URL = CLEAN_BASE.endsWith("/api/v1")
   ? CLEAN_BASE 
   : `${CLEAN_BASE}/api/v1`;
 
+const isProdWithoutRemoteApi = 
+  import.meta.env.PROD && 
+  !import.meta.env.VITE_API_URL && 
+  CLEAN_BASE.includes("localhost");
+
 const TOKEN_KEY = "ce_access_token";
 
 export class ApiError extends Error {
@@ -48,10 +53,15 @@ export const tokenStorage = {
 export interface RequestConfig extends RequestInit {
   params?: Record<string, string | number | boolean | undefined | null>;
   requiresAuth?: boolean;
+  timeoutMs?: number;
 }
 
 export async function httpClient<T>(endpoint: string, config: RequestConfig = {}): Promise<T> {
-  const { params, requiresAuth = false, headers = {}, ...rest } = config;
+  if (isProdWithoutRemoteApi) {
+    throw new ApiError("API backend no disponible en entorno de producción sin VITE_API_URL.", 503);
+  }
+
+  const { params, requiresAuth = false, timeoutMs = 4500, headers = {}, signal, ...rest } = config;
 
   let url = endpoint.startsWith("http")
     ? endpoint
@@ -87,10 +97,24 @@ export async function httpClient<T>(endpoint: string, config: RequestConfig = {}
     throw new ApiError("No autenticado. Por favor inicie sesión.", 401);
   }
 
-  const response = await fetch(url, {
-    ...rest,
-    headers: reqHeaders,
-  });
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+
+  let response: Response;
+  try {
+    response = await fetch(url, {
+      ...rest,
+      signal: signal || controller.signal,
+      headers: reqHeaders,
+    });
+  } catch (error: unknown) {
+    if (error instanceof Error && error.name === "AbortError") {
+      throw new ApiError("Tiempo de espera agotado al conectar con el servidor (timeout).", 408);
+    }
+    throw error;
+  } finally {
+    clearTimeout(timeoutId);
+  }
 
   if (!response.ok) {
     let errorMsg = `Error ${response.status}: ${response.statusText}`;

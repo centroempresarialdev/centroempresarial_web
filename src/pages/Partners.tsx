@@ -225,6 +225,8 @@ const Partners = () => {
                         <img
                           src={partner.logo}
                           alt={partner.name}
+                          loading="lazy"
+                          decoding="async"
                           className="max-h-70 max-w-[100%] object-contain"
                         />
                       </div>
