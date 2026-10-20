@@ -59,12 +59,22 @@ export const ContactSection: React.FC = () => {
       } else if (planParam.includes("profesional")) {
         setFormData((prev) => ({ ...prev, profileType: "Profesional", serviceInterest: "Membresía Profesional" }));
       } else if (
+        planParam.includes("public") ||
+        planParam.includes("institucion")
+      ) {
+        setFormData((prev) => ({
+          ...prev,
+          profileType: "Institución Pública",
+          serviceInterest: "Membresía Empresarial",
+        }));
+      } else if (
         planParam.includes("empresa") ||
+        planParam.includes("privada") ||
         planParam.includes("corporaci")
       ) {
         setFormData((prev) => ({
           ...prev,
-          profileType: "Empresa",
+          profileType: "Empresa Privada",
           serviceInterest: "Membresía Empresarial",
         }));
       }
@@ -363,7 +373,8 @@ export const ContactSection: React.FC = () => {
                       <option value="">Seleccionar</option>
                       <option value="Estudiante">Estudiante</option>
                       <option value="Profesional">Profesional</option>
-                      <option value="Empresa">Empresa</option>
+                      <option value="Institución Pública">Institución Pública</option>
+                      <option value="Empresa Privada">Empresa Privada</option>
                     </select>
                   </div>
 
@@ -475,7 +486,7 @@ export const ContactSection: React.FC = () => {
                   Perfil correcto
                 </h3>
                 <p className="mt-1.5 text-xs leading-relaxed text-gray-600">
-                  Estudiante, profesional o empresa.
+                  Estudiante, profesional, institución pública o empresa privada.
                 </p>
               </div>
             </div>

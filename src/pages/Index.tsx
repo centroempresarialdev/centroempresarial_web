@@ -19,8 +19,10 @@ import misionImage from "@/assets/hero/identidad-mision.jpg";
 import visionImage from "@/assets/hero/identidad-vision.jpg";
 import objetivosImage from "@/assets/hero/identidad-objetivos.jpg";
 import valoresImage from "@/assets/hero/identidad-valores.jpg";
+import internshipImage from "@/assets/hero/practicas-administracion.jpg";
 import {
   ArrowRight,
+  Briefcase,
   Check,
   Eye,
   Handshake,
@@ -52,7 +54,7 @@ const institutionalPillars = [
     image: misionImage,
     icon: Target,
     title: "Misión",
-    text: "Impulsar el crecimiento de estudiantes, profesionales y empresas mediante capacitación, asesoría, alianzas estratégicas y espacios de conexión que generen oportunidades reales.",
+    text: "Impulsar el crecimiento de estudiantes, profesionales, instituciones públicas y empresas privadas mediante capacitación, asesoría, alianzas estratégicas y espacios de conexión que generen oportunidades reales.",
   },
   {
     image: visionImage,
@@ -198,7 +200,7 @@ const Index = () => {
             <p className="mt-5 text-lg leading-8 text-muted-foreground">
               Centro Empresarial es una organización con más de 12 años en Ica
               articulando capacitación, asesoría, alianzas estratégicas y
-              eventos para estudiantes, profesionales y empresas que buscan
+              eventos para estudiantes, profesionales, instituciones públicas y empresas privadas que buscan
               crecer.
             </p>
           </ScrollReveal>
@@ -390,6 +392,114 @@ const Index = () => {
                   </div>
                 </div>
               ))}
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* Seccion de Llamado a la Accion (CTA) - Practicas Preprofesionales */}
+      <section className="relative overflow-hidden border-t border-border/40 bg-gradient-to-b from-background via-muted/30 to-muted/60 py-16 md:py-24">
+        <div className="container relative z-10 mx-auto px-6 lg:px-12">
+          <ScrollReveal direction="up">
+            <div className="relative mx-auto max-w-5xl overflow-hidden rounded-3xl border border-white/15 bg-gradient-hero p-8 text-white shadow-elevated md:p-12 lg:p-14">
+              {/* Halos luminosos de ambientacion */}
+              <div
+                className="pointer-events-none absolute -right-20 -top-20 h-80 w-80 rounded-full bg-accent/20 blur-3xl"
+                aria-hidden="true"
+              />
+              <div
+                className="pointer-events-none absolute -bottom-20 -left-20 h-80 w-80 rounded-full bg-primary-light/35 blur-3xl"
+                aria-hidden="true"
+              />
+
+              <div className="relative z-10 grid items-center gap-10 lg:grid-cols-12">
+                {/* Columna de Contenido */}
+                <div className="flex flex-col items-center text-center lg:col-span-7 lg:items-start lg:text-left">
+                  <div className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/15 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-accent backdrop-blur-sm">
+                    <span className="relative flex h-2 w-2">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
+                      <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+                    </span>
+                    <Briefcase className="h-3.5 w-3.5" />
+                    Convocatoria Abierta
+                  </div>
+
+                  <h2 className="mt-5 text-3xl font-extrabold leading-tight text-white sm:text-4xl md:text-5xl">
+                    ¿Listo para iniciar tu carrera?
+                  </h2>
+
+                  <p className="mt-4 text-base font-medium leading-relaxed text-white/90 sm:text-lg md:text-xl">
+                    Postula a nuestras prácticas preprofesionales de Administración
+                  </p>
+
+                  <ul className="mt-6 space-y-2.5 text-left text-sm text-white/85">
+                    <li className="flex items-center gap-2.5">
+                      <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent/25 text-accent">
+                        <Check className="h-3.5 w-3.5 stroke-[3]" />
+                      </div>
+                      <span>Experiencia práctica en gestión corporativa y proyectos reales</span>
+                    </li>
+                    <li className="flex items-center gap-2.5">
+                      <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent/25 text-accent">
+                        <Check className="h-3.5 w-3.5 stroke-[3]" />
+                      </div>
+                      <span>Acompañamiento, mentoría continua y desarrollo profesional</span>
+                    </li>
+                    <li className="flex items-center gap-2.5">
+                      <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent/25 text-accent">
+                        <Check className="h-3.5 w-3.5 stroke-[3]" />
+                      </div>
+                      <span>Certificación institucional emitida por Centro Empresarial</span>
+                    </li>
+                  </ul>
+
+                  <div className="mt-8 flex w-full flex-col items-center justify-center lg:items-start">
+                    <Button
+                      asChild
+                      size="lg"
+                      className="group relative h-14 rounded-full bg-accent px-9 text-base font-extrabold text-accent-foreground shadow-[0_10px_25px_-5px_rgba(234,179,8,0.5)] transition-all duration-300 hover:scale-105 hover:bg-accent-light hover:shadow-[0_14px_30px_-5px_rgba(234,179,8,0.65)] active:scale-95"
+                    >
+                      <a
+                        href="https://forms.gle/MVS6qZ5w45SNSvca9"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-3"
+                      >
+                        <span>Postular Aquí</span>
+                        <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                      </a>
+                    </Button>
+                    <span className="mt-2.5 text-xs text-white/70">
+                      Cupos limitados • Proceso de postulación activo
+                    </span>
+                  </div>
+                </div>
+
+                {/* Columna Visual / Imagen Corporativa */}
+                <div className="relative mx-auto w-full max-w-md lg:col-span-5 lg:max-w-none">
+                  <div className="relative overflow-hidden rounded-2xl border-2 border-white/20 shadow-2xl transition-transform duration-500 hover:scale-[1.02]">
+                    <img
+                      src={internshipImage}
+                      alt="Prácticas preprofesionales en Administración - Centro Empresarial"
+                      loading="lazy"
+                      decoding="async"
+                      className="h-72 w-full object-cover sm:h-80 md:h-96 lg:h-[400px]"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+
+                    {/* Badge flotante sobre la foto */}
+                    <div className="absolute bottom-4 left-4 right-4 rounded-xl border border-white/20 bg-black/45 p-3.5 backdrop-blur-md">
+                      <div className="flex items-center justify-between text-xs font-semibold text-white">
+                        <span className="flex items-center gap-1.5">
+                          <span className="h-2 w-2 rounded-full bg-emerald-400" />
+                          Área de Administración
+                        </span>
+                        <span className="font-bold text-accent">Ica, Perú</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </ScrollReveal>
         </div>

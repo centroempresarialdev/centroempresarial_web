@@ -1,7 +1,7 @@
-﻿import { motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight, Building2, CheckCircle2, GraduationCap, Lightbulb, Network, ShieldCheck, Users } from "lucide-react";
+import { ArrowRight, Building2, CheckCircle2, GraduationCap, Landmark, Lightbulb, Network, ShieldCheck, Users } from "lucide-react";
 import aboutImage from "@/assets/hero/about-nosotros.jpg";
 
 const strengths = [
@@ -62,7 +62,7 @@ const About = () => {
               Una plataforma empresarial para asociarse, capacitarse y crear oportunidades
             </h2>
             <p className="mt-5 text-lg leading-8 text-muted-foreground">
-              Centro Empresarial reúne servicios de asesoría, capacitación, alianzas estratégicas y membresías para conectar a estudiantes, profesionales y empresas con herramientas de crecimiento.
+              Centro Empresarial reúne servicios de asesoría, capacitación, alianzas estratégicas y membresías para conectar a estudiantes, profesionales, instituciones públicas y empresas privadas con herramientas de crecimiento.
             </p>
 
             <div className="mt-8 grid gap-4 md:grid-cols-3">
@@ -109,11 +109,12 @@ const About = () => {
           </div>
         </div>
 
-        <div className="mt-14 grid gap-4 md:grid-cols-3">
+        <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {[
             { icon: Users, label: "Estudiantes", value: "Capacitaciones, blog y apoyo académico" },
             { icon: Lightbulb, label: "Profesionales", value: "Formación continua y networking especializado" },
-            { icon: Building2, label: "Empresas", value: "Consultorías, auditorías e innovación aplicada" },
+            { icon: Landmark, label: "Instituciones Públicas", value: "Capacitación para funcionarios, gestión pública y convenios" },
+            { icon: Building2, label: "Empresas Privadas", value: "Consultorías, auditorías e innovación aplicada" },
           ].map((item) => (
             <div key={item.label} className="flex items-center gap-4 rounded-xl border border-border bg-background p-5 shadow-sm">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">

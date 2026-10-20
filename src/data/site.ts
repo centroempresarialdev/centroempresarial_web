@@ -6,6 +6,7 @@ import {
   CalendarDays,
   GraduationCap,
   Handshake,
+  Landmark,
   Lightbulb,
   Network,
   PlayCircle,
@@ -75,7 +76,8 @@ export const strengths: IconItem[] = [
 export const audiences = [
   { icon: Users, label: "Estudiantes", value: "Capacitaciones, blog y apoyo academico" },
   { icon: Lightbulb, label: "Profesionales", value: "Formacion continua y networking especializado" },
-  { icon: Building2, label: "Empresas", value: "Consultorias, auditorias e innovacion aplicada" },
+  { icon: Landmark, label: "Instituciones Públicas", value: "Capacitación a funcionarios, consultorías y convenios" },
+  { icon: Building2, label: "Empresas Privadas", value: "Consultorías, auditorías e innovación aplicada" },
 ];
 
 export const membershipPlans = [

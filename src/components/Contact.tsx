@@ -64,12 +64,22 @@ const Contact: React.FC = () => {
       } else if (planParam.includes("profesional")) {
         setFormData((prev) => ({ ...prev, profileType: "Profesional" }));
       } else if (
+        planParam.includes("public") ||
+        planParam.includes("institucion")
+      ) {
+        setFormData((prev) => ({
+          ...prev,
+          profileType: "Institución Pública",
+          serviceInterest: "Soluciones Empresariales",
+        }));
+      } else if (
         planParam.includes("empresa") ||
+        planParam.includes("privada") ||
         planParam.includes("corporaci")
       ) {
         setFormData((prev) => ({
           ...prev,
-          profileType: "Empresa",
+          profileType: "Empresa Privada",
           serviceInterest: "Soluciones Empresariales",
         }));
       }
@@ -173,13 +183,21 @@ const Contact: React.FC = () => {
 
     // 1. Guardar prospecto en la base de datos a través del backend FastAPI
     try {
-      const validTypes: Array<"Estudiante" | "Profesional" | "Empresa"> = [
+      const validTypes: Array<
+        "Estudiante" | "Profesional" | "Empresa" | "Institución Pública" | "Empresa Privada"
+      > = [
         "Estudiante",
         "Profesional",
-        "Empresa",
+        "Institución Pública",
+        "Empresa Privada",
       ];
       const interested_type = validTypes.includes(formData.profileType as any)
-        ? (formData.profileType as "Estudiante" | "Profesional" | "Empresa")
+        ? (formData.profileType as
+            | "Estudiante"
+            | "Profesional"
+            | "Empresa"
+            | "Institución Pública"
+            | "Empresa Privada")
         : "Profesional";
 
       await leadsService.create({
@@ -416,7 +434,8 @@ const Contact: React.FC = () => {
                         <option value="">Seleccionar</option>
                         <option value="Estudiante">Estudiante</option>
                         <option value="Profesional">Profesional</option>
-                        <option value="Empresa">Empresa</option>
+                        <option value="Institución Pública">Institución Pública</option>
+                        <option value="Empresa Privada">Empresa Privada</option>
                       </select>
                     </div>
 
@@ -557,7 +576,7 @@ const Contact: React.FC = () => {
                   Perfil correcto
                 </h3>
                 <p className="mt-1.5 text-xs leading-relaxed text-gray-600">
-                  Estudiante, profesional o empresa.
+                  Estudiante, profesional, institución pública o empresa privada.
                 </p>
               </div>
             </div>

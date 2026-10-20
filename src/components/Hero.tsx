@@ -1,4 +1,4 @@
-﻿import { motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CalendarDays, GraduationCap, Handshake, Sparkles, Users } from "lucide-react";
 import heroImage from "@/assets/hero/hero-image.jpg";
@@ -44,7 +44,7 @@ const Hero = () => {
               Una red para aprender, asociarte y hacer crecer tu organización
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-white/84 md:text-xl">
-              Membresías, capacitaciones, eventos, aliados estratégicos y acompañamiento empresarial para estudiantes, profesionales y empresas de Ica y el Perú.
+              Membresías, capacitaciones, eventos, aliados estratégicos y acompañamiento empresarial para estudiantes, profesionales, instituciones públicas y empresas privadas de Ica y el Perú.
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">

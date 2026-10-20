@@ -24,7 +24,12 @@ export interface LeadCreate {
   full_name: string;
   phone: string;
   email: string;
-  interested_type: "Estudiante" | "Profesional" | "Empresa";
+  interested_type:
+    | "Estudiante"
+    | "Profesional"
+    | "Empresa"
+    | "Institución Pública"
+    | "Empresa Privada";
   target_plan?: string;
   message?: string;
 }
@@ -60,7 +65,12 @@ export interface ClientCreate {
   document_number: string;
   email: string;
   phone: string;
-  client_type: "Estudiante" | "Profesional" | "Empresa";
+  client_type:
+    | "Estudiante"
+    | "Profesional"
+    | "Empresa"
+    | "Institución Pública"
+    | "Empresa Privada";
   company_name?: string;
   opt_in_newsletter?: boolean;
   opt_in_whatsapp?: boolean;
