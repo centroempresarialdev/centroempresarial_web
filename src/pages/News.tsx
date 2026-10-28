@@ -20,12 +20,16 @@ import { Button } from "@/components/ui/button";
 import newsHeroBg from "@/assets/hero/news-hero-press.jpg";
 import { newsService } from "@/services";
 
+import flyerIsoPucp from "@/assets/flayers-Noticias empresariales/unnamed.jpg";
 import flyer1 from "@/assets/flayers-Noticias empresariales/1.png";
 import flyer2 from "@/assets/flayers-Noticias empresariales/2.png";
 import flyer3 from "@/assets/flayers-Noticias empresariales/3.png";
 import flyer4 from "@/assets/flayers-Noticias empresariales/4.png";
 import flyerInnovation from "@/assets/flayers-Noticias empresariales/Corporate_flyer_for_business_inn…_2K_20260929112835.jpg";
 import flyerGnv from "@/assets/flayers-Noticias empresariales/Invitación Foro GNV Ica 2026_page-0001.jpg";
+import flyerTallerLmr from "@/assets/flayers-Noticias empresariales/taller-lmr-plaguicidas.png";
+import flyerSeminarioEducacion from "@/assets/flayers-Noticias empresariales/seminario-educacion-futuro.png";
+import flyerConcursoVino from "@/assets/flayers-Noticias empresariales/concurso-nacional-vino-chincha.jpg";
 
 interface NewsFlyer {
   id: number;
@@ -40,7 +44,57 @@ interface NewsFlyer {
 
 const flyers: NewsFlyer[] = [
   {
+    id: 101,
+    image: flyerTallerLmr,
+    category: "Taller & Agroexportación",
+    tag: "MINCETUR, CCI & Centro Empresarial",
+    title:
+      "Normativas Internacionales sobre los Límites Máximos de Residuos (LMR) de plaguicidas en productos agrícolas",
+    description:
+      "Taller presencial dirigido a empresas exportadoras y con potencial exportador, coorganizado con MINCETUR, Dircetur Ica, CERX Ica y la Cámara de Comercio, Turismo e Industria de Ica (Calle Pedro Olaechea N.° 285, Ica).",
+    date: "29 y 30 de Octubre | 9:00 a. m.",
+    whatsappMessage:
+      "Hola, deseo inscribirme en el Taller sobre Normativas Internacionales de Límites Máximos de Residuos (LMR) en productos agrícolas.",
+  },
+  {
+    id: 102,
+    image: flyerConcursoVino,
+    category: "Evento & Agroindustria Vitivinícola",
+    tag: "CCI & Centro Empresarial",
+    title:
+      "VI Concurso Nacional del Vino Peruano & II Concurso Internacional de Vinos de Origen y Patrimonio — Chincha",
+    description:
+      "Encuentro oficial que reúne a las principales bodegas, productores e instituciones del sector vitivinícola nacional e internacional en Chincha.",
+    date: "Del 27 al 30 de Octubre | Chincha",
+    whatsappMessage:
+      "Hola, deseo más información sobre el VI Concurso Nacional del Vino Peruano y II Concurso Internacional en Chincha.",
+  },
+  {
+    id: 103,
+    image: flyerSeminarioEducacion,
+    category: "Seminario de Educación",
+    tag: "CCI & Centro Empresarial",
+    title: "Seminario de Educación: El futuro se educa hoy",
+    description:
+      "Dirigido a directivos, coordinadores académicos, docentes de educación básica y superior, profesionales de universidades e instituciones educativas y líderes comprometidos con la educación. Incluye certificación en el Colegio de Ingenieros, Ica.",
+    date: "Viernes 13 y Sábado 14 | Desde las 4:00 p. m.",
+    whatsappMessage:
+      "Hola, deseo conocer el programa e inscribirme en el Seminario de Educación «El futuro se educa hoy».",
+  },
+  {
     id: 1,
+    image: flyerIsoPucp,
+    category: "Webinar & Calidad",
+    tag: "Instituto para la Calidad PUCP",
+    title: "ISO 9001:2026: Liderazgo que fortalece la cultura de calidad, la ética y la gestión de oportunidades",
+    description:
+      "Webinar online con el expositor Luis Alberto Fosca Pastor (Consultor y auditor independiente en SIG, ISO 9001, ISO 14001, ISO 45001 y auditor MTPE; docente PUCP). Transmisión en vivo vía Zoom y Facebook Live.",
+    date: "Martes 03 de Noviembre de 2026 | 7:00 p.m.",
+    whatsappMessage:
+      "Hola, deseo inscribirme en el Webinar ISO 9001:2026 del Instituto para la Calidad PUCP.",
+  },
+  {
+    id: 2,
     image: flyerInnovation,
     category: "Innovación & Emprendimiento",
     tag: "Centro Empresarial",
@@ -52,7 +106,7 @@ const flyers: NewsFlyer[] = [
       "Hola, deseo más información sobre los Concursos Regionales de Innovación Edición 2.",
   },
   {
-    id: 2,
+    id: 3,
     image: flyerGnv,
     category: "Foro Empresarial & Sostenibilidad",
     tag: "Contugas & CIP Ica",
@@ -64,7 +118,7 @@ const flyers: NewsFlyer[] = [
       "Hola, deseo inscribirme en el Foro GNV Ica 2026 sobre movilidad a Gas Natural.",
   },
   {
-    id: 3,
+    id: 4,
     image: flyer1,
     category: "Evento Académico",
     tag: "Cámara de Comercio de Ica",
@@ -76,7 +130,7 @@ const flyers: NewsFlyer[] = [
       "Hola, deseo más información sobre el II Encuentro Académico a otro nivel.",
   },
   {
-    id: 4,
+    id: 5,
     image: flyer2,
     category: "Networking & Gastronomía",
     tag: "La Caravedo & Portón",
@@ -88,7 +142,7 @@ const flyers: NewsFlyer[] = [
       "Hola, deseo información sobre la Cena by Portón IX Edición en La Caravedo.",
   },
   {
-    id: 5,
+    id: 6,
     image: flyer3,
     category: "Publicación Institucional",
     tag: "Revista Asociados",
@@ -100,7 +154,7 @@ const flyers: NewsFlyer[] = [
       "Hola, deseo acceder a la edición completa de la Revista Empresarial Asociados.",
   },
   {
-    id: 6,
+    id: 7,
     image: flyer4,
     category: "Alianza Estratégica",
     tag: "Equifax & Infocorp",

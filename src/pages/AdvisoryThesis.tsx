@@ -19,6 +19,8 @@ import {
   ArrowRight,
   Sparkles,
   CheckCircle2,
+  Clock,
+  ExternalLink,
 } from "lucide-react";
 import thesisHeroBg from "@/assets/hero/inner-hero-office.jpg";
 import thesisCard1Img from "@/assets/hero/tesis.jpg";
@@ -411,7 +413,7 @@ const AdvisoryThesis = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
                 <div className="absolute bottom-3 left-3 flex items-center gap-2">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/95 text-primary shadow-sm backdrop-blur-md">
+                  <div className="icon-badge icon-badge-md bg-white/95 shadow-sm backdrop-blur-md">
                     <GraduationCap className="h-5 w-5" />
                   </div>
                   <span className="rounded-full bg-primary/90 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-white shadow-sm">
@@ -466,7 +468,7 @@ const AdvisoryThesis = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
                 <div className="absolute bottom-3 left-3 flex items-center gap-2">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/95 text-accent shadow-sm backdrop-blur-md">
+                  <div className="icon-badge icon-badge-md bg-white/95 shadow-sm backdrop-blur-md">
                     <BookOpen className="h-5 w-5" />
                   </div>
                   <span className="rounded-full bg-accent/90 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-white shadow-sm">
@@ -557,7 +559,7 @@ const AdvisoryThesis = () => {
               >
                 <div>
                   <div className="mb-5 flex items-center justify-between">
-                    <div className="benefit-icon flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 text-primary shadow-sm">
+                    <div className="benefit-icon icon-badge icon-badge-lg shadow-sm">
                       <benefit.icon className="h-7 w-7" />
                     </div>
                     <span className="rounded-full border border-accent/30 bg-accent/15 px-2.5 py-0.5 text-[11px] font-bold text-accent">
@@ -583,102 +585,135 @@ const AdvisoryThesis = () => {
       </section>
 
       {/* ══════════════════════════════════════════════════════════
-          SECCIÓN 5: CONTACTO (Curtain Reveal / Parallax Banner)
+          SECCIÓN 5: UBICACIÓN Y CONTACTO DIRECTO DE TESIS
          ══════════════════════════════════════════════════════════ */}
-      <section className="curtain-section relative overflow-hidden bg-background py-20 md:py-28">
-        <div className="curtain-content container relative z-10 mx-auto px-6 lg:px-12 will-change-transform">
-          <div className="mx-auto max-w-4xl overflow-hidden rounded-3xl bg-gradient-primary p-8 text-primary-foreground shadow-elevated md:p-14">
-            <div className="text-center">
-              <span className="inline-block text-xs font-bold uppercase tracking-[0.25em] text-accent">
-                Contacto Directo
+      <section className="curtain-section relative w-full border-t border-gray-200/80 bg-white py-16 md:py-24">
+        <div className="curtain-content container mx-auto px-6 lg:px-12 will-change-transform">
+          <div className="mb-10 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+            <div>
+              <span className="text-sm font-bold uppercase tracking-[0.2em] text-primary">
+                Contacto Directo • Asesoría de Tesis
               </span>
-              <h2 className="mt-3 text-3xl font-extrabold text-white md:text-5xl">
+              <h2 className="mt-2 text-3xl font-extrabold text-[#1a4a38] sm:text-4xl md:text-5xl">
                 ¿Listo para titularte con éxito?
               </h2>
-              <p className="mx-auto mt-4 max-w-xl text-base text-white/80 md:text-lg">
-                Comunícate hoy mismo con nuestros consultores académicos y
-                agenda tu primera sesión de diagnóstico sin costo.
-              </p>
             </div>
+            <p className="max-w-md text-sm leading-relaxed text-gray-600">
+              Comunícate hoy mismo con nuestros consultores académicos o visítanos
+              en nuestra oficina para coordinar tu primera sesión de diagnóstico.
+            </p>
+          </div>
 
-            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {/* Teléfono / WhatsApp */}
+          <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
+            {/* Columna izquierda: Canales en 1 columna apilada */}
+            <div className="flex flex-col gap-4">
+              {/* WhatsApp */}
               <a
-                href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Hola, deseo información sobre asesoría de tesis.")}`}
+                href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Hola, deseo cotizar mi asesoría de tesis con Centro Empresarial.")}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex flex-col items-center rounded-2xl border border-white/15 bg-white/10 p-6 text-center backdrop-blur-sm transition-all hover:bg-white/20"
+                className="group flex items-center gap-4 rounded-2xl border border-gray-200/80 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md"
               >
-                <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-accent text-accent-foreground transition-transform group-hover:scale-110">
-                  <Phone className="h-5 w-5" />
+                <div className="icon-badge icon-badge-lg">
+                  <MessageCircle />
                 </div>
-                <div className="text-xs font-semibold uppercase text-white/70">
-                  Teléfono / WhatsApp
+                <div className="min-w-0">
+                  <p className="text-[11px] font-bold uppercase tracking-wider text-gray-500">
+                    Teléfono directo / WhatsApp
+                  </p>
+                  <p className="text-base font-bold text-gray-900">
+                    {phoneFormatted}
+                  </p>
                 </div>
-                <div className="mt-1 text-sm font-bold text-white">
-                  {phoneFormatted}
-                </div>
+                <ArrowRight className="ml-auto h-4 w-4 text-primary transition-transform group-hover:translate-x-1" />
               </a>
 
               {/* Correo */}
               <a
-                href={`mailto:${contactInfo.email}`}
-                className="group flex flex-col items-center rounded-2xl border border-white/15 bg-white/10 p-6 text-center backdrop-blur-sm transition-all hover:bg-white/20"
+                href={`mailto:${contactInfo.email}?subject=${encodeURIComponent("Consulta sobre Asesoría de Tesis")}`}
+                className="group flex items-center gap-4 rounded-2xl border border-gray-200/80 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md"
               >
-                <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-white/20 text-white transition-transform group-hover:scale-110">
-                  <Mail className="h-5 w-5" />
+                <div className="icon-badge icon-badge-lg">
+                  <Mail />
                 </div>
-                <div className="text-xs font-semibold uppercase text-white/70">
-                  Correo Electrónico
-                </div>
-                <div className="mt-1 text-xs font-bold text-white break-all sm:text-sm">
-                  {contactInfo.email}
+                <div className="min-w-0">
+                  <p className="text-[11px] font-bold uppercase tracking-wider text-gray-500">
+                    Correo oficial
+                  </p>
+                  <p className="break-all text-sm font-bold text-gray-900 sm:text-base">
+                    {contactInfo.email}
+                  </p>
                 </div>
               </a>
 
-              {/* Dirección */}
-              <div className="flex flex-col items-center rounded-2xl border border-white/15 bg-white/10 p-6 text-center backdrop-blur-sm sm:col-span-2 lg:col-span-1">
-                <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-white/20 text-white">
-                  <MapPin className="h-5 w-5" />
+              {/* Dirección / Sede Corporativa con acciones */}
+              <div className="relative flex-1 overflow-hidden rounded-2xl bg-[#1a4a38] p-5 text-white shadow-lg">
+                {/* Marca de agua sutil del isotipo 'e' de Centro Empresarial */}
+                <div className="pointer-events-none absolute -bottom-10 -right-6 select-none font-sans text-[150px] font-extrabold leading-none text-white/[0.08]">
+                  e
                 </div>
-                <div className="text-xs font-semibold uppercase text-white/70">
-                  Ubicación
-                </div>
-                <div className="mt-1 text-sm font-bold text-white">
-                  {contactInfo.address}
+                <div className="relative z-10 space-y-4">
+                  <div className="flex items-start gap-4">
+                    <div className="icon-badge icon-badge-inverse icon-badge-lg">
+                      <MapPin />
+                    </div>
+                    <div>
+                      <p className="text-[11px] font-bold uppercase tracking-wider text-accent">
+                        Oficina y Atención Presencial
+                      </p>
+                      <p className="text-sm font-semibold leading-relaxed text-white/90">
+                        {contactInfo.address}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <div className="icon-badge icon-badge-inverse icon-badge-lg">
+                      <Clock />
+                    </div>
+                    <div>
+                      <p className="text-[11px] font-bold uppercase tracking-wider text-accent">
+                        Horario de Atención
+                      </p>
+                      <p className="text-sm font-semibold leading-relaxed text-white/90">
+                        Lunes a Sábado • Previa coordinación y diagnóstico
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-2.5 pt-2">
+                    <a
+                      href={contactInfo.mapUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded-xl bg-accent px-4 py-2.5 text-xs font-bold text-accent-foreground transition-all hover:brightness-110"
+                    >
+                      <span>Cómo llegar</span>
+                      <ExternalLink className="h-3.5 w-3.5" />
+                    </a>
+
+                    <Link
+                      to="/contacto?servicio=tesis"
+                      className="inline-flex items-center gap-2 rounded-xl border border-white/25 bg-white/10 px-4 py-2.5 text-xs font-bold text-white backdrop-blur transition-all hover:bg-white hover:text-primary"
+                    >
+                      <span>Formulario de contacto</span>
+                      <ArrowRight className="h-3.5 w-3.5" />
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Button
-                asChild
-                size="lg"
-                variant="accent"
-                className="w-full font-bold sm:w-auto shadow-corporate"
-              >
-                <a
-                  href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Hola, deseo cotizar mi asesoría de tesis con Centro Empresarial.")}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="gap-2"
-                >
-                  <MessageCircle className="h-5 w-5" />
-                  Iniciar Asesoría por WhatsApp
-                </a>
-              </Button>
-
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="w-full border-white/30 bg-white/10 text-white hover:bg-white hover:text-primary sm:w-auto"
-              >
-                <Link to="/contacto" className="gap-2">
-                  Formulario de Contacto
-                  <ArrowRight className="h-5 w-5" />
-                </Link>
-              </Button>
+            {/* Columna derecha: Mapa interactivo de Google Maps amplio */}
+            <div className="relative min-h-[380px] overflow-hidden rounded-2xl border border-gray-200/80 bg-gray-100 shadow-md sm:min-h-[440px] lg:col-span-2 lg:min-h-[500px]">
+              <iframe
+                title="Ubicación Centro Empresarial - Asesoría de Tesis, Calle Castrovirreyna 323, Ica"
+                src={contactInfo.mapEmbedUrl}
+                className="absolute inset-0 h-full w-full border-0"
+                loading="lazy"
+                allowFullScreen
+                referrerPolicy="no-referrer-when-downgrade"
+              />
             </div>
           </div>
         </div>

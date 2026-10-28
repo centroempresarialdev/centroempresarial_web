@@ -326,3 +326,41 @@ All colors MUST be HSL.
   }
 }
 
+/* ── Sistema de iconografía unificado ─────────────────────────────────
+   Todos los iconos (lucide-react) comparten el mismo grosor de trazo,
+   terminaciones redondeadas y no se deforman dentro de layouts flex. */
+@layer base {
+  svg.lucide {
+    stroke-width: 1.75;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+  }
+}
+
+@layer components {
+  /* Contenedor estándar de icono: verde institucional sobre tinte suave */
+  .icon-badge {
+    @apply inline-flex shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary ring-1 ring-inset ring-primary/15 transition-colors duration-300;
+  }
+  .icon-badge svg { @apply h-5 w-5; }
+  .icon-badge-sm { @apply h-8 w-8 rounded-lg; }
+  .icon-badge-sm svg { @apply h-4 w-4; }
+  .icon-badge-md { @apply h-10 w-10; }
+  .icon-badge-lg { @apply h-12 w-12; }
+  .icon-badge-lg svg { @apply h-6 w-6; }
+
+  /* Variante sólida (acciones / destacados) */
+  .icon-badge-solid {
+    @apply bg-primary text-primary-foreground ring-0;
+  }
+  /* Variante dorada (acentos sobre fondos oscuros) */
+  .icon-badge-accent {
+    @apply bg-accent/15 text-accent ring-accent/30;
+  }
+  /* Variante para fondos oscuros verdes */
+  .icon-badge-inverse {
+    @apply bg-white/10 text-accent ring-white/15;
+  }
+}
+

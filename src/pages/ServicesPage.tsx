@@ -380,7 +380,7 @@ const ServicesPage = () => {
               {/* Tarjeta Flotante 1: Años de Experiencia */}
               <div className="absolute -bottom-6 -left-4 sm:-left-6 rounded-2xl border border-border/80 bg-white/95 p-4 shadow-elevated backdrop-blur-md transition-transform hover:-translate-y-1">
                 <div className="flex items-center gap-3.5">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-sm">
+                  <div className="icon-badge icon-badge-lg icon-badge-solid shadow-sm">
                     <ShieldCheck className="h-6 w-6" />
                   </div>
                   <div>
@@ -397,7 +397,7 @@ const ServicesPage = () => {
               {/* Tarjeta Flotante 2: Certificación Aplicada */}
               <div className="absolute -top-6 -right-4 sm:-right-6 hidden sm:block rounded-2xl border border-border/80 bg-white/95 p-4 shadow-elevated backdrop-blur-md transition-transform hover:-translate-y-1">
                 <div className="flex items-center gap-3.5">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/20 text-accent shadow-sm">
+                  <div className="icon-badge icon-badge-lg icon-badge-accent shadow-sm">
                     <Award className="h-6 w-6 text-accent" />
                   </div>
                   <div>
@@ -462,7 +462,7 @@ const ServicesPage = () => {
                   </div>
 
                   {/* Icono corporativo en la esquina inferior */}
-                  <div className="absolute -bottom-3 left-4 flex h-11 w-11 items-center justify-center rounded-xl bg-white text-primary shadow-md ring-2 ring-white/60 transition-all duration-300 group-hover:scale-105 group-hover:bg-primary group-hover:text-white">
+                  <div className="absolute -bottom-3 left-4 icon-badge icon-badge-lg bg-white shadow-md ring-2 ring-white/60 transition-all duration-300 group-hover:scale-105 group-hover:bg-primary group-hover:text-white">
                     <item.icon className="h-5 w-5" />
                   </div>
                 </div>
@@ -591,7 +591,7 @@ const ServicesPage = () => {
                   </div>
 
                   {/* Icono flotante */}
-                  <div className="absolute -bottom-3 left-5 flex h-12 w-12 items-center justify-center rounded-xl bg-white text-primary shadow-md ring-2 ring-white/70 transition-all duration-300 group-hover:bg-primary group-hover:text-white">
+                  <div className="absolute -bottom-3 left-5 icon-badge icon-badge-lg bg-white shadow-md ring-2 ring-white/70 transition-all duration-300 group-hover:bg-primary group-hover:text-white">
                     <course.icon className="h-6 w-6" />
                   </div>
                 </div>
@@ -727,7 +727,7 @@ const ServicesPage = () => {
                 href={`tel:${whatsappNumber}`}
                 className="flex items-center gap-3.5 rounded-xl border border-white/10 bg-white/5 p-4 text-white/90 backdrop-blur-sm transition-colors hover:bg-white/15"
               >
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent text-accent-foreground">
+                <div className="icon-badge icon-badge-md icon-badge-inverse">
                   <Phone className="h-5 w-5" />
                 </div>
                 <div>
@@ -744,7 +744,7 @@ const ServicesPage = () => {
                 href={`mailto:${contactInfo.email}`}
                 className="flex items-center gap-3.5 rounded-xl border border-white/10 bg-white/5 p-4 text-white/90 backdrop-blur-sm transition-colors hover:bg-white/15"
               >
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/20 text-white">
+                <div className="icon-badge icon-badge-md icon-badge-inverse">
                   <Mail className="h-5 w-5" />
                 </div>
                 <div>

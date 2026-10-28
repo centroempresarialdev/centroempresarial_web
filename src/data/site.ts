@@ -46,6 +46,8 @@ export const contactInfo = {
   email: "centroempresarialsac@gmail.com",
   address: "Calle Castrovirreyna 323, tercer piso, Ica, Peru",
   mapUrl: "https://maps.google.com/?q=Calle+Castrovirreyna+323+Ica+Peru",
+  mapEmbedUrl:
+    "https://www.google.com/maps?q=Calle+Castrovirreyna+323,+Ica,+Peru&z=17&output=embed",
 };
 
 export const metrics = [
@@ -100,7 +102,7 @@ export const membershipPlans = [
   {
     icon: UserRound,
     name: "Profesionales",
-    price: "S/ 480",
+    price: "S/ 780",
     period: "anual",
     audience: "Orientada a profesionales que buscan formacion continua, beneficios academicos y acceso a eventos especializados.",
     description: "Una membresia para actualizar competencias, acceder a beneficios academicos y conectar con espacios especializados.",

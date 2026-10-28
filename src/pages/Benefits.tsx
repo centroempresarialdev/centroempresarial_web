@@ -13,7 +13,9 @@ import {
   FileText,
   Handshake,
   Image as ImageIcon,
+  Maximize2,
   MessageCircle,
+  X,
 } from "lucide-react";
 
 const galleryModules = import.meta.glob<{ default: string }>(
@@ -22,6 +24,13 @@ const galleryModules = import.meta.glob<{ default: string }>(
 );
 
 const featuredOrder = [
+  "fila-1-columna-1.png",
+  "fila-1-columna-2.png",
+  "fila-1-columna-3.png",
+  "fila-1-columna-4.png",
+  "fila-1-columna-5.png",
+  "fila-1-columna-6.png",
+  "fila-1-columna-7.png",
   "2025 (4).jpg",
   "2026.jpg",
   "16 de septiembre 2025.jpg",
@@ -35,6 +44,21 @@ const gallerySlotLabels = [
   "Convenios y tecnologia",
   "Red de aliados",
 ];
+
+const imageTitles: Record<string, string> = {
+  "fila-1-columna-1.png": "Feria Laboral UTP - Stand Centro Empresarial",
+  "fila-1-columna-2.png": "Orientación y Empleabilidad UTP",
+  "fila-1-columna-3.png": "Networking con Empresas Aliadas",
+  "fila-1-columna-4.png": "Presencia Institucional y Convocatorias",
+  "fila-1-columna-5.png": "Comunidad Estudiantil y Talento Joven",
+  "fila-1-columna-6.png": "Asesoría Profesional Personalizada",
+  "fila-1-columna-7.png": "Vinculación y Oportunidades Laborales",
+  "2025 (4).jpg": "Participación Institucional en Ferias",
+  "2026.jpg": "Capacitación Aplicada y Dinámicas",
+  "16 de septiembre 2025.jpg": "Convenios y Alianzas Educativas",
+  "2025.jpg": "Talleres y Formación Empresarial",
+  "5 de septiembre 2025.jpg": "Encuentros con Profesionales",
+};
 
 const galleryImages = Object.entries(galleryModules)
   .filter(([path]) => {
@@ -56,10 +80,14 @@ const galleryImages = Object.entries(galleryModules)
 
     return fileB.localeCompare(fileA, "es", { numeric: true });
   })
-  .map(([path, module]) => ({
-    src: module.default,
-    filename: decodeURIComponent(path.split("/").pop() ?? ""),
-  }));
+  .map(([path, module]) => {
+    const filename = decodeURIComponent(path.split("/").pop() ?? "");
+    return {
+      src: module.default,
+      filename,
+      title: imageTitles[filename] || "Actividad institucional",
+    };
+  });
 
 type GalleryCardImage = {
   src: string;
@@ -71,59 +99,75 @@ const GalleryTile = ({
   image,
   className,
   delay = 0,
+  onClick,
 }: {
   image: GalleryCardImage;
   className: string;
   delay?: number;
+  onClick?: () => void;
 }) => (
   <ScrollReveal
     delay={delay}
-    className={`group relative overflow-hidden rounded-lg border border-border bg-card shadow-sm ${className}`}
+    className={`group relative overflow-hidden rounded-lg border border-border bg-card shadow-sm cursor-pointer ${className}`}
   >
-    <AnimatePresence initial={false} mode="sync">
-      <motion.img
-        key={image.src}
-        src={image.src}
-        alt={image.title}
-        loading="lazy"
-        decoding="async"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.9, ease: "easeInOut" }}
-        className="absolute inset-0 h-full w-full object-cover"
-      />
-    </AnimatePresence>
-    <div className="absolute inset-0 bg-gradient-to-t from-black/72 via-black/12 to-transparent opacity-90 transition-opacity group-hover:opacity-100" />
-    <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
-      <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-md bg-accent text-accent-foreground">
-        <ImageIcon className="h-5 w-5" />
+    <div className="h-full w-full" onClick={onClick}>
+      <AnimatePresence initial={false} mode="sync">
+        <motion.img
+          key={image.src}
+          src={image.src}
+          alt={image.title}
+          loading="lazy"
+          decoding="async"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.9, ease: "easeInOut" }}
+          className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+        />
+      </AnimatePresence>
+      <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent opacity-90 transition-opacity group-hover:opacity-100" />
+      <div className="absolute top-4 right-4 z-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-black/60 text-white backdrop-blur-sm">
+          <Maximize2 className="h-4 w-4" />
+        </div>
       </div>
-      <h3 className="text-xl font-extrabold">{image.title}</h3>
-      <p className="mt-1 text-xs font-semibold uppercase tracking-[0.14em] text-white/70">
-        Centro Empresarial
-      </p>
+      <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
+        <div className="mb-3 icon-badge icon-badge-md icon-badge-solid bg-accent text-accent-foreground">
+          <ImageIcon className="h-5 w-5" />
+        </div>
+        <h3 className="text-xl font-extrabold">{image.title}</h3>
+        <p className="mt-1 text-xs font-semibold uppercase tracking-[0.14em] text-white/70">
+          Centro Empresarial
+        </p>
+      </div>
     </div>
   </ScrollReveal>
 );
 
 const Benefits = () => {
   const [galleryIndex, setGalleryIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<GalleryCardImage | null>(null);
 
   useEffect(() => {
+    if (isPaused || selectedImage) return;
+
     const timer = window.setInterval(() => {
       setGalleryIndex((current) => (current + 1) % galleryImages.length);
     }, 6000);
 
     return () => window.clearInterval(timer);
-  }, []);
+  }, [isPaused, selectedImage]);
 
   const visibleGalleryImages = useMemo(
     () =>
-      gallerySlotLabels.map((title, index) => {
+      gallerySlotLabels.map((defaultLabel, index) => {
         const image =
           galleryImages[(galleryIndex + index) % galleryImages.length];
-        return { ...image, title };
+        return {
+          ...image,
+          title: imageTitles[image.filename] || defaultLabel,
+        };
       }),
     [galleryIndex],
   );
@@ -336,7 +380,11 @@ const Benefits = () => {
         </div>
       </section>
 
-      <section className="bg-muted/30 py-14 md:py-20">
+      <section
+        className="bg-muted/30 py-14 md:py-20"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+      >
         <div className="container mx-auto px-6 lg:px-12">
           <ScrollReveal className="mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end">
             <div>
@@ -380,6 +428,7 @@ const Benefits = () => {
             <GalleryTile
               image={visibleGalleryImages[0]}
               className="min-h-[430px] lg:min-h-[520px]"
+              onClick={() => setSelectedImage(visibleGalleryImages[0])}
             />
             <div className="grid gap-5 sm:grid-cols-2">
               {visibleGalleryImages.slice(1).map((image, index) => (
@@ -388,12 +437,107 @@ const Benefits = () => {
                   image={image}
                   delay={(index + 1) * 0.04}
                   className={`min-h-[230px] ${index === 2 ? "sm:col-span-2" : ""}`}
+                  onClick={() => setSelectedImage(image)}
                 />
               ))}
             </div>
           </div>
+
+          {/* Carrusel de miniaturas para exploración rápida */}
+          <div className="mt-8 border-t border-border/60 pt-6">
+            <div className="mb-3 flex items-center justify-between">
+              <p className="text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">
+                Explorar fotos destacadas ({featuredOrder.length})
+              </p>
+              <p className="text-xs text-muted-foreground">
+                Haz clic en una foto para verla en grande
+              </p>
+            </div>
+            <div className="flex items-center gap-3 overflow-x-auto pb-3 pt-1 scrollbar-thin">
+              {galleryImages.slice(0, 14).map((img, idx) => {
+                const isCurrentFirst =
+                  visibleGalleryImages[0]?.filename === img.filename;
+                return (
+                  <button
+                    key={img.filename}
+                    type="button"
+                    onClick={() => setGalleryIndex(idx)}
+                    className={`group relative h-16 w-16 sm:h-20 sm:w-20 flex-shrink-0 overflow-hidden rounded-lg border-2 transition-all ${
+                      isCurrentFirst
+                        ? "border-accent ring-2 ring-accent/60 scale-105 shadow-md"
+                        : "border-border/70 opacity-60 hover:opacity-100 hover:border-accent/40"
+                    }`}
+                    title={img.title}
+                  >
+                    <img
+                      src={img.src}
+                      alt={img.title}
+                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-black/15 group-hover:bg-transparent" />
+                  </button>
+                );
+              })}
+            </div>
+          </div>
         </div>
       </section>
+
+      {/* Modal Lightbox */}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm p-4 sm:p-6"
+            onClick={() => setSelectedImage(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.94, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.94, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="relative max-h-[92vh] max-w-4xl w-full overflow-hidden rounded-2xl bg-card border border-border shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                type="button"
+                onClick={() => setSelectedImage(null)}
+                className="absolute top-4 right-4 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full bg-black/70 text-white hover:bg-black transition-colors"
+                aria-label="Cerrar imagen"
+              >
+                <X className="h-5 w-5" />
+              </button>
+              <div className="flex items-center justify-center bg-black/50 max-h-[72vh] p-2">
+                <img
+                  src={selectedImage.src}
+                  alt={selectedImage.title}
+                  className="max-h-[68vh] w-auto max-w-full object-contain rounded-lg"
+                />
+              </div>
+              <div className="p-4 sm:p-6 bg-card border-t border-border flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                <div>
+                  <h4 className="text-lg font-bold text-foreground">
+                    {selectedImage.title}
+                  </h4>
+                  <p className="text-xs uppercase tracking-wider text-muted-foreground">
+                    Galería Institucional • Centro Empresarial
+                  </p>
+                </div>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => setSelectedImage(null)}
+                >
+                  Cerrar
+                </Button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

@@ -69,7 +69,7 @@ const plans: MembershipPlan[] = [
   },
   {
     name: "Profesional",
-    price: "S/ 480",
+    price: "S/ 780",
     period: "anual",
     audience:
       "Orientada a profesionales que buscan formacion continua, beneficios academicos y acceso a eventos especializados.",
@@ -342,8 +342,8 @@ const Memberships = () => {
                     className="group flex cursor-pointer items-center justify-between rounded-xl border border-white/10 bg-white/5 p-3 transition-all duration-300 hover:border-emerald-400/40 hover:bg-white/10"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-emerald-500/20 text-emerald-300">
-                        <GraduationCap className="h-5 w-5" />
+                      <div className="icon-badge icon-badge-inverse icon-badge-md">
+                        <GraduationCap />
                       </div>
                       <div>
                         <div className="flex items-center gap-1.5">
@@ -371,8 +371,8 @@ const Memberships = () => {
                     className="group relative flex cursor-pointer items-center justify-between rounded-xl border border-accent/60 bg-accent/15 p-3 shadow-lg shadow-accent/10 transition-all duration-300 hover:border-accent hover:bg-accent/20"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-accent text-accent-foreground font-black">
-                        <UserRound className="h-5 w-5" />
+                      <div className="icon-badge icon-badge-md icon-badge-solid bg-accent text-accent-foreground">
+                        <UserRound />
                       </div>
                       <div>
                         <div className="flex items-center gap-1.5">
@@ -389,7 +389,7 @@ const Memberships = () => {
                       </div>
                     </div>
                     <div className="text-right">
-                      <span className="text-sm font-extrabold text-accent">S/ 480</span>
+                      <span className="text-sm font-extrabold text-accent">S/ 780</span>
                       <p className="text-[10px] text-white/70">/anual</p>
                     </div>
                   </div>
@@ -400,8 +400,8 @@ const Memberships = () => {
                     className="group flex cursor-pointer items-center justify-between rounded-xl border border-white/10 bg-white/5 p-3 transition-all duration-300 hover:border-emerald-400/40 hover:bg-white/10"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-emerald-500/20 text-emerald-300">
-                        <Briefcase className="h-5 w-5" />
+                      <div className="icon-badge icon-badge-inverse icon-badge-md">
+                        <Briefcase />
                       </div>
                       <div>
                         <div className="flex items-center gap-1.5">
@@ -445,18 +445,27 @@ const Memberships = () => {
       </section>
 
       {/* ─── MEMBERSHIP CARDS ─── */}
-      <section id="planes-membresia" className="bg-background py-12 md:py-16">
-        <div className="container mx-auto px-6 lg:px-12">
+      <section
+        id="planes-membresia"
+        className="relative overflow-hidden bg-gradient-to-b from-[#e6f0ea] via-[#edf4ef] to-[#e3eee7] py-12 md:py-16"
+      >
+        {/* Patrón sutil + bordes para diferenciar la sección de planes */}
+        <div className="pointer-events-none absolute inset-0 opacity-[0.35] [background-image:radial-gradient(hsl(var(--primary)/0.18)_1px,transparent_1px)] [background-size:22px_22px]" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-primary via-accent to-primary" />
+        <div className="pointer-events-none absolute -right-24 top-10 h-72 w-72 rounded-full bg-accent/15 blur-3xl" />
+        <div className="pointer-events-none absolute -left-24 bottom-0 h-72 w-72 rounded-full bg-primary/10 blur-3xl" />
+        <div className="container relative mx-auto px-6 lg:px-12">
           <ScrollReveal className="mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end">
             <div>
-              <p className="mb-2 text-sm font-bold uppercase tracking-[0.2em] text-primary">
-                Membresía anual
+              <p className="mb-2 inline-flex items-center gap-2 rounded-full bg-primary px-3 py-1 text-xs font-bold uppercase tracking-[0.2em] text-primary-foreground">
+                <Crown className="h-3.5 w-3.5 text-accent" />
+                Planes e inscripción anual
               </p>
               <h2 className="text-3xl font-extrabold leading-tight text-corporate md:text-5xl">
                 Beneficios por tipo de asociado
               </h2>
             </div>
-            <p className="max-w-xl text-base leading-7 text-muted-foreground">
+            <p className="max-w-xl text-base leading-7 text-foreground/70">
               Cada plan responde a una necesidad distinta: apoyo académico,
               desarrollo profesional o crecimiento empresarial.
             </p>
@@ -468,7 +477,7 @@ const Memberships = () => {
               <ScrollReveal key={plan.name} delay={index * 0.08}>
                 {/* ── Card wrapper: pl-[45%] pushes ALL content to the right ── */}
                 <div
-                  className={`group relative mt-24 flex min-h-[520px] flex-col justify-between overflow-visible rounded-2xl border bg-background py-6 pl-[45%] pr-5 shadow-sm
+                  className={`group relative mt-24 flex min-h-[520px] flex-col justify-between overflow-visible rounded-2xl border bg-white py-6 pl-[45%] pr-5 shadow-md
                     transition-all duration-300 ease-out
                     hover:scale-[1.05] hover:shadow-[0_20px_60px_-12px_rgba(0,0,0,0.25)]
                     ${plan.featured ? "border-accent ring-2 ring-accent/40" : "border-border"}`}
@@ -523,7 +532,7 @@ const Memberships = () => {
                   <h3 className="text-2xl font-extrabold text-corporate lg:text-3xl">
                     {plan.name}
                   </h3>
-                  <div className="mt-1 flex items-end gap-1">
+                  <div className="mt-2 flex w-fit items-end gap-1 rounded-xl bg-primary/[0.07] px-3 py-1.5 ring-1 ring-inset ring-primary/15">
                     <span className="text-3xl font-extrabold text-corporate lg:text-4xl">
                       {plan.price}
                     </span>
@@ -616,8 +625,8 @@ const Memberships = () => {
                     key={item.title}
                     className="flex items-center gap-4 rounded-md border border-border bg-background p-4 shadow-sm"
                   >
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-primary text-primary-foreground">
-                      <item.icon className="h-5 w-5" aria-hidden="true" />
+                    <div className="icon-badge icon-badge-md icon-badge-solid">
+                      <item.icon aria-hidden="true" />
                     </div>
                     <div>
                       <h4 className="text-base font-extrabold text-corporate">

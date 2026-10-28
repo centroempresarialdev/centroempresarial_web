@@ -18,8 +18,34 @@ import {
   Users,
   Loader2,
   CheckCircle2,
+  ExternalLink,
+  Clock,
 } from "lucide-react";
 import { leadsService } from "@/services";
+import { contactInfo } from "@/data/site";
+
+const processSteps = [
+  {
+    icon: UserCheck,
+    title: "Datos claros",
+    text: "Nombre, teléfono y correo.",
+  },
+  {
+    icon: Building2,
+    title: "Perfil correcto",
+    text: "Estudiante, profesional, institución pública o empresa privada.",
+  },
+  {
+    icon: MessageCircle,
+    title: "Cierre directo",
+    text: "Mensaje listo para WhatsApp.",
+  },
+  {
+    icon: Users,
+    title: "Acompañamiento",
+    text: "Nuestro equipo te brinda el soporte que necesitas.",
+  },
+];
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -247,8 +273,53 @@ const Contact: React.FC = () => {
 
   return (
     <div ref={sectionRef} className="relative w-full bg-[#f8f9fa]">
-      {/* ─── HERO DE CONTACTO (100vh - HEADER) ─── */}
-      <section className="relative w-full min-h-screen min-h-[100dvh] flex flex-col justify-center overflow-hidden bg-[#f8f9fa] pt-24 pb-12 sm:pt-28 sm:pb-14 lg:pt-[104px] lg:pb-12">
+      {/* ─── PROCESO TRANSPARENTE (antes del formulario para generar confianza) ─── */}
+      <section className="relative w-full bg-white pt-28 pb-10 sm:pt-32 md:pb-12 lg:pt-36">
+        <div className="container mx-auto px-6 lg:px-12">
+          <div className="mb-8 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+            <div>
+              <span className="text-sm font-bold uppercase tracking-[0.18em] text-primary">
+                ¿Cómo podemos ayudarte?
+              </span>
+              <h2 className="mt-2 text-2xl font-extrabold text-[#1a4a38] sm:text-3xl md:text-4xl">
+                Proceso transparente y atención dedicada
+              </h2>
+            </div>
+            <p className="max-w-md text-sm leading-relaxed text-gray-600">
+              Cuatro pasos simples para que tu solicitud llegue completa y
+              recibas una respuesta directa de nuestro equipo.
+            </p>
+          </div>
+
+          <div
+            ref={bottomGridRef}
+            className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4"
+          >
+            {processSteps.map((step, index) => (
+              <div
+                key={step.title}
+                className="group relative flex flex-col rounded-2xl border border-gray-200/80 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-md"
+              >
+                <span className="absolute right-5 top-5 text-xs font-extrabold text-primary/30">
+                  0{index + 1}
+                </span>
+                <div className="icon-badge icon-badge-md mb-3 group-hover:bg-primary group-hover:text-primary-foreground">
+                  <step.icon />
+                </div>
+                <h3 className="text-base font-bold text-gray-900 md:text-base lg:text-base">
+                  {step.title}
+                </h3>
+                <p className="mt-1.5 text-xs leading-relaxed text-gray-600">
+                  {step.text}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── FORMULARIO DE MEMBRESÍA ─── */}
+      <section className="relative w-full flex flex-col justify-center overflow-hidden bg-[#f8f9fa] py-12 sm:py-14 lg:py-12">
         {/* Elementos decorativos sutiles de fondo */}
         <div className="pointer-events-none absolute -left-20 top-1/4 h-96 w-96 rounded-full bg-[#1a4a38]/5 blur-3xl" />
         <div className="pointer-events-none absolute -right-20 top-1/2 h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
@@ -277,8 +348,8 @@ const Contact: React.FC = () => {
               {/* Párrafo descriptivo con tarjeta visual integrada */}
               <div className="mt-4 rounded-2xl border border-[#1a4a38]/15 bg-white/85 p-4 shadow-sm backdrop-blur-md transition-all duration-300 hover:bg-white/95 hover:shadow-md">
                 <div className="flex items-start gap-3">
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#1a4a38]/10 text-[#1a4a38]">
-                    <Sparkles className="h-4 w-4" />
+                  <div className="icon-badge icon-badge-sm">
+                    <Sparkles />
                   </div>
                   <p className="text-xs sm:text-sm font-medium leading-relaxed text-[#1a4a38]/90">
                     Completa los datos principales y la web preparará un mensaje
@@ -338,8 +409,8 @@ const Contact: React.FC = () => {
               <div className="relative rounded-2xl border border-gray-200/80 bg-white p-5 sm:p-6 lg:p-5 xl:p-6 shadow-xl">
                 {/* Cabecera del formulario */}
                 <div className="mb-4 flex items-center gap-3 border-b border-gray-100 pb-3">
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gray-100 text-[#1a4a38]">
-                    <MessageCircle className="h-4 w-4" />
+                  <div className="icon-badge icon-badge-md">
+                    <MessageCircle />
                   </div>
                   <div>
                     <h2 className="text-lg sm:text-xl font-extrabold text-gray-900">
@@ -533,138 +604,117 @@ const Contact: React.FC = () => {
         </div>
       </section>
 
-      {/* ─── SECCIÓN INFERIOR (Beneficios y Contacto: Grid 5 Columnas) ─── */}
+      {/* ─── UBICACIÓN Y CANALES DE CONTACTO ─── */}
       <section className="relative w-full border-t border-gray-200/80 bg-white py-14 md:py-20">
         <div className="container mx-auto px-6 lg:px-12">
-          {/* Subtítulo superior */}
           <div className="mb-8">
-            <span className="text-sm font-bold tracking-wider text-gray-500">
-              — ¿Cómo podemos ayudarte?
+            <span className="text-sm font-bold uppercase tracking-[0.18em] text-primary">
+              Visítanos o escríbenos
             </span>
-            <h2 className="mt-1 text-2xl font-extrabold text-[#1a4a38] sm:text-3xl">
-              Proceso transparente y atención dedicada
+            <h2 className="mt-2 text-2xl font-extrabold text-[#1a4a38] sm:text-3xl md:text-4xl">
+              Ubicación y canales oficiales
             </h2>
           </div>
 
-          {/* Grid de 5 Columnas (1 a 4 beneficios + 5 contacto dark) */}
-          <div
-            ref={bottomGridRef}
-            className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5"
-          >
-            {/* Tarjeta 1 */}
-            <div className="flex flex-col justify-between rounded-2xl border border-gray-200/80 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#1a4a38]/40 hover:shadow-md">
-              <div>
-                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-[#1a4a38]/10 text-[#1a4a38]">
-                  <UserCheck className="h-5 w-5" />
+          <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
+            {/* Columna izquierda: canales apilados en 1 columna */}
+            <div className="flex flex-col gap-4">
+              <a
+                href={`https://wa.me/${contactInfo.whatsapp}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-4 rounded-2xl border border-gray-200/80 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md"
+              >
+                <div className="icon-badge icon-badge-lg">
+                  <MessageCircle />
                 </div>
-                <h3 className="text-base font-bold text-gray-900">
-                  Datos claros
-                </h3>
-                <p className="mt-1.5 text-xs leading-relaxed text-gray-600">
-                  Nombre, teléfono y correo.
-                </p>
-              </div>
-            </div>
-
-            {/* Tarjeta 2 */}
-            <div className="flex flex-col justify-between rounded-2xl border border-gray-200/80 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#1a4a38]/40 hover:shadow-md">
-              <div>
-                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-[#1a4a38]/10 text-[#1a4a38]">
-                  <Building2 className="h-5 w-5" />
-                </div>
-                <h3 className="text-base font-bold text-gray-900">
-                  Perfil correcto
-                </h3>
-                <p className="mt-1.5 text-xs leading-relaxed text-gray-600">
-                  Estudiante, profesional, institución pública o empresa privada.
-                </p>
-              </div>
-            </div>
-
-            {/* Tarjeta 3 */}
-            <div className="flex flex-col justify-between rounded-2xl border border-gray-200/80 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#1a4a38]/40 hover:shadow-md">
-              <div>
-                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-[#1a4a38]/10 text-[#1a4a38]">
-                  <MessageCircle className="h-5 w-5" />
-                </div>
-                <h3 className="text-base font-bold text-gray-900">
-                  Cierre directo
-                </h3>
-                <p className="mt-1.5 text-xs leading-relaxed text-gray-600">
-                  Mensaje listo para WhatsApp.
-                </p>
-              </div>
-            </div>
-
-            {/* Tarjeta 4 */}
-            <div className="flex flex-col justify-between rounded-2xl border border-gray-200/80 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#1a4a38]/40 hover:shadow-md">
-              <div>
-                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-[#1a4a38]/10 text-[#1a4a38]">
-                  <Users className="h-5 w-5" />
-                </div>
-                <h3 className="text-base font-bold text-gray-900">
-                  Acompañamiento
-                </h3>
-                <p className="mt-1.5 text-xs leading-relaxed text-gray-600">
-                  Nuestro equipo te brinda el soporte que necesitas.
-                </p>
-              </div>
-            </div>
-
-            {/* Columna 5: Tarjeta de Contacto Dark */}
-            <div className="relative overflow-hidden rounded-2xl bg-[#1a4a38] p-5 text-white shadow-lg transition-all duration-300 hover:-translate-y-1 sm:col-span-2 lg:col-span-1">
-              {/* Marca de agua sutil del isotipo 'e' de Centro Empresarial */}
-              <div className="pointer-events-none absolute -bottom-10 -right-6 select-none font-sans text-[150px] font-extrabold leading-none text-white/[0.08]">
-                e
-              </div>
-
-              <div className="relative z-10 flex h-full flex-col justify-between">
-                <div>
-                  <h3 className="text-lg font-extrabold text-white">
-                    Contáctanos
-                  </h3>
-                  <p className="mt-1 text-xs text-white/75">
-                    Canales oficiales de atención
+                <div className="min-w-0">
+                  <p className="text-[11px] font-bold uppercase tracking-wider text-gray-500">
+                    WhatsApp
                   </p>
+                  <p className="text-base font-bold text-gray-900">
+                    {contactInfo.phone}
+                  </p>
+                </div>
+                <ArrowRight className="ml-auto h-4 w-4 text-primary transition-transform group-hover:translate-x-1" />
+              </a>
 
-                  <div className="mt-4 space-y-3">
-                    <a
-                      href="https://wa.me/51906491859"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2.5 text-xs font-semibold text-white/90 hover:text-white transition-colors"
-                    >
-                      <Phone className="h-3.5 w-3.5 shrink-0 text-accent" />
-                      <span>+51 906 491 859</span>
-                    </a>
+              <a
+                href={`mailto:${contactInfo.email}`}
+                className="group flex items-center gap-4 rounded-2xl border border-gray-200/80 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md"
+              >
+                <div className="icon-badge icon-badge-lg">
+                  <Mail />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-[11px] font-bold uppercase tracking-wider text-gray-500">
+                    Correo electrónico
+                  </p>
+                  <p className="break-all text-sm font-bold text-gray-900 sm:text-base">
+                    {contactInfo.email}
+                  </p>
+                </div>
+              </a>
 
-                    <a
-                      href="mailto:centroempresarialsac@gmail.com"
-                      className="flex items-start gap-2.5 text-xs font-semibold text-white/90 hover:text-white transition-colors break-all"
-                    >
-                      <Mail className="h-3.5 w-3.5 shrink-0 text-accent mt-0.5" />
-                      <span>centroempresarialsac@gmail.com</span>
-                    </a>
-
-                    <div className="flex items-start gap-2.5 text-xs text-white/80">
-                      <MapPin className="h-3.5 w-3.5 shrink-0 text-accent mt-0.5" />
-                      <span>
+              <div className="relative flex-1 overflow-hidden rounded-2xl bg-[#1a4a38] p-5 text-white shadow-lg">
+                <div className="pointer-events-none absolute -bottom-10 -right-6 select-none font-sans text-[150px] font-extrabold leading-none text-white/[0.08]">
+                  e
+                </div>
+                <div className="relative z-10 space-y-4">
+                  <div className="flex items-start gap-4">
+                    <div className="icon-badge icon-badge-inverse icon-badge-lg">
+                      <MapPin />
+                    </div>
+                    <div>
+                      <p className="text-[11px] font-bold uppercase tracking-wider text-accent">
+                        Dirección
+                      </p>
+                      <p className="text-sm font-semibold leading-relaxed text-white/90">
                         Calle Castrovirreyna 323, tercer piso, Ica, Perú
-                      </span>
+                      </p>
                     </div>
                   </div>
-                </div>
-
-                <div className="mt-5 border-t border-white/15 pt-3">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-accent">
-                    Atención personalizada
-                  </span>
+                  <div className="flex items-start gap-4">
+                    <div className="icon-badge icon-badge-inverse icon-badge-lg">
+                      <Clock />
+                    </div>
+                    <div>
+                      <p className="text-[11px] font-bold uppercase tracking-wider text-accent">
+                        Atención
+                      </p>
+                      <p className="text-sm font-semibold leading-relaxed text-white/90">
+                        Atención personalizada
+                      </p>
+                    </div>
+                  </div>
+                  <a
+                    href={contactInfo.mapUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-xl bg-accent px-4 py-2.5 text-xs font-bold text-accent-foreground transition-all hover:brightness-110"
+                  >
+                    Cómo llegar
+                    <ExternalLink className="h-3.5 w-3.5" />
+                  </a>
                 </div>
               </div>
+            </div>
+
+            {/* Columna derecha: mapa grande */}
+            <div className="relative min-h-[360px] overflow-hidden rounded-2xl border border-gray-200/80 bg-gray-100 shadow-md sm:min-h-[420px] lg:col-span-2 lg:min-h-[480px]">
+              <iframe
+                title="Ubicación Centro Empresarial - Calle Castrovirreyna 323, Ica"
+                src={contactInfo.mapEmbedUrl}
+                className="absolute inset-0 h-full w-full border-0"
+                loading="lazy"
+                allowFullScreen
+                referrerPolicy="no-referrer-when-downgrade"
+              />
             </div>
           </div>
         </div>
       </section>
+
     </div>
   );
 };

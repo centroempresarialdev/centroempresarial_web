@@ -125,7 +125,7 @@ const memberships = [
   {
     icon: UserRound,
     name: "Profesionales",
-    price: "S/ 480",
+    price: "S/ 780",
     period: "anual",
     description:
       "Para profesionales que desean formación continua, eventos y networking especializado.",

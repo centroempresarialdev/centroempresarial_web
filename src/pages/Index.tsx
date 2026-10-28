@@ -188,7 +188,7 @@ const Index = () => {
         <div className="pointer-events-none absolute -bottom-20 -left-20 h-[500px] w-[500px] rounded-full bg-accent/12 blur-3xl" />
         <div className="container relative z-10 mx-auto px-6 lg:px-12">
           <ScrollReveal className="mx-auto mb-12 max-w-3xl text-center">
-            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-accent/15 text-accent">
+            <div className="mx-auto mb-4 icon-badge icon-badge-lg icon-badge-accent">
               <Zap className="h-6 w-6" />
             </div>
             <p className="mb-3 text-sm font-bold uppercase tracking-[0.2em] text-primary">
@@ -213,7 +213,7 @@ const Index = () => {
                   className="group relative flex flex-col items-center overflow-hidden rounded-xl border border-border bg-card p-8 text-center shadow-sm transition-all duration-500 hover:-translate-y-1.5 hover:border-primary/30 hover:shadow-corporate cursor-pointer"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-primary-dark to-primary opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                  <div className="relative z-10 mb-5 flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 text-primary transition-all duration-500 group-hover:bg-white/20 group-hover:text-white group-hover:scale-110">
+                  <div className="relative z-10 mb-5 icon-badge icon-badge-lg transition-all duration-500 group-hover:bg-white/20 group-hover:text-white group-hover:ring-white/20 group-hover:scale-110">
                     <service.icon className="h-7 w-7" />
                   </div>
                   <h3 className="relative z-10 text-lg font-bold text-corporate transition-colors duration-500 group-hover:text-white">
@@ -255,8 +255,8 @@ const Index = () => {
                     />
                   </div>
 
-                  <div className="relative z-10 -mt-7 ml-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary text-primary-foreground shadow-md transition-transform duration-300 ">
-                    <pillar.icon className="h-7 w-7" strokeWidth={2.2} />
+                  <div className="relative z-10 -mt-7 ml-6 icon-badge icon-badge-lg icon-badge-solid shadow-md transition-transform duration-300">
+                    <pillar.icon className="h-7 w-7" />
                   </div>
 
                   <div className="relative z-10 flex flex-1 flex-col justify-between p-6 pt-4">
@@ -379,7 +379,7 @@ const Index = () => {
                   key={item.label}
                   className="flex items-center gap-4 rounded-lg border border-border bg-background p-5 shadow-sm"
                 >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-md bg-accent/15 text-accent">
+                  <div className="icon-badge icon-badge-lg icon-badge-accent">
                     <item.icon className="h-6 w-6" />
                   </div>
                   <div>
