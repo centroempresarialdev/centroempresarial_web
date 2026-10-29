@@ -8,7 +8,7 @@ import Layout from "@/components/Layout";
 
 const Index = lazy(() => import("@/pages/Index"));
 const Memberships = lazy(() => import("@/pages/Memberships"));
-const Benefits = lazy(() => import("@/pages/Benefits"));
+const Eventos = lazy(() => import("@/pages/Eventos"));
 const ServicesPage = lazy(() => import("@/pages/ServicesPage"));
 const AdvisoryThesis = lazy(() => import("@/pages/AdvisoryThesis"));
 const Partners = lazy(() => import("@/pages/Partners"));
@@ -42,7 +42,7 @@ const App = () => (
             <Route element={<Layout />}>
               <Route path="/" element={<Index />} />
               <Route path="/membresias" element={<Memberships />} />
-              <Route path="/eventos" element={<Benefits />} />
+              <Route path="/eventos" element={<Eventos />} />
               <Route path="/beneficios" element={<Navigate to="/eventos" replace />} />
               <Route path="/servicios" element={<ServicesPage />} />
               <Route path="/asesoria-tesis" element={<AdvisoryThesis />} />

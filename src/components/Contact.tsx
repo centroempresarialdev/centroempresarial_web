@@ -1,20 +1,14 @@
 import React, { useState, useEffect, useRef, FormEvent } from "react";
 import { useSearchParams } from "react-router-dom";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import advisorImg from "@/assets/hero/asesora-contacto.png";
 import {
   Sparkles,
   ArrowRight,
   MessageCircle,
-  Phone,
   Mail,
   MapPin,
   Building2,
-  FileText,
   UserCheck,
-  Send,
-  Headphones,
   Users,
   Loader2,
   CheckCircle2,
@@ -46,8 +40,6 @@ const processSteps = [
     text: "Nuestro equipo te brinda el soporte que necesitas.",
   },
 ];
-
-gsap.registerPlugin(ScrollTrigger);
 
 interface FormDataState {
   name: string;
@@ -136,58 +128,6 @@ const Contact: React.FC = () => {
       }
     }
   }, [searchParams]);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Bloque izquierdo entrando desde la izquierda
-      if (leftColRef.current) {
-        gsap.fromTo(
-          leftColRef.current,
-          { opacity: 0, x: -30 },
-          { opacity: 1, x: 0, duration: 0.9, ease: "power2.out" },
-        );
-      }
-
-      // Imagen de asesora entrando en el centro con fade y suave lift
-      if (imageRef.current) {
-        gsap.fromTo(
-          imageRef.current,
-          { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 0.95, delay: 0.1, ease: "power2.out" },
-        );
-      }
-
-      // Tarjeta del formulario entrando desde la derecha
-      if (formCardRef.current) {
-        gsap.fromTo(
-          formCardRef.current,
-          { opacity: 0, x: 30 },
-          { opacity: 1, x: 0, duration: 0.9, delay: 0.18, ease: "power2.out" },
-        );
-      }
-
-      // Tarjetas inferiores con ScrollTrigger y stagger 0.15s
-      if (bottomGridRef.current) {
-        gsap.fromTo(
-          bottomGridRef.current.children,
-          { opacity: 0, y: 35 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.75,
-            stagger: 0.15,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: bottomGridRef.current,
-              start: "top 85%",
-            },
-          },
-        );
-      }
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -390,14 +330,14 @@ const Contact: React.FC = () => {
                   WebkitMaskImage:
                     "linear-gradient(to bottom, black 0%, black 72%, transparent 87%)",
                 }}
-                className="relative z-10 h-[400px] sm:h-[520px] md:h-[520px] lg:h-[540px] xl:h-[600px] 2xl:h-[640px] w-auto max-w-full object-contain drop-shadow-2xl transition-transform duration-300 hover:scale-[1.02]"
+                className="relative z-10 h-[400px] sm:h-[520px] md:h-[520px] lg:h-[540px] xl:h-[600px] 2xl:h-[640px] w-auto max-w-full object-contain drop-shadow-2xl"
               />
 
               {/* Puesto / Rol de la asesora */}
-              <div className="relative z-20 -mt-12 sm:-mt-16 lg:-mt-20 -translate-x-5 sm:-translate-x-8 mb-3 flex flex-col items-center text-center">
-                <div className="inline-flex items-center gap-2 rounded-full border border-[#1a4a38]/20 bg-white/95 px-4 py-1.5 shadow-md backdrop-blur-md">
-                  <span className="h-2 w-2 rounded-full bg-[#1a4a38]" />
-                  <span className="text-xs sm:text-sm font-bold text-[#1a4a38]">
+              <div className="relative z-20 -mt-20 sm:-mt-28 lg:-mt-32 -translate-x-5 sm:-translate-x-8 mb-3 flex flex-col items-center text-center">
+                <div className="inline-flex items-center gap-2.5 rounded-full border border-[#1a4a38]/25 bg-white/95 px-6 py-2.5 shadow-lg backdrop-blur-md">
+                  <span className="h-2.5 w-2.5 rounded-full bg-[#1a4a38]" />
+                  <span className="text-sm sm:text-base font-extrabold text-[#1a4a38]">
                     Líder de Gestión Empresarial y TI
                   </span>
                 </div>
@@ -667,10 +607,10 @@ const Contact: React.FC = () => {
                     </div>
                     <div>
                       <p className="text-[11px] font-bold uppercase tracking-wider text-accent">
-                        Dirección
+                        Oficina y Atención Presencial
                       </p>
                       <p className="text-sm font-semibold leading-relaxed text-white/90">
-                        Calle Castrovirreyna 323, tercer piso, Ica, Perú
+                        {contactInfo.address}
                       </p>
                     </div>
                   </div>
@@ -680,22 +620,33 @@ const Contact: React.FC = () => {
                     </div>
                     <div>
                       <p className="text-[11px] font-bold uppercase tracking-wider text-accent">
-                        Atención
+                        Horario de Atención
                       </p>
                       <p className="text-sm font-semibold leading-relaxed text-white/90">
-                        Atención personalizada
+                        Lunes a Sábado • Previa coordinación y diagnóstico
                       </p>
                     </div>
                   </div>
-                  <a
-                    href={contactInfo.mapUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-xl bg-accent px-4 py-2.5 text-xs font-bold text-accent-foreground transition-all hover:brightness-110"
-                  >
-                    Cómo llegar
-                    <ExternalLink className="h-3.5 w-3.5" />
-                  </a>
+                  <div className="flex flex-wrap items-center gap-2.5 pt-2">
+                    <a
+                      href={contactInfo.mapUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded-xl bg-accent px-4 py-2.5 text-xs font-bold text-accent-foreground transition-all hover:brightness-110"
+                    >
+                      <span>Cómo llegar</span>
+                      <ExternalLink className="h-3.5 w-3.5" />
+                    </a>
+
+                    <button
+                      type="button"
+                      onClick={scrollToForm}
+                      className="inline-flex items-center gap-2 rounded-xl bg-accent px-4 py-2.5 text-xs font-bold text-accent-foreground transition-all hover:brightness-110"
+                    >
+                      <span>Formulario de contacto</span>
+                      <ArrowRight className="h-3.5 w-3.5" />
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -714,7 +665,6 @@ const Contact: React.FC = () => {
           </div>
         </div>
       </section>
-
     </div>
   );
 };

@@ -4,16 +4,12 @@ import { gsap } from "gsap";
 import { contactInfo } from "@/data/site";
 import {
   ArrowRight,
-  BookOpen,
   CalendarDays,
   FileText,
-  Lightbulb,
-  Maximize2,
   MessageCircle,
   Newspaper,
   Sparkles,
   TrendingUp,
-  X,
 } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import { Button } from "@/components/ui/button";
@@ -86,7 +82,8 @@ const flyers: NewsFlyer[] = [
     image: flyerIsoPucp,
     category: "Webinar & Calidad",
     tag: "Instituto para la Calidad PUCP",
-    title: "ISO 9001:2026: Liderazgo que fortalece la cultura de calidad, la ética y la gestión de oportunidades",
+    title:
+      "ISO 9001:2026: Liderazgo que fortalece la cultura de calidad, la ética y la gestión de oportunidades",
     description:
       "Webinar online con el expositor Luis Alberto Fosca Pastor (Consultor y auditor independiente en SIG, ISO 9001, ISO 14001, ISO 45001 y auditor MTPE; docente PUCP). Transmisión en vivo vía Zoom y Facebook Live.",
     date: "Martes 03 de Noviembre de 2026 | 7:00 p.m.",
@@ -168,7 +165,6 @@ const flyers: NewsFlyer[] = [
 ];
 
 const News = () => {
-  const [selectedFlyer, setSelectedFlyer] = useState<NewsFlyer | null>(null);
   const [flyerList, setFlyerList] = useState<NewsFlyer[]>(flyers);
 
   useEffect(() => {
@@ -196,25 +192,12 @@ const News = () => {
         }
       })
       .catch((err) => {
-        console.warn("Backend news no disponible, usando afiches locales:", err);
+        console.warn(
+          "Backend news no disponible, usando afiches locales:",
+          err,
+        );
       });
   }, []);
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setSelectedFlyer(null);
-    };
-    if (selectedFlyer) {
-      document.body.style.overflow = "hidden";
-      window.addEventListener("keydown", handleKeyDown);
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [selectedFlyer]);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const heroBgRef = useRef<HTMLDivElement>(null);
@@ -312,8 +295,8 @@ const News = () => {
             {/* Description */}
             <p className="news-hero-lift mt-5 text-base leading-relaxed text-white/85 sm:text-lg sm:leading-8 max-w-2xl">
               Accede a comunicados oficiales, foros de desarrollo económico,
-              alianzas y publicaciones clave del ecosistema corporativo en Ica
-              y la región.
+              alianzas y publicaciones clave del ecosistema corporativo en Ica y
+              la región.
             </p>
 
             {/* Action Buttons */}
@@ -350,23 +333,6 @@ const News = () => {
                 </a>
               </Button>
             </div>
-
-            {/* Bottom 3 Quick Highlights */}
-            <div className="news-hero-lift relative mt-12 pt-6 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl">
-              <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-white/30 via-white/15 to-transparent" />
-              <div className="flex items-center gap-2.5 text-xs sm:text-sm font-medium text-white/90">
-                <FileText className="h-4 w-4 shrink-0 text-accent" />
-                <span>Comunicados oficiales</span>
-              </div>
-              <div className="flex items-center gap-2.5 text-xs sm:text-sm font-medium text-white/90">
-                <TrendingUp className="h-4 w-4 shrink-0 text-accent" />
-                <span>Foros e innovación</span>
-              </div>
-              <div className="flex items-center gap-2.5 text-xs sm:text-sm font-medium text-white/90">
-                <Sparkles className="h-4 w-4 shrink-0 text-accent" />
-                <span>Publicaciones clave</span>
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -384,8 +350,8 @@ const News = () => {
               </h2>
             </div>
             <p className="max-w-xl text-muted-foreground">
-              Haz clic en cualquier afiche para verlo en alta resolución o
-              consultar directamente por WhatsApp con un asesor.
+              Consulta directamente por WhatsApp con un asesor sobre cualquiera
+              de nuestras convocatorias y comunicados oficiales.
             </p>
           </ScrollReveal>
 
@@ -407,25 +373,14 @@ const News = () => {
                 >
                   <div className="group flex h-full flex-col justify-between overflow-hidden rounded-[1.75rem] border border-border/80 bg-card shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/40 hover:shadow-corporate">
                     {/* Flyer Image Container */}
-                    <div
-                      className="relative aspect-[4/5] w-full cursor-pointer overflow-hidden bg-muted"
-                      onClick={() => setSelectedFlyer(flyer)}
-                    >
+                    <div className="relative aspect-[4/5] w-full overflow-hidden bg-muted">
                       <img
                         src={flyer.image}
                         alt={flyer.title}
                         loading="lazy"
                         decoding="async"
-                        className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+                        className="h-full w-full object-cover object-top"
                       />
-
-                      {/* Hover Overlay */}
-                      <div className="absolute inset-0 flex items-center justify-center bg-primary-dark/25 opacity-0 backdrop-blur-[2px] transition-opacity duration-300 group-hover:opacity-100">
-                        <span className="flex items-center gap-2 rounded-full bg-white/95 px-5 py-2.5 text-xs font-extrabold uppercase tracking-wide text-corporate shadow-xl">
-                          <Maximize2 className="h-4 w-4 text-accent" />
-                          Ampliar afiche
-                        </span>
-                      </div>
 
                       {/* Tag floating badge */}
                       <div className="absolute left-4 top-4 z-10 flex flex-wrap gap-2">
@@ -452,21 +407,12 @@ const News = () => {
                         </p>
                       </div>
 
-                      {/* Buttons */}
-                      <div className="mt-6 flex flex-col gap-3 border-t border-border/70 pt-5 sm:flex-row">
-                        <Button
-                          type="button"
-                          variant="outline"
-                          onClick={() => setSelectedFlyer(flyer)}
-                          className="flex-1 gap-2 border-border/80 hover:bg-muted"
-                        >
-                          <Maximize2 className="h-4 w-4 text-primary" />
-                          Ver completo
-                        </Button>
+                      {/* Button */}
+                      <div className="mt-6 flex border-t border-border/70 pt-5">
                         <Button
                           asChild
                           variant="accent"
-                          className="flex-1 gap-2"
+                          className="w-full gap-2"
                         >
                           <a
                             href={`https://wa.me/${contactInfo.whatsapp}?text=${encodeURIComponent(
@@ -514,82 +460,6 @@ const News = () => {
           </ScrollReveal>
         </div>
       </section>
-
-      {/* ─── FULLSCREEN LIGHTBOX MODAL ─── */}
-      {selectedFlyer && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm animate-in fade-in-0 duration-200"
-          onClick={() => setSelectedFlyer(null)}
-          role="dialog"
-          aria-modal="true"
-        >
-          <div
-            className="relative flex max-h-[94vh] w-full max-w-2xl flex-col overflow-hidden rounded-2xl bg-card shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Close Button */}
-            <button
-              onClick={() => setSelectedFlyer(null)}
-              className="absolute right-3.5 top-3.5 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-black/60 text-white backdrop-blur transition-colors hover:bg-black"
-              aria-label="Cerrar vista previa"
-            >
-              <X className="h-5 w-5" />
-            </button>
-
-            {/* Scrollable image + details */}
-            <div className="overflow-y-auto">
-              <div className="bg-muted/40 p-2 sm:p-4">
-                <img
-                  src={selectedFlyer.image}
-                  alt={selectedFlyer.title}
-                  className="mx-auto max-h-[68vh] w-auto rounded-lg object-contain shadow-md"
-                />
-              </div>
-
-              <div className="border-t border-border/80 bg-card p-6">
-                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-accent">
-                  <CalendarDays className="h-3.5 w-3.5 text-accent" />
-                  <span>{selectedFlyer.date}</span>
-                  <span className="text-muted-foreground">•</span>
-                  <span className="text-muted-foreground">
-                    {selectedFlyer.category}
-                  </span>
-                </div>
-
-                <h3 className="mt-2 text-2xl font-extrabold text-corporate">
-                  {selectedFlyer.title}
-                </h3>
-
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  {selectedFlyer.description}
-                </p>
-
-                <div className="mt-5 flex flex-wrap gap-3">
-                  <Button asChild variant="accent">
-                    <a
-                      href={`https://wa.me/${contactInfo.whatsapp}?text=${encodeURIComponent(
-                        selectedFlyer.whatsappMessage,
-                      )}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="gap-2"
-                    >
-                      <MessageCircle className="h-4 w-4" />
-                      Consultar por WhatsApp
-                    </a>
-                  </Button>
-                  <Button
-                    variant="outline"
-                    onClick={() => setSelectedFlyer(null)}
-                  >
-                    Cerrar
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

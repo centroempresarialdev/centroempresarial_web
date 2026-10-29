@@ -9,7 +9,6 @@ import {
   ShieldCheck,
   BarChart3,
   Target,
-  Sparkles,
   ArrowRight,
   MessageCircle,
   Phone,
@@ -18,13 +17,10 @@ import {
   Award,
   Lightbulb,
   Handshake,
-  Clock,
   Compass,
   Check,
-  Briefcase,
   Newspaper,
 } from "lucide-react";
-import consultingImg from "@/assets/hero/cursos-especializados.jpg";
 import sol1Img from "@/assets/hero/inner-hero-office.jpg";
 import sol2Img from "@/assets/hero/identidad-objetivos.jpg";
 import sol3Img from "@/assets/hero/finanzas-analytics.jpg";
@@ -39,6 +35,7 @@ gsap.registerPlugin(ScrollTrigger);
 const ServicesPage = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
+  const heroBgRef = useRef<HTMLDivElement>(null);
   const ctaBtnRef = useRef<HTMLAnchorElement>(null);
 
   // Teléfono oficial unificado del Centro Empresarial
@@ -171,95 +168,14 @@ const ServicesPage = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // ═════════════════════════════════════════════════════════════
-      // SECCIÓN 1: CABECERA CORPORATIVA EN DOS COLUMNAS (Opción 1)
-      // ═════════════════════════════════════════════════════════════
-      if (heroRef.current) {
+      if (heroBgRef.current) {
         gsap.fromTo(
-          heroRef.current,
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.9, ease: "power2.out" },
+          heroBgRef.current,
+          { opacity: 0, scale: 1.05 },
+          { opacity: 1, scale: 1, duration: 1.4, ease: "sine.out" },
         );
       }
 
-      gsap.fromTo(
-        ".hero-img-wrap",
-        { opacity: 0, scale: 0.95 },
-        { opacity: 1, scale: 1, duration: 1, delay: 0.2, ease: "power3.out" },
-      );
-
-      // ═════════════════════════════════════════════════════════════
-      // SECCIÓN 2: SOLUCIONES EMPRESARIALES (Stagger sutil desde abajo)
-      // ═════════════════════════════════════════════════════════════
-      gsap.fromTo(
-        ".solution-card",
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          stagger: 0.15,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: ".solutions-section",
-            start: "top 82%",
-          },
-        },
-      );
-
-      gsap.fromTo(
-        ".solution-general-cta",
-        { opacity: 0, y: 20 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: ".solution-general-cta",
-            start: "top 90%",
-          },
-        },
-      );
-
-      // ═════════════════════════════════════════════════════════════
-      // SECCIÓN 3: CURSOS DE CAPACITACIÓN (Deslizamiento sutil)
-      // ═════════════════════════════════════════════════════════════
-      gsap.fromTo(
-        ".course-card",
-        { opacity: 0, x: 20 },
-        {
-          opacity: 1,
-          x: 0,
-          duration: 0.8,
-          stagger: 0.15,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: ".courses-section",
-            start: "top 82%",
-          },
-        },
-      );
-
-      // ═════════════════════════════════════════════════════════════
-      // SECCIÓN 4: CTA CONFIABLE (Fade-in suave + Pulsación muy sutil)
-      // ═════════════════════════════════════════════════════════════
-      gsap.fromTo(
-        ".cta-container",
-        { opacity: 0, y: 25 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.9,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: ".cta-section",
-            start: "top 85%",
-          },
-        },
-      );
-
-      // Pulsación muy suave y elegante en loop lento (scale: 1.02, ciclo total ~7s)
       if (ctaBtnRef.current) {
         gsap.to(ctaBtnRef.current, {
           scale: 1.02,
@@ -277,138 +193,94 @@ const ServicesPage = () => {
   return (
     <div
       ref={containerRef}
-      className="relative w-full overflow-hidden bg-background text-foreground"
+      className="relative w-full overflow-x-hidden bg-background text-foreground"
     >
       {/* ══════════════════════════════════════════════════════════
-          SECCIÓN 1: CABECERA CORPORATIVA EN DOS COLUMNAS (Opción 1)
+          SECCIÓN 1: CABECERA CORPORATIVA (Mobile-First)
          ══════════════════════════════════════════════════════════ */}
-      <section className="relative flex min-h-screen min-h-[100dvh] flex-col justify-center overflow-hidden bg-gradient-to-b from-gray-50/80 via-background to-background pb-14 pt-28 sm:pt-32 md:pb-16 md:pt-[110px]">
-        <div className="container mx-auto px-6 lg:px-12">
-          <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
+      <section className="relative flex min-h-screen min-h-[100dvh] flex-col justify-center overflow-hidden bg-gradient-to-br from-[#0c3f30] via-[#105340] to-[#093527] pb-14 pt-28 text-white sm:pt-32 md:pb-16 md:pt-[110px]">
+        {/* Background photography with smooth gradient mask */}
+        <div
+          ref={heroBgRef}
+          className="pointer-events-none absolute inset-0 overflow-hidden will-change-transform"
+        >
+          <img
+            src={course3Img}
+            alt="Servicios y Consultoría Centro Empresarial"
+            className="h-full w-full object-cover object-center opacity-25 lg:opacity-35"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0c3f30] via-[#0c3f30]/75 to-transparent lg:w-2/3" />
+        </div>
+
+        {/* Decorative ambient glowing lines */}
+        <svg
+          className="pointer-events-none absolute inset-0 h-full w-full opacity-20"
+          viewBox="0 0 1440 600"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M-100 480 C 300 400, 600 580, 1000 320 C 1200 200, 1400 250, 1600 120"
+            stroke="#F59E0B"
+            strokeWidth="1.5"
+            strokeDasharray="4 4"
+          />
+          <path
+            d="M-50 560 C 400 480, 700 620, 1100 360 C 1300 220, 1450 280, 1650 180"
+            stroke="#10B981"
+            strokeWidth="1.5"
+          />
+        </svg>
+
+        {/* Ambient glow halos */}
+        <div className="pointer-events-none absolute -left-20 top-1/4 h-80 w-80 rounded-full bg-primary/20 blur-[100px]" />
+        <div className="pointer-events-none absolute right-10 bottom-10 h-72 w-72 rounded-full bg-accent/15 blur-[90px]" />
+
+        <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-12">
+          <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
             {/* Columna Izquierda: Información Corporativa */}
             <div ref={heroRef} className="space-y-6">
               {/* Badge Institucional */}
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.22em] text-primary shadow-sm">
-                <Newspaper className="h-4 w-4" />
-                Servicios
+              <div className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.22em] text-accent backdrop-blur-md">
+                <Newspaper className="h-4 w-4 shrink-0" />
+                <span>Servicios</span>
               </div>
 
               {/* Título Principal */}
-              <h1 className="text-4xl font-extrabold tracking-tight text-corporate sm:text-5xl md:text-6xl leading-[1.08]">
+              <h1 className="text-3xl font-extrabold leading-[1.12] tracking-tight text-white sm:text-5xl md:text-6xl">
                 Innovación y Soluciones <br className="hidden sm:inline" />
-                <span className="text-primary">Empresariales</span>
+                <span className="relative inline-block pb-1 text-accent after:absolute after:bottom-0 after:left-0 after:right-0 after:h-1 after:rounded-full after:bg-gradient-to-r after:from-accent after:via-accent-light after:to-transparent">
+                  Empresariales
+                </span>
               </h1>
 
-              {/* Subtítulo */}
-              <p className="text-lg font-semibold text-corporate/90 sm:text-xl">
-                ¡Potencia tu futuro profesional con nosotros!
-              </p>
-
-              <p className="text-base leading-relaxed text-muted-foreground">
+              <p className="max-w-2xl text-base leading-relaxed text-white/85 sm:text-lg">
                 Acompañamos a directivos, empresas e instituciones con programas
                 de capacitación práctica y consultoría técnica orientada a
                 resultados reales de productividad, calidad y competitividad
                 regional.
               </p>
 
-              {/* Micro-beneficios con checkmarks */}
-              <div className="grid gap-2.5 pt-2 sm:grid-cols-2">
-                {[
-                  "Consultoría técnica a medida",
-                  "Capacitación 100% práctica",
-                  "Metodología con respaldo ISO",
-                  "Diagnóstico sin costo inicial",
-                ].map((item) => (
-                  <div
-                    key={item}
-                    className="flex items-center gap-2.5 text-sm font-semibold text-corporate"
-                  >
-                    <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
-                      <Check className="h-3.5 w-3.5 stroke-[3]" />
-                    </div>
-                    <span>{item}</span>
-                  </div>
-                ))}
-              </div>
-
               {/* Botones de Acción Inmediata */}
-              <div className="flex flex-wrap items-center gap-4 pt-4">
+              <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-4 pt-2">
                 <Button
                   asChild
                   size="lg"
                   variant="accent"
-                  className="h-12 px-7 text-sm font-bold shadow-corporate"
+                  className="min-h-[44px] h-12 w-full sm:w-auto px-7 text-sm font-bold shadow-lg shadow-accent/20 transition-all duration-300 hover:scale-105"
                 >
                   <a
                     href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Hola, deseo solicitar información sobre los servicios empresariales y capacitaciones.")}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="gap-2"
+                    className="inline-flex min-h-[44px] items-center justify-center gap-2"
                   >
-                    <MessageCircle className="h-4 w-4" />
+                    <MessageCircle className="h-4 w-4 shrink-0" />
                     <span>Consultar por WhatsApp</span>
-                    <ArrowRight className="h-4 w-4" />
+                    <ArrowRight className="h-4 w-4 shrink-0" />
                   </a>
                 </Button>
-
-                <Button
-                  asChild
-                  size="lg"
-                  variant="outline"
-                  className="h-12 border-border/80 bg-background text-corporate hover:bg-muted"
-                >
-                  <a href={`tel:${whatsappNumber}`} className="gap-2">
-                    <Phone className="h-4 w-4 text-primary" />
-                    {phoneFormatted}
-                  </a>
-                </Button>
-              </div>
-            </div>
-
-            {/* Columna Derecha: Fotografía Profesional con Tarjetas Flotantes */}
-            <div className="hero-img-wrap relative">
-              {/* Marco fotográfico principal */}
-              <div className="relative overflow-hidden rounded-3xl border border-border/80 bg-card shadow-elevated">
-                <img
-                  src={consultingImg}
-                  alt="Equipo consultor de Centro Empresarial en reunión directiva"
-                  className="h-[380px] w-full object-cover sm:h-[460px] lg:h-[500px]"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-              </div>
-
-              {/* Tarjeta Flotante 1: Años de Experiencia */}
-              <div className="absolute -bottom-6 -left-4 sm:-left-6 rounded-2xl border border-border/80 bg-white/95 p-4 shadow-elevated backdrop-blur-md transition-transform hover:-translate-y-1">
-                <div className="flex items-center gap-3.5">
-                  <div className="icon-badge icon-badge-lg icon-badge-solid shadow-sm">
-                    <ShieldCheck className="h-6 w-6" />
-                  </div>
-                  <div>
-                    <div className="text-xl font-extrabold text-corporate">
-                      +12 Años
-                    </div>
-                    <div className="text-xs font-semibold text-muted-foreground">
-                      Trayectoria y respaldo
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Tarjeta Flotante 2: Certificación Aplicada */}
-              <div className="absolute -top-6 -right-4 sm:-right-6 hidden sm:block rounded-2xl border border-border/80 bg-white/95 p-4 shadow-elevated backdrop-blur-md transition-transform hover:-translate-y-1">
-                <div className="flex items-center gap-3.5">
-                  <div className="icon-badge icon-badge-lg icon-badge-accent shadow-sm">
-                    <Award className="h-6 w-6 text-accent" />
-                  </div>
-                  <div>
-                    <div className="text-sm font-extrabold text-corporate">
-                      100% Aplicado
-                    </div>
-                    <div className="text-xs font-semibold text-muted-foreground">
-                      Certificación verificable
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -416,16 +288,16 @@ const ServicesPage = () => {
       </section>
 
       {/* ══════════════════════════════════════════════════════════
-          SECCIÓN 2: SOLUCIONES EMPRESARIALES
+          SECCIÓN 2: SOLUCIONES EMPRESARIALES (Tarjetas Mobile-First)
          ══════════════════════════════════════════════════════════ */}
-      <section className="solutions-section border-t border-border/80 bg-gray-50/60 py-20 md:py-28">
-        <div className="container mx-auto px-6 lg:px-12">
+      <section className="solutions-section border-t border-border/80 bg-gray-50/60 py-16 sm:py-20 md:py-28">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-12">
           {/* Encabezado de Sección */}
-          <div className="mb-14 text-center sm:mb-16">
+          <div className="mb-12 text-center sm:mb-16">
             <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.22em] text-primary">
               Consultoría Estratégica
             </div>
-            <h2 className="mt-3 text-3xl font-extrabold text-corporate md:text-4xl lg:text-5xl">
+            <h2 className="mt-3 text-2xl font-extrabold text-corporate sm:text-3xl md:text-4xl lg:text-5xl">
               Soluciones especializadas para tu organización
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground md:text-base">
@@ -434,79 +306,64 @@ const ServicesPage = () => {
             </p>
           </div>
 
-          {/* Grid de 4 tarjetas: 1 col móvil, 2 cols tablet, 4 cols desktop */}
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {/* Grid Mobile-First: estrictamente 1 col en móvil (grid-cols-1 gap-6), 2 cols en tablet (md:grid-cols-2), 4 cols en desktop (lg:grid-cols-4) */}
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
             {solutions.map((item) => (
               <div
                 key={item.num}
                 className="solution-card group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-border/80 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/50 hover:shadow-xl focus-within:border-primary/50 focus-within:ring-2 focus-within:ring-primary/20"
               >
-                {/* Imagen de Cabecera con Overlay y Badges */}
-                <div className="relative h-44 w-full overflow-hidden bg-slate-900">
+                {/* Imagen de Cabecera con Overlay */}
+                <div className="relative h-48 w-full overflow-hidden bg-slate-900 sm:h-44">
                   <img
                     src={item.image}
                     alt={item.title}
-                    className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                    className="h-full w-full object-cover"
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-black/10" />
-
-                  {/* Top bar flotante */}
-                  <div className="absolute inset-x-3.5 top-3.5 flex items-center justify-between">
-                    <span className="rounded-md bg-black/60 px-2 py-0.5 font-mono text-xs font-bold tracking-wider text-white backdrop-blur-sm">
-                      {item.num}
-                    </span>
-                    <span className="inline-block rounded-full border border-white/20 bg-black/55 px-2.5 py-0.5 text-[11px] font-semibold text-white backdrop-blur-md">
-                      {item.category}
-                    </span>
-                  </div>
-
-                  {/* Icono corporativo en la esquina inferior */}
-                  <div className="absolute -bottom-3 left-4 icon-badge icon-badge-lg bg-white shadow-md ring-2 ring-white/60 transition-all duration-300 group-hover:scale-105 group-hover:bg-primary group-hover:text-white">
-                    <item.icon className="h-5 w-5" />
-                  </div>
                 </div>
 
-                <div className="flex flex-1 flex-col p-6 pt-6">
+                <div className="flex flex-1 flex-col p-5 sm:p-6">
                   {/* Título del servicio */}
-                  <h3 className="text-base font-bold leading-snug text-corporate transition-colors group-hover:text-primary sm:text-lg">
+                  <h3 className="text-lg font-bold leading-snug text-corporate transition-colors group-hover:text-primary">
                     {item.title}
                   </h3>
 
                   {/* Descripción breve orientada al beneficio */}
-                  <p className="mt-2.5 text-xs leading-relaxed text-muted-foreground sm:text-sm">
+                  <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">
                     {item.description}
                   </p>
 
                   {/* Sección ÁREAS DE TRABAJO con 3 puntos clave */}
-                  <div className="mt-5 border-t border-border/60 pt-3.5">
+                  <div className="mt-5 border-t border-border/60 pt-4">
                     <div className="mb-2.5 text-[11px] font-bold uppercase tracking-wider text-muted-foreground/90">
                       Áreas de trabajo
                     </div>
-                    <ul className="space-y-1.5">
+                    <ul className="space-y-2">
                       {item.areas.map((area) => (
                         <li
                           key={area}
-                          className="flex items-start gap-2 text-xs leading-snug text-corporate"
+                          className="flex items-start gap-2 text-xs leading-snug text-corporate sm:text-sm"
                         >
-                          <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" />
+                          <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
                           <span>{area}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
 
-                  {/* CTA inferior: Solicitar asesoría → */}
+                  {/* CTA inferior con área táctil mínima de 44px */}
                   <div className="mt-auto pt-5">
-                    <div className="border-t border-border/60 pt-3.5">
+                    <div className="border-t border-border/60 pt-3">
                       <a
                         href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(`Hola, deseo solicitar asesoría sobre el servicio de: ${item.title}.`)}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group/cta inline-flex items-center gap-1.5 text-xs font-bold text-primary transition-colors hover:text-primary-dark"
+                        className="group/cta inline-flex min-h-[44px] w-full items-center justify-between rounded-xl px-3 py-2 text-xs font-bold text-primary transition-colors hover:bg-primary/5 hover:text-primary-dark sm:w-auto sm:justify-start sm:px-0 sm:hover:bg-transparent"
                       >
                         <span>Solicitar asesoría</span>
-                        <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover/cta:translate-x-1" />
+                        <ArrowRight className="ml-1.5 h-4 w-4 shrink-0 transition-transform duration-200 group-hover/cta:translate-x-1" />
                       </a>
                     </div>
                   </div>
@@ -516,7 +373,7 @@ const ServicesPage = () => {
           </div>
 
           {/* CTA General al pie del Grid */}
-          <div className="solution-general-cta mt-12 rounded-2xl border border-border/80 bg-white p-7 text-center shadow-sm sm:mt-16 sm:p-10">
+          <div className="solution-general-cta mt-12 rounded-2xl border border-border/80 bg-white p-6 text-center shadow-sm sm:mt-16 sm:p-10">
             <div className="mx-auto max-w-2xl">
               <h3 className="text-xl font-bold text-corporate sm:text-2xl">
                 ¿No sabes qué solución necesita tu organización?
@@ -530,11 +387,11 @@ const ServicesPage = () => {
                   href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Hola, me gustaría conversar con un especialista para evaluar qué solución necesita mi organización.")}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-bold text-primary-foreground shadow-corporate transition-all duration-300 hover:bg-primary-dark hover:-translate-y-0.5"
+                  className="group inline-flex min-h-[44px] w-full sm:w-auto items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-bold text-primary-foreground shadow-corporate transition-all duration-300 hover:bg-primary-dark hover:-translate-y-0.5"
                 >
-                  <MessageCircle className="h-4 w-4" />
+                  <MessageCircle className="h-4 w-4 shrink-0" />
                   <span>Conversar con un especialista</span>
-                  <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+                  <ArrowRight className="h-4 w-4 shrink-0 transition-transform duration-200 group-hover:translate-x-1" />
                 </a>
               </div>
             </div>
@@ -543,16 +400,16 @@ const ServicesPage = () => {
       </section>
 
       {/* ══════════════════════════════════════════════════════════
-          SECCIÓN 3: CURSOS DE CAPACITACIÓN (Grid Limpio con Badges)
+          SECCIÓN 3: CURSOS DE CAPACITACIÓN (Grid Mobile-First)
          ══════════════════════════════════════════════════════════ */}
-      <section className="courses-section border-t border-border/80 bg-white py-20 md:py-28">
-        <div className="container mx-auto px-6 lg:px-12">
+      <section className="courses-section border-t border-border/80 bg-white py-16 sm:py-20 md:py-28">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-12">
           {/* Encabezado de Cursos */}
-          <div className="mb-14 text-center">
+          <div className="mb-12 text-center sm:mb-14">
             <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.22em] text-primary">
               Programas Especializados
             </div>
-            <h2 className="mt-3 text-3xl font-extrabold text-corporate md:text-4xl lg:text-5xl">
+            <h2 className="mt-3 text-2xl font-extrabold text-corporate sm:text-3xl md:text-4xl lg:text-5xl">
               Cursos de Capacitación
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground md:text-base">
@@ -562,33 +419,22 @@ const ServicesPage = () => {
             </p>
           </div>
 
-          {/* Grid de 2 columnas con tarjetas rectangulares ordenadas */}
-          <div className="grid gap-6 md:grid-cols-2">
+          {/* Grid estrictamente 1 columna en móvil (grid-cols-1 gap-6) y 2 columnas desde tablet (md:grid-cols-2) */}
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {courses.map((course) => (
               <div
                 key={course.title}
                 className="course-card group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-border/80 bg-gray-50/40 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:bg-white hover:shadow-lg"
               >
                 {/* Portada visual con badges */}
-                <div className="relative h-44 w-full overflow-hidden bg-slate-900 sm:h-48">
+                <div className="relative h-48 w-full overflow-hidden bg-slate-900">
                   <img
                     src={course.image}
                     alt={course.title}
-                    className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                    className="h-full w-full object-cover"
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/10" />
-
-                  {/* Badges superiores */}
-                  <div className="absolute inset-x-4 top-4 flex flex-wrap items-center justify-between gap-2">
-                    <span className="rounded-full border border-white/20 bg-black/60 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-white backdrop-blur-md">
-                      {course.category}
-                    </span>
-                    <span className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-black/60 px-3 py-1 text-xs font-semibold text-white backdrop-blur-md">
-                      <Clock className="h-3.5 w-3.5 text-accent" />
-                      <span>{course.duration}</span>
-                    </span>
-                  </div>
 
                   {/* Icono flotante */}
                   <div className="absolute -bottom-3 left-5 icon-badge icon-badge-lg bg-white shadow-md ring-2 ring-white/70 transition-all duration-300 group-hover:bg-primary group-hover:text-white">
@@ -596,7 +442,7 @@ const ServicesPage = () => {
                   </div>
                 </div>
 
-                <div className="flex flex-1 flex-col p-6 pt-6 sm:p-7 sm:pt-6">
+                <div className="flex flex-1 flex-col p-5 pt-6 sm:p-7 sm:pt-6">
                   {/* Badges de Garantía */}
                   <div className="mb-3 flex flex-wrap gap-2">
                     <span className="inline-flex items-center gap-1 rounded-full border border-primary/20 bg-primary/10 px-2.5 py-0.5 text-[11px] font-bold text-primary">
@@ -625,9 +471,9 @@ const ServicesPage = () => {
                       {course.topics.map((topic) => (
                         <li
                           key={topic}
-                          className="flex items-center gap-2 text-xs text-muted-foreground"
+                          className="flex items-start gap-2 text-xs text-muted-foreground sm:text-sm"
                         >
-                          <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-accent" />
+                          <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-accent" />
                           <span>{topic}</span>
                         </li>
                       ))}
@@ -635,7 +481,7 @@ const ServicesPage = () => {
                   </div>
 
                   <div className="mt-auto pt-6">
-                    <div className="flex flex-wrap items-center justify-between gap-3 border-t border-border/60 pt-4">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-t border-border/60 pt-4">
                       <span className="text-xs font-bold uppercase tracking-wider text-primary">
                         Modalidad Presencial y Virtual
                       </span>
@@ -643,17 +489,16 @@ const ServicesPage = () => {
                       <Button
                         asChild
                         variant="outline"
-                        size="sm"
-                        className="border-border/80 text-corporate hover:border-primary hover:bg-primary hover:text-white"
+                        className="min-h-[44px] w-full sm:w-auto border-border/80 text-corporate hover:border-primary hover:bg-primary hover:text-white"
                       >
                         <a
                           href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(`Hola, deseo solicitar temario y costos del curso: ${course.title}.`)}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="gap-1.5"
+                          className="inline-flex min-h-[44px] items-center justify-center gap-1.5"
                         >
                           <span>Inscribirme / Consultar</span>
-                          <ArrowRight className="h-3.5 w-3.5" />
+                          <ArrowRight className="h-4 w-4 shrink-0" />
                         </a>
                       </Button>
                     </div>
@@ -668,69 +513,72 @@ const ServicesPage = () => {
       {/* ══════════════════════════════════════════════════════════
           SECCIÓN 4: LLAMADO A LA ACCIÓN (CTA) CONFIABLE
          ══════════════════════════════════════════════════════════ */}
-      <section className="cta-section border-t border-border/80 bg-gray-50/70 py-20 md:py-28">
-        <div className="container mx-auto px-6 lg:px-12">
+      <section className="cta-section border-t border-border/80 bg-gray-50/70 py-16 sm:py-20 md:py-28">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-12">
           {/* Contenedor ancho sólido con acento corporativo */}
-          <div className="cta-container mx-auto max-w-4xl overflow-hidden rounded-3xl bg-gradient-primary p-8 text-primary-foreground shadow-elevated md:p-14 text-center">
+          <div className="cta-container mx-auto max-w-4xl overflow-hidden rounded-3xl bg-gradient-primary p-6 sm:p-8 text-center text-primary-foreground shadow-elevated md:p-14">
             {/* Badge de Sección */}
             <span className="inline-block text-xs font-bold uppercase tracking-[0.25em] text-accent">
               Inscripciones &amp; Consultoría
             </span>
 
             {/* Cita Destacada Requerida */}
-            <blockquote className="mx-auto mt-4 max-w-3xl text-2xl font-extrabold leading-snug text-white sm:text-3xl md:text-4xl">
+            <blockquote className="mx-auto mt-4 max-w-3xl text-xl font-extrabold leading-snug text-white sm:text-3xl md:text-4xl">
               “Impulsamos el potencial de tu empresa con asesoría personalizada
               y soluciones que marcan la diferencia.”
             </blockquote>
 
-            <p className="mx-auto mt-4 max-w-xl text-base text-white/80">
+            <p className="mx-auto mt-4 max-w-xl text-sm text-white/80 sm:text-base">
               Contáctanos hoy mismo para coordinar una reunión de diagnóstico o
               asegurar tu vacante en nuestros programas certificados.
             </p>
 
-            {/* Botón Principal con leve pulsación sutil */}
+            {/* Botones con área táctil >= 44px */}
             <div className="mt-8 flex flex-col items-center justify-center gap-4">
               <Button
                 asChild
                 size="lg"
                 variant="accent"
-                className="h-14 px-8 text-base font-extrabold shadow-corporate"
+                className="min-h-[44px] h-auto w-full sm:w-auto py-3.5 px-6 sm:px-8 text-sm sm:text-base font-extrabold shadow-corporate whitespace-normal text-center"
               >
                 <a
                   ref={ctaBtnRef}
                   href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent("¡Hola! Deseo inscribirme y transformar mi carrera con Centro Empresarial.")}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="gap-2.5"
+                  className="inline-flex min-h-[44px] items-center justify-center gap-2.5"
                 >
-                  <MessageCircle className="h-5 w-5" />
+                  <MessageCircle className="h-5 w-5 shrink-0" />
                   <span>¡Inscríbete hoy y transforma tu carrera!</span>
-                  <ArrowRight className="h-4 w-4" />
+                  <ArrowRight className="h-4 w-4 shrink-0" />
                 </a>
               </Button>
 
               <Button
                 asChild
                 variant="outline"
-                className="border-white/30 bg-white/10 text-white hover:bg-white hover:text-primary"
+                className="min-h-[44px] w-full sm:w-auto border-white/30 bg-white/10 text-white hover:bg-white hover:text-primary"
               >
-                <Link to="/contacto" className="gap-2">
-                  Formulario de Contacto
-                  <ArrowRight className="h-4 w-4" />
+                <Link
+                  to="/contacto"
+                  className="inline-flex min-h-[44px] items-center justify-center gap-2"
+                >
+                  <span>Formulario de Contacto</span>
+                  <ArrowRight className="h-4 w-4 shrink-0" />
                 </Link>
               </Button>
             </div>
 
             {/* Datos de Contacto Directo */}
-            <div className="mt-12 grid gap-6 border-t border-white/15 pt-8 sm:grid-cols-2 text-left">
+            <div className="mt-10 grid grid-cols-1 gap-4 border-t border-white/15 pt-8 text-left sm:mt-12 sm:grid-cols-2 sm:gap-6">
               <a
                 href={`tel:${whatsappNumber}`}
-                className="flex items-center gap-3.5 rounded-xl border border-white/10 bg-white/5 p-4 text-white/90 backdrop-blur-sm transition-colors hover:bg-white/15"
+                className="flex min-h-[44px] items-center gap-3.5 rounded-xl border border-white/10 bg-white/5 p-4 text-white/90 backdrop-blur-sm transition-colors hover:bg-white/15"
               >
-                <div className="icon-badge icon-badge-md icon-badge-inverse">
+                <div className="icon-badge icon-badge-md icon-badge-inverse shrink-0">
                   <Phone className="h-5 w-5" />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <div className="text-[11px] font-semibold uppercase text-white/70">
                     Teléfono directo / WhatsApp
                   </div>
@@ -742,16 +590,16 @@ const ServicesPage = () => {
 
               <a
                 href={`mailto:${contactInfo.email}`}
-                className="flex items-center gap-3.5 rounded-xl border border-white/10 bg-white/5 p-4 text-white/90 backdrop-blur-sm transition-colors hover:bg-white/15"
+                className="flex min-h-[44px] items-center gap-3.5 rounded-xl border border-white/10 bg-white/5 p-4 text-white/90 backdrop-blur-sm transition-colors hover:bg-white/15"
               >
-                <div className="icon-badge icon-badge-md icon-badge-inverse">
+                <div className="icon-badge icon-badge-md icon-badge-inverse shrink-0">
                   <Mail className="h-5 w-5" />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <div className="text-[11px] font-semibold uppercase text-white/70">
                     Correo oficial
                   </div>
-                  <div className="text-sm font-bold text-white break-all">
+                  <div className="break-all text-sm font-bold text-white">
                     {contactInfo.email}
                   </div>
                 </div>

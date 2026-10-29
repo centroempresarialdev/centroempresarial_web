@@ -14,7 +14,6 @@ import {
   TrendingUp,
   Mail,
   MapPin,
-  Phone,
   MessageCircle,
   ArrowRight,
   Sparkles,
@@ -22,7 +21,7 @@ import {
   Clock,
   ExternalLink,
 } from "lucide-react";
-import thesisHeroBg from "@/assets/hero/inner-hero-office.jpg";
+import thesisHeroBg from "@/assets/hero/thesis-hero-bg.jpg";
 import thesisCard1Img from "@/assets/hero/tesis.jpg";
 import thesisCard2Img from "@/assets/hero/tesis2.jpg";
 
@@ -32,11 +31,6 @@ const AdvisoryThesis = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const heroBgRef = useRef<HTMLDivElement>(null);
   const revealWordsRef = useRef<HTMLSpanElement[]>([]);
-
-  // Texto de la Sección 2 dividido en palabras para revelación scrub
-  const problemSolutionText =
-    "¿Tesis, monografía o proyecto en pausa? ¡No te preocupes! Te ayudamos a desarrollar tu investigación con calidad, rapidez y metodología experta.";
-  const problemWords = problemSolutionText.split(" ");
 
   // Teléfono oficial unificado: 906 491 859
   const phoneFormatted = contactInfo.phone; // +51 906 491 859
@@ -132,99 +126,6 @@ const AdvisoryThesis = () => {
           },
         );
       }
-
-      // ═════════════════════════════════════════════════════════════
-      // SECCIÓN 3: SERVICIOS (Entrada Y + Escala 0.8 -> 1)
-      // ═════════════════════════════════════════════════════════════
-      gsap.fromTo(
-        ".service-card",
-        { y: 70, scale: 0.85, opacity: 0 },
-        {
-          y: 0,
-          scale: 1,
-          opacity: 1,
-          duration: 0.85,
-          stagger: 0.2,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: ".services-container",
-            start: "top 78%",
-          },
-        },
-      );
-
-      // Nota flotante para profesionales/estudiantes
-      gsap.fromTo(
-        ".services-note",
-        { opacity: 0, y: 25 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.65,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: ".services-note",
-            start: "top 88%",
-          },
-        },
-      );
-
-      // ═════════════════════════════════════════════════════════════
-      // SECCIÓN 4: BENEFICIOS (3D Flip en eje X + Stagger)
-      // ═════════════════════════════════════════════════════════════
-      const benefitCards = gsap.utils.toArray<HTMLElement>(".benefit-item");
-      benefitCards.forEach((card, index) => {
-        const icon = card.querySelector(".benefit-icon");
-        const content = card.querySelector(".benefit-content");
-
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: card,
-            start: "top 86%",
-            toggleActions: "play none none reverse",
-          },
-        });
-
-        tl.fromTo(
-          card,
-          {
-            rotateX: 38,
-            y: 35,
-            opacity: 0,
-            transformPerspective: 1000,
-          },
-          {
-            rotateX: 0,
-            y: 0,
-            opacity: 1,
-            duration: 0.75,
-            delay: index * 0.1,
-            ease: "power3.out",
-          },
-        )
-          .fromTo(
-            icon,
-            { scale: 0, rotation: -20 },
-            {
-              scale: 1,
-              rotation: 0,
-              duration: 0.45,
-              ease: "back.out(2)",
-            },
-            "-=0.35",
-          )
-          .fromTo(
-            content,
-            { opacity: 0, x: 12 },
-            {
-              opacity: 1,
-              x: 0,
-              duration: 0.4,
-              ease: "power2.out",
-            },
-            "-=0.25",
-          );
-      });
 
       // ═════════════════════════════════════════════════════════════
       // SECCIÓN 5: CURTAIN REVEAL CONTACTO (Parallax Footer Effect)
@@ -353,23 +254,6 @@ const AdvisoryThesis = () => {
                 </a>
               </Button>
             </div>
-
-            {/* Bottom 3 Quick Highlights matching reference */}
-            <div className="hero-lift-item relative mt-12 pt-6 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl">
-              <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-white/30 via-white/15 to-transparent" />
-              <div className="flex items-center gap-2.5 text-xs sm:text-sm font-medium text-white/90">
-                <Award className="h-4 w-4 shrink-0 text-accent" />
-                <span>8 años de experiencia</span>
-              </div>
-              <div className="flex items-center gap-2.5 text-xs sm:text-sm font-medium text-white/90">
-                <Users className="h-4 w-4 shrink-0 text-accent" />
-                <span>+500 tesistas asesorados</span>
-              </div>
-              <div className="flex items-center gap-2.5 text-xs sm:text-sm font-medium text-white/90">
-                <ShieldCheck className="h-4 w-4 shrink-0 text-accent" />
-                <span>100% Rigor antiplagio</span>
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -401,127 +285,105 @@ const AdvisoryThesis = () => {
           </div>
 
           <div className="services-container grid gap-8 md:grid-cols-2">
-            {/* Tarjeta 1: Tesis de pregrado y postgrado - Visual con imagen institucional */}
-            <div className="service-card group relative overflow-hidden rounded-3xl border border-border/80 bg-card p-6 sm:p-8 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/50 hover:shadow-corporate">
-              <div className="relative mb-6 h-52 sm:h-60 w-full overflow-hidden rounded-2xl">
+            {/* Tarjeta 1: Tesis de pregrado y postgrado - Imagen completa al borde del marco */}
+            <div className="service-card group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-border/80 bg-card shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/50 hover:shadow-corporate">
+              <div className="relative h-56 sm:h-64 w-full overflow-hidden bg-slate-900">
                 <img
                   src={thesisCard1Img}
                   alt="Tesis de pregrado y postgrado"
                   loading="lazy"
                   decoding="async"
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="h-full w-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-                <div className="absolute bottom-3 left-3 flex items-center gap-2">
-                  <div className="icon-badge icon-badge-md bg-white/95 shadow-sm backdrop-blur-md">
-                    <GraduationCap className="h-5 w-5" />
+              </div>
+
+              <div className="flex flex-1 flex-col justify-between p-6 sm:p-8">
+                <div>
+                  <h3 className="text-2xl font-extrabold text-corporate md:text-3xl">
+                    Tesis de pregrado y postgrado
+                  </h3>
+
+                  <p className="mt-4 text-sm leading-relaxed text-muted-foreground md:text-base">
+                    Acompañamiento metodológico integral para licenciaturas,
+                    maestrías y doctorados. Desde la formulación del problema,
+                    matriz de consistencia y marco teórico, hasta el análisis
+                    estadístico (SPSS, R, Atlas.ti) y la preparación para la
+                    sustentación.
+                  </p>
+
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    {[
+                      "Pregrado & Postgrado",
+                      "Maestrías y Doctorados",
+                      "Análisis Estadístico",
+                      "Simulación de Sustentación",
+                    ].map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-full border border-border bg-muted/50 px-3 py-1 text-xs font-semibold text-muted-foreground"
+                      >
+                        {tag}
+                      </span>
+                    ))}
                   </div>
-                  <span className="rounded-full bg-primary/90 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-white shadow-sm">
-                    Grado Profesional
-                  </span>
                 </div>
-              </div>
 
-              <h3 className="text-2xl font-extrabold text-corporate md:text-3xl">
-                Tesis de pregrado y postgrado
-              </h3>
-
-              <p className="mt-4 text-sm leading-relaxed text-muted-foreground md:text-base">
-                Acompañamiento metodológico integral para licenciaturas,
-                maestrías y doctorados. Desde la formulación del problema,
-                matriz de consistencia y marco teórico, hasta el análisis
-                estadístico (SPSS, R, Atlas.ti) y la preparación para la
-                sustentación.
-              </p>
-
-              <div className="mt-6 flex flex-wrap gap-2">
-                {[
-                  "Pregrado & Postgrado",
-                  "Maestrías y Doctorados",
-                  "Análisis Estadístico",
-                  "Simulación de Sustentación",
-                ].map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded-full border border-border bg-muted/50 px-3 py-1 text-xs font-semibold text-muted-foreground"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-
-              <div className="mt-8 flex items-center justify-between border-t border-border/70 pt-6 text-sm font-bold text-primary">
-                <span>Asesoría personalizada</span>
-                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1.5" />
+                <div className="mt-8 flex items-center justify-between border-t border-border/70 pt-6 text-sm font-bold text-primary">
+                  <span>Asesoría personalizada</span>
+                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1.5" />
+                </div>
               </div>
             </div>
 
-            {/* Tarjeta 2: Monografías y tesinas - Visual con imagen institucional */}
-            <div className="service-card group relative overflow-hidden rounded-3xl border border-border/80 bg-card p-6 sm:p-8 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-accent/60 hover:shadow-corporate">
-              <div className="relative mb-6 h-52 sm:h-60 w-full overflow-hidden rounded-2xl">
+            {/* Tarjeta 2: Monografías y tesinas - Imagen completa al borde del marco */}
+            <div className="service-card group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-border/80 bg-card shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-accent/60 hover:shadow-corporate">
+              <div className="relative h-56 sm:h-64 w-full overflow-hidden bg-slate-900">
                 <img
                   src={thesisCard2Img}
                   alt="Monografías y tesinas escolares y/o universitarios"
                   loading="lazy"
                   decoding="async"
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="h-full w-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-                <div className="absolute bottom-3 left-3 flex items-center gap-2">
-                  <div className="icon-badge icon-badge-md bg-white/95 shadow-sm backdrop-blur-md">
-                    <BookOpen className="h-5 w-5" />
+              </div>
+
+              <div className="flex flex-1 flex-col justify-between p-6 sm:p-8">
+                <div>
+                  <h3 className="text-2xl font-extrabold text-corporate md:text-3xl">
+                    Monografías y tesinas escolares y/o universitarios
+                  </h3>
+
+                  <p className="mt-4 text-sm leading-relaxed text-muted-foreground md:text-base">
+                    Estructuración rigurosa de trabajos de investigación,
+                    monografías temáticas, tesinas de grado y proyectos de
+                    suficiencia profesional. Aplicación estricta de normas de citado
+                    (APA 7ma edición, Vancouver, IEEE) y redacción científica.
+                  </p>
+
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    {[
+                      "Monografías Temáticas",
+                      "Tesinas Escolares / Universitarias",
+                      "Normas APA / Vancouver",
+                      "Control Antiplagio",
+                    ].map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-full border border-border bg-muted/50 px-3 py-1 text-xs font-semibold text-muted-foreground"
+                      >
+                        {tag}
+                      </span>
+                    ))}
                   </div>
-                  <span className="rounded-full bg-accent/90 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-white shadow-sm">
-                    Investigación Aplicada
-                  </span>
+                </div>
+
+                <div className="mt-8 flex items-center justify-between border-t border-border/70 pt-6 text-sm font-bold text-accent">
+                  <span>Asesoría personalizada</span>
+                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1.5" />
                 </div>
               </div>
-
-              <h3 className="text-2xl font-extrabold text-corporate md:text-3xl">
-                Monografías y tesinas escolares y/o universitarios
-              </h3>
-
-              <p className="mt-4 text-sm leading-relaxed text-muted-foreground md:text-base">
-                Estructuración rigurosa de trabajos de investigación,
-                monografías temáticas, tesinas de grado y proyectos de
-                suficiencia profesional. Aplicación estricta de normas de citado
-                (APA 7ma edición, Vancouver, IEEE) y redacción científica.
-              </p>
-
-              <div className="mt-6 flex flex-wrap gap-2">
-                {[
-                  "Monografías Temáticas",
-                  "Tesinas Escolares / Universitarias",
-                  "Normas APA / Vancouver",
-                  "Control Antiplagio",
-                ].map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded-full border border-border bg-muted/50 px-3 py-1 text-xs font-semibold text-muted-foreground"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-
-              <div className="mt-8 flex items-center justify-between border-t border-border/70 pt-6 text-sm font-bold text-accent">
-                <span>Asesoría personalizada</span>
-                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1.5" />
-              </div>
-            </div>
-          </div>
-
-          {/* Nota destacada */}
-          <div className="services-note mt-12 flex items-center justify-center">
-            <div className="inline-flex items-center gap-3 rounded-2xl border border-primary/20 bg-primary/5 px-6 py-3.5 text-center text-sm font-medium text-corporate shadow-sm backdrop-blur-md sm:text-base">
-              <CheckCircle2 className="h-5 w-5 shrink-0 text-accent" />
-              <span>
-                Para{" "}
-                <strong className="font-extrabold text-corporate">
-                  profesionales, estudiantes técnicos y universitarios
-                </strong>
-                .
-              </span>
             </div>
           </div>
         </div>
@@ -548,10 +410,7 @@ const AdvisoryThesis = () => {
             </p>
           </div>
 
-          <div
-            className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
-            style={{ perspective: "1200px" }}
-          >
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {benefits.map((benefit) => (
               <div
                 key={benefit.title}
@@ -591,17 +450,10 @@ const AdvisoryThesis = () => {
         <div className="curtain-content container mx-auto px-6 lg:px-12 will-change-transform">
           <div className="mb-10 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
             <div>
-              <span className="text-sm font-bold uppercase tracking-[0.2em] text-primary">
-                Contacto Directo • Asesoría de Tesis
-              </span>
               <h2 className="mt-2 text-3xl font-extrabold text-[#1a4a38] sm:text-4xl md:text-5xl">
                 ¿Listo para titularte con éxito?
               </h2>
             </div>
-            <p className="max-w-md text-sm leading-relaxed text-gray-600">
-              Comunícate hoy mismo con nuestros consultores académicos o visítanos
-              en nuestra oficina para coordinar tu primera sesión de diagnóstico.
-            </p>
           </div>
 
           <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
@@ -694,7 +546,7 @@ const AdvisoryThesis = () => {
 
                     <Link
                       to="/contacto?servicio=tesis"
-                      className="inline-flex items-center gap-2 rounded-xl border border-white/25 bg-white/10 px-4 py-2.5 text-xs font-bold text-white backdrop-blur transition-all hover:bg-white hover:text-primary"
+                      className="inline-flex items-center gap-2 rounded-xl bg-accent px-4 py-2.5 text-xs font-bold text-accent-foreground transition-all hover:brightness-110"
                     >
                       <span>Formulario de contacto</span>
                       <ArrowRight className="h-3.5 w-3.5" />

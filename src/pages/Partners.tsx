@@ -3,23 +3,16 @@ import { Link } from "react-router-dom";
 import { gsap } from "gsap";
 import { Button } from "@/components/ui/button";
 import ScrollReveal from "@/components/ScrollReveal";
-import { partners, contactInfo } from "@/data/site";
-import partnerHeroBg from "@/assets/hero/hero-business-network.png";
+import { partners } from "@/data/site";
 import { partnersService } from "@/services";
-import {
-  ArrowRight,
-  BadgeCheck,
-  CheckCircle2,
-  Handshake,
-  MessageCircle,
-  Network,
-  Sparkles,
-} from "lucide-react";
+import partnersHeroBg from "@/assets/hero/partners-hero-alliance.jpg";
+import { ArrowRight, CheckCircle2, Handshake, Sparkles } from "lucide-react";
 
 const Partners = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const heroBgRef = useRef<HTMLDivElement>(null);
   const [partnerList, setPartnerList] = useState(partners);
+  const partnerLogoTrack = [...partnerList, ...partnerList];
 
   useEffect(() => {
     partnersService
@@ -51,8 +44,6 @@ const Partners = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const heroTl = gsap.timeline({ defaults: { ease: "power3.out" } });
-
       if (heroBgRef.current) {
         gsap.fromTo(
           heroBgRef.current,
@@ -60,39 +51,27 @@ const Partners = () => {
           { opacity: 1, scale: 1, duration: 1.8, ease: "sine.out" },
         );
       }
-
-      heroTl.fromTo(
-        ".partners-hero-lift",
-        { y: 38, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1.0,
-          stagger: 0.12,
-          ease: "power3.out",
-        },
-        0.1,
-      );
     }, containerRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <div ref={containerRef} className="relative w-full overflow-hidden bg-background">
-      {/* ─── HERO SECTION: ALIANZAS ESTRATÉGICAS ─── */}
-      <section className="relative w-full min-h-screen min-h-[100dvh] flex flex-col justify-center overflow-hidden bg-gradient-to-br from-[#0c3f30] via-[#105340] to-[#093527] text-white pt-28 pb-12 sm:pt-32 sm:pb-14 md:pt-36 md:pb-16">
-        {/* Background photography on right with smooth fade */}
+    <div
+      ref={containerRef}
+      className="relative w-full overflow-hidden bg-background"
+    >
+      <section className="relative w-full min-h-screen min-h-[100dvh] flex flex-col justify-center overflow-hidden bg-gradient-to-br from-[#0c3f30] via-[#105340] to-[#093527] pt-28 pb-14 text-primary-foreground sm:pt-32 md:pt-36 md:pb-20">
+        {/* Full-width background photography with uniform transparency */}
         <div
           ref={heroBgRef}
           className="pointer-events-none absolute inset-0 overflow-hidden will-change-transform"
         >
           <img
-            src={partnerHeroBg}
-            alt="Red de Aliados Estratégicos"
-            className="h-full w-full object-cover object-center lg:object-right opacity-25 lg:opacity-40 [mask-image:linear-gradient(to_right,transparent_0%,transparent_30%,black_80%)] [-webkit-mask-image:linear-gradient(to_right,transparent_0%,transparent_30%,black_80%)]"
+            src={partnersHeroBg}
+            alt="Alianzas Estratégicas y Convenios"
+            className="h-full w-full object-cover object-center opacity-15"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0c3f30] via-transparent to-transparent lg:w-1/2" />
         </div>
 
         {/* Decorative ambient glowing lines */}
@@ -120,82 +99,55 @@ const Partners = () => {
         <div className="pointer-events-none absolute -left-20 top-1/4 h-80 w-80 rounded-full bg-primary/20 blur-[100px]" />
         <div className="pointer-events-none absolute right-10 bottom-10 h-72 w-72 rounded-full bg-accent/15 blur-[90px]" />
 
-        <div className="container relative z-10 mx-auto px-6 lg:px-12">
-          <div className="max-w-3xl lg:max-w-4xl">
-            {/* Pill Badge */}
-            <div className="partners-hero-lift inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-accent backdrop-blur-md">
-              <Handshake className="h-4 w-4" />
-              <span>Alianzas Estratégicas &amp; Convenios</span>
-            </div>
-
-            {/* Main Headline */}
-            <h1 className="partners-hero-lift mt-5 text-3xl font-extrabold leading-[1.15] tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
-              Convenios clave que multiplican{" "}
-              <span className="relative inline-block text-accent pb-1 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-1 after:rounded-full after:bg-gradient-to-r after:from-accent after:via-accent-light after:to-transparent">
-                el valor de pertenecer
-              </span>
-            </h1>
-
-            {/* Description */}
-            <p className="partners-hero-lift mt-5 text-base leading-relaxed text-white/85 sm:text-lg sm:leading-8 max-w-2xl">
-              Articulamos con organismos internacionales, gremios, instituciones de salud
-              y empresas líderes para ofrecer a nuestra red de asociados beneficios tangibles,
-              respaldo institucional y nuevas oportunidades de crecimiento.
-            </p>
-
-            {/* Action Buttons */}
-            <div className="partners-hero-lift mt-8 flex flex-wrap items-center gap-3 sm:gap-4">
-              <Button
-                asChild
-                size="lg"
-                variant="accent"
-                className="h-12 px-7 text-sm font-bold shadow-lg shadow-accent/20 transition-all duration-300 hover:scale-105"
-              >
-                <a
-                  href={`https://wa.me/${contactInfo.whatsapp}?text=${encodeURIComponent(
-                    "Hola, deseo información para sumar a mi empresa o institución como aliado estratégico del Centro Empresarial.",
-                  )}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="gap-2.5"
+        <ScrollReveal className="container relative z-10 mx-auto px-6 text-center lg:px-12">
+          <Handshake className="mx-auto mb-5 h-10 w-10 text-accent" />
+          <h2 className="mx-auto max-w-3xl text-3xl font-extrabold leading-[1.22] tracking-normal text-white md:text-5xl">
+            Aliados con beneficios concretos para asociados
+          </h2>
+          <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-white/78">
+            Revisa que aporta cada convenio y solicita orientacion para elegir
+            la membresia que mejor encaja con tu perfil.
+          </p>
+          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+            <Button asChild variant="accent" size="lg">
+              <Link to="/contacto">Activar mi membresia</Link>
+            </Button>
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="border-white/30 bg-white/10 text-white hover:bg-white hover:text-primary"
+            >
+              <a href="#convenios">
+                <Handshake className="h-5 w-5" />
+                Ver convenios
+              </a>
+            </Button>
+          </div>
+          <div className="logo-marquee mt-12">
+            <div className="logo-marquee-track">
+              {partnerLogoTrack.map((partner, index) => (
+                <div
+                  key={`${partner.name}-${index}`}
+                  className="flex h-28 w-56 sm:h-32 sm:w-64 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-white p-3 sm:p-4 shadow-md border border-white/20"
                 >
-                  <MessageCircle className="h-5 w-5" />
-                  <span>Sumar mi organización</span>
-                  <ArrowRight className="h-4 w-4" />
-                </a>
-              </Button>
-
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="h-12 border-white/25 bg-white/10 px-6 text-sm font-semibold text-white backdrop-blur transition-all duration-300 hover:bg-white hover:text-primary-dark"
-              >
-                <a href="#convenios" className="gap-2">
-                  <span>Ver convenios activos</span>
-                  <ArrowRight className="h-4 w-4" />
-                </a>
-              </Button>
-            </div>
-
-            {/* Bottom 3 Quick Highlights */}
-            <div className="partners-hero-lift relative mt-12 pt-6 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl">
-              <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-white/30 via-white/15 to-transparent" />
-              <div className="flex items-center gap-2.5 text-xs sm:text-sm font-medium text-white/90">
-                <BadgeCheck className="h-4 w-4 shrink-0 text-accent" />
-                <span>Respaldo institucional</span>
-              </div>
-              <div className="flex items-center gap-2.5 text-xs sm:text-sm font-medium text-white/90">
-                <Network className="h-4 w-4 shrink-0 text-accent" />
-                <span>Red multisectorial</span>
-              </div>
-              <div className="flex items-center gap-2.5 text-xs sm:text-sm font-medium text-white/90">
-                <Sparkles className="h-4 w-4 shrink-0 text-accent" />
-                <span>Beneficios exclusivos</span>
-              </div>
+                  <img
+                    src={partner.logo}
+                    alt={partner.name}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-full w-full max-h-20 sm:max-h-24 max-w-[88%] object-contain"
+                    style={{
+                      transform: partner.logoScale
+                        ? `scale(${partner.logoScale})`
+                        : undefined,
+                    }}
+                  />
+                </div>
+              ))}
             </div>
           </div>
-        </div>
+        </ScrollReveal>
       </section>
 
       {/* ─── LISTADO DE CONVENIOS ─── */}
@@ -212,12 +164,12 @@ const Partners = () => {
                   <div>
                     {/* Big prominent logo area */}
                     <div
-                      className={`relative flex h-80 w-full items-center justify-center overflow-hidden  transition-colors ${
+                      className={`relative flex h-80 w-full items-center justify-center overflow-hidden transition-colors ${
                         partner.darkLogo ? "bg-primary" : "bg-white"
                       }`}
                     >
                       <div
-                        className="flex h-full w-full items-center justify-center transition-transform duration-300 group-hover:scale-105"
+                        className="flex h-full w-full items-center justify-center"
                         style={{
                           transform: `scale(${partner.logoScale || 1})`,
                         }}
