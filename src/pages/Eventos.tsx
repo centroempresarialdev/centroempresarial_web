@@ -19,6 +19,9 @@ const galleryModules = import.meta.glob<{ default: string }>(
 );
 
 const featuredOrder = [
+  "cci-encuentro-empresarial-1.jpg",
+  "cci-encuentro-empresarial-2.jpg",
+  "cci-encuentro-empresarial-3.jpg",
   "fila-1-columna-1.png",
   "5 de septiembre 2025.jpg",
   "fila-1-columna-2.png",
@@ -41,6 +44,9 @@ const gallerySlotLabels = [
 ];
 
 const imageTitles: Record<string, string> = {
+  "cci-encuentro-empresarial-1.jpg": "Encuentro Empresarial - Cámara de Comercio de Ica",
+  "cci-encuentro-empresarial-2.jpg": "Representación Directiva y Alianzas Estratégicas",
+  "cci-encuentro-empresarial-3.jpg": "Networking Ejecutivo y Comunidad Empresarial",
   "fila-1-columna-1.png": "Feria Laboral UTP - Stand Centro Empresarial",
   "2025.jpg": "Talleres y Formación Empresarial",
   "fila-1-columna-6.png": "Asesoría Profesional Personalizada",
@@ -115,7 +121,7 @@ const GalleryTile = ({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.9, ease: "easeInOut" }}
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-cover object-[center_25%]"
         />
       </AnimatePresence>
       <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent opacity-90 transition-opacity group-hover:opacity-100" />
@@ -411,7 +417,7 @@ const Eventos = () => {
               </p>
             </div>
             <div className="flex items-center gap-3 overflow-x-auto pb-3 pt-1 scrollbar-thin">
-              {galleryImages.slice(0, 14).map((img, idx) => {
+              {galleryImages.slice(0, featuredOrder.length).map((img, idx) => {
                 const isCurrentFirst =
                   visibleGalleryImages[0]?.filename === img.filename;
                 return (

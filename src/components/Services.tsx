@@ -63,6 +63,9 @@ import gal37 from "@/assets/galeria/2026 (12).jpg";
 import gal38 from "@/assets/galeria/2026 (13).jpg";
 import gal39 from "@/assets/galeria/2026 (14).jpg";
 import gal40 from "@/assets/galeria/2026 (15).jpg";
+import gal41 from "@/assets/galeria/cci-encuentro-empresarial-1.jpg";
+import gal42 from "@/assets/galeria/cci-encuentro-empresarial-2.jpg";
+import gal43 from "@/assets/galeria/cci-encuentro-empresarial-3.jpg";
 
 const galleryImages = [
   gal01,
@@ -105,6 +108,9 @@ const galleryImages = [
   gal38,
   gal39,
   gal40,
+  gal41,
+  gal42,
+  gal43,
 ];
 
 const memberships = [
