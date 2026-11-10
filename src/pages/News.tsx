@@ -26,6 +26,7 @@ import flyerGnv from "@/assets/flayers-Noticias empresariales/Invitación Foro G
 import flyerTallerLmr from "@/assets/flayers-Noticias empresariales/taller-lmr-plaguicidas.png";
 import flyerSeminarioEducacion from "@/assets/flayers-Noticias empresariales/seminario-educacion-futuro.png";
 import flyerConcursoVino from "@/assets/flayers-Noticias empresariales/concurso-nacional-vino-chincha.jpg";
+import flyerSemanaAgroindustria from "@/assets/flayers-Noticias empresariales/semana-agroindustria-ica-2026.jpg";
 
 interface NewsFlyer {
   id: number;
@@ -39,6 +40,18 @@ interface NewsFlyer {
 }
 
 const flyers: NewsFlyer[] = [
+  {
+    id: 104,
+    image: flyerSemanaAgroindustria,
+    category: "Evento & Agroindustria",
+    tag: "CITEagroindustrial, Univ. Continental & CCI",
+    title: "Semana de la Agroindustria ICA 2026",
+    description:
+      "Encuentro regional de innovación, tecnología y desarrollo productivo organizado por el CITEagroindustrial Ica y la Universidad Continental, con la Cámara de Comercio de Ica como aliado estratégico y el respaldo de PRODUCE e ITP red CITE.",
+    date: "11 y 12 de Noviembre de 2026 | Ica",
+    whatsappMessage:
+      "Hola, deseo más información e inscribirme en la Semana de la Agroindustria ICA 2026 (11 y 12 de noviembre).",
+  },
   {
     id: 101,
     image: flyerTallerLmr,
